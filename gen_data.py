@@ -1,19 +1,40 @@
 import json
+import re
+
+_RE_COMBINE_WHITESPACE = re.compile(r"\s+")
+
+def joinBlock(name, description):
+    if not name or name.isspace() or not description or description.isspace():
+        return ""
+    else:
+        joinedBlock = f"{name.strip()}: {description.strip()}".strip()
+        if joinedBlock.endswith("."):
+            return joinedBlock + " "
+        else:
+            return joinedBlock + ". "
+
+def cleanSequence(sequence):
+    return _RE_COMBINE_WHITESPACE.sub(" ", sequence).strip()
 
 with open("en_articles.json") as f:
     articles = json.load(f)
 
-print(list(articles["articles"][0].keys()))
+jsonArray = []
 
-# with open("data/en_articles_text_module.json", "w", encoding="utf-8") as f:
-#     for article in articles["articles"]:
-#         description = article['text'].replace('"', '\\"').replace('\\\\"', '\\"')
-#         f.write(f"{{\"input\": \"{description}\", \"output\": \"{article['module']}\"}}\n")
+for article in articles["articles"]:
+    sequence = article["name"]
+    if article["description"]["text"] and not article["description"]["text"].isspace():
+        sequence += ": " + article["description"]["text"].strip()
+    if sequence.endswith("."):
+        sequence += " "
+    else:
+        sequence += ". "
+    for block in article["blocks"]:
+        sequence += joinBlock(block["name"], block["description"]["text"])
 
-with open("data/en_articles_text_module.tsv", "w", encoding="utf-8") as f:
-    f.write("input\toutput\n")
-    for article in articles["articles"]:
-        description = article['text'].replace('"', '\\"').replace('\\\\"', '\\"').replace('\n', ' ')
-        if '\t' in description:
-            continue
-        f.write(f"{description}\t{article['module']}\n")
+    sequence = cleanSequence(sequence)
+
+    jsonArray.append({"input": "", "output": sequence})
+
+with open("data/en_articles_autoregressive.json", "w", encoding="utf-8") as f:
+    json.dump(jsonArray, f, ensure_ascii=False, indent=4)
