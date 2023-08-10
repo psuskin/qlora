@@ -6,14 +6,14 @@ from peft import PeftModel
 from peft.tuners.lora import LoraLayer
 
 # TODO: Update variables
-max_new_tokens = 64
+max_new_tokens = 512
 top_p = 0.9
 temperature=0.7
 
 # Base model
 model_name_or_path = 'huggyllama/llama-7b'
 # Adapter name on HF hub or local checkpoint path.
-adapter_path = 'output/guanaco-7b/checkpoint-1875/adapter_model'
+adapter_path = 'output/guanaco-7b/checkpoint-1000/adapter_model'
 
 tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
 # Fixing some of the early LLaMA HF conversion issues.

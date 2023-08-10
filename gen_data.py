@@ -50,7 +50,7 @@ for article in articles["articles"]:
 
     sequence = cleanSequence(sequence)
 
-    jsonArray.append({"input": "", "output": sequence, "module": article["url"]})
+    jsonArray.append({"input": sequence, "output": ""})
 
-with open("data/en_articles_autoregressive.json", "w", encoding="utf-8") as f:
+with open("data/en_articles_autoregressive_input.json", "w", encoding="utf-8") as f:
     json.dump(jsonArray, f, ensure_ascii=False, indent=4)
