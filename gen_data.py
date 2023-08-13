@@ -4,6 +4,7 @@ import re
 import random
 
 _RE_COMBINE_WHITESPACE = re.compile(r"\s+")
+_RE_COMBINE_PERIOD = re.compile(r"\.+")
 
 toCut = [
     '...   (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with the trademark reference"®")',
@@ -30,7 +31,7 @@ def joinBlock(name, description):
             return joinedBlock + ". "
 
 def cleanSequence(sequence):
-    return _RE_COMBINE_WHITESPACE.sub(" ", sequence).strip()
+    return _RE_COMBINE_PERIOD.sub(".", _RE_COMBINE_WHITESPACE.sub(" ", sequence)).strip()
 
 def autoregressive(path):
     with open("en_articles.json") as f:
