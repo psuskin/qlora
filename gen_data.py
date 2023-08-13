@@ -5,6 +5,20 @@ import random
 
 _RE_COMBINE_WHITESPACE = re.compile(r"\s+")
 
+toCut = [
+    '...   (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with the trademark reference"®")',
+    '...   (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with trademark reference"®").',
+    '... (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with the trademark reference"®")',
+    '...  (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with trademark reference"®").',
+    '...  (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with the trademark reference"®")',
+]
+
+def cut(string):
+    for cutString in toCut:
+        string = string.replace(cutString, "")
+    
+    return string
+
 def joinBlock(name, description):
     if not name or name.isspace() or not description or description.isspace():
         return ""
@@ -87,10 +101,13 @@ def alpaca(path):
     jsonArray = []
 
     for article in articles["articles"]:
-        if not article["description"]["text"] or article["description"]["text"].isspace():
+        description = cut(article["description"]["text"]).strip()
+        if "trademark reference" in description:
+            print(description)
+        if not description:
             continue
 
-        sequence = f"### Context: This is the description of {article['name']}: {article['description']['text'].strip()}"
+        sequence = f"### Context: This is the description of {article['name']}: {description}"
         if sequence.endswith("."):
             sequence += "\n\n"
         else:
@@ -101,7 +118,7 @@ def alpaca(path):
 
         sequence = "### Context:\n\n"
         sequence += "### Instruction: " + random.choice(dataStrings["describe"]["questions"]).format(textType="module", name=article["name"], inMod="") + "\n\n"
-        sequence += "### Response: " + random.choice(dataStrings["describe"]["responses"]).format(textType="module", name=article["name"], inMod="", description=article["description"]["text"].strip())
+        sequence += "### Response: " + random.choice(dataStrings["describe"]["responses"]).format(textType="module", name=article["name"], inMod="", description=description)
         if sequence.endswith("."):
             sequence += "\n\n"
         else:
@@ -109,10 +126,11 @@ def alpaca(path):
         jsonArray.append({"input": "", "output": cleanSequence(sequence)})
 
         for block in article["blocks"]:
-            if not "Win" in block["name"] or not block["description"]["text"] or block["description"]["text"].isspace():
+            description = cut(block["description"]["text"]).strip()
+            if not "Win" in block["name"] or not description:
                 continue
 
-            sequence += f"### Context: This is the description of {block['name']} in {article['name']}: {block['description']['text'].strip()}"
+            sequence += f"### Context: This is the description of {block['name']} in {article['name']}: {description}"
             if sequence.endswith("."):
                 sequence += "\n\n"
             else:
@@ -123,7 +141,7 @@ def alpaca(path):
 
             sequence = "### Context:\n\n"
             sequence += "### Instruction: " + random.choice(dataStrings["describe"]["questions"]).format(textType="window", name=block["name"], inMod=f" in {article['name']}") + "\n\n"
-            sequence += "### Response: " + random.choice(dataStrings["describe"]["responses"]).format(textType="window", name=block["name"], inMod=f" in {article['name']}", description=block["description"]["text"].strip())
+            sequence += "### Response: " + random.choice(dataStrings["describe"]["responses"]).format(textType="window", name=block["name"], inMod=f" in {article['name']}", description=description)
             if sequence.endswith("."):
                 sequence += "\n\n"
             else:
