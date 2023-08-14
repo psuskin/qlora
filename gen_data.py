@@ -25,7 +25,7 @@ def cut(string):
     return string
 
 def cleanSequence(sequence):
-    return _RE_COMBINE_PERIOD.sub(".", _RE_COMBINE_WHITESPACE.sub(" ", sequence)).strip()
+    return _RE_COMBINE_PERIOD.sub(".", _RE_COMBINE_WHITESPACE.sub(" ", sequence)).replace("?.", "?").strip()
 
 def joinBlock(name, description):
     if not name or name.isspace() or not description or description.isspace():
