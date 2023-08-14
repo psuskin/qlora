@@ -11,6 +11,8 @@ cache_dir = None
 
 DEFAULT_PAD_TOKEN = "[PAD]"
 
+max_sequence_length = 2048
+
 tokenizer = AutoTokenizer.from_pretrained(
     model_name_or_path,
     cache_dir=cache_dir,
@@ -34,20 +36,30 @@ if 'llama' in model_name_or_path or isinstance(tokenizer, LlamaTokenizer):
             "unk_token": tokenizer.convert_ids_to_tokens(tokenizer.pad_token_id),
     })
 
-with open("data/en_articles_autoregressive.json", encoding="utf-8") as f:
-    jsonArray = json.load(f)
+def count(path, maxTokens=max_sequence_length):
+    with open(path, encoding="utf-8") as f:
+        jsonArray = json.load(f)
 
-sources = [f"{tokenizer.bos_token}{jsonObject['output']}{tokenizer.eos_token}" for jsonObject in jsonArray]
+    sources = [f"{tokenizer.bos_token}{jsonObject['output']}{tokenizer.eos_token}" for jsonObject in jsonArray]
 
-tokenized_sources_with_prompt = tokenizer(
-    sources,
-    max_length=2**20,
-    truncation=True,
-    add_special_tokens=False,
-)
+    tokenized_sources_with_prompt = tokenizer(
+        sources,
+        max_length=2**20,
+        truncation=True,
+        add_special_tokens=False,
+    )
 
-print(list(tokenized_sources_with_prompt.keys()))
+    print(list(tokenized_sources_with_prompt.keys()))
 
-tokenCounts = [len(input_ids) for input_ids in tokenized_sources_with_prompt["input_ids"]]
-s = pd.Series(tokenCounts)
-print(s.describe())
+    tokenCounts = [len(input_ids) for input_ids in tokenized_sources_with_prompt["input_ids"]]
+    s = pd.Series(tokenCounts)
+    print(s.describe())
+
+    samplesUnderMaxLength = sum(1 for tokenCount in tokenCounts if tokenCount < maxTokens)
+    print(f"Samples under max sequence length: {samplesUnderMaxLength} (approx. {float(samplesUnderMaxLength) / len(tokenCounts)}).\n")
+
+    samplesOverMaxLength = [jsonArray[i]["output"] for i in range(len(tokenCounts)) if tokenCounts[i] > max_sequence_length]
+    print("Samples over max sequence length: ", samplesOverMaxLength)
+
+#count("data/en_articles_autoregressive.json")
+count("data/en_articles_alpaca.json")
