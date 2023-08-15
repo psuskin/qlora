@@ -124,7 +124,7 @@ def alpaca(path, max_words=2000/3):
         inputSequence = "\n\n".join([
             "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.",
             f"### Instruction:\n{cleanSequence(random.choice(dataStrings['query']['questions']).format(textType='module') + '.')}",
-            f"### Context:\nThis is the description of the module {name}:\n{cleanSequence(description + '.')}",
+            f"### Context:\n{cleanSequence(description + '.')}",
             "### Response:"
         ])
         jsonArray.append({"input": inputSequence, "output": cleanSequence(random.choice(dataStrings["query"]["responses"]).format(textType="module", name=name, inMod="") + ".")})
@@ -144,7 +144,7 @@ def alpaca(path, max_words=2000/3):
             inputSequence = "\n\n".join([
                 "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.",
                 f"### Instruction:\n{cleanSequence(random.choice(dataStrings['query']['questions']).format(textType='window') + '.')}",
-                f"### Context:\nThis is the description of the window {block['name']} in module {name}:\n{cleanSequence(description + '.')}",
+                f"### Context:\n{cleanSequence(description + '.')}",
                 "### Response:"
             ])
             jsonArray.append({"input": inputSequence, "output": cleanSequence(random.choice(dataStrings["query"]["responses"]).format(textType="window", name=block["name"], inMod=f" in {article['module']}") + ".")})

@@ -8,7 +8,7 @@ from peft.tuners.lora import LoraLayer
 # TODO: Update variables
 max_new_tokens = 512
 top_p = 0.9
-temperature=0
+temperature=0.01
 
 # Base model
 model_name_or_path = 'huggyllama/llama-7b'
