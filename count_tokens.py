@@ -36,11 +36,11 @@ if 'llama' in model_name_or_path or isinstance(tokenizer, LlamaTokenizer):
             "unk_token": tokenizer.convert_ids_to_tokens(tokenizer.pad_token_id),
     })
 
-def count(path, maxTokens=max_sequence_length):
+def count(path, sequencePart="output", maxTokens=max_sequence_length):
     with open(path, encoding="utf-8") as f:
         jsonArray = json.load(f)
 
-    sources = [f"{tokenizer.bos_token}{jsonObject['output']}{tokenizer.eos_token}" for jsonObject in jsonArray]
+    sources = [f"{tokenizer.bos_token}{jsonObject[sequencePart]}{tokenizer.eos_token}" for jsonObject in jsonArray]
 
     tokenized_sources_with_prompt = tokenizer(
         sources,
@@ -58,8 +58,12 @@ def count(path, maxTokens=max_sequence_length):
     samplesUnderMaxLength = sum(1 for tokenCount in tokenCounts if tokenCount < maxTokens)
     print(f"Samples under max sequence length: {samplesUnderMaxLength} (approx. {float(samplesUnderMaxLength) / len(tokenCounts)}).\n")
 
-    samplesOverMaxLength = [jsonArray[i]["output"] for i in range(len(tokenCounts)) if tokenCounts[i] > max_sequence_length]
+    samplesOverMaxLength = [jsonArray[i][sequencePart] for i in range(len(tokenCounts)) if tokenCounts[i] > maxTokens]
     print("Samples over max sequence length: ", samplesOverMaxLength)
 
 #count("data/en_articles_autoregressive.json")
-count("data/en_articles_alpaca.json")
+
+#count("data/en_articles_alpaca.json")
+
+count("data/en_articles_alpaca.json", "input", 1024)
+count("data/en_articles_alpaca.json", "output", 1024)

@@ -12,10 +12,20 @@ toCut = [
     '... (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with the trademark reference"®")',
     '...  (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with trademark reference"®").',
     '...  (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with the trademark reference"®")',
+
+    '.....',
+    '...',
 ]
 
 tooLong = [
-    "qmbase"
+    "qmbase",
+    "capcheck",
+    "genproce",
+    "cxItemCostEstimate",
+
+    "cxTxnNote",
+    "logfistx",
+    "verifydb",
 ]
 
 def cut(string):
@@ -107,6 +117,9 @@ def alpaca(path, max_words=2000/3):
 
         if name in tooLong:
             continue
+
+        if len(description) < 3:
+            print(name, description)
 
         inputSequence = "\n\n".join([
             "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.",

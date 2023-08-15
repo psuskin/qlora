@@ -37,7 +37,8 @@ model = PeftModel.from_pretrained(model, adapter_path)
 model.eval()
 
 def generate(model, prompt, max_new_tokens=max_new_tokens, top_p=top_p, temperature=temperature):
-    inputs = tokenizer(prompt, return_tensors="pt").to('cuda')
+    promptAlpaca = "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\n{instruction}\n\nResponse:".format(instruction=prompt)
+    inputs = tokenizer(promptAlpaca, return_tensors="pt").to('cuda')
 
     outputs = model.generate(
         **inputs, 
@@ -50,7 +51,7 @@ def generate(model, prompt, max_new_tokens=max_new_tokens, top_p=top_p, temperat
     )
 
     text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    print("\nNetwork output: ", text.replace(prompt, ""), "\n")
+    print("\nNetwork output: ", text.replace(promptAlpaca, ""), "\n")
     return text
 
 while (prompt := input("Enter prompt: ")) != "exit":
