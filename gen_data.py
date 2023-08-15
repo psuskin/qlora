@@ -99,46 +99,49 @@ def alpaca(path, max_words=2000/3):
     jsonArray = []
 
     for article in articles["articles"]:
+        name = article["module"]
         description = cut(article["description"]["text"]).strip()
 
         if not description or not article["blocks"]:
             continue
 
-        if article["module"] in tooLong:
+        if name in tooLong:
             continue
 
-        sequence = "\n\n".join([
-            f"### Context: This is the description of the module {article['module']}: {description}.",
-            cleanSequence("### Instruction: " + random.choice(dataStrings["query"]["questions"]).format(textType="module") + "."),
-            cleanSequence("### Response: " + random.choice(dataStrings["query"]["responses"]).format(textType="module", name=article["module"], inMod="") + ".")
+        inputSequence = "\n\n".join([
+            "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.",
+            f"### Instruction:\n{cleanSequence(random.choice(dataStrings['query']['questions']).format(textType='module') + '.')}",
+            f"### Context:\nThis is the description of the module {name}:\n{cleanSequence(description + '.')}",
+            "### Response:"
         ])
-        jsonArray.append({"input": "", "output": sequence})
+        jsonArray.append({"input": inputSequence, "output": cleanSequence(random.choice(dataStrings["query"]["responses"]).format(textType="module", name=name, inMod="") + ".")})
 
-        sequence = "\n\n".join([
-            "### Context:",
-            cleanSequence("### Instruction: " + random.choice(dataStrings["describe"]["questions"]).format(textType="module", name=article["module"], inMod="") + "."),
-            cleanSequence("### Response: " + random.choice(dataStrings["describe"]["responses"]).format(textType="module", name=article["module"], inMod="", description=description) + ".")
+        inputSequence = "\n\n".join([
+            "Below is an instruction that describes a task. Write a response that appropriately completes the request.",
+            f"### Instruction:\n{cleanSequence(random.choice(dataStrings['describe']['questions']).format(textType='module', name=name, inMod='') + '.')}",
+            "### Response:"
         ])
-        jsonArray.append({"input": "", "output": sequence})
+        jsonArray.append({"input": inputSequence, "output": cleanSequence(random.choice(dataStrings["describe"]["responses"]).format(textType="module", name=name, inMod="", description=description) + ".")})
 
         for block in article["blocks"]:
             description = cut(block["description"]["text"]).strip()
             if not "Win" in block["name"] or not description:
                 continue
 
-            sequence = "\n\n".join([
-                cleanSequence(f"### Context: This is the description of the window {block['name']} in module {article['module']}: {description}."),
-                cleanSequence("### Instruction: " + random.choice(dataStrings["query"]["questions"]).format(textType="window") + "."),
-                cleanSequence("### Response: " + random.choice(dataStrings["query"]["responses"]).format(textType="window", name=block["name"], inMod=f" in {article['module']}") + ".")
+            inputSequence = "\n\n".join([
+                "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.",
+                f"### Instruction:\n{cleanSequence(random.choice(dataStrings['query']['questions']).format(textType='window') + '.')}",
+                f"### Context:\nThis is the description of the window {block['name']} in module {name}:\n{cleanSequence(description + '.')}",
+                "### Response:"
             ])
-            jsonArray.append({"input": "", "output": sequence})
+            jsonArray.append({"input": inputSequence, "output": cleanSequence(random.choice(dataStrings["query"]["responses"]).format(textType="window", name=block["name"], inMod=f" in {article['module']}") + ".")})
 
-            sequence = "\n\n".join([
-                "### Context:",
-                cleanSequence("### Instruction: " + random.choice(dataStrings["describe"]["questions"]).format(textType="window", name=block["name"], inMod=f" in {article['module']}") + "."),
-                cleanSequence("### Response: " + random.choice(dataStrings["describe"]["responses"]).format(textType="window", name=block["name"], inMod=f" in {article['module']}", description=description) + ".")
+            inputSequence = "\n\n".join([
+                "Below is an instruction that describes a task. Write a response that appropriately completes the request.",
+                f"### Instruction:\n{cleanSequence(random.choice(dataStrings['describe']['questions']).format(textType='window', name=block['name'], inMod=f' in {name}') + '.')}",
+                "### Response:"
             ])
-            jsonArray.append({"input": "", "output": sequence})
+            jsonArray.append({"input": inputSequence, "output": cleanSequence(random.choice(dataStrings["describe"]["responses"]).format(textType="window", name=block["name"], inMod=f" in {name}", description=description) + ".")})
 
     with open(path, "w", encoding="utf-8") as f:
         json.dump(jsonArray, f, ensure_ascii=False, indent=4)

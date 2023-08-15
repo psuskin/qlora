@@ -8,12 +8,12 @@ from peft.tuners.lora import LoraLayer
 # TODO: Update variables
 max_new_tokens = 512
 top_p = 0.9
-temperature=0.7
+temperature=0
 
 # Base model
 model_name_or_path = 'huggyllama/llama-7b'
 # Adapter name on HF hub or local checkpoint path.
-adapter_path = 'output/guanaco-7b/checkpoint-1000/adapter_model'
+adapter_path = '/workspace/output/guanaco-7b/checkpoint-1875/adapter_model'
 
 tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
 # Fixing some of the early LLaMA HF conversion issues.
@@ -50,7 +50,7 @@ def generate(model, prompt, max_new_tokens=max_new_tokens, top_p=top_p, temperat
     )
 
     text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    print("Network output: ", text)
+    print("\nNetwork output: ", text.replace(prompt, ""), "\n")
     return text
 
 while (prompt := input("Enter prompt: ")) != "exit":
