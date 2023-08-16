@@ -65,6 +65,24 @@ def autoregressive(path):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(jsonArray, f, ensure_ascii=False, indent=4)
 
+def corpus(path):
+    with open("en_articles.json") as f:
+        articles = json.load(f)
+
+    with open(path, "w", encoding="utf-8") as f:
+        for article in articles["articles"]:
+            sequence = article["module"]
+            if article["description"]["text"] and not article["description"]["text"].isspace():
+                sequence += ": " + article["description"]["text"].strip()
+            sequence += ". "
+            
+            for block in article["blocks"]:
+                sequence += joinBlock(block["name"], block["description"]["text"])
+
+            sequence = cleanSequence(sequence)
+
+            f.write(sequence + "\n")
+
 def alpaca(path, max_words=2000/3):
     dataStrings = {
         "query": {
@@ -124,7 +142,7 @@ def alpaca(path, max_words=2000/3):
         inputSequence = "\n\n".join([
             "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.",
             f"### Instruction:\n{cleanSequence(random.choice(dataStrings['query']['questions']).format(textType='module') + '.')}",
-            f"### Context:\n{cleanSequence(description + '.')}",
+            f"### Input:\n{cleanSequence(description + '.')}",
             "### Response:"
         ])
         jsonArray.append({"input": inputSequence, "output": cleanSequence(random.choice(dataStrings["query"]["responses"]).format(textType="module", name=name, inMod="") + ".")})
@@ -144,7 +162,7 @@ def alpaca(path, max_words=2000/3):
             inputSequence = "\n\n".join([
                 "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.",
                 f"### Instruction:\n{cleanSequence(random.choice(dataStrings['query']['questions']).format(textType='window') + '.')}",
-                f"### Context:\n{cleanSequence(description + '.')}",
+                f"### Input:\n{cleanSequence(description + '.')}", 
                 "### Response:"
             ])
             jsonArray.append({"input": inputSequence, "output": cleanSequence(random.choice(dataStrings["query"]["responses"]).format(textType="window", name=block["name"], inMod=f" in {article['module']}") + ".")})
@@ -161,4 +179,5 @@ def alpaca(path, max_words=2000/3):
 
 if __name__ == "__main__":
     #autoregressive("data/en_articles_autoregressive.json")
-    alpaca("data/en_articles_alpaca.json")
+    #alpaca("data/en_articles_alpaca.json")
+    corpus("data/en_articles_corpus.txt")

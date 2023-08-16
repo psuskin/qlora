@@ -10,6 +10,8 @@ max_new_tokens = 512
 top_p = 0.9
 temperature=0.01
 
+finetuned = False
+
 # Base model
 model_name_or_path = 'huggyllama/llama-7b'
 # Adapter name on HF hub or local checkpoint path.
@@ -33,11 +35,15 @@ model = AutoModelForCausalLM.from_pretrained(
     )
 )
 
-model = PeftModel.from_pretrained(model, adapter_path)
+if finetuned:
+    model = PeftModel.from_pretrained(model, adapter_path)
 model.eval()
 
 def generate(model, prompt, max_new_tokens=max_new_tokens, top_p=top_p, temperature=temperature):
-    promptAlpaca = "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\n{instruction}\n\nResponse:".format(instruction=prompt)
+    if finetuned:
+        promptAlpaca = "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\n{instruction}\n\nResponse:".format(instruction=prompt)
+    else:
+        promptAlpaca = prompt
     inputs = tokenizer(promptAlpaca, return_tensors="pt").to('cuda')
 
     outputs = model.generate(
