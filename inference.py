@@ -48,11 +48,10 @@ def generate(model, tokenizer, prompt, finetuned=False, max_new_tokens=512, top_
     )
 
     text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    output = f"\nNetwork output: {text.replace(promptAlpaca, '')}\n"
-    return output
+    return text.replace(promptAlpaca, '')
 
 if __name__ == "__main__":
     model, tokenizer = load_model(True)
 
     while (prompt := input("Enter prompt: ")) != "exit":
-        print(generate(model, tokenizer, prompt))
+        print(f"\nNetwork output: {generate(model, tokenizer, prompt)}\n")

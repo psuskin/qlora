@@ -92,7 +92,7 @@ adapters = OrderedDict([
         "dataset": "Alpaca ohne Modulenamen im Kontext",
         "checkpoint": "1000"
     }),
-    ("alpaca-2-7b-chat", {
+    ("chat-7b", {
         "model": "LLaMA-2-7b-chat",
         "dataset": "Alpaca refined",
         "checkpoint": "1875"
@@ -122,7 +122,7 @@ def infer():
     for name in adapterNames:
         inferences[name] = {}
 
-        model, tokenizer = load_model(True, models[adapters[name]["model"]]["path"], f"output/{name}/checkpoint-{adapters[name]['checkpoint']}/adapter_model")
+        model, tokenizer = load_model(True, models[adapters[name]["model"]]["path"], f"/workspace/output/{name}/checkpoint-{adapters[name]['checkpoint']}/adapter_model")
 
         for promptCategory in list(prompts.keys()):
             if promptCategory == "specific":
