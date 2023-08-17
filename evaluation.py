@@ -126,8 +126,13 @@ def infer():
         model, tokenizer = load_model(True, models[adapters[name]["model"]]["path"], f"output/{name}/checkpoint-{adapters[name]['checkpoint']}/adapter_model")
 
         for promptCategory in list(prompts.keys()):
-            for prompt in prompts[promptCategory]:
-                inferences[name][prompt] = generate(model, tokenizer, prompt, True)
+            if promptCategory == "specific":
+                for module in prompts[promptCategory]:
+                    for prompt in prompts[promptCategory][module]:
+                        inferences[name][prompt] = generate(model, tokenizer, prompt, True)
+            else:
+                for prompt in prompts[promptCategory]:
+                    inferences[name][prompt] = generate(model, tokenizer, prompt, True)
 
     return inferences
 
