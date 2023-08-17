@@ -1,6 +1,6 @@
 import openpyxl
 from collections import OrderedDict
-#from inference import load_model, generate
+from inference import load_model, generate
 
 prompts = OrderedDict([
     ("general", [
@@ -102,8 +102,25 @@ adapters = OrderedDict([
 def infer():
     inferences = {}
 
-    names = list(adapters.keys())
-    for name in names:
+    """
+    adapterNames = list(adapters.keys())
+    for name in adapterNames:
+        inferences[name] = {}
+
+        for promptCategory in list(prompts.keys()):
+            if promptCategory == "specific":
+                for module in prompts[promptCategory]:
+                    for prompt in prompts[promptCategory][module]:
+                        inferences[name][prompt] = "test"
+            else:
+                for prompt in prompts[promptCategory]:
+                    inferences[name][prompt] = "test"
+
+    return inferences
+    """
+
+    adapterNames = list(adapters.keys())
+    for name in adapterNames:
         inferences[name] = {}
 
         model, tokenizer = load_model(True, models[adapters[name]["model"]]["path"], f"output/{name}/checkpoint-{adapters[name]['checkpoint']}/adapter_model")
@@ -115,28 +132,63 @@ def infer():
     return inferences
 
 def evaluate(ws, inferences):
-    pass
+    adapterNames = list(adapters.keys())
+    modelNames = list(models.keys())
+    datasetNames = list(datasets.keys())
 
-def prompt(ws, inferences):
-    names = list(prompts["specific"].keys())
-    for col in ws.iter_cols(max_row=1, max_col=len(prompts)):
+    for col in ws.iter_cols(max_row=1, min_col=2, max_col=len(modelNames)+1):
         for cell in col:
             cell.font = openpyxl.styles.Font(bold=True)
-            cell.value = list(prompts.items())[cell.column - 1][0]
+            cell.value = modelNames[cell.column - 2]
 
-    for col in ws.iter_cols(max_row=1, min_col=len(prompts) + 1, max_col=len(prompts) + len(names)):
-        for cell in col:
-            cell.value = names[cell.column - (len(prompts) + 1)]
+    for row in ws.iter_rows(max_col=1, min_row=2, max_row=len(datasetNames)+1):
+        for cell in row:
+            cell.font = openpyxl.styles.Font(bold=True)
+            cell.value = datasetNames[cell.row - 2]
 
-    for i in range(len(prompts)-1):
-        for row in ws.iter_rows(min_row=2, max_row=len(list(prompts.items())[i][1]) + 1, min_col=i + 1, max_col=i + 1):
-            for cell in row:
-                cell.value = list(prompts.items())[i][1][cell.row - 2]
+    for name in adapterNames:
+        c = modelNames.index(adapters[name]["model"]) + 2
+        r = datasetNames.index(adapters[name]["dataset"]) + 2
+        cell = ws.cell(row=r, column=c)
+        cell.value = name
 
-    for i, name in enumerate(names):
-        for row in ws.iter_rows(min_row=2, max_row=len(prompts["specific"][name]) + 1, min_col=len(prompts) + 1 + i, max_col=len(prompts) + 1 + i):
-            for cell in row:
-                cell.value = prompts["specific"][name][cell.row - 2]
+def prompt(ws, inferences):
+    adapterNames = list(adapters.keys())
+
+    i = 1
+    for promptCategory in list(prompts.keys()):
+        cell = ws[f"A{i}"]
+        cell.font = openpyxl.styles.Font(bold=True)
+        cell.value = promptCategory.capitalize()
+        i += 1
+        if promptCategory == "specific":
+            for module in prompts[promptCategory]:
+                cell = ws[f"A{i}"]
+                cell.font = openpyxl.styles.Font(bold=True)
+                cell.value = module
+                i += 1
+                for prompt in prompts[promptCategory][module]:
+                    ws[f"A{i}"] = prompt
+                    i += 1
+        else:
+            for prompt in prompts[promptCategory]:
+                ws[f"A{i}"] = prompt
+                i += 1
+
+    for a, name in enumerate(adapterNames):
+        i = 1
+        for promptCategory in list(prompts.keys()):
+            i += 1
+            if promptCategory == "specific":
+                for module in prompts[promptCategory]:
+                    i += 1
+                    for prompt in prompts[promptCategory][module]:
+                        ws[f"{openpyxl.utils.get_column_letter(a + 2)}{i}"] = inferences[name][prompt]
+                        i += 1
+            else:
+                for prompt in prompts[promptCategory]:
+                    ws[f"{openpyxl.utils.get_column_letter(a + 2)}{i}"] = inferences[name][prompt]
+                    i += 1
 
 def dataset(ws):
     headers = ["Name", "Format", "Motivation"]
@@ -188,7 +240,8 @@ if __name__ == "__main__":
     wsDatasets = wb.create_sheet("Datasets")
     wsModels = wb.create_sheet("Models")
 
-    inferences = None#infer()
+    inferences = infer()
+    #print(inferences)
 
     evaluate(wsEval, inferences)
 
