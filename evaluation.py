@@ -102,22 +102,21 @@ adapters = OrderedDict([
 def infer():
     inferences = {}
 
-    """
-    adapterNames = list(adapters.keys())
-    for name in adapterNames:
-        inferences[name] = {}
+    if False:
+        adapterNames = list(adapters.keys())
+        for name in adapterNames:
+            inferences[name] = {}
 
-        for promptCategory in list(prompts.keys()):
-            if promptCategory == "specific":
-                for module in prompts[promptCategory]:
-                    for prompt in prompts[promptCategory][module]:
+            for promptCategory in list(prompts.keys()):
+                if promptCategory == "specific":
+                    for module in prompts[promptCategory]:
+                        for prompt in prompts[promptCategory][module]:
+                            inferences[name][prompt] = "test"
+                else:
+                    for prompt in prompts[promptCategory]:
                         inferences[name][prompt] = "test"
-            else:
-                for prompt in prompts[promptCategory]:
-                    inferences[name][prompt] = "test"
 
-    return inferences
-    """
+        return inferences
 
     adapterNames = list(adapters.keys())
     for name in adapterNames:
@@ -135,6 +134,40 @@ def infer():
                     inferences[name][prompt] = generate(model, tokenizer, prompt, True)
 
     return inferences
+
+colors = [
+    "dd776e",
+    "e0816d",
+    "e2886c",
+    "e5926b",
+    "e79a69",
+    "e9a268",
+    "ecac67",
+    "e6ad61",
+    "e9b861",
+    "f3c563",
+    "f5ce62",
+    "e2c965",
+    "d4c86a",
+    "c4c56d",
+    "b0be6e",
+    "a4c073",
+    "94bd77",
+    "84bb7b",
+    "73b87e",
+    "63b682",
+    "57bb8a"
+]
+
+def accuracy(inferences, name):
+    correct = 0
+    total = 0
+    for module in prompts["specific"]:
+        for prompt in prompts["specific"][module]:
+            correct += module in inferences[name][prompt]
+            total += 1
+
+    return colors[int((correct / total) * len(colors))]
 
 def evaluate(ws, inferences):
     adapterNames = list(adapters.keys())
@@ -156,6 +189,8 @@ def evaluate(ws, inferences):
         r = datasetNames.index(adapters[name]["dataset"]) + 2
         cell = ws.cell(row=r, column=c)
         cell.value = name
+        color = accuracy(inferences, name)
+        cell.fill = openpyxl.styles.PatternFill(start_color=color, end_color=color, fill_type="solid")
 
 def prompt(ws, inferences):
     adapterNames = list(adapters.keys())
@@ -205,8 +240,6 @@ def dataset(ws):
 
     for row in ws.iter_rows(min_row=2, max_row=len(datasets)+1, max_col=3):
         for cell in row:
-            cell.alignment = openpyxl.styles.Alignment(wrap_text=True)
-
             if cell.column == 1: # name
                 cell.value = list(datasets.items())[cell.row - 2][0]
             else:
@@ -226,8 +259,6 @@ def model(ws):
 
     for row in ws.iter_rows(min_row=2, max_row=len(models)+1, max_col=3):
         for cell in row:
-            cell.alignment = openpyxl.styles.Alignment(wrap_text=True)
-
             if cell.column == 1: # name
                 cell.value = list(models.items())[cell.row - 2][0]
             else:
