@@ -51,7 +51,7 @@ datasets = OrderedDict([
             "[], [###Context###: This is the description of the module <Modulename>: <Module Description>.\n###Instruction###: What is the name of this module?\n###Response###: The name of the module is <Modulename>.]",
             "[], [###Context###:\n###Instruction###: What is the purpose of the module <Modulename>?\n###Response###: The purpose of the module <Modulename> is <Module Description>.]"
         ],
-        "motivation": "The main goal is for the model to answer correct module names based on descriptions, supported by the first data format. The second data format is give the model an understanding of appsWH."
+        "motivation": "The main goal is for the model to answer correct module names based on descriptions, supported by the first data format. The second data format is to give the model an understanding of appsWH."
     }),
     ("Alpaca", {
         "format": [
