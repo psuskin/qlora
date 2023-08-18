@@ -142,7 +142,7 @@ def alpaca(path, max_words=2000/3):
         inputSequence = "\n\n".join([
             "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.",
             f"### Instruction:\n{cleanSequence(random.choice(dataStrings['query']['questions']).format(textType='module') + '.')}",
-            f"### Input:\n{cleanSequence(description + '.')}",
+            f"### Context:\n{cleanSequence(description + '.')}",
             "### Response:"
         ])
         jsonArray.append({"input": inputSequence, "output": cleanSequence(random.choice(dataStrings["query"]["responses"]).format(textType="module", name=name, inMod="") + ".")})
@@ -162,10 +162,10 @@ def alpaca(path, max_words=2000/3):
             inputSequence = "\n\n".join([
                 "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.",
                 f"### Instruction:\n{cleanSequence(random.choice(dataStrings['query']['questions']).format(textType='window') + '.')}",
-                f"### Input:\n{cleanSequence(description + '.')}", 
+                f"### Context:\n{cleanSequence(description + '.')}", 
                 "### Response:"
             ])
-            jsonArray.append({"input": inputSequence, "output": cleanSequence(random.choice(dataStrings["query"]["responses"]).format(textType="window", name=block["name"], inMod=f" in {article['module']}") + ".")})
+            jsonArray.append({"input": inputSequence, "output": cleanSequence(random.choice(dataStrings["query"]["responses"]).format(textType="window", name=block["name"], inMod=f" in {name}") + ".")})
 
             inputSequence = "\n\n".join([
                 "Below is an instruction that describes a task. Write a response that appropriately completes the request.",
@@ -179,5 +179,5 @@ def alpaca(path, max_words=2000/3):
 
 if __name__ == "__main__":
     #autoregressive("data/en_articles_autoregressive.json")
-    #alpaca("data/en_articles_alpaca.json")
-    corpus("data/en_articles_corpus.txt")
+    alpaca("data/en_articles_alpaca.json")
+    #corpus("data/en_articles_corpus.txt")

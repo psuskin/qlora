@@ -102,7 +102,7 @@ adapters = OrderedDict([
 def infer():
     inferences = {}
 
-    if False:
+    if True:
         adapterNames = list(adapters.keys())
         for name in adapterNames:
             inferences[name] = {}
@@ -217,6 +217,11 @@ def prompt(ws, inferences):
 
     for a, name in enumerate(adapterNames):
         i = 1
+
+        cell = ws[f"{openpyxl.utils.get_column_letter(a + 2)}{i}"]
+        cell.font = openpyxl.styles.Font(bold=True)
+        cell.value = name
+
         for promptCategory in list(prompts.keys()):
             i += 1
             if promptCategory == "specific":

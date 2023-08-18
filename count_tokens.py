@@ -65,5 +65,8 @@ def count(path, sequencePart="output", maxTokens=max_sequence_length):
 
 #count("data/en_articles_alpaca.json")
 
-count("data/en_articles_alpaca.json", "input", 1024)
-count("data/en_articles_alpaca.json", "output", 1024)
+#count("data/en_articles_alpaca.json", "input", 1024)
+#count("data/en_articles_alpaca.json", "output", 1024)
+
+count("data/de_articles_alpaca.json", "input", 1024)
+count("data/de_articles_alpaca.json", "output", 1024)
