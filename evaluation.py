@@ -102,7 +102,7 @@ adapters = OrderedDict([
 def infer():
     inferences = {}
 
-    if True:
+    if False:
         adapterNames = list(adapters.keys())
         for name in adapterNames:
             inferences[name] = {}
@@ -174,23 +174,39 @@ def evaluate(ws, inferences):
     modelNames = list(models.keys())
     datasetNames = list(datasets.keys())
 
-    for col in ws.iter_cols(max_row=1, min_col=2, max_col=len(modelNames)+1):
+    datasetHeaderCell = ws["A1"]
+    datasetHeaderCell.alignment = openpyxl.styles.Alignment(horizontal="center")
+    datasetHeaderCell.value = "Dataset"
+    modelHeaderCell = ws["B1"]
+    modelHeaderCell.alignment = openpyxl.styles.Alignment(horizontal="center")
+    modelHeaderCell.value = "Model"
+    ws.merge_cells(start_row=1, end_row=1, start_column=2, end_column=len(modelNames)+1)
+
+    for col in ws.iter_cols(min_row = 2, max_row=2, min_col=2, max_col=len(modelNames)+1):
         for cell in col:
             cell.font = openpyxl.styles.Font(bold=True)
+            cell.border = openpyxl.styles.borders.Border(bottom=openpyxl.styles.borders.Side(style="thin"))
             cell.value = modelNames[cell.column - 2]
 
-    for row in ws.iter_rows(max_col=1, min_row=2, max_row=len(datasetNames)+1):
+    for row in ws.iter_rows(max_col=1, min_row=3, max_row=len(datasetNames)+2):
         for cell in row:
             cell.font = openpyxl.styles.Font(bold=True)
-            cell.value = datasetNames[cell.row - 2]
+            cell.border = openpyxl.styles.borders.Border(right=openpyxl.styles.borders.Side(style="thin"))
+            cell.value = datasetNames[cell.row - 3]
 
     for name in adapterNames:
         c = modelNames.index(adapters[name]["model"]) + 2
-        r = datasetNames.index(adapters[name]["dataset"]) + 2
+        r = datasetNames.index(adapters[name]["dataset"]) + 3
         cell = ws.cell(row=r, column=c)
         cell.value = name
         color = accuracy(inferences, name)
         cell.fill = openpyxl.styles.PatternFill(start_color=color, end_color=color, fill_type="solid")
+
+    dim_holder = openpyxl.worksheet.dimensions.DimensionHolder(worksheet=ws)
+    dim_holder["A"] = openpyxl.worksheet.dimensions.ColumnDimension(ws, min=1, max=1, width=50)
+    for col in range(ws.min_column+1, ws.max_column + 1):
+        dim_holder[openpyxl.utils.get_column_letter(col)] = openpyxl.worksheet.dimensions.ColumnDimension(ws, min=col, max=col, width=20)
+    ws.column_dimensions = dim_holder
 
 def prompt(ws, inferences):
     adapterNames = list(adapters.keys())
@@ -208,11 +224,15 @@ def prompt(ws, inferences):
                 cell.value = module
                 i += 1
                 for prompt in prompts[promptCategory][module]:
-                    ws[f"A{i}"] = prompt
+                    cell = ws[f"A{i}"]
+                    cell.alignment = openpyxl.styles.Alignment(wrapText=True)
+                    cell.value = prompt
                     i += 1
         else:
             for prompt in prompts[promptCategory]:
-                ws[f"A{i}"] = prompt
+                cell = ws[f"A{i}"]
+                cell.alignment = openpyxl.styles.Alignment(wrapText=True)
+                cell.value = prompt
                 i += 1
 
     for a, name in enumerate(adapterNames):
@@ -228,12 +248,21 @@ def prompt(ws, inferences):
                 for module in prompts[promptCategory]:
                     i += 1
                     for prompt in prompts[promptCategory][module]:
-                        ws[f"{openpyxl.utils.get_column_letter(a + 2)}{i}"] = inferences[name][prompt]
+                        cell = ws[f"{openpyxl.utils.get_column_letter(a + 2)}{i}"]
+                        cell.alignment = openpyxl.styles.Alignment(wrapText=True)
+                        cell.value = inferences[name][prompt]
                         i += 1
             else:
                 for prompt in prompts[promptCategory]:
-                    ws[f"{openpyxl.utils.get_column_letter(a + 2)}{i}"] = inferences[name][prompt]
+                    cell = ws[f"{openpyxl.utils.get_column_letter(a + 2)}{i}"]
+                    cell.alignment = openpyxl.styles.Alignment(wrapText=True)
+                    cell.value = inferences[name][prompt]
                     i += 1
+
+    dim_holder = openpyxl.worksheet.dimensions.DimensionHolder(worksheet=ws)
+    for col in range(ws.min_column, ws.max_column + 1):
+        dim_holder[openpyxl.utils.get_column_letter(col)] = openpyxl.worksheet.dimensions.ColumnDimension(ws, min=col, max=col, width=80)
+    ws.column_dimensions = dim_holder
 
 def dataset(ws):
     headers = ["Name", "Format", "Motivation"]
@@ -245,6 +274,7 @@ def dataset(ws):
 
     for row in ws.iter_rows(min_row=2, max_row=len(datasets)+1, max_col=3):
         for cell in row:
+            cell.alignment = openpyxl.styles.Alignment(wrapText=True)
             if cell.column == 1: # name
                 cell.value = list(datasets.items())[cell.row - 2][0]
             else:
@@ -253,6 +283,12 @@ def dataset(ws):
                     text = "\n".join([f"{i+1}. {t}" for i, t in enumerate(text)])
 
                 cell.value = text
+
+    dim_holder = openpyxl.worksheet.dimensions.DimensionHolder(worksheet=ws)
+    dim_holder[openpyxl.utils.get_column_letter(headers.index("Name") + 1)] = openpyxl.worksheet.dimensions.ColumnDimension(ws, min=headers.index("Name") + 1, max=headers.index("Name") + 1, width=30)
+    dim_holder[openpyxl.utils.get_column_letter(headers.index("Format") + 1)] = openpyxl.worksheet.dimensions.ColumnDimension(ws, min=headers.index("Format") + 1, max=headers.index("Format") + 1, width=100)
+    dim_holder[openpyxl.utils.get_column_letter(headers.index("Motivation") + 1)] = openpyxl.worksheet.dimensions.ColumnDimension(ws, min=headers.index("Motivation") + 1, max=headers.index("Motivation") + 1, width=80)
+    ws.column_dimensions = dim_holder
 
 def model(ws):
     headers = ["Name", "Path", "Motivation"]
@@ -264,6 +300,7 @@ def model(ws):
 
     for row in ws.iter_rows(min_row=2, max_row=len(models)+1, max_col=3):
         for cell in row:
+            cell.alignment = openpyxl.styles.Alignment(wrapText=True)
             if cell.column == 1: # name
                 cell.value = list(models.items())[cell.row - 2][0]
             else:
@@ -272,6 +309,12 @@ def model(ws):
                     text = "\n".join([f"{i+1}. {t}" for i, t in enumerate(text)])
 
                 cell.value = text
+
+    dim_holder = openpyxl.worksheet.dimensions.DimensionHolder(worksheet=ws)
+    dim_holder[openpyxl.utils.get_column_letter(headers.index("Name") + 1)] = openpyxl.worksheet.dimensions.ColumnDimension(ws, min=headers.index("Name") + 1, max=headers.index("Name") + 1, width=20)
+    dim_holder[openpyxl.utils.get_column_letter(headers.index("Path") + 1)] = openpyxl.worksheet.dimensions.ColumnDimension(ws, min=headers.index("Path") + 1, max=headers.index("Path") + 1, width=30)
+    dim_holder[openpyxl.utils.get_column_letter(headers.index("Motivation") + 1)] = openpyxl.worksheet.dimensions.ColumnDimension(ws, min=headers.index("Motivation") + 1, max=headers.index("Motivation") + 1, width=80)
+    ws.column_dimensions = dim_holder
 
 if __name__ == "__main__":
     wb = openpyxl.Workbook()
