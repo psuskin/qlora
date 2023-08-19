@@ -30,9 +30,12 @@ def load_model(finetuned=False, model_name_or_path='huggyllama/llama-7b', adapte
 
     return model, tokenizer
 
-def generate(model, tokenizer, prompt, finetuned=False, max_new_tokens=512, top_p=0.9, temperature=0.01):
+def generate(model, tokenizer, prompt, finetuned=False, EN=True, max_new_tokens=512, top_p=0.9, temperature=0.01):
     if finetuned:
-        promptAlpaca = "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\n{instruction}\n\nResponse:".format(instruction=prompt)
+        if EN:
+            promptAlpaca = "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\n{instruction}\n\nResponse:".format(instruction=prompt)
+        else:
+            promptAlpaca = "Unten steht eine Anweisung, die eine Aufgabe beschreibt. Schreiben Sie eine Antwort, die die Aufgabe angemessen erfüllt.\n\n### Anleitung:\n{instruction}\n\nAntwort:".format(instruction=prompt)
     else:
         promptAlpaca = prompt
     inputs = tokenizer(promptAlpaca, return_tensors="pt").to('cuda')
