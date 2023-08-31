@@ -1,6 +1,10 @@
+import os
 import openpyxl
+from collections import Counter
 from collections import OrderedDict
 from inference import load_model, generate
+
+filename = "evaluation.xlsx"
 
 prompts = OrderedDict([
     ("general", [
@@ -74,6 +78,20 @@ datasets = OrderedDict([
         ],
         "motivation": "The previous data format used the Context tag. In order to finetune the already instruction tuned LLaMA-2-chat model, the Input tag is used instead. This data format is the same as the previous one, but the Context tag is replaced with Input."
     }),
+    ("Alpaca ohne Modulnamen im Kontext (de)", {
+        "format": [
+            "[Unten ist eine Anweisung, die eine Aufgabe beschreibt, gepaart mit einer Eingabe, die weitere Kontextinformationen liefert. Schreiben Sie eine Antwort, die die Anfrage angemessen vervollständigt.\n\n### Anweisung:\nWie heißt dieses Modul?\n\n### Kontext:\n<Module Description>\n\n### Antwort:], [Der Name des Moduls ist <Modulename>.]",
+            "[Unten ist eine Anweisung, die eine Aufgabe beschreibt. Schreiben Sie eine Antwort, die die Anfrage angemessen vervollständigt.\n\n### Anweisung:\nWas ist der Zweck des Moduls <Modulename>?\n\n### Antwort:], [Der Zweck des Moduls <Modulename> ist <Module Description>.]"
+        ],
+        "motivation": "Test LLaMA-7b's multilingualism."
+    }),
+    ("Alpaca ohne Modulnamen im Kontext (extratokens)", {
+        "format": [
+            "[Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the name of this module?\n\n### Context:\n<Module Description>\n\n### Response:], [The name of the module is <Modulename>.]",
+            "[Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the purpose of the module <Modulename>?\n\n### Response:], [The purpose of the module <Modulename> is <Module Description>.]"
+        ],
+        "motivation": "See if adding module names to the token vocabulary produces more accurate module names."
+    }),
 ])
 
 adapters = OrderedDict([
@@ -96,13 +114,55 @@ adapters = OrderedDict([
         "model": "LLaMA-2-7b-chat",
         "dataset": "Alpaca refined",
         "checkpoint": "1875"
-    })
+    }),
+    ("alpaca-7b-en", {
+        "model": "LLaMA-7b",
+        "dataset": "Alpaca ohne Modulnamen im Kontext",
+        "checkpoint": "1875"
+    }),
+    ("alpaca-7b-de", {
+        "model": "LLaMA-7b",
+        "dataset": "Alpaca ohne Modulnamen im Kontext (de)",
+        "checkpoint": "1875"
+    }),
+    ("alpaca-7b-extratokens", {
+        "model": "LLaMA-7b",
+        "dataset": "Alpaca ohne Modulnamen im Kontext (extratokens)",
+        "checkpoint": "1875"
+    }),
 ])
 
-def infer():
+def readInferences():
     inferences = {}
+    if os.path.isfile(filename):
+        wb = openpyxl.load_workbook(filename)
+        ws = wb["Prompts"]
+
+        currentPrompts = []
+        for row in ws.iter_rows(min_row=2, max_col=1, max_row=ws.max_row):
+            for cell in row:
+                if cell.font != openpyxl.styles.Font(bold=True):
+                    currentPrompts.append(cell.value)
+
+        currentAdapters = []
+        for col in ws.iter_cols(min_col=2, max_row=1, max_col=ws.max_column):
+            for cell in col:
+                if cell.font != openpyxl.styles.Font(bold=True):
+                    currentAdapters.append(cell.value)
+                    inferences[cell.value] = {}
+
+        for i, row in enumerate(ws.iter_rows(min_row=2, min_col=2, max_row=ws.max_row, max_col=ws.max_column)):
+            for j, cell in enumerate(row):
+                if cell.value:
+                    inferences[currentAdapters[j]][currentPrompts[i]] = cell.value
+
+    return inferences
+
+def infer():
+    inferences = readInferences()
 
     if False:
+        inferences = {}
         adapterNames = list(adapters.keys())
         for name in adapterNames:
             inferences[name] = {}
@@ -118,8 +178,21 @@ def infer():
 
         return inferences
 
+    currentPrompts = []
+    for promptCategory in list(prompts.keys()):
+        if promptCategory == "specific":
+            for module in prompts[promptCategory]:
+                for prompt in prompts[promptCategory][module]:
+                    currentPrompts.append(prompt)
+        else:
+            for prompt in prompts[promptCategory]:
+                currentPrompts.append(prompt)
+
     adapterNames = list(adapters.keys())
     for name in adapterNames:
+        if name in inferences and Counter(list(inferences[name].keys())) == Counter(currentPrompts):
+            continue
+
         inferences[name] = {}
 
         model, tokenizer = load_model(True, models[adapters[name]["model"]]["path"], f"/workspace/output/{name}/checkpoint-{adapters[name]['checkpoint']}/adapter_model")
@@ -335,4 +408,4 @@ if __name__ == "__main__":
 
     model(wsModels)
 
-    wb.save("evaluation.xlsx")
+    wb.save(filename)
