@@ -55,7 +55,7 @@ def generate(model, tokenizer, prompt, finetuned=False, EN=True, max_new_tokens=
     )
 
     text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    return text.replace(promptAlpaca, '')
+    return text.replace(promptAlpaca, '').strip()
 
 if __name__ == "__main__":
     model, tokenizer = load_model(True)

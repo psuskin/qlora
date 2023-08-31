@@ -64,7 +64,7 @@ datasets = OrderedDict([
         ],
         "motivation": "The previous data format put all data in the output, causing the model to recursively generate Context and Instruction tags. This data format is the same as the previous one, but only the response is in the output."
     }),
-    ("Alpaca ohne Modulenamen im Kontext", {
+    ("Alpaca ohne Modulnamen im Kontext", {
         "format": [
             "[Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the name of this module?\n\n### Context:\n<Module Description>\n\n### Response:], [The name of the module is <Modulename>.]",
             "[Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the purpose of the module <Modulename>?\n\n### Response:], [The purpose of the module <Modulename> is <Module Description>.]"
@@ -107,7 +107,7 @@ adapters = OrderedDict([
     }),
     ("alpaca-2-70b", {
         "model": "LLaMA-2-70b",
-        "dataset": "Alpaca ohne Modulenamen im Kontext",
+        "dataset": "Alpaca ohne Modulnamen im Kontext",
         "checkpoint": "1000"
     }),
     ("chat-7b", {
@@ -138,23 +138,21 @@ def readInferences():
         wb = openpyxl.load_workbook(filename)
         ws = wb["Prompts"]
 
-        currentPrompts = []
-        for row in ws.iter_rows(min_row=2, max_col=1, max_row=ws.max_row):
-            for cell in row:
-                if cell.font != openpyxl.styles.Font(bold=True):
-                    currentPrompts.append(cell.value)
-
         currentAdapters = []
         for col in ws.iter_cols(min_col=2, max_row=1, max_col=ws.max_column):
             for cell in col:
-                if cell.font != openpyxl.styles.Font(bold=True):
-                    currentAdapters.append(cell.value)
-                    inferences[cell.value] = {}
-
-        for i, row in enumerate(ws.iter_rows(min_row=2, min_col=2, max_row=ws.max_row, max_col=ws.max_column)):
+                currentAdapters.append(cell.value)
+                inferences[cell.value] = {}
+        
+        for row in ws.iter_rows(min_row=2, max_col=ws.max_column, max_row=ws.max_row):
             for j, cell in enumerate(row):
-                if cell.value:
-                    inferences[currentAdapters[j]][currentPrompts[i]] = cell.value
+                if j == 0:
+                    if cell.font.bold:
+                        break
+                    else:
+                        prompt = cell.value
+                else:
+                    inferences[currentAdapters[j-1]][prompt] = cell.value.strip()
 
     return inferences
 
@@ -195,16 +193,22 @@ def infer():
 
         inferences[name] = {}
 
-        model, tokenizer = load_model(True, models[adapters[name]["model"]]["path"], f"/workspace/output/{name}/checkpoint-{adapters[name]['checkpoint']}/adapter_model")
+        model, tokenizer = load_model(True, "extratokens" in name, models[adapters[name]["model"]]["path"], f"/workspace/output/{name}/checkpoint-{adapters[name]['checkpoint']}/adapter_model")
 
         for promptCategory in list(prompts.keys()):
             if promptCategory == "specific":
                 for module in prompts[promptCategory]:
                     for prompt in prompts[promptCategory][module]:
-                        inferences[name][prompt] = generate(model, tokenizer, prompt, True)
+                        try:
+                            inferences[name][prompt] = generate(model, tokenizer, prompt, True, not "de" in name)
+                        except:
+                            inferences[name][prompt] = "Error"
             else:
                 for prompt in prompts[promptCategory]:
-                    inferences[name][prompt] = generate(model, tokenizer, prompt, True)
+                    try:
+                        inferences[name][prompt] = generate(model, tokenizer, prompt, True, not "de" in name)
+                    except:
+                        inferences[name][prompt] = "Error"
 
     return inferences
 
@@ -298,13 +302,13 @@ def prompt(ws, inferences):
                 i += 1
                 for prompt in prompts[promptCategory][module]:
                     cell = ws[f"A{i}"]
-                    cell.alignment = openpyxl.styles.Alignment(wrapText=True)
+                    cell.alignment = openpyxl.styles.Alignment(wrapText=True, vertical="top")
                     cell.value = prompt
                     i += 1
         else:
             for prompt in prompts[promptCategory]:
                 cell = ws[f"A{i}"]
-                cell.alignment = openpyxl.styles.Alignment(wrapText=True)
+                cell.alignment = openpyxl.styles.Alignment(wrapText=True, vertical="top")
                 cell.value = prompt
                 i += 1
 
@@ -322,13 +326,13 @@ def prompt(ws, inferences):
                     i += 1
                     for prompt in prompts[promptCategory][module]:
                         cell = ws[f"{openpyxl.utils.get_column_letter(a + 2)}{i}"]
-                        cell.alignment = openpyxl.styles.Alignment(wrapText=True)
+                        cell.alignment = openpyxl.styles.Alignment(wrapText=True, vertical="top")
                         cell.value = inferences[name][prompt]
                         i += 1
             else:
                 for prompt in prompts[promptCategory]:
                     cell = ws[f"{openpyxl.utils.get_column_letter(a + 2)}{i}"]
-                    cell.alignment = openpyxl.styles.Alignment(wrapText=True)
+                    cell.alignment = openpyxl.styles.Alignment(wrapText=True, vertical="top")
                     cell.value = inferences[name][prompt]
                     i += 1
 
@@ -347,7 +351,7 @@ def dataset(ws):
 
     for row in ws.iter_rows(min_row=2, max_row=len(datasets)+1, max_col=3):
         for cell in row:
-            cell.alignment = openpyxl.styles.Alignment(wrapText=True)
+            cell.alignment = openpyxl.styles.Alignment(wrapText=True, vertical="top")
             if cell.column == 1: # name
                 cell.value = list(datasets.items())[cell.row - 2][0]
             else:
@@ -373,7 +377,7 @@ def model(ws):
 
     for row in ws.iter_rows(min_row=2, max_row=len(models)+1, max_col=3):
         for cell in row:
-            cell.alignment = openpyxl.styles.Alignment(wrapText=True)
+            cell.alignment = openpyxl.styles.Alignment(wrapText=True, vertical="top")
             if cell.column == 1: # name
                 cell.value = list(models.items())[cell.row - 2][0]
             else:
@@ -390,6 +394,10 @@ def model(ws):
     ws.column_dimensions = dim_holder
 
 if __name__ == "__main__":
+    if False:
+        print(readInferences())
+        exit()
+
     wb = openpyxl.Workbook()
     wsEval = wb.active
     wsEval.title = "Evaluation"
