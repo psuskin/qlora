@@ -152,7 +152,8 @@ def readInferences():
                     else:
                         prompt = cell.value
                 else:
-                    inferences[currentAdapters[j-1]][prompt] = cell.value.strip()
+                    if cell.value:
+                        inferences[currentAdapters[j-1]][prompt] = cell.value.strip()
 
     return inferences
 
