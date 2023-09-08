@@ -8,30 +8,60 @@ filename = "evaluation.xlsx"
 
 prompts = OrderedDict([
     ("general", [
-        ("What is a module?", "Was ist ein Modul?"),
+        "What is a module?",
 
-        ("In what module can I edit customers?", "In welchem Modul kann ich Kunden editieren?"),
-        ("In what module do I edit the name of a customer?", "In welchem Modul kann ich den Namen eines Kunden ändern?"),
+        "In what module can I edit customers?",
+        "In what module do I edit the name of a customer?",
 
-        ("What is the module for entering sales invoices?", "Welches Modul wird für das Eingeben von Verkaufsrechnungen benutzt?"),
+        "What is the module for entering sales invoices?",
     ]),
     ("hallucination", [
-        ("This is the context of the module billofma: feeding guinea pigs and groundhogs. Which module describes feeding mammals?", "Dies ist der Kontext des Moduls billofma: Füttern von Meerschweinchen und Murmeltieren. Welches Modul beschreibt das Füttern von Säugetieren?"),
-        ("This is the description of the module billofma: Feeding guinea pigs and groundhogs. Which module describes Donald Trump's presidency?", "Dies ist die Beschreibung des Moduls billofma: Füttern von Meerschweinchen und Murmeltieren. Welches Modul beschreibt Donald Trump's Präsidentschaft?"),
+        "This is the context of the module billofma: feeding guinea pigs and groundhogs. Which module describes feeding mammals?",
+        "This is the description of the module billofma: Feeding guinea pigs and groundhogs. Which module describes Donald Trump's presidency?",
     ]),
     ("specific", {
         "balanfac": [
-            ("With this module, the annual and period balances of a general ledger or personal account posted in financial accounting are displayed. Which module is being described?", "Mit diesem Modul werden die in der Finanzbuchhaltung gebuchten Jahres- und Periodensalden eines Sach- oder Personenkontos angezeigt. Welches Modul wird hier beschrieben?"),
-            ("Which module is used to display the annual and period balances of a general ledger?", "Welches Modul wird für das Anzeigen von Jahres- und Periodensalden eines Sachkontos verwendet?"),
-            ("What is the module to list annual balances of general ledger?", "Welches Modul wird für die Auflistung von Jahressalden eines Sachkontos verwendet?"),
+            "With this module, the annual and period balances of a general ledger or personal account posted in financial accounting are displayed. Which module is being described?",
+            "Which module is used to display the annual and period balances of a general ledger?",
+            "What is the module to list annual balances of general ledger?",
         ],
         "icastedt": [
-            ("Which module deals with creating and deleting parts or service-role relationships?", "Welches Modul dient zum Anlegen und Löschen von Teile bzw. Dienstleistungs-Rollen Beziehungen?")
+            "Which module deals with creating and deleting parts or service-role relationships?",
         ],
         "billofma": [
-            ("Which module describes the composition of a production part?", "Welches Modul beschreibt die Zusammensetzung eines Fertigungsteils?")
+            "Which module describes the composition of a production part?"
         ],
     }),
+    ("realistic (finding module)", [
+        "Wo erfasse ich Kunden?",
+        "Wo gebe ich Arbeitsplatz Kapazitäten ein?",
+        "Wo erfasse ich den Urlaub eines Mitarbeiters?",
+        "Wie kann ich die Gültigkeit eines Teils beschränken?",
+        "In welchem Modul gibt man das Logistik Kennzeichen ein?",
+        "Wie erfasse ich eine Rahmenbestellung?",
+        "Wo pflege ich Währungstabellen?",
+    ]),
+    ("realistic (explanation)", [
+        "Was ist ein Variantenteil?",
+        "Was macht der Gozintograph?",
+        "Wie plane ich Fertigungsaufträge?",
+        "Was sind Spezifikationsnummern?",
+        "Was ist eine Sachmerkmalsleiste?",
+        "Wie setze ich Attribute in die Sachmerkmalsleiste ein?",
+        "Wie werden die Teile im Lager bewertet?",
+        "Was ist eine Preistabelle?",
+        "Was sind bedingte Stücklistenpositionen?",
+        "Was ist eine Fehlzeit?",
+        "Wie importiere ich meine Inventurdaten in GESTIN?",
+        "Was ist eine Stichprobeninventur?"
+        "Was macht PYTHIA?",
+        "Kann man Belege löschen?",
+        "Was ist die Beleghistorie?",
+        "Kann ich die Ausgabewährung einer Auftragsbestätigung anpassen?",
+        "Was ist ein Logistik-Kennzeichen?",
+        "Was ist eine Beipackliste?",
+        "Was sind Stammdaten?",
+    ])
 ])
 
 models =  OrderedDict([
@@ -46,6 +76,18 @@ models =  OrderedDict([
     ("LLaMA-2-7b-chat", {
         "path": "meta-llama/Llama-2-7b-chat-hf",
         "motivation": "Check if finetuning an instruction-finetuned model improves chat dialogue."
+    }),
+    ("LLaMA-2-7b", {
+        "path": "meta-llama/Llama-2-7b-hf",
+        "motivation": "Fill out model evaluation."
+    }),
+    ("LLaMA-2-13b-chat", {
+        "path": "meta-llama/Llama-2-13b-chat-hf",
+        "motivation": "Fill out model evaluation."
+    }),
+    ("LLaMA-2-13b", {
+        "path": "meta-llama/Llama-2-13b-hf",
+        "motivation": "Fill out model evaluation."
     }),
 ])
 

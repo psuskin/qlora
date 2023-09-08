@@ -59,14 +59,14 @@ def count(path, sequencePart="output", maxTokens=max_sequence_length):
     print(f"Samples under max sequence length: {samplesUnderMaxLength} (approx. {float(samplesUnderMaxLength) / len(tokenCounts)}).\n")
 
     samplesOverMaxLength = [jsonArray[i][sequencePart] for i in range(len(tokenCounts)) if tokenCounts[i] > maxTokens]
-    print("Samples over max sequence length: ", samplesOverMaxLength)
+    #print("Samples over max sequence length: ", samplesOverMaxLength)
 
-#count("data/en_articles_autoregressive.json")
+#count("data/en_articles_autoregressive.json", "output", 2000)
 
 #count("data/en_articles_alpaca.json")
 
-#count("data/en_articles_alpaca.json", "input", 1024)
-#count("data/en_articles_alpaca.json", "output", 1024)
+count("data/en_articles_alpaca.json", "input", 1024)
+count("data/en_articles_alpaca.json", "output", 1024)
 
-count("data/de_articles_alpaca.json", "input", 1024)
-count("data/de_articles_alpaca.json", "output", 1024)
+#count("data/de_articles_alpaca.json", "input", 1024)
+#count("data/de_articles_alpaca.json", "output", 1024)

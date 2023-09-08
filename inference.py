@@ -12,7 +12,8 @@ def load_model(finetuned=False, extraTokens=False, model_name_or_path='huggyllam
     # Fixing some of the early LLaMA HF conversion issues.
     tokenizer.bos_token_id = 1
     if extraTokens:
-        tokenizer.add_tokens(new_toks)
+        tokenizer.add_tokens(new_toks) # https://discuss.huggingface.co/t/lm-finetuning-on-domain-specific-unlabelled-data/5433/3
+        #tokenizer.save_vocabulary("vocab")
 
     # Load the model (use bf16 for faster inference)
     model = AutoModelForCausalLM.from_pretrained(
@@ -28,13 +29,16 @@ def load_model(finetuned=False, extraTokens=False, model_name_or_path='huggyllam
         )
     )
 
+    if extraTokens:
+        model.resize_token_embeddings(len(tokenizer))
+
     if finetuned:
         model = PeftModel.from_pretrained(model, adapter_path)
     model.eval()
 
     return model, tokenizer
 
-def generate(model, tokenizer, prompt, finetuned=False, EN=True, max_new_tokens=512, top_p=0.9, temperature=0.01):
+def generate(model, tokenizer, prompt, finetuned=False, EN=True, max_new_tokens=512, top_p=1, temperature=0.01):
     if finetuned:
         if EN:
             promptAlpaca = "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\n{instruction}\n\nResponse:".format(instruction=prompt)
@@ -54,6 +58,10 @@ def generate(model, tokenizer, prompt, finetuned=False, EN=True, max_new_tokens=
         )
     )
 
+    if False:
+        for output in outputs[0]:
+            print(output, tokenizer.decode(output))
+
     text = tokenizer.decode(outputs[0], skip_special_tokens=True)
     return text.replace(promptAlpaca, '').strip()
 
@@ -61,4 +69,4 @@ if __name__ == "__main__":
     model, tokenizer = load_model(True)
 
     while (prompt := input("Enter prompt: ")) != "exit":
-        print(f"\nNetwork output: {generate(model, tokenizer, prompt)}\n")
+        print(f"\nNetwork output: {generate(model, tokenizer, prompt, True)}\n")
