@@ -177,7 +177,7 @@ adapters = OrderedDict([
         "dataset": "Alpaca ohne Modulnamen im Kontext",
         "checkpoint": "1875"
     }),
-    ("chat-13b", {
+    ("chat-13b-context", {
         "model": "LLaMA-2-13b-chat",
         "dataset": "Alpaca ohne Modulnamen im Kontext",
         "checkpoint": "1875"
