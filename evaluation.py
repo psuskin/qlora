@@ -172,6 +172,21 @@ adapters = OrderedDict([
         "dataset": "Alpaca ohne Modulnamen im Kontext (extratokens)",
         "checkpoint": "1875"
     }),
+    ("alpaca-2-7b", {
+        "model": "LLaMA-2-7b",
+        "dataset": "Alpaca ohne Modulnamen im Kontext",
+        "checkpoint": "1875"
+    }),
+    ("chat-13b", {
+        "model": "LLaMA-2-13b-chat",
+        "dataset": "Alpaca ohne Modulnamen im Kontext",
+        "checkpoint": "1875"
+    }),
+    ("alpaca-2-13b", {
+        "model": "LLaMA-2-13b",
+        "dataset": "Alpaca ohne Modulnamen im Kontext",
+        "checkpoint": "1875"
+    })
 ])
 
 def readInferences():
