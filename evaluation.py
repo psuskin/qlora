@@ -2,7 +2,7 @@ import os
 import openpyxl
 from collections import Counter
 from collections import OrderedDict
-from inference import load_model, generate
+#from inference import load_model, generate
 
 filename = "evaluation.xlsx"
 
@@ -69,43 +69,43 @@ models =  OrderedDict([
         "path": "huggyllama/llama-7b",
         "motivation": "Able to run on local PC, reputable foundation model."
     }),
-    ("LLaMA-2-70b", {
-        "path": "meta-llama/Llama-2-70b-hf",
-        "motivation": "Acquire a feel for the runtime and performance associated with a large model."
+    ("LLaMA-2-7b", {
+        "path": "meta-llama/Llama-2-7b-hf",
+        "motivation": "Fill out model evaluation."
     }),
     ("LLaMA-2-7b-chat", {
         "path": "meta-llama/Llama-2-7b-chat-hf",
         "motivation": "Check if finetuning an instruction-finetuned model improves chat dialogue."
     }),
-    ("LLaMA-2-7b", {
-        "path": "meta-llama/Llama-2-7b-hf",
+    ("LLaMA-2-13b", {
+        "path": "meta-llama/Llama-2-13b-hf",
         "motivation": "Fill out model evaluation."
     }),
     ("LLaMA-2-13b-chat", {
         "path": "meta-llama/Llama-2-13b-chat-hf",
         "motivation": "Fill out model evaluation."
     }),
-    ("LLaMA-2-13b", {
-        "path": "meta-llama/Llama-2-13b-hf",
-        "motivation": "Fill out model evaluation."
+    ("LLaMA-2-70b", {
+        "path": "meta-llama/Llama-2-70b-hf",
+        "motivation": "Acquire a feel for the runtime and performance associated with a large model."
     }),
 ])
 
 datasets = OrderedDict([
-    ("I/O falsch", {
-        "format": [
-            "[], [###Context###: This is the description of the module <Modulename>: <Module Description>.\n###Instruction###: What is the name of this module?\n###Response###: The name of the module is <Modulename>.]",
-            "[], [###Context###:\n###Instruction###: What is the purpose of the module <Modulename>?\n###Response###: The purpose of the module <Modulename> is <Module Description>.]"
-        ],
-        "motivation": "The main goal is for the model to answer correct module names based on descriptions, supported by the first data format. The second data format is to give the model an understanding of appsWH."
-    }),
-    ("Alpaca", {
-        "format": [
-            "[Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the name of this module?\n\n### Context:\nThis is the description of the module <Modulename>: <Module Description>\n\n### Response:], [The name of the module is <Modulename>.]",
-            "[Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the purpose of the module <Modulename>?\n\n### Response:], [The purpose of the module <Modulename> is <Module Description>.]"
-        ],
-        "motivation": "The previous data format put all data in the output, causing the model to recursively generate Context and Instruction tags. This data format is the same as the previous one, but only the response is in the output."
-    }),
+    # ("I/O falsch", {
+    #     "format": [
+    #         "[], [###Context###: This is the description of the module <Modulename>: <Module Description>.\n###Instruction###: What is the name of this module?\n###Response###: The name of the module is <Modulename>.]",
+    #         "[], [###Context###:\n###Instruction###: What is the purpose of the module <Modulename>?\n###Response###: The purpose of the module <Modulename> is <Module Description>.]"
+    #     ],
+    #     "motivation": "The main goal is for the model to answer correct module names based on descriptions, supported by the first data format. The second data format is to give the model an understanding of appsWH."
+    # }),
+    # ("Alpaca", {
+    #     "format": [
+    #         "[Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the name of this module?\n\n### Context:\nThis is the description of the module <Modulename>: <Module Description>\n\n### Response:], [The name of the module is <Modulename>.]",
+    #         "[Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the purpose of the module <Modulename>?\n\n### Response:], [The purpose of the module <Modulename> is <Module Description>.]"
+    #     ],
+    #     "motivation": "The previous data format put all data in the output, causing the model to recursively generate Context and Instruction tags. This data format is the same as the previous one, but only the response is in the output."
+    # }),
     ("Alpaca ohne Modulnamen im Kontext", {
         "format": [
             "[Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the name of this module?\n\n### Context:\n<Module Description>\n\n### Response:], [The name of the module is <Modulename>.]",
@@ -113,13 +113,13 @@ datasets = OrderedDict([
         ],
         "motivation": "The previous data format gave away the module name in the context, causing the model to pay attention only to the passed name instead of the actual context. This data format is the same as the previous one, but the module name is removed from the context."
     }),
-    ("Alpaca refined", {
-        "format": [
-            "[Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the name of this module?\n\n### Input:\n<Module Description>\n\n### Response:], [The name of the module is <Modulename>.]",
-            "[Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the purpose of the module <Modulename>?\n\n### Response:], [The purpose of the module <Modulename> is <Module Description>.]"
-        ],
-        "motivation": "The previous data format used the Context tag. In order to finetune the already instruction tuned LLaMA-2-chat model, the Input tag is used instead. This data format is the same as the previous one, but the Context tag is replaced with Input."
-    }),
+    # ("Alpaca refined", {
+    #     "format": [
+    #         "[Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the name of this module?\n\n### Input:\n<Module Description>\n\n### Response:], [The name of the module is <Modulename>.]",
+    #         "[Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the purpose of the module <Modulename>?\n\n### Response:], [The purpose of the module <Modulename> is <Module Description>.]"
+    #     ],
+    #     "motivation": "The previous data format used the Context tag. In order to finetune the already instruction tuned LLaMA-2-chat model, the Input tag is used instead. This data format is the same as the previous one, but the Context tag is replaced with Input."
+    # }),
     ("Alpaca ohne Modulnamen im Kontext (de)", {
         "format": [
             "[Unten ist eine Anweisung, die eine Aufgabe beschreibt, gepaart mit einer Eingabe, die weitere Kontextinformationen liefert. Schreiben Sie eine Antwort, die die Anfrage angemessen vervollständigt.\n\n### Anweisung:\nWie heißt dieses Modul?\n\n### Kontext:\n<Module Description>\n\n### Antwort:], [Der Name des Moduls ist <Modulename>.]",
@@ -137,30 +137,45 @@ datasets = OrderedDict([
 ])
 
 adapters = OrderedDict([
-    ("guanaco-7b", {
+    # ("guanaco-7b", {
+    #     "model": "LLaMA-7b",
+    #     "dataset": "I/O falsch",
+    #     "checkpoint": "1875"
+    # }),
+    # ("alpaca-7b", {
+    #     "model": "LLaMA-7b",
+    #     "dataset": "Alpaca",
+    #     "checkpoint": "1875"
+    # }),
+    ("alpaca-7b-en", {
         "model": "LLaMA-7b",
-        "dataset": "I/O falsch",
+        "dataset": "Alpaca ohne Modulnamen im Kontext",
         "checkpoint": "1875"
     }),
-    ("alpaca-7b", {
-        "model": "LLaMA-7b",
-        "dataset": "Alpaca",
+    ("alpaca-2-7b", {
+        "model": "LLaMA-2-7b",
+        "dataset": "Alpaca ohne Modulnamen im Kontext",
+        "checkpoint": "1875"
+    }),
+    ("chat-7b", {
+        "model": "LLaMA-2-7b-chat",
+        "dataset": "Alpaca ohne Modulnamen im Kontext",#"Alpaca refined",
+        "checkpoint": "1875"
+    }),
+    ("alpaca-2-13b", {
+        "model": "LLaMA-2-13b",
+        "dataset": "Alpaca ohne Modulnamen im Kontext",
+        "checkpoint": "1875"
+    }),
+    ("chat-13b-context", {
+        "model": "LLaMA-2-13b-chat",
+        "dataset": "Alpaca ohne Modulnamen im Kontext",
         "checkpoint": "1875"
     }),
     ("alpaca-2-70b", {
         "model": "LLaMA-2-70b",
         "dataset": "Alpaca ohne Modulnamen im Kontext",
         "checkpoint": "1000"
-    }),
-    ("chat-7b", {
-        "model": "LLaMA-2-7b-chat",
-        "dataset": "Alpaca refined",
-        "checkpoint": "1875"
-    }),
-    ("alpaca-7b-en", {
-        "model": "LLaMA-7b",
-        "dataset": "Alpaca ohne Modulnamen im Kontext",
-        "checkpoint": "1875"
     }),
     ("alpaca-7b-de", {
         "model": "LLaMA-7b",
@@ -172,21 +187,6 @@ adapters = OrderedDict([
         "dataset": "Alpaca ohne Modulnamen im Kontext (extratokens)",
         "checkpoint": "1875"
     }),
-    ("alpaca-2-7b", {
-        "model": "LLaMA-2-7b",
-        "dataset": "Alpaca ohne Modulnamen im Kontext",
-        "checkpoint": "1875"
-    }),
-    ("chat-13b-context", {
-        "model": "LLaMA-2-13b-chat",
-        "dataset": "Alpaca ohne Modulnamen im Kontext",
-        "checkpoint": "1875"
-    }),
-    ("alpaca-2-13b", {
-        "model": "LLaMA-2-13b",
-        "dataset": "Alpaca ohne Modulnamen im Kontext",
-        "checkpoint": "1875"
-    })
 ])
 
 def readInferences():
