@@ -405,6 +405,10 @@ def get_accelerate_model(args, checkpoint_dir):
             if hasattr(module, 'weight'):
                 if args.bf16 and module.weight.dtype == torch.float32:
                     module = module.to(torch.bfloat16)
+
+    #model.save_pretrained(os.path.join(args.output_dir, "initial"))
+    #print("Saved initial model.")
+
     return model, tokenizer
 
 def print_trainable_parameters(args, model):
