@@ -2,7 +2,9 @@ import os
 import openpyxl
 from collections import Counter
 from collections import OrderedDict
-#from inference import load_model, generate
+from inference import load_model, generate
+
+RESET = False
 
 filename = "evaluation.xlsx"
 
@@ -246,25 +248,29 @@ def infer():
 
     adapterNames = list(adapters.keys())
     for name in adapterNames:
-        if name in inferences and Counter(list(inferences[name].keys())) == Counter(currentPrompts):
+        if name in inferences and Counter(list(inferences[name].keys())) == Counter(currentPrompts) and not RESET:
             continue
 
-        inferences[name] = {}
-
-        model, tokenizer = load_model(True, "extratokens" in name, models[adapters[name]["model"]]["path"], f"/workspace/output/{name}/checkpoint-{adapters[name]['checkpoint']}/adapter_model")
+        base_model, finetuned_model, tokenizer = load_model(models[adapters[name]["model"]]["path"], f"/workspace/output/{name}/checkpoint-{adapters[name]['checkpoint']}/adapter_model")
 
         for promptCategory in list(prompts.keys()):
             if promptCategory == "specific":
                 for module in prompts[promptCategory]:
                     for prompt in prompts[promptCategory][module]:
+                        if prompt in inferences[name] and not RESET:
+                            continue
+
                         try:
-                            inferences[name][prompt] = generate(model, tokenizer, prompt, True, not "de" in name)
+                            inferences[name][prompt] = generate(finetuned_model, tokenizer, prompt, True, not "de" in name) + generate(base_model, tokenizer, prompt, True, not "de" in name)
                         except:
                             inferences[name][prompt] = "Error"
             else:
                 for prompt in prompts[promptCategory]:
+                    if prompt in inferences[name] and not RESET:
+                        continue
+
                     try:
-                        inferences[name][prompt] = generate(model, tokenizer, prompt, True, not "de" in name)
+                        inferences[name][prompt] = generate(finetuned_model, tokenizer, prompt, True, not "de" in name) + generate(base_model, tokenizer, prompt, True, not "de" in name)
                     except:
                         inferences[name][prompt] = "Error"
 
