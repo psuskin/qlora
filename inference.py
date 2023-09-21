@@ -34,7 +34,9 @@ def load_model(model_name_or_path='huggyllama/llama-7b', adapter_path=None):
 
     if adapter_path:
         finetuned_model = PeftModel.from_pretrained(base_model, adapter_path)
-    finetuned_model.eval()
+        finetuned_model.eval()
+    else:
+        finetuned_model = None
 
     return base_model, finetuned_model, tokenizer
 
@@ -66,7 +68,7 @@ def generate(model, tokenizer, prompt, finetuned=False, EN=True, max_new_tokens=
     return text.replace(promptAlpaca, '').strip()
 
 if __name__ == "__main__":
-    model, tokenizer = load_model('huggyllama/llama-7b', '/workspace/output/guanaco-7b/checkpoint-1875/adapter_model')
+    base_model, finetuned_model, tokenizer = load_model('huggyllama/llama-7b', '/workspace/output/guanaco-7b/checkpoint-1875/adapter_model')
 
     while (prompt := input("Enter prompt: ")) != "exit":
-        print(f"\nNetwork output: {generate(model, tokenizer, prompt, True)}\n")
+        print(f"\nNetwork output: {generate(finetuned_model, tokenizer, prompt, True)}\n")
