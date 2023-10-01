@@ -406,8 +406,9 @@ def get_accelerate_model(args, checkpoint_dir):
                 if args.bf16 and module.weight.dtype == torch.float32:
                     module = module.to(torch.bfloat16)
 
-    #model.save_pretrained(os.path.join(args.output_dir, "initial"))
-    #print("Saved initial model.")
+    model.save_pretrained(os.path.join(args.output_dir, f"init-r{args.lora_r}-{args.model_name_or_path}"))
+    print("Saved initial model.")
+    #exit()
 
     return model, tokenizer
 
