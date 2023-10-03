@@ -12,3 +12,5 @@ CMD ["jupyter", "lab", "--ip='*'", "--NotebookApp.allow_origin='*'", "--port=888
 RUN pip install -U openpyxl
 RUN git config --global credential.helper store
 #huggingface-cli login
+
+RUN mv /home/qlora/lora.py /usr/local/lib/python3.10/dist-packages/peft/tuners/lora.py
