@@ -1,56 +1,72 @@
 import re
 import os
+import glob
 import torch
 import numpy as np
 import matplotlib.pyplot as plt
+from collections import defaultdict
 
-PATH = "/workspace/output"
+PATH = "/workspace/analysis"
 
-USE_CPU = False
+USE_CPU = True
 
 RANKS = [64, 32, 16]
 
-def getInitWeights(weights):
-    for rank in RANKS:
-        weights[rank] = {}
+rec_dd = lambda: defaultdict(rec_dd)
+
+class Weights:
+    def __init__(self, tensor):
+        self.matrix = tensor.detach().cpu().float().numpy()
+
+        self.U, self.S, self.Vh = np.linalg.svd(self.matrix)
+
+class Layer:
+    def __init__(self):
+        self.modules = rec_dd()
+
+class Model:
+    def __init__(self, directory):
+        if rankMatch := re.search(r"-r([0-9]+)", directory):
+            self.rank = int(rankMatch.group(1))
+        else:
+            self.rank = 64
+
+        if modelMatch := re.search(r"(.*?)-r", directory):
+            self.foundation = modelMatch.group(1)
+        else:
+            self.foundation = directory
+
+
+        if initBinaryFound := glob.glob(f"{directory}/init-*/*/adapter_model.bin"):
+            if os.path.exists(resultBinary := os.path.join(directory, "checkpoint-1875", "adapter_model", "adapter_model.bin")):
+                self.layers = self._loadLayers(initBinaryFound[0], resultBinary)
+
+    def _loadLayers(self, initBinary, resultBinary):
+        layers = defaultdict(Layer)
+
         if USE_CPU:
-            weights[rank]["init"] = torch.load(f"init-r{rank}/adapter_model.bin", map_location="cpu")
+            initTorchDir = torch.load(initBinary, map_location="cpu")
+            resultTorchDir = torch.load(resultBinary, map_location="cpu")
         else:
-            weights[rank]["init"] = torch.load(f"init-r{rank}/adapter_model.bin")
+            initTorchDir = torch.load(initBinary)
+            resultTorchDir = torch.load(resultBinary)
 
-def getWeights(weights, models):
-    for model in models:
-        result = re.search(r"-r([0-9]+)", model)
-        if result:
-            rank = int(result.group(1))
-        else:
-            rank = 64
+        for module in initTorchDir:
+            layerIndex, layerFragment, layerMatrix = self._getRegex(module)
+            layers[layerIndex].modules[layerFragment][layerMatrix]["init"] = Weights(initTorchDir[module])
 
-        if rank not in weights:
-            raise Exception(f"Rank {rank} identified for {model} does not have initial weight matrices defined. Initial weight matrices are defined for the following ranks: {sorted(list(weights.keys()))}")
+        for module in resultTorchDir:
+            layerIndex, layerFragment, layerMatrix = self._getRegex(module)
+            layers[layerIndex].modules[layerFragment][layerMatrix]["result"] = Weights(initTorchDir[module])
+    
+    def _getRegex(self, module):
+        layerMatch = re.search(r"layers.([0-9]+).(.*?).lora_([A-B]).", module)
+        return layerMatch.group(1), layerMatch.group(2), layerMatch.group(3)
 
-        if USE_CPU:
-            weights[rank][model] = torch.load(os.path.join(PATH, model, "adapter_model/adapter_model.bin"), map_location="cpu")
-        else:
-            weights[rank][model] = torch.load(os.path.join(PATH, model, "adapter_model/adapter_model.bin"))
+def grassmann(matrixLarge, matrixSmall):
+    pass
 
-def getSVDs(weights):
-    SVDs = {}
-    for rank in weights:
-        SVDs[rank] = {}
-        for model in weights[rank]:
-            for module in weights[rank][model]:
-                tensor = weights[rank][model][module]
-                matrix = tensor.detach().cpu().float().numpy()
-                U, S, Vh = np.linalg.svd(matrix)
-                print(U, S, Vh)
-                exit()
-
-    return SVDs
-
-def plotDistribution(tensor):
-    matrix = tensor.detach().cpu().float().numpy()
-
+def plotDistribution(matrix):
     plt.hist(matrix.flatten(), bins=100)
     plt.show()
 
@@ -62,8 +78,8 @@ def ensureImageSubset(dirOrig, dirTrans):
         weightsOrig = torch.load(dirOrig)
         weightsTrans = torch.load(dirTrans)
 
-    weightOrig = next(iter(weightsOrig.values()))
-    weightTrans = next(iter(weightsTrans.values()))
+    weightOrig = next(iter(weightsOrig.values())).detach().cpu().float()
+    weightTrans = next(iter(weightsTrans.values())).detach().cpu().float()
 
     #for row in weightOrig: print(row)
     #for row in weightTrans: print(row)
@@ -73,14 +89,13 @@ def ensureImageSubset(dirOrig, dirTrans):
     exit()
 
 if __name__ == '__main__':
-    #ensureImageSubset("output/init-r64-EleutherAI/pythia-12b/adapter_model.bin", "output/init-r32-EleutherAI/pythia-12b/adapter_model.bin")
+    #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
-    weights = {}
+    models = {}
+    for directory in os.listdir(PATH):
+        models[directory] = Model(os.path.join(PATH, directory))
 
-    getInitWeights(weights)
-    #plotDistribution(weights[64]["init"]['base_model.model.model.layers.0.self_attn.q_proj.lora_A.weight'])
+    #print(models)
+    print(models["alpaca-2-7b-r64"].layers[0])
 
-    models = ["alpaca-2-7b/checkpoint-1875", "alpaca-2-7b-r32/checkpoint-1875", "alpaca-2-7b-r16/checkpoint-1875"]
-    getWeights(weights, models)
-
-    SVDs = getSVDs(weights)
+    #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
