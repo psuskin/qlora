@@ -750,7 +750,7 @@ class LoraLayer:
 
                 weight_A_64 = LoraLayer.weights_A_64[LoraLayer.keys_A_64[LoraLayer.counter]]
 
-                random_indices = torch.randperm(64)[:32]
+                random_indices = torch.randperm(64)[:r]
                 self.lora_A[adapter_name].weight = torch.nn.parameter.Parameter(weight_A_64[random_indices])
             else:
                 # initialize A the same way as the default for nn.Linear and B to zero
