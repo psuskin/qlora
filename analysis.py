@@ -63,8 +63,11 @@ class Model:
         layerMatch = re.search(r"layers.([0-9]+).(.*?).lora_([A-B]).", module)
         return layerMatch.group(1), layerMatch.group(2), layerMatch.group(3)
 
-def grassmann(matrixLarge, matrixSmall):
-    pass
+def grassmann(A, B, i, j):
+    Ui = A.Vh.T[:, :i]
+    Uj = B.Vh.T[:, :j]
+
+    return (Ui.T @ Uj).norm()**2 / min(i, j)
 
 def plotDistribution(matrix):
     plt.hist(matrix.flatten(), bins=100)
@@ -88,14 +91,19 @@ def ensureImageSubset(dirOrig, dirTrans):
 
     exit()
 
+specificModels = ["alpaca-2-7b-r64", "alpaca-2-7b-r32"]
+
 if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
     models = {}
     for directory in os.listdir(PATH):
-        models[directory] = Model(os.path.join(PATH, directory))
+        if not specificModels or directory in specificModels:
+            models[directory] = Model(os.path.join(PATH, directory))
 
     #print(models)
     print(models["alpaca-2-7b-r64"].layers[0])
+
+    print(grassmann(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"], models["alpaca-2-7b-r32"].layers[0]["self_attn.q_proj"]["A"]["init"]))
 
     #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
