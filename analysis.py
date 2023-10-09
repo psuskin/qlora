@@ -63,9 +63,13 @@ class Model:
         layerMatch = re.search(r"layers.([0-9]+).(.*?).lora_([A-B]).", module)
         return layerMatch.group(1), layerMatch.group(2), layerMatch.group(3)
 
-def grassmann(A, B, i, j):
-    _, _, AVh = np.linalg.svd(A.matrix)
-    _, _, BVh = np.linalg.svd(B.matrix)
+def grassmann(A, B, i, j, SVD=True):
+    if SVD:
+        _, _, AVh = np.linalg.svd(A.matrix)
+        _, _, BVh = np.linalg.svd(B.matrix)
+    else:
+        AVh = A
+        BVh = B
     
     Ui = AVh.T[:, :i]
     Uj = BVh.T[:, :j]
@@ -94,7 +98,7 @@ def ensureImageSubset(dirOrig, dirTrans):
 
     exit()
 
-specificModels = ["alpaca-2-7b-r64", "alpaca-2-7b-r32"]
+specificModels = ["alpaca-2-7b-r64", "alpaca-2-7b-r8"]
 
 if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
@@ -113,18 +117,22 @@ if __name__ == '__main__':
     #print(grassmann(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"], models["alpaca-2-7b-r32"].layers[0].modules["self_attn.q_proj"]["A"]["init"], 16, 8))
     #print(grassmann(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["result"], models["alpaca-2-7b-r32"].layers[0].modules["self_attn.q_proj"]["A"]["result"], 16, 8))
 
+    _, _, AVh = np.linalg.svd(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["result"].matrix)
+    _, _, BVh = np.linalg.svd(models["alpaca-2-7b-r8"].layers[0].modules["self_attn.q_proj"]["A"]["result"].matrix)
     grassmann_matrix = np.zeros((64, 8))
-    for j in range(8):
-        for i in range(j, 64):
-            grassmann_matrix[i, j] = grassmann(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["result"], models["alpaca-2-7b-r8"].layers[0].modules["self_attn.q_proj"]["A"]["result"], i, j)
+    for j in range(1, 8+1):
+        for i in range(j, 64+1):
+            dist = grassmann(AVh, BVh, i, j, False)
+            print(dist)
+            grassmann_matrix[i-1, j-1] = dist
     
     fix, ax = plt.subplots()
 
     ax.matshow(grassmann_matrix, cmap=plt.cm.Blues)
     for i in range(64):
         for j in range(8):
-            c = grassmann_matrix[j, i]
-            ax.text(i, j, str(c), va='center', ha='center')
+            c = grassmann_matrix[i, j]
+            #ax.text(i, j, str(c), va='center', ha='center')
 
     plt.savefig("figure.png")
 
