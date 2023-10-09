@@ -18,7 +18,7 @@ class Weights:
     def __init__(self, tensor):
         self.matrix = tensor.detach().cpu().float().numpy()
 
-        self.U, self.S, self.Vh = np.linalg.svd(self.matrix)
+        #self.U, self.S, self.Vh = np.linalg.svd(self.matrix)
 
 class Layer:
     def __init__(self):
@@ -53,21 +53,26 @@ class Model:
 
         for module in initTorchDir:
             layerIndex, layerFragment, layerMatrix = self._getRegex(module)
-            layers[layerIndex].modules[layerFragment][layerMatrix]["init"] = Weights(initTorchDir[module])
+            layers[int(layerIndex)].modules[layerFragment][layerMatrix]["init"] = Weights(initTorchDir[module])
 
         for module in resultTorchDir:
             layerIndex, layerFragment, layerMatrix = self._getRegex(module)
-            layers[layerIndex].modules[layerFragment][layerMatrix]["result"] = Weights(initTorchDir[module])
+            layers[int(layerIndex)].modules[layerFragment][layerMatrix]["result"] = Weights(resultTorchDir[module])
+
+        return layers
     
     def _getRegex(self, module):
         layerMatch = re.search(r"layers.([0-9]+).(.*?).lora_([A-B]).", module)
         return layerMatch.group(1), layerMatch.group(2), layerMatch.group(3)
 
 def grassmann(A, B, i, j):
-    Ui = A.Vh.T[:, :i]
-    Uj = B.Vh.T[:, :j]
+    _, _, AVh = np.linalg.svd(A.matrix)
+    _, _, BVh = np.linalg.svd(B.matrix)
+    
+    Ui = AVh.T[:, :i]
+    Uj = BVh.T[:, :j]
 
-    return (Ui.T @ Uj).norm()**2 / min(i, j)
+    return np.linalg.norm(Ui.T @ Uj)**2 / min(i, j)
 
 def plotDistribution(matrix):
     plt.hist(matrix.flatten(), bins=100)
@@ -102,8 +107,12 @@ if __name__ == '__main__':
             models[directory] = Model(os.path.join(PATH, directory))
 
     #print(models)
-    print(models["alpaca-2-7b-r64"].layers[0])
+    #print(models["alpaca-2-7b-r64"].layers)
+    #print(models["alpaca-2-7b-r64"].layers[0])
+    #print(models["alpaca-2-7b-r64"].layers[0].modules)
+    #print(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"])
 
-    print(grassmann(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"], models["alpaca-2-7b-r32"].layers[0]["self_attn.q_proj"]["A"]["init"]))
+    #print(grassmann(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"], models["alpaca-2-7b-r32"].layers[0].modules["self_attn.q_proj"]["A"]["init"], 16, 8))
+    print(grassmann(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["result"], models["alpaca-2-7b-r32"].layers[0].modules["self_attn.q_proj"]["A"]["result"], 16, 8))
 
     #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
