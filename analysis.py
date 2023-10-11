@@ -2,6 +2,8 @@ import re
 import os
 import glob
 import torch
+import pickle
+import itertools
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import defaultdict
@@ -63,16 +65,9 @@ class Model:
         layerMatch = re.search(r"layers.([0-9]+).(.*?).lora_([A-B]).", module)
         return layerMatch.group(1), layerMatch.group(2), layerMatch.group(3)
 
-def grassmann(A, B, i, j, SVD=True):
-    if SVD:
-        _, _, AVh = np.linalg.svd(A.matrix)
-        _, _, BVh = np.linalg.svd(B.matrix)
-    else:
-        AVh = A
-        BVh = B
-    
-    Ui = AVh.T[:, :i]
-    Uj = BVh.T[:, :j]
+def grassmann(A, B, i, j):
+    Ui = A[:, :i]
+    Uj = B[:, :j]
 
     return np.linalg.norm(Ui.T @ Uj)**2 / min(i, j)
 
@@ -98,7 +93,77 @@ def ensureImageSubset(dirOrig, dirTrans):
 
     exit()
 
-specificModels = ["alpaca-2-7b-r64", "alpaca-2-7b-r8"]
+def analyze_grassmann(models):
+    # Grassmann distance analysis
+    grassmann_matrices = rec_dd()
+    for model1, model2 in itertools.combinations(list(models.keys())):
+        for layerIndex in [0]:#model1.layers:
+            for fragment in ["self_attn.q_proj"]:#model1.layers[layerIndex].modules:
+                for matrix in model1.layers[layerIndex].modules[fragment]:
+                    AU, _, AVh = np.linalg.svd(models[model1].layers[layerIndex].modules[fragment][matrix]["result"].matrix)
+                    BU, _, BVh = np.linalg.svd(models[model2].layers[layerIndex].modules[fragment][matrix]["result"].matrix)
+
+                    if matrix == "A":
+                        A = AVh.T
+                        B = BVh.T
+                    elif matrix == "B":
+                        A = AU
+                        B = BU
+
+                    Ar = A.shape[0]
+                    Br = B.shape[0]
+
+                    grassmann_matrix = np.zeros((Ar, Br))
+                    for i in range(1, Ar+1):
+                        for j in range(1, Br+1):
+                            grassmann_matrix[i-1, j-1] = grassmann(A, B, i, j)
+
+                    grassmann_matrices[tuple(sorted(model1, model2))][layerIndex][fragment][matrix] = grassmann_matrix
+
+    # Save to pickle file
+    with open("grassmann/matrices.pickle", "wb") as handle:
+        pickle.dump(grassmann_matrices, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+    return grassmann_matrices
+
+def split_grassmann(grassmann_matrix):
+    upper_diagonal = np.zeros(grassmann_matrix.shape)
+    lower_diagonal = np.zeros(grassmann_matrix.shape)
+
+    for i in range(grassmann_matrix.shape[0]):
+        for j in range(grassmann_matrix.shape[1]):
+            if j >= i:
+                upper_diagonal[i, j] = grassmann_matrix[i, j]
+
+            if j <= i:
+                lower_diagonal[i, j] = grassmann_matrix[i, j]
+
+    return upper_diagonal, lower_diagonal
+
+def plot_grassmann(grassmann_matrices=None):
+    with open("grassmann/matrices.pickle", "rb") as handle:
+        grassmann_matrices = pickle.load(handle)
+
+    for model1, model2 in grassmann_matrices:
+        for layerIndex in grassmann_matrices[tuple(sorted(model1, model2))]:
+            for fragment in grassmann_matrices[tuple(sorted(model1, model2))][layerIndex]:
+                for matrix in grassmann_matrices[tuple(sorted(model1, model2))][layerIndex][fragment]:
+                    grassmann_matrix = grassmann_matrices[layerIndex][fragment][matrix]
+                    upper_diagonal, lower_diagonal = split_grassmann(grassmann_matrix)
+
+                    fig, ax = plt.subplots()
+
+                    ax.matshow(upper_diagonal)
+                    plt.savefig(os.path.join("grassmann", "plots", f"{model1} - {model2}", layerIndex, fragment, matrix, "upper.png"))
+
+                    ax.matshow(lower_diagonal)
+                    plt.savefig(os.path.join("grassmann", "plots", f"{model1} - {model2}", layerIndex, fragment, matrix, "lower.png"))
+
+def analyze(models):
+    grassmann_matrices = analyze_grassmann(models)
+    plot_grassmann(grassmann_matrices)
+
+specificModels = []#["alpaca-2-7b-r64", "alpaca-2-7b-r8"]
 
 if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
@@ -117,23 +182,6 @@ if __name__ == '__main__':
     #print(grassmann(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"], models["alpaca-2-7b-r32"].layers[0].modules["self_attn.q_proj"]["A"]["init"], 16, 8))
     #print(grassmann(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["result"], models["alpaca-2-7b-r32"].layers[0].modules["self_attn.q_proj"]["A"]["result"], 16, 8))
 
-    _, _, AVh = np.linalg.svd(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["result"].matrix)
-    _, _, BVh = np.linalg.svd(models["alpaca-2-7b-r8"].layers[0].modules["self_attn.q_proj"]["A"]["result"].matrix)
-    grassmann_matrix = np.zeros((64, 8))
-    for j in range(1, 8+1):
-        for i in range(j, 64+1):
-            dist = grassmann(AVh, BVh, i, j, False)
-            print(dist)
-            grassmann_matrix[i-1, j-1] = dist
-    
-    fix, ax = plt.subplots()
-
-    ax.matshow(grassmann_matrix, cmap=plt.cm.Blues)
-    for i in range(64):
-        for j in range(8):
-            c = grassmann_matrix[i, j]
-            #ax.text(i, j, str(c), va='center', ha='center')
-
-    plt.savefig("figure.png")
-
     #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
+
+    analyze(models)
