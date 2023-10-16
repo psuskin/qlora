@@ -143,7 +143,7 @@ def analyze_grassmann(models):
 
 def split_grassmann(grassmann_matrix):
     upper_diagonal = np.zeros(grassmann_matrix.shape)
-    lower_diagonal = np.zeros(grassmann_matrix.shape)
+    lower_diagonal = np.zeros((min(grassmann_matrix.shape), min(grassmann_matrix.shape)))
 
     for i in range(grassmann_matrix.shape[0]):
         for j in range(grassmann_matrix.shape[1]):
@@ -167,18 +167,25 @@ def plot_grassmann(grassmann_matrices=None):
                     grassmann_matrix = grassmann_matrices[comparison][layerIndex][fragment][matrix]
                     upper_diagonal, lower_diagonal = split_grassmann(grassmann_matrix)
 
-                    fig, ax = plt.subplots()
                     saveDir = os.path.join("grassmann", "plots", comparison, str(layerIndex), fragment, matrix)
                     if not os.path.isdir(saveDir):
                         os.makedirs(saveDir)
 
-                    ax.matshow(upper_diagonal)
+                    fig, ax = plt.subplots()
+                    cax = ax.matshow(upper_diagonal)
+                    fig.colorbar(cax)
                     plt.savefig(os.path.join(saveDir, "upper.png"))
+                    plt.close()
 
-                    ax.matshow(lower_diagonal)
+                    fig, ax = plt.subplots()
+                    cax = ax.matshow(lower_diagonal)
+                    fig.colorbar(cax)
                     plt.savefig(os.path.join(saveDir, "lower.png"))
+                    plt.close()
 
-                    plt.close("all")
+                    #plt.close("all")
+
+    exit()
 
 def analyze(models):
     grassmann_matrices = analyze_grassmann(models)
@@ -190,7 +197,6 @@ if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
     plot_grassmann()
-    exit()
 
     models = {}
     for directory in os.listdir(PATH):
