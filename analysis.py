@@ -271,22 +271,17 @@ if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
     #plot_grassmann()
-    print_absolute()
+    #print_absolute()
 
     models = {}
     for directory in os.listdir(PATH):
         if not specificModels or directory in specificModels:
             models[directory] = Model(os.path.join(PATH, directory))
 
-    #print(models)
-    #print(models["alpaca-2-7b-r64"].layers)
-    #print(models["alpaca-2-7b-r64"].layers[0])
-    #print(models["alpaca-2-7b-r64"].layers[0].modules)
-    #print(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"])
-
-    #print(grassmann(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"], models["alpaca-2-7b-r32"].layers[0].modules["self_attn.q_proj"]["A"]["init"], 16, 8))
-    #print(grassmann(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["result"], models["alpaca-2-7b-r32"].layers[0].modules["self_attn.q_proj"]["A"]["result"], 16, 8))
+    #print(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape)  # 4096
+    #print(models["alpaca-2-13b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape) # 5120
+    #print(models["alpaca-2-70b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape) # 8192
 
     #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
 
-    #analyze(models)
+    analyze(models)
