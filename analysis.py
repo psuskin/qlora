@@ -5,6 +5,7 @@ import json
 import torch
 import pickle
 import itertools
+import statistics
 import numpy as np
 import matplotlib.pyplot as plt
 from collections import defaultdict
@@ -254,7 +255,24 @@ def print_absolute(absolute_matrices=None):
         with open("grassmann/absolute.pickle", "rb") as handle:
             absolute_matrices = pickle.load(handle)
 
-    print(absolute_matrices)
+    #print(absolute_matrices)
+
+    contextLengths = {7: 4096, 13: 5120, 70: 8192}
+
+    quotients = [] # B / A
+    factors = [] # A * ...
+    for model in absolute_matrices:
+        for layerIndex in absolute_matrices[model]:
+            for fragment in absolute_matrices[model][layerIndex]:
+                quotients.append(absolute_matrices[model][layerIndex][fragment]["B"] / absolute_matrices[model][layerIndex][fragment]["A"])
+
+                layerMatch = re.search(r"-([0-9]+)b-r([0-9]+)", model)
+                contextLength = contextLengths[int(layerMatch.group(1))]
+                r = int(layerMatch.group(2))
+                factors.append(r * contextLength / absolute_matrices[model][layerIndex][fragment]["A"])
+
+    print(statistics.mean(quotients), statistics.stdev(quotients))
+    print(statistics.mean(factors), statistics.stdev(factors))
 
     exit()
 
@@ -271,7 +289,7 @@ if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
     #plot_grassmann()
-    #print_absolute()
+    print_absolute()
 
     models = {}
     for directory in os.listdir(PATH):
@@ -284,4 +302,4 @@ if __name__ == '__main__':
 
     #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
 
-    analyze(models)
+    #analyze(models)
