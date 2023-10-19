@@ -115,6 +115,9 @@ def analyze_grassmann(models):
                 Ar = models[model1].layers[layerIndex].modules[fragment]["A"]["result"].matrix.shape[0]
                 Br = models[model2].layers[layerIndex].modules[fragment]["A"]["result"].matrix.shape[0]
 
+                if models[model1].layers[layerIndex].modules[fragment]["A"]["result"].matrix.shape[1] != models[model2].layers[layerIndex].modules[fragment]["A"]["result"].matrix.shape[1]:
+                    continue
+
                 grassmann_matrix = np.zeros((Ar, Br))
                 for i in range(1, Ar+1):
                     for j in range(1, Br+1):
@@ -172,8 +175,9 @@ def split_grassmann(grassmann_matrix):
     return upper_diagonal, lower_diagonal
 
 def plot_grassmann(grassmann_matrices=None):
-    with open("grassmann/matrices.pickle", "rb") as handle:
-        grassmann_matrices = pickle.load(handle)
+    if not grassmann_matrices:
+        with open("grassmann/matrices.pickle", "rb") as handle:
+            grassmann_matrices = pickle.load(handle)
 
     for comparison in grassmann_matrices:
         print(comparison)
@@ -211,9 +215,42 @@ def plot_grassmann(grassmann_matrices=None):
 
     exit()
 
+def analyze_absolute(models):
+    # Absolute value change analysis
+    absolute_matrices = rec_dd()
+    for model in models:
+        print(model)
+        for layerIndex in [0]:#model.layers:
+            for fragment in ["self_attn.q_proj"]:#model.layers[layerIndex].modules:
+                for matrix in models[model].layers[layerIndex].modules[fragment]:
+                    init = models[model].layers[layerIndex].modules[fragment][matrix]["init"].matrix
+                    result = models[model].layers[layerIndex].modules[fragment][matrix]["result"].matrix
+
+                    absolute_matrices[model][layerIndex][fragment][matrix] = np.sum(np.absolute(result - init))
+
+    # Save to pickle file
+    absolute_matrices_dict = ddict2dict(absolute_matrices)
+    with open("grassmann/absolute.pickle", "wb") as handle:
+        pickle.dump(absolute_matrices_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    print("Saved absolute matrix differences")
+    
+    return absolute_matrices_dict
+
+def print_absolute(absolute_matrices=None):
+    if not absolute_matrices:
+        with open("grassmann/absolute.pickle", "rb") as handle:
+            absolute_matrices = pickle.load(handle)
+
+    print(absolute_matrices)
+
+    exit()
+
 def analyze(models):
     grassmann_matrices = analyze_grassmann(models)
     plot_grassmann(grassmann_matrices)
+
+    #absolute_matrices = analyze_absolute(models)
+    #print_absolute(absolute_matrices)
 
 specificModels = []#["alpaca-2-7b-r64", "alpaca-2-7b-r8"]
 
@@ -221,6 +258,7 @@ if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
     #plot_grassmann()
+    print_absolute()
 
     models = {}
     for directory in os.listdir(PATH):
@@ -238,4 +276,4 @@ if __name__ == '__main__':
 
     #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
 
-    analyze(models)
+    #analyze(models)
