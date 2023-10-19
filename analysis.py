@@ -107,6 +107,22 @@ def analyze_grassmann(models):
         print(model1, model2)
         for layerIndex in [0]:#model1.layers:
             for fragment in ["self_attn.q_proj"]:#model1.layers[layerIndex].modules:
+                Wa = models[model1].layers[layerIndex].modules[fragment]["B"]["result"].matrix @ models[model1].layers[layerIndex].modules[fragment]["A"]["result"].matrix
+                Wb = models[model2].layers[layerIndex].modules[fragment]["B"]["result"].matrix @ models[model2].layers[layerIndex].modules[fragment]["A"]["result"].matrix
+                WUa, _, _ = np.linalg.svd(Wa)
+                WUb, _, _ = np.linalg.svd(Wb)
+                print("Completed fat SVD")
+                Ar = models[model1].layers[layerIndex].modules[fragment]["A"]["result"].matrix.shape[0]
+                Br = models[model2].layers[layerIndex].modules[fragment]["A"]["result"].matrix.shape[0]
+
+                grassmann_matrix = np.zeros((Ar, Br))
+                for i in range(1, Ar+1):
+                    for j in range(1, Br+1):
+                        #print(i, j)
+                        grassmann_matrix[i-1, j-1] = grassmann(WUa, WUb, i, j)
+
+                grassmann_matrices[f"{model1} - {model2}"][layerIndex][fragment]["W"] = grassmann_matrix
+                
                 for matrix in models[model1].layers[layerIndex].modules[fragment]:
                     AU, _, AVh = np.linalg.svd(models[model1].layers[layerIndex].modules[fragment][matrix]["result"].matrix)
                     BU, _, BVh = np.linalg.svd(models[model2].layers[layerIndex].modules[fragment][matrix]["result"].matrix)
@@ -204,7 +220,7 @@ specificModels = []#["alpaca-2-7b-r64", "alpaca-2-7b-r8"]
 if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
-    plot_grassmann()
+    #plot_grassmann()
 
     models = {}
     for directory in os.listdir(PATH):
@@ -222,4 +238,4 @@ if __name__ == '__main__':
 
     #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
 
-    #analyze(models)
+    analyze(models)

@@ -10,6 +10,7 @@ RUN echo "c.NotebookApp.allow_origin='*'" >> /root/.jupyter/jupyter_notebook_con
 CMD ["jupyter", "lab", "--ip='*'", "--NotebookApp.allow_origin='*'", "--port=8888", "--no-browser", "--allow-root", "--NotebookApp.token='cx'"]
 
 RUN pip install -U openpyxl
+RUN pip install -U matplotlib
 RUN git config --global credential.helper store
 #huggingface-cli login
 
