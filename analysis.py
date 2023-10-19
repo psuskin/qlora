@@ -100,6 +100,16 @@ def ddict2dict(d):
             d[k] = ddict2dict(v)
     return dict(d)
 
+def svd_left(A, B):
+    Ua, Sa, Vta = np.linalg.svd(A, full_matrices=False)
+    Ub, Sb, Vtb = np.linalg.svd(B, full_matrices=False)
+
+    C = np.diag(Sb) @ Vtb @ Ua @ np.diag(Sa)
+
+    Uc, Sc, Vtc = np.linalg.svd(C, full_matrices=False)
+
+    return Ub @ Uc
+
 def analyze_grassmann(models):
     # Grassmann distance analysis
     grassmann_matrices = rec_dd()
@@ -107,22 +117,25 @@ def analyze_grassmann(models):
         print(model1, model2)
         for layerIndex in [0]:#model1.layers:
             for fragment in ["self_attn.q_proj"]:#model1.layers[layerIndex].modules:
-                Wa = models[model1].layers[layerIndex].modules[fragment]["B"]["result"].matrix @ models[model1].layers[layerIndex].modules[fragment]["A"]["result"].matrix
-                Wb = models[model2].layers[layerIndex].modules[fragment]["B"]["result"].matrix @ models[model2].layers[layerIndex].modules[fragment]["A"]["result"].matrix
-                WUa, _, _ = np.linalg.svd(Wa)
-                WUb, _, _ = np.linalg.svd(Wb)
-                print("Completed fat SVD")
-                Ar = models[model1].layers[layerIndex].modules[fragment]["A"]["result"].matrix.shape[0]
-                Br = models[model2].layers[layerIndex].modules[fragment]["A"]["result"].matrix.shape[0]
+                A1 = models[model1].layers[layerIndex].modules[fragment]["A"]["result"].matrix
+                B1 = models[model1].layers[layerIndex].modules[fragment]["B"]["result"].matrix
+                A2 = models[model2].layers[layerIndex].modules[fragment]["A"]["result"].matrix
+                B2 = models[model2].layers[layerIndex].modules[fragment]["B"]["result"].matrix
 
-                if models[model1].layers[layerIndex].modules[fragment]["A"]["result"].matrix.shape[1] != models[model2].layers[layerIndex].modules[fragment]["A"]["result"].matrix.shape[1]:
+                Uw1 = svd_left(A1, B1)
+                Uw2 = svd_left(A2, B2)
+
+                Ar = Uw1.shape[1]
+                Br = Uw2.shape[1]
+
+                if Uw1.shape[0] != Uw2.shape[0]:
                     continue
 
                 grassmann_matrix = np.zeros((Ar, Br))
                 for i in range(1, Ar+1):
                     for j in range(1, Br+1):
                         #print(i, j)
-                        grassmann_matrix[i-1, j-1] = grassmann(WUa, WUb, i, j)
+                        grassmann_matrix[i-1, j-1] = grassmann(Uw1, Uw2, i, j)
 
                 grassmann_matrices[f"{model1} - {model2}"][layerIndex][fragment]["W"] = grassmann_matrix
                 
