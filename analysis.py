@@ -116,8 +116,8 @@ def analyze_grassmann(models):
     grassmann_matrices = rec_dd()
     for model1, model2 in itertools.combinations(list(models.keys()), 2):
         print(model1, model2)
-        for layerIndex in [0]:#model1.layers:
-            for fragment in ["self_attn.q_proj"]:#model1.layers[layerIndex].modules:
+        for layerIndex in [0]:#models[model1].layers:
+            for fragment in ["self_attn.q_proj"]:#modles[model1].layers[layerIndex].modules:
                 A1 = models[model1].layers[layerIndex].modules[fragment]["A"]["result"].matrix
                 B1 = models[model1].layers[layerIndex].modules[fragment]["B"]["result"].matrix
                 A2 = models[model2].layers[layerIndex].modules[fragment]["A"]["result"].matrix
@@ -234,8 +234,8 @@ def analyze_absolute(models):
     absolute_matrices = rec_dd()
     for model in models:
         print(model)
-        for layerIndex in [0]:#model.layers:
-            for fragment in ["self_attn.q_proj"]:#model.layers[layerIndex].modules:
+        for layerIndex in models[model].layers:
+            for fragment in models[model].layers[layerIndex].modules:
                 for matrix in models[model].layers[layerIndex].modules[fragment]:
                     init = models[model].layers[layerIndex].modules[fragment][matrix]["init"].matrix
                     result = models[model].layers[layerIndex].modules[fragment][matrix]["result"].matrix
@@ -259,22 +259,25 @@ def print_absolute(absolute_matrices=None):
 
     contextLengths = {7: 4096, 13: 5120, 70: 8192}
 
-    quotients = [] # B / A
-    factors = defaultdict(list) # A * ...
+    factor = rec_dd() # B / A
+    factors = rec_dd() # A * ...
     for model in absolute_matrices:
         for layerIndex in absolute_matrices[model]:
             for fragment in absolute_matrices[model][layerIndex]:
-                quotients.append(absolute_matrices[model][layerIndex][fragment]["B"] / absolute_matrices[model][layerIndex][fragment]["A"])
-
                 layerMatch = re.search(r"-([0-9]+)b-r([0-9]+)", model)
                 contextLength = contextLengths[int(layerMatch.group(1))]
                 r = int(layerMatch.group(2))
-                factors[contextLength].append(r * contextLength / absolute_matrices[model][layerIndex][fragment]["A"])
 
-    print(statistics.mean(quotients), statistics.stdev(quotients))
-    for factor in factors:
-        print(factor, factors[factor])
-        #print(statistics.mean(factors[factor]), statistics.stdev(factors[factor]))
+                if not factors[contextLength][fragment]:
+                    factors[contextLength][fragment]["A"] = [r * contextLength / absolute_matrices[model][layerIndex][fragment]["A"]]
+                    factors[contextLength][fragment]["B"] = [r * contextLength / absolute_matrices[model][layerIndex][fragment]["B"]]
+                else:
+                    factors[contextLength][fragment]["A"].append(r * contextLength / absolute_matrices[model][layerIndex][fragment]["A"])
+                    factors[contextLength][fragment]["B"].append(r * contextLength / absolute_matrices[model][layerIndex][fragment]["B"])
+
+    for c in factors:
+        for f in factors[c]:
+            print(c, f, statistics.mean(factors[c][f]["A"]), statistics.stdev(factors[c][f]["A"]), statistics.mean(factors[c][f]["B"]), statistics.stdev(factors[c][f]["B"]))
 
     exit()
 
