@@ -260,7 +260,7 @@ def print_absolute(absolute_matrices=None):
     contextLengths = {7: 4096, 13: 5120, 70: 8192}
 
     quotients = [] # B / A
-    factors = [] # A * ...
+    factors = defaultdict(list) # A * ...
     for model in absolute_matrices:
         for layerIndex in absolute_matrices[model]:
             for fragment in absolute_matrices[model][layerIndex]:
@@ -269,10 +269,12 @@ def print_absolute(absolute_matrices=None):
                 layerMatch = re.search(r"-([0-9]+)b-r([0-9]+)", model)
                 contextLength = contextLengths[int(layerMatch.group(1))]
                 r = int(layerMatch.group(2))
-                factors.append(r * contextLength / absolute_matrices[model][layerIndex][fragment]["A"])
+                factors[contextLength].append(r * contextLength / absolute_matrices[model][layerIndex][fragment]["A"])
 
     print(statistics.mean(quotients), statistics.stdev(quotients))
-    print(statistics.mean(factors), statistics.stdev(factors))
+    for factor in factors:
+        print(factor, factors[factor])
+        #print(statistics.mean(factors[factor]), statistics.stdev(factors[factor]))
 
     exit()
 
