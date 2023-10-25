@@ -248,7 +248,7 @@ def analyze_absolute(models):
                             os.makedirs(saveDir)
 
                         fig, ax = plt.subplots()
-                        cax = ax.matshow(result - init)
+                        cax = ax.imshow(result - init, interpolation='nearest', aspect='auto')
                         fig.colorbar(cax)
                         ax.xaxis.tick_bottom()
                         plt.savefig(os.path.join(saveDir, f"{model}_{layerIndex}_{fragment}_{matrix}.png"))
@@ -305,7 +305,7 @@ if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
     #plot_grassmann()
-    print_absolute()
+    #print_absolute()
 
     models = {}
     for directory in os.listdir(PATH):
@@ -315,6 +315,8 @@ if __name__ == '__main__':
     #print(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape)  # 4096
     #print(models["alpaca-2-13b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape) # 5120
     #print(models["alpaca-2-70b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape) # 8192
+
+    analyze_absolute(models)
 
     #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
 
