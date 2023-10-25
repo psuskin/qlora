@@ -242,6 +242,19 @@ def analyze_absolute(models):
 
                     absolute_matrices[model][layerIndex][fragment][matrix] = np.sum(np.absolute(result - init))
 
+                    if model == "alpaca-2-7b-r64" and layerIndex == 0:
+                        for matrix in absolute_matrices[model][layerIndex][fragment]:
+                            saveDir = os.path.join("grassmann", "absolutes")
+                            if not os.path.isdir(saveDir):
+                                os.makedirs(saveDir)
+
+                            fig, ax = plt.subplots()
+                            cax = ax.matshow(result - init)
+                            fig.colorbar(cax)
+                            ax.xaxis.tick_bottom()
+                            plt.savefig(os.path.join(saveDir, f"{model}_{layerIndex}_{fragment}_{matrix}.png"))
+                            plt.close()
+
     # Save to pickle file
     absolute_matrices_dict = ddict2dict(absolute_matrices)
     with open("grassmann/absolute.pickle", "wb") as handle:
@@ -259,7 +272,6 @@ def print_absolute(absolute_matrices=None):
 
     contextLengths = {7: 4096, 13: 5120, 70: 8192}
 
-    factor = rec_dd() # B / A
     factors = rec_dd() # A * ...
     for model in absolute_matrices:
         for layerIndex in absolute_matrices[model]:
