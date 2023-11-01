@@ -1,0 +1,1857 @@
+{
+  "best_metric": null,
+  "best_model_checkpoint": null,
+  "epoch": 29.821073558648113,
+  "global_step": 1875,
+  "is_hyper_param_search": false,
+  "is_local_process_zero": true,
+  "is_world_process_zero": true,
+  "log_history": [
+    {
+      "epoch": 0.16,
+      "learning_rate": 0.0002,
+      "loss": 2.6657,
+      "step": 10
+    },
+    {
+      "epoch": 0.32,
+      "learning_rate": 0.0002,
+      "loss": 2.048,
+      "step": 20
+    },
+    {
+      "epoch": 0.48,
+      "learning_rate": 0.0002,
+      "loss": 1.8394,
+      "step": 30
+    },
+    {
+      "epoch": 0.64,
+      "learning_rate": 0.0002,
+      "loss": 1.9426,
+      "step": 40
+    },
+    {
+      "epoch": 0.8,
+      "learning_rate": 0.0002,
+      "loss": 1.8013,
+      "step": 50
+    },
+    {
+      "epoch": 0.95,
+      "learning_rate": 0.0002,
+      "loss": 1.7769,
+      "step": 60
+    },
+    {
+      "epoch": 1.11,
+      "learning_rate": 0.0002,
+      "loss": 1.7283,
+      "step": 70
+    },
+    {
+      "epoch": 1.27,
+      "learning_rate": 0.0002,
+      "loss": 1.3895,
+      "step": 80
+    },
+    {
+      "epoch": 1.43,
+      "learning_rate": 0.0002,
+      "loss": 1.5076,
+      "step": 90
+    },
+    {
+      "epoch": 1.59,
+      "learning_rate": 0.0002,
+      "loss": 1.4928,
+      "step": 100
+    },
+    {
+      "epoch": 1.75,
+      "learning_rate": 0.0002,
+      "loss": 1.4401,
+      "step": 110
+    },
+    {
+      "epoch": 1.91,
+      "learning_rate": 0.0002,
+      "loss": 1.3621,
+      "step": 120
+    },
+    {
+      "epoch": 2.07,
+      "learning_rate": 0.0002,
+      "loss": 1.3276,
+      "step": 130
+    },
+    {
+      "epoch": 2.23,
+      "learning_rate": 0.0002,
+      "loss": 0.992,
+      "step": 140
+    },
+    {
+      "epoch": 2.39,
+      "learning_rate": 0.0002,
+      "loss": 1.1972,
+      "step": 150
+    },
+    {
+      "epoch": 2.54,
+      "learning_rate": 0.0002,
+      "loss": 1.131,
+      "step": 160
+    },
+    {
+      "epoch": 2.7,
+      "learning_rate": 0.0002,
+      "loss": 0.9707,
+      "step": 170
+    },
+    {
+      "epoch": 2.86,
+      "learning_rate": 0.0002,
+      "loss": 1.318,
+      "step": 180
+    },
+    {
+      "epoch": 2.97,
+      "eval_loss": 1.6940879821777344,
+      "eval_runtime": 20.9426,
+      "eval_samples_per_second": 4.775,
+      "eval_steps_per_second": 4.775,
+      "step": 187
+    },
+    {
+      "epoch": 2.97,
+      "mmlu_eval_accuracy": 0.44608634410630904,
+      "mmlu_eval_accuracy_abstract_algebra": 0.2727272727272727,
+      "mmlu_eval_accuracy_anatomy": 0.5,
+      "mmlu_eval_accuracy_astronomy": 0.25,
+      "mmlu_eval_accuracy_business_ethics": 0.45454545454545453,
+      "mmlu_eval_accuracy_clinical_knowledge": 0.41379310344827586,
+      "mmlu_eval_accuracy_college_biology": 0.25,
+      "mmlu_eval_accuracy_college_chemistry": 0.375,
+      "mmlu_eval_accuracy_college_computer_science": 0.45454545454545453,
+      "mmlu_eval_accuracy_college_mathematics": 0.2727272727272727,
+      "mmlu_eval_accuracy_college_medicine": 0.3181818181818182,
+      "mmlu_eval_accuracy_college_physics": 0.45454545454545453,
+      "mmlu_eval_accuracy_computer_security": 0.45454545454545453,
+      "mmlu_eval_accuracy_conceptual_physics": 0.38461538461538464,
+      "mmlu_eval_accuracy_econometrics": 0.16666666666666666,
+      "mmlu_eval_accuracy_electrical_engineering": 0.5,
+      "mmlu_eval_accuracy_elementary_mathematics": 0.3170731707317073,
+      "mmlu_eval_accuracy_formal_logic": 0.2857142857142857,
+      "mmlu_eval_accuracy_global_facts": 0.1,
+      "mmlu_eval_accuracy_high_school_biology": 0.3125,
+      "mmlu_eval_accuracy_high_school_chemistry": 0.3181818181818182,
+      "mmlu_eval_accuracy_high_school_computer_science": 0.5555555555555556,
+      "mmlu_eval_accuracy_high_school_european_history": 0.6666666666666666,
+      "mmlu_eval_accuracy_high_school_geography": 0.5,
+      "mmlu_eval_accuracy_high_school_government_and_politics": 0.6190476190476191,
+      "mmlu_eval_accuracy_high_school_macroeconomics": 0.37209302325581395,
+      "mmlu_eval_accuracy_high_school_mathematics": 0.27586206896551724,
+      "mmlu_eval_accuracy_high_school_microeconomics": 0.34615384615384615,
+      "mmlu_eval_accuracy_high_school_physics": 0.29411764705882354,
+      "mmlu_eval_accuracy_high_school_psychology": 0.6833333333333333,
+      "mmlu_eval_accuracy_high_school_statistics": 0.30434782608695654,
+      "mmlu_eval_accuracy_high_school_us_history": 0.6363636363636364,
+      "mmlu_eval_accuracy_high_school_world_history": 0.4230769230769231,
+      "mmlu_eval_accuracy_human_aging": 0.6521739130434783,
+      "mmlu_eval_accuracy_human_sexuality": 0.6666666666666666,
+      "mmlu_eval_accuracy_international_law": 0.7692307692307693,
+      "mmlu_eval_accuracy_jurisprudence": 0.45454545454545453,
+      "mmlu_eval_accuracy_logical_fallacies": 0.5,
+      "mmlu_eval_accuracy_machine_learning": 0.09090909090909091,
+      "mmlu_eval_accuracy_management": 0.45454545454545453,
+      "mmlu_eval_accuracy_marketing": 0.8,
+      "mmlu_eval_accuracy_medical_genetics": 0.9090909090909091,
+      "mmlu_eval_accuracy_miscellaneous": 0.5813953488372093,
+      "mmlu_eval_accuracy_moral_disputes": 0.4473684210526316,
+      "mmlu_eval_accuracy_moral_scenarios": 0.24,
+      "mmlu_eval_accuracy_nutrition": 0.6363636363636364,
+      "mmlu_eval_accuracy_philosophy": 0.4117647058823529,
+      "mmlu_eval_accuracy_prehistory": 0.4,
+      "mmlu_eval_accuracy_professional_accounting": 0.3870967741935484,
+      "mmlu_eval_accuracy_professional_law": 0.36470588235294116,
+      "mmlu_eval_accuracy_professional_medicine": 0.3548387096774194,
+      "mmlu_eval_accuracy_professional_psychology": 0.36231884057971014,
+      "mmlu_eval_accuracy_public_relations": 0.3333333333333333,
+      "mmlu_eval_accuracy_security_studies": 0.4074074074074074,
+      "mmlu_eval_accuracy_sociology": 0.7272727272727273,
+      "mmlu_eval_accuracy_us_foreign_policy": 0.8181818181818182,
+      "mmlu_eval_accuracy_virology": 0.3888888888888889,
+      "mmlu_eval_accuracy_world_religions": 0.7368421052631579,
+      "mmlu_loss": 1.0340400925654356,
+      "step": 187
+    },
+    {
+      "epoch": 3.02,
+      "learning_rate": 0.0002,
+      "loss": 1.1947,
+      "step": 190
+    },
+    {
+      "epoch": 3.18,
+      "learning_rate": 0.0002,
+      "loss": 1.0619,
+      "step": 200
+    },
+    {
+      "epoch": 3.34,
+      "learning_rate": 0.0002,
+      "loss": 0.9356,
+      "step": 210
+    },
+    {
+      "epoch": 3.5,
+      "learning_rate": 0.0002,
+      "loss": 0.8473,
+      "step": 220
+    },
+    {
+      "epoch": 3.66,
+      "learning_rate": 0.0002,
+      "loss": 0.9285,
+      "step": 230
+    },
+    {
+      "epoch": 3.82,
+      "learning_rate": 0.0002,
+      "loss": 1.0978,
+      "step": 240
+    },
+    {
+      "epoch": 3.98,
+      "learning_rate": 0.0002,
+      "loss": 0.8493,
+      "step": 250
+    },
+    {
+      "epoch": 4.14,
+      "learning_rate": 0.0002,
+      "loss": 0.8763,
+      "step": 260
+    },
+    {
+      "epoch": 4.29,
+      "learning_rate": 0.0002,
+      "loss": 0.6938,
+      "step": 270
+    },
+    {
+      "epoch": 4.45,
+      "learning_rate": 0.0002,
+      "loss": 0.6622,
+      "step": 280
+    },
+    {
+      "epoch": 4.61,
+      "learning_rate": 0.0002,
+      "loss": 1.0432,
+      "step": 290
+    },
+    {
+      "epoch": 4.77,
+      "learning_rate": 0.0002,
+      "loss": 0.7286,
+      "step": 300
+    },
+    {
+      "epoch": 4.93,
+      "learning_rate": 0.0002,
+      "loss": 0.8517,
+      "step": 310
+    },
+    {
+      "epoch": 5.09,
+      "learning_rate": 0.0002,
+      "loss": 0.7929,
+      "step": 320
+    },
+    {
+      "epoch": 5.25,
+      "learning_rate": 0.0002,
+      "loss": 0.4578,
+      "step": 330
+    },
+    {
+      "epoch": 5.41,
+      "learning_rate": 0.0002,
+      "loss": 0.8003,
+      "step": 340
+    },
+    {
+      "epoch": 5.57,
+      "learning_rate": 0.0002,
+      "loss": 0.6432,
+      "step": 350
+    },
+    {
+      "epoch": 5.73,
+      "learning_rate": 0.0002,
+      "loss": 0.4754,
+      "step": 360
+    },
+    {
+      "epoch": 5.88,
+      "learning_rate": 0.0002,
+      "loss": 0.7515,
+      "step": 370
+    },
+    {
+      "epoch": 5.95,
+      "eval_loss": 1.983302354812622,
+      "eval_runtime": 20.9636,
+      "eval_samples_per_second": 4.77,
+      "eval_steps_per_second": 4.77,
+      "step": 374
+    },
+    {
+      "epoch": 5.95,
+      "mmlu_eval_accuracy": 0.44228164354051414,
+      "mmlu_eval_accuracy_abstract_algebra": 0.2727272727272727,
+      "mmlu_eval_accuracy_anatomy": 0.5714285714285714,
+      "mmlu_eval_accuracy_astronomy": 0.1875,
+      "mmlu_eval_accuracy_business_ethics": 0.5454545454545454,
+      "mmlu_eval_accuracy_clinical_knowledge": 0.4482758620689655,
+      "mmlu_eval_accuracy_college_biology": 0.25,
+      "mmlu_eval_accuracy_college_chemistry": 0.25,
+      "mmlu_eval_accuracy_college_computer_science": 0.5454545454545454,
+      "mmlu_eval_accuracy_college_mathematics": 0.18181818181818182,
+      "mmlu_eval_accuracy_college_medicine": 0.36363636363636365,
+      "mmlu_eval_accuracy_college_physics": 0.45454545454545453,
+      "mmlu_eval_accuracy_computer_security": 0.36363636363636365,
+      "mmlu_eval_accuracy_conceptual_physics": 0.38461538461538464,
+      "mmlu_eval_accuracy_econometrics": 0.3333333333333333,
+      "mmlu_eval_accuracy_electrical_engineering": 0.4375,
+      "mmlu_eval_accuracy_elementary_mathematics": 0.36585365853658536,
+      "mmlu_eval_accuracy_formal_logic": 0.35714285714285715,
+      "mmlu_eval_accuracy_global_facts": 0.0,
+      "mmlu_eval_accuracy_high_school_biology": 0.3125,
+      "mmlu_eval_accuracy_high_school_chemistry": 0.3181818181818182,
+      "mmlu_eval_accuracy_high_school_computer_science": 0.5555555555555556,
+      "mmlu_eval_accuracy_high_school_european_history": 0.6666666666666666,
+      "mmlu_eval_accuracy_high_school_geography": 0.5909090909090909,
+      "mmlu_eval_accuracy_high_school_government_and_politics": 0.47619047619047616,
+      "mmlu_eval_accuracy_high_school_macroeconomics": 0.3488372093023256,
+      "mmlu_eval_accuracy_high_school_mathematics": 0.2413793103448276,
+      "mmlu_eval_accuracy_high_school_microeconomics": 0.38461538461538464,
+      "mmlu_eval_accuracy_high_school_physics": 0.4117647058823529,
+      "mmlu_eval_accuracy_high_school_psychology": 0.7166666666666667,
+      "mmlu_eval_accuracy_high_school_statistics": 0.34782608695652173,
+      "mmlu_eval_accuracy_high_school_us_history": 0.6363636363636364,
+      "mmlu_eval_accuracy_high_school_world_history": 0.4230769230769231,
+      "mmlu_eval_accuracy_human_aging": 0.5652173913043478,
+      "mmlu_eval_accuracy_human_sexuality": 0.6666666666666666,
+      "mmlu_eval_accuracy_international_law": 0.7692307692307693,
+      "mmlu_eval_accuracy_jurisprudence": 0.45454545454545453,
+      "mmlu_eval_accuracy_logical_fallacies": 0.5,
+      "mmlu_eval_accuracy_machine_learning": 0.18181818181818182,
+      "mmlu_eval_accuracy_management": 0.2727272727272727,
+      "mmlu_eval_accuracy_marketing": 0.8,
+      "mmlu_eval_accuracy_medical_genetics": 0.9090909090909091,
+      "mmlu_eval_accuracy_miscellaneous": 0.5813953488372093,
+      "mmlu_eval_accuracy_moral_disputes": 0.3684210526315789,
+      "mmlu_eval_accuracy_moral_scenarios": 0.25,
+      "mmlu_eval_accuracy_nutrition": 0.6363636363636364,
+      "mmlu_eval_accuracy_philosophy": 0.38235294117647056,
+      "mmlu_eval_accuracy_prehistory": 0.42857142857142855,
+      "mmlu_eval_accuracy_professional_accounting": 0.41935483870967744,
+      "mmlu_eval_accuracy_professional_law": 0.32941176470588235,
+      "mmlu_eval_accuracy_professional_medicine": 0.3548387096774194,
+      "mmlu_eval_accuracy_professional_psychology": 0.36231884057971014,
+      "mmlu_eval_accuracy_public_relations": 0.3333333333333333,
+      "mmlu_eval_accuracy_security_studies": 0.48148148148148145,
+      "mmlu_eval_accuracy_sociology": 0.7272727272727273,
+      "mmlu_eval_accuracy_us_foreign_policy": 0.7272727272727273,
+      "mmlu_eval_accuracy_virology": 0.3333333333333333,
+      "mmlu_eval_accuracy_world_religions": 0.631578947368421,
+      "mmlu_loss": 1.1391346801308384,
+      "step": 374
+    },
+    {
+      "epoch": 6.04,
+      "learning_rate": 0.0002,
+      "loss": 0.5788,
+      "step": 380
+    },
+    {
+      "epoch": 6.2,
+      "learning_rate": 0.0002,
+      "loss": 0.47,
+      "step": 390
+    },
+    {
+      "epoch": 6.36,
+      "learning_rate": 0.0002,
+      "loss": 0.683,
+      "step": 400
+    },
+    {
+      "epoch": 6.52,
+      "learning_rate": 0.0002,
+      "loss": 0.4169,
+      "step": 410
+    },
+    {
+      "epoch": 6.68,
+      "learning_rate": 0.0002,
+      "loss": 0.5002,
+      "step": 420
+    },
+    {
+      "epoch": 6.84,
+      "learning_rate": 0.0002,
+      "loss": 0.6002,
+      "step": 430
+    },
+    {
+      "epoch": 7.0,
+      "learning_rate": 0.0002,
+      "loss": 0.2841,
+      "step": 440
+    },
+    {
+      "epoch": 7.16,
+      "learning_rate": 0.0002,
+      "loss": 0.442,
+      "step": 450
+    },
+    {
+      "epoch": 7.32,
+      "learning_rate": 0.0002,
+      "loss": 0.4376,
+      "step": 460
+    },
+    {
+      "epoch": 7.48,
+      "learning_rate": 0.0002,
+      "loss": 0.2655,
+      "step": 470
+    },
+    {
+      "epoch": 7.63,
+      "learning_rate": 0.0002,
+      "loss": 0.5566,
+      "step": 480
+    },
+    {
+      "epoch": 7.79,
+      "learning_rate": 0.0002,
+      "loss": 0.4497,
+      "step": 490
+    },
+    {
+      "epoch": 7.95,
+      "learning_rate": 0.0002,
+      "loss": 0.2671,
+      "step": 500
+    },
+    {
+      "epoch": 8.11,
+      "learning_rate": 0.0002,
+      "loss": 0.4431,
+      "step": 510
+    },
+    {
+      "epoch": 8.27,
+      "learning_rate": 0.0002,
+      "loss": 0.2829,
+      "step": 520
+    },
+    {
+      "epoch": 8.43,
+      "learning_rate": 0.0002,
+      "loss": 0.2781,
+      "step": 530
+    },
+    {
+      "epoch": 8.59,
+      "learning_rate": 0.0002,
+      "loss": 0.3691,
+      "step": 540
+    },
+    {
+      "epoch": 8.75,
+      "learning_rate": 0.0002,
+      "loss": 0.2746,
+      "step": 550
+    },
+    {
+      "epoch": 8.91,
+      "learning_rate": 0.0002,
+      "loss": 0.2843,
+      "step": 560
+    },
+    {
+      "epoch": 8.92,
+      "eval_loss": 2.1748385429382324,
+      "eval_runtime": 20.9487,
+      "eval_samples_per_second": 4.774,
+      "eval_steps_per_second": 4.774,
+      "step": 561
+    },
+    {
+      "epoch": 8.92,
+      "mmlu_eval_accuracy": 0.45050531355731716,
+      "mmlu_eval_accuracy_abstract_algebra": 0.2727272727272727,
+      "mmlu_eval_accuracy_anatomy": 0.5714285714285714,
+      "mmlu_eval_accuracy_astronomy": 0.3125,
+      "mmlu_eval_accuracy_business_ethics": 0.5454545454545454,
+      "mmlu_eval_accuracy_clinical_knowledge": 0.4482758620689655,
+      "mmlu_eval_accuracy_college_biology": 0.25,
+      "mmlu_eval_accuracy_college_chemistry": 0.25,
+      "mmlu_eval_accuracy_college_computer_science": 0.45454545454545453,
+      "mmlu_eval_accuracy_college_mathematics": 0.18181818181818182,
+      "mmlu_eval_accuracy_college_medicine": 0.4090909090909091,
+      "mmlu_eval_accuracy_college_physics": 0.45454545454545453,
+      "mmlu_eval_accuracy_computer_security": 0.45454545454545453,
+      "mmlu_eval_accuracy_conceptual_physics": 0.46153846153846156,
+      "mmlu_eval_accuracy_econometrics": 0.3333333333333333,
+      "mmlu_eval_accuracy_electrical_engineering": 0.4375,
+      "mmlu_eval_accuracy_elementary_mathematics": 0.34146341463414637,
+      "mmlu_eval_accuracy_formal_logic": 0.42857142857142855,
+      "mmlu_eval_accuracy_global_facts": 0.2,
+      "mmlu_eval_accuracy_high_school_biology": 0.3125,
+      "mmlu_eval_accuracy_high_school_chemistry": 0.36363636363636365,
+      "mmlu_eval_accuracy_high_school_computer_science": 0.3333333333333333,
+      "mmlu_eval_accuracy_high_school_european_history": 0.6666666666666666,
+      "mmlu_eval_accuracy_high_school_geography": 0.5909090909090909,
+      "mmlu_eval_accuracy_high_school_government_and_politics": 0.6190476190476191,
+      "mmlu_eval_accuracy_high_school_macroeconomics": 0.3488372093023256,
+      "mmlu_eval_accuracy_high_school_mathematics": 0.1724137931034483,
+      "mmlu_eval_accuracy_high_school_microeconomics": 0.34615384615384615,
+      "mmlu_eval_accuracy_high_school_physics": 0.4117647058823529,
+      "mmlu_eval_accuracy_high_school_psychology": 0.6666666666666666,
+      "mmlu_eval_accuracy_high_school_statistics": 0.391304347826087,
+      "mmlu_eval_accuracy_high_school_us_history": 0.5909090909090909,
+      "mmlu_eval_accuracy_high_school_world_history": 0.5,
+      "mmlu_eval_accuracy_human_aging": 0.5652173913043478,
+      "mmlu_eval_accuracy_human_sexuality": 0.6666666666666666,
+      "mmlu_eval_accuracy_international_law": 0.6153846153846154,
+      "mmlu_eval_accuracy_jurisprudence": 0.5454545454545454,
+      "mmlu_eval_accuracy_logical_fallacies": 0.5,
+      "mmlu_eval_accuracy_machine_learning": 0.09090909090909091,
+      "mmlu_eval_accuracy_management": 0.36363636363636365,
+      "mmlu_eval_accuracy_marketing": 0.76,
+      "mmlu_eval_accuracy_medical_genetics": 0.8181818181818182,
+      "mmlu_eval_accuracy_miscellaneous": 0.5813953488372093,
+      "mmlu_eval_accuracy_moral_disputes": 0.4473684210526316,
+      "mmlu_eval_accuracy_moral_scenarios": 0.25,
+      "mmlu_eval_accuracy_nutrition": 0.6363636363636364,
+      "mmlu_eval_accuracy_philosophy": 0.4117647058823529,
+      "mmlu_eval_accuracy_prehistory": 0.45714285714285713,
+      "mmlu_eval_accuracy_professional_accounting": 0.41935483870967744,
+      "mmlu_eval_accuracy_professional_law": 0.32941176470588235,
+      "mmlu_eval_accuracy_professional_medicine": 0.3548387096774194,
+      "mmlu_eval_accuracy_professional_psychology": 0.42028985507246375,
+      "mmlu_eval_accuracy_public_relations": 0.3333333333333333,
+      "mmlu_eval_accuracy_security_studies": 0.4074074074074074,
+      "mmlu_eval_accuracy_sociology": 0.7272727272727273,
+      "mmlu_eval_accuracy_us_foreign_policy": 0.7272727272727273,
+      "mmlu_eval_accuracy_virology": 0.4444444444444444,
+      "mmlu_eval_accuracy_world_religions": 0.6842105263157895,
+      "mmlu_loss": 1.4056120722960366,
+      "step": 561
+    },
+    {
+      "epoch": 9.07,
+      "learning_rate": 0.0002,
+      "loss": 0.3612,
+      "step": 570
+    },
+    {
+      "epoch": 9.22,
+      "learning_rate": 0.0002,
+      "loss": 0.1111,
+      "step": 580
+    },
+    {
+      "epoch": 9.38,
+      "learning_rate": 0.0002,
+      "loss": 0.3051,
+      "step": 590
+    },
+    {
+      "epoch": 9.54,
+      "learning_rate": 0.0002,
+      "loss": 0.3167,
+      "step": 600
+    },
+    {
+      "epoch": 9.7,
+      "learning_rate": 0.0002,
+      "loss": 0.1137,
+      "step": 610
+    },
+    {
+      "epoch": 9.86,
+      "learning_rate": 0.0002,
+      "loss": 0.3667,
+      "step": 620
+    },
+    {
+      "epoch": 10.02,
+      "learning_rate": 0.0002,
+      "loss": 0.216,
+      "step": 630
+    },
+    {
+      "epoch": 10.18,
+      "learning_rate": 0.0002,
+      "loss": 0.1508,
+      "step": 640
+    },
+    {
+      "epoch": 10.34,
+      "learning_rate": 0.0002,
+      "loss": 0.2875,
+      "step": 650
+    },
+    {
+      "epoch": 10.5,
+      "learning_rate": 0.0002,
+      "loss": 0.161,
+      "step": 660
+    },
+    {
+      "epoch": 10.66,
+      "learning_rate": 0.0002,
+      "loss": 0.1724,
+      "step": 670
+    },
+    {
+      "epoch": 10.82,
+      "learning_rate": 0.0002,
+      "loss": 0.2337,
+      "step": 680
+    },
+    {
+      "epoch": 10.97,
+      "learning_rate": 0.0002,
+      "loss": 0.1032,
+      "step": 690
+    },
+    {
+      "epoch": 11.13,
+      "learning_rate": 0.0002,
+      "loss": 0.2413,
+      "step": 700
+    },
+    {
+      "epoch": 11.29,
+      "learning_rate": 0.0002,
+      "loss": 0.1835,
+      "step": 710
+    },
+    {
+      "epoch": 11.45,
+      "learning_rate": 0.0002,
+      "loss": 0.0662,
+      "step": 720
+    },
+    {
+      "epoch": 11.61,
+      "learning_rate": 0.0002,
+      "loss": 0.1766,
+      "step": 730
+    },
+    {
+      "epoch": 11.77,
+      "learning_rate": 0.0002,
+      "loss": 0.2097,
+      "step": 740
+    },
+    {
+      "epoch": 11.9,
+      "eval_loss": 2.3738961219787598,
+      "eval_runtime": 20.9229,
+      "eval_samples_per_second": 4.779,
+      "eval_steps_per_second": 4.779,
+      "step": 748
+    },
+    {
+      "epoch": 11.9,
+      "mmlu_eval_accuracy": 0.4379183068558352,
+      "mmlu_eval_accuracy_abstract_algebra": 0.2727272727272727,
+      "mmlu_eval_accuracy_anatomy": 0.5714285714285714,
+      "mmlu_eval_accuracy_astronomy": 0.3125,
+      "mmlu_eval_accuracy_business_ethics": 0.45454545454545453,
+      "mmlu_eval_accuracy_clinical_knowledge": 0.4482758620689655,
+      "mmlu_eval_accuracy_college_biology": 0.25,
+      "mmlu_eval_accuracy_college_chemistry": 0.25,
+      "mmlu_eval_accuracy_college_computer_science": 0.45454545454545453,
+      "mmlu_eval_accuracy_college_mathematics": 0.2727272727272727,
+      "mmlu_eval_accuracy_college_medicine": 0.36363636363636365,
+      "mmlu_eval_accuracy_college_physics": 0.45454545454545453,
+      "mmlu_eval_accuracy_computer_security": 0.45454545454545453,
+      "mmlu_eval_accuracy_conceptual_physics": 0.38461538461538464,
+      "mmlu_eval_accuracy_econometrics": 0.4166666666666667,
+      "mmlu_eval_accuracy_electrical_engineering": 0.4375,
+      "mmlu_eval_accuracy_elementary_mathematics": 0.3170731707317073,
+      "mmlu_eval_accuracy_formal_logic": 0.35714285714285715,
+      "mmlu_eval_accuracy_global_facts": 0.2,
+      "mmlu_eval_accuracy_high_school_biology": 0.28125,
+      "mmlu_eval_accuracy_high_school_chemistry": 0.36363636363636365,
+      "mmlu_eval_accuracy_high_school_computer_science": 0.3333333333333333,
+      "mmlu_eval_accuracy_high_school_european_history": 0.6111111111111112,
+      "mmlu_eval_accuracy_high_school_geography": 0.5909090909090909,
+      "mmlu_eval_accuracy_high_school_government_and_politics": 0.5714285714285714,
+      "mmlu_eval_accuracy_high_school_macroeconomics": 0.4186046511627907,
+      "mmlu_eval_accuracy_high_school_mathematics": 0.2413793103448276,
+      "mmlu_eval_accuracy_high_school_microeconomics": 0.5,
+      "mmlu_eval_accuracy_high_school_physics": 0.29411764705882354,
+      "mmlu_eval_accuracy_high_school_psychology": 0.7333333333333333,
+      "mmlu_eval_accuracy_high_school_statistics": 0.391304347826087,
+      "mmlu_eval_accuracy_high_school_us_history": 0.5454545454545454,
+      "mmlu_eval_accuracy_high_school_world_history": 0.4230769230769231,
+      "mmlu_eval_accuracy_human_aging": 0.5652173913043478,
+      "mmlu_eval_accuracy_human_sexuality": 0.5,
+      "mmlu_eval_accuracy_international_law": 0.7692307692307693,
+      "mmlu_eval_accuracy_jurisprudence": 0.5454545454545454,
+      "mmlu_eval_accuracy_logical_fallacies": 0.5555555555555556,
+      "mmlu_eval_accuracy_machine_learning": 0.09090909090909091,
+      "mmlu_eval_accuracy_management": 0.2727272727272727,
+      "mmlu_eval_accuracy_marketing": 0.76,
+      "mmlu_eval_accuracy_medical_genetics": 0.7272727272727273,
+      "mmlu_eval_accuracy_miscellaneous": 0.5697674418604651,
+      "mmlu_eval_accuracy_moral_disputes": 0.42105263157894735,
+      "mmlu_eval_accuracy_moral_scenarios": 0.24,
+      "mmlu_eval_accuracy_nutrition": 0.6060606060606061,
+      "mmlu_eval_accuracy_philosophy": 0.4117647058823529,
+      "mmlu_eval_accuracy_prehistory": 0.42857142857142855,
+      "mmlu_eval_accuracy_professional_accounting": 0.22580645161290322,
+      "mmlu_eval_accuracy_professional_law": 0.34705882352941175,
+      "mmlu_eval_accuracy_professional_medicine": 0.3548387096774194,
+      "mmlu_eval_accuracy_professional_psychology": 0.391304347826087,
+      "mmlu_eval_accuracy_public_relations": 0.3333333333333333,
+      "mmlu_eval_accuracy_security_studies": 0.4444444444444444,
+      "mmlu_eval_accuracy_sociology": 0.6818181818181818,
+      "mmlu_eval_accuracy_us_foreign_policy": 0.7272727272727273,
+      "mmlu_eval_accuracy_virology": 0.3888888888888889,
+      "mmlu_eval_accuracy_world_religions": 0.631578947368421,
+      "mmlu_loss": 1.498444895566016,
+      "step": 748
+    },
+    {
+      "epoch": 11.93,
+      "learning_rate": 0.0002,
+      "loss": 0.063,
+      "step": 750
+    },
+    {
+      "epoch": 12.09,
+      "learning_rate": 0.0002,
+      "loss": 0.192,
+      "step": 760
+    },
+    {
+      "epoch": 12.25,
+      "learning_rate": 0.0002,
+      "loss": 0.083,
+      "step": 770
+    },
+    {
+      "epoch": 12.41,
+      "learning_rate": 0.0002,
+      "loss": 0.1409,
+      "step": 780
+    },
+    {
+      "epoch": 12.56,
+      "learning_rate": 0.0002,
+      "loss": 0.1739,
+      "step": 790
+    },
+    {
+      "epoch": 12.72,
+      "learning_rate": 0.0002,
+      "loss": 0.0835,
+      "step": 800
+    },
+    {
+      "epoch": 12.88,
+      "learning_rate": 0.0002,
+      "loss": 0.1479,
+      "step": 810
+    },
+    {
+      "epoch": 13.04,
+      "learning_rate": 0.0002,
+      "loss": 0.1582,
+      "step": 820
+    },
+    {
+      "epoch": 13.2,
+      "learning_rate": 0.0002,
+      "loss": 0.0454,
+      "step": 830
+    },
+    {
+      "epoch": 13.36,
+      "learning_rate": 0.0002,
+      "loss": 0.1204,
+      "step": 840
+    },
+    {
+      "epoch": 13.52,
+      "learning_rate": 0.0002,
+      "loss": 0.1054,
+      "step": 850
+    },
+    {
+      "epoch": 13.68,
+      "learning_rate": 0.0002,
+      "loss": 0.058,
+      "step": 860
+    },
+    {
+      "epoch": 13.84,
+      "learning_rate": 0.0002,
+      "loss": 0.1524,
+      "step": 870
+    },
+    {
+      "epoch": 14.0,
+      "learning_rate": 0.0002,
+      "loss": 0.0634,
+      "step": 880
+    },
+    {
+      "epoch": 14.16,
+      "learning_rate": 0.0002,
+      "loss": 0.0864,
+      "step": 890
+    },
+    {
+      "epoch": 14.31,
+      "learning_rate": 0.0002,
+      "loss": 0.1173,
+      "step": 900
+    },
+    {
+      "epoch": 14.47,
+      "learning_rate": 0.0002,
+      "loss": 0.0314,
+      "step": 910
+    },
+    {
+      "epoch": 14.63,
+      "learning_rate": 0.0002,
+      "loss": 0.1259,
+      "step": 920
+    },
+    {
+      "epoch": 14.79,
+      "learning_rate": 0.0002,
+      "loss": 0.1297,
+      "step": 930
+    },
+    {
+      "epoch": 14.87,
+      "eval_loss": 2.5226521492004395,
+      "eval_runtime": 20.9809,
+      "eval_samples_per_second": 4.766,
+      "eval_steps_per_second": 4.766,
+      "step": 935
+    },
+    {
+      "epoch": 14.87,
+      "mmlu_eval_accuracy": 0.4344000435570418,
+      "mmlu_eval_accuracy_abstract_algebra": 0.2727272727272727,
+      "mmlu_eval_accuracy_anatomy": 0.5714285714285714,
+      "mmlu_eval_accuracy_astronomy": 0.3125,
+      "mmlu_eval_accuracy_business_ethics": 0.45454545454545453,
+      "mmlu_eval_accuracy_clinical_knowledge": 0.4827586206896552,
+      "mmlu_eval_accuracy_college_biology": 0.25,
+      "mmlu_eval_accuracy_college_chemistry": 0.25,
+      "mmlu_eval_accuracy_college_computer_science": 0.5454545454545454,
+      "mmlu_eval_accuracy_college_mathematics": 0.2727272727272727,
+      "mmlu_eval_accuracy_college_medicine": 0.36363636363636365,
+      "mmlu_eval_accuracy_college_physics": 0.36363636363636365,
+      "mmlu_eval_accuracy_computer_security": 0.5454545454545454,
+      "mmlu_eval_accuracy_conceptual_physics": 0.3076923076923077,
+      "mmlu_eval_accuracy_econometrics": 0.3333333333333333,
+      "mmlu_eval_accuracy_electrical_engineering": 0.4375,
+      "mmlu_eval_accuracy_elementary_mathematics": 0.2926829268292683,
+      "mmlu_eval_accuracy_formal_logic": 0.35714285714285715,
+      "mmlu_eval_accuracy_global_facts": 0.2,
+      "mmlu_eval_accuracy_high_school_biology": 0.375,
+      "mmlu_eval_accuracy_high_school_chemistry": 0.3181818181818182,
+      "mmlu_eval_accuracy_high_school_computer_science": 0.2222222222222222,
+      "mmlu_eval_accuracy_high_school_european_history": 0.6666666666666666,
+      "mmlu_eval_accuracy_high_school_geography": 0.5909090909090909,
+      "mmlu_eval_accuracy_high_school_government_and_politics": 0.6666666666666666,
+      "mmlu_eval_accuracy_high_school_macroeconomics": 0.3953488372093023,
+      "mmlu_eval_accuracy_high_school_mathematics": 0.27586206896551724,
+      "mmlu_eval_accuracy_high_school_microeconomics": 0.3076923076923077,
+      "mmlu_eval_accuracy_high_school_physics": 0.29411764705882354,
+      "mmlu_eval_accuracy_high_school_psychology": 0.7333333333333333,
+      "mmlu_eval_accuracy_high_school_statistics": 0.2608695652173913,
+      "mmlu_eval_accuracy_high_school_us_history": 0.5454545454545454,
+      "mmlu_eval_accuracy_high_school_world_history": 0.38461538461538464,
+      "mmlu_eval_accuracy_human_aging": 0.5652173913043478,
+      "mmlu_eval_accuracy_human_sexuality": 0.3333333333333333,
+      "mmlu_eval_accuracy_international_law": 0.7692307692307693,
+      "mmlu_eval_accuracy_jurisprudence": 0.45454545454545453,
+      "mmlu_eval_accuracy_logical_fallacies": 0.5,
+      "mmlu_eval_accuracy_machine_learning": 0.18181818181818182,
+      "mmlu_eval_accuracy_management": 0.36363636363636365,
+      "mmlu_eval_accuracy_marketing": 0.76,
+      "mmlu_eval_accuracy_medical_genetics": 0.8181818181818182,
+      "mmlu_eval_accuracy_miscellaneous": 0.5813953488372093,
+      "mmlu_eval_accuracy_moral_disputes": 0.47368421052631576,
+      "mmlu_eval_accuracy_moral_scenarios": 0.23,
+      "mmlu_eval_accuracy_nutrition": 0.6363636363636364,
+      "mmlu_eval_accuracy_philosophy": 0.38235294117647056,
+      "mmlu_eval_accuracy_prehistory": 0.42857142857142855,
+      "mmlu_eval_accuracy_professional_accounting": 0.22580645161290322,
+      "mmlu_eval_accuracy_professional_law": 0.34705882352941175,
+      "mmlu_eval_accuracy_professional_medicine": 0.3870967741935484,
+      "mmlu_eval_accuracy_professional_psychology": 0.36231884057971014,
+      "mmlu_eval_accuracy_public_relations": 0.3333333333333333,
+      "mmlu_eval_accuracy_security_studies": 0.48148148148148145,
+      "mmlu_eval_accuracy_sociology": 0.7272727272727273,
+      "mmlu_eval_accuracy_us_foreign_policy": 0.6363636363636364,
+      "mmlu_eval_accuracy_virology": 0.5,
+      "mmlu_eval_accuracy_world_religions": 0.631578947368421,
+      "mmlu_loss": 1.4956599580042507,
+      "step": 935
+    },
+    {
+      "epoch": 14.95,
+      "learning_rate": 0.0002,
+      "loss": 0.0291,
+      "step": 940
+    },
+    {
+      "epoch": 15.11,
+      "learning_rate": 0.0002,
+      "loss": 0.109,
+      "step": 950
+    },
+    {
+      "epoch": 15.27,
+      "learning_rate": 0.0002,
+      "loss": 0.1115,
+      "step": 960
+    },
+    {
+      "epoch": 15.43,
+      "learning_rate": 0.0002,
+      "loss": 0.0315,
+      "step": 970
+    },
+    {
+      "epoch": 15.59,
+      "learning_rate": 0.0002,
+      "loss": 0.0606,
+      "step": 980
+    },
+    {
+      "epoch": 15.75,
+      "learning_rate": 0.0002,
+      "loss": 0.0738,
+      "step": 990
+    },
+    {
+      "epoch": 15.9,
+      "learning_rate": 0.0002,
+      "loss": 0.0467,
+      "step": 1000
+    },
+    {
+      "epoch": 16.06,
+      "learning_rate": 0.0002,
+      "loss": 0.0928,
+      "step": 1010
+    },
+    {
+      "epoch": 16.22,
+      "learning_rate": 0.0002,
+      "loss": 0.0178,
+      "step": 1020
+    },
+    {
+      "epoch": 16.38,
+      "learning_rate": 0.0002,
+      "loss": 0.1014,
+      "step": 1030
+    },
+    {
+      "epoch": 16.54,
+      "learning_rate": 0.0002,
+      "loss": 0.0731,
+      "step": 1040
+    },
+    {
+      "epoch": 16.7,
+      "learning_rate": 0.0002,
+      "loss": 0.0275,
+      "step": 1050
+    },
+    {
+      "epoch": 16.86,
+      "learning_rate": 0.0002,
+      "loss": 0.086,
+      "step": 1060
+    },
+    {
+      "epoch": 17.02,
+      "learning_rate": 0.0002,
+      "loss": 0.048,
+      "step": 1070
+    },
+    {
+      "epoch": 17.18,
+      "learning_rate": 0.0002,
+      "loss": 0.0271,
+      "step": 1080
+    },
+    {
+      "epoch": 17.34,
+      "learning_rate": 0.0002,
+      "loss": 0.0617,
+      "step": 1090
+    },
+    {
+      "epoch": 17.5,
+      "learning_rate": 0.0002,
+      "loss": 0.069,
+      "step": 1100
+    },
+    {
+      "epoch": 17.65,
+      "learning_rate": 0.0002,
+      "loss": 0.0473,
+      "step": 1110
+    },
+    {
+      "epoch": 17.81,
+      "learning_rate": 0.0002,
+      "loss": 0.0637,
+      "step": 1120
+    },
+    {
+      "epoch": 17.84,
+      "eval_loss": 2.6606152057647705,
+      "eval_runtime": 20.9822,
+      "eval_samples_per_second": 4.766,
+      "eval_steps_per_second": 4.766,
+      "step": 1122
+    },
+    {
+      "epoch": 17.84,
+      "mmlu_eval_accuracy": 0.43562838061633113,
+      "mmlu_eval_accuracy_abstract_algebra": 0.36363636363636365,
+      "mmlu_eval_accuracy_anatomy": 0.5714285714285714,
+      "mmlu_eval_accuracy_astronomy": 0.1875,
+      "mmlu_eval_accuracy_business_ethics": 0.45454545454545453,
+      "mmlu_eval_accuracy_clinical_knowledge": 0.4482758620689655,
+      "mmlu_eval_accuracy_college_biology": 0.25,
+      "mmlu_eval_accuracy_college_chemistry": 0.125,
+      "mmlu_eval_accuracy_college_computer_science": 0.5454545454545454,
+      "mmlu_eval_accuracy_college_mathematics": 0.18181818181818182,
+      "mmlu_eval_accuracy_college_medicine": 0.45454545454545453,
+      "mmlu_eval_accuracy_college_physics": 0.36363636363636365,
+      "mmlu_eval_accuracy_computer_security": 0.45454545454545453,
+      "mmlu_eval_accuracy_conceptual_physics": 0.23076923076923078,
+      "mmlu_eval_accuracy_econometrics": 0.3333333333333333,
+      "mmlu_eval_accuracy_electrical_engineering": 0.4375,
+      "mmlu_eval_accuracy_elementary_mathematics": 0.2926829268292683,
+      "mmlu_eval_accuracy_formal_logic": 0.2857142857142857,
+      "mmlu_eval_accuracy_global_facts": 0.3,
+      "mmlu_eval_accuracy_high_school_biology": 0.34375,
+      "mmlu_eval_accuracy_high_school_chemistry": 0.36363636363636365,
+      "mmlu_eval_accuracy_high_school_computer_science": 0.4444444444444444,
+      "mmlu_eval_accuracy_high_school_european_history": 0.6111111111111112,
+      "mmlu_eval_accuracy_high_school_geography": 0.6363636363636364,
+      "mmlu_eval_accuracy_high_school_government_and_politics": 0.6666666666666666,
+      "mmlu_eval_accuracy_high_school_macroeconomics": 0.37209302325581395,
+      "mmlu_eval_accuracy_high_school_mathematics": 0.3448275862068966,
+      "mmlu_eval_accuracy_high_school_microeconomics": 0.38461538461538464,
+      "mmlu_eval_accuracy_high_school_physics": 0.35294117647058826,
+      "mmlu_eval_accuracy_high_school_psychology": 0.6666666666666666,
+      "mmlu_eval_accuracy_high_school_statistics": 0.2608695652173913,
+      "mmlu_eval_accuracy_high_school_us_history": 0.5909090909090909,
+      "mmlu_eval_accuracy_high_school_world_history": 0.38461538461538464,
+      "mmlu_eval_accuracy_human_aging": 0.5652173913043478,
+      "mmlu_eval_accuracy_human_sexuality": 0.4166666666666667,
+      "mmlu_eval_accuracy_international_law": 0.7692307692307693,
+      "mmlu_eval_accuracy_jurisprudence": 0.45454545454545453,
+      "mmlu_eval_accuracy_logical_fallacies": 0.5,
+      "mmlu_eval_accuracy_machine_learning": 0.18181818181818182,
+      "mmlu_eval_accuracy_management": 0.18181818181818182,
+      "mmlu_eval_accuracy_marketing": 0.8,
+      "mmlu_eval_accuracy_medical_genetics": 0.8181818181818182,
+      "mmlu_eval_accuracy_miscellaneous": 0.5813953488372093,
+      "mmlu_eval_accuracy_moral_disputes": 0.4473684210526316,
+      "mmlu_eval_accuracy_moral_scenarios": 0.24,
+      "mmlu_eval_accuracy_nutrition": 0.6363636363636364,
+      "mmlu_eval_accuracy_philosophy": 0.4117647058823529,
+      "mmlu_eval_accuracy_prehistory": 0.37142857142857144,
+      "mmlu_eval_accuracy_professional_accounting": 0.25806451612903225,
+      "mmlu_eval_accuracy_professional_law": 0.3588235294117647,
+      "mmlu_eval_accuracy_professional_medicine": 0.41935483870967744,
+      "mmlu_eval_accuracy_professional_psychology": 0.36231884057971014,
+      "mmlu_eval_accuracy_public_relations": 0.3333333333333333,
+      "mmlu_eval_accuracy_security_studies": 0.48148148148148145,
+      "mmlu_eval_accuracy_sociology": 0.6818181818181818,
+      "mmlu_eval_accuracy_us_foreign_policy": 0.7272727272727273,
+      "mmlu_eval_accuracy_virology": 0.4444444444444444,
+      "mmlu_eval_accuracy_world_religions": 0.6842105263157895,
+      "mmlu_loss": 1.4917471485539715,
+      "step": 1122
+    },
+    {
+      "epoch": 17.97,
+      "learning_rate": 0.0002,
+      "loss": 0.0356,
+      "step": 1130
+    },
+    {
+      "epoch": 18.13,
+      "learning_rate": 0.0002,
+      "loss": 0.0493,
+      "step": 1140
+    },
+    {
+      "epoch": 18.29,
+      "learning_rate": 0.0002,
+      "loss": 0.0338,
+      "step": 1150
+    },
+    {
+      "epoch": 18.45,
+      "learning_rate": 0.0002,
+      "loss": 0.017,
+      "step": 1160
+    },
+    {
+      "epoch": 18.61,
+      "learning_rate": 0.0002,
+      "loss": 0.0893,
+      "step": 1170
+    },
+    {
+      "epoch": 18.77,
+      "learning_rate": 0.0002,
+      "loss": 0.0587,
+      "step": 1180
+    },
+    {
+      "epoch": 18.93,
+      "learning_rate": 0.0002,
+      "loss": 0.0311,
+      "step": 1190
+    },
+    {
+      "epoch": 19.09,
+      "learning_rate": 0.0002,
+      "loss": 0.0414,
+      "step": 1200
+    },
+    {
+      "epoch": 19.24,
+      "learning_rate": 0.0002,
+      "loss": 0.0332,
+      "step": 1210
+    },
+    {
+      "epoch": 19.4,
+      "learning_rate": 0.0002,
+      "loss": 0.042,
+      "step": 1220
+    },
+    {
+      "epoch": 19.56,
+      "learning_rate": 0.0002,
+      "loss": 0.0487,
+      "step": 1230
+    },
+    {
+      "epoch": 19.72,
+      "learning_rate": 0.0002,
+      "loss": 0.0293,
+      "step": 1240
+    },
+    {
+      "epoch": 19.88,
+      "learning_rate": 0.0002,
+      "loss": 0.0404,
+      "step": 1250
+    },
+    {
+      "epoch": 20.04,
+      "learning_rate": 0.0002,
+      "loss": 0.0444,
+      "step": 1260
+    },
+    {
+      "epoch": 20.2,
+      "learning_rate": 0.0002,
+      "loss": 0.0198,
+      "step": 1270
+    },
+    {
+      "epoch": 20.36,
+      "learning_rate": 0.0002,
+      "loss": 0.0375,
+      "step": 1280
+    },
+    {
+      "epoch": 20.52,
+      "learning_rate": 0.0002,
+      "loss": 0.0413,
+      "step": 1290
+    },
+    {
+      "epoch": 20.68,
+      "learning_rate": 0.0002,
+      "loss": 0.0182,
+      "step": 1300
+    },
+    {
+      "epoch": 20.82,
+      "eval_loss": 2.9767770767211914,
+      "eval_runtime": 20.9538,
+      "eval_samples_per_second": 4.772,
+      "eval_steps_per_second": 4.772,
+      "step": 1309
+    },
+    {
+      "epoch": 20.82,
+      "mmlu_eval_accuracy": 0.43076886542466913,
+      "mmlu_eval_accuracy_abstract_algebra": 0.2727272727272727,
+      "mmlu_eval_accuracy_anatomy": 0.5714285714285714,
+      "mmlu_eval_accuracy_astronomy": 0.25,
+      "mmlu_eval_accuracy_business_ethics": 0.5454545454545454,
+      "mmlu_eval_accuracy_clinical_knowledge": 0.4482758620689655,
+      "mmlu_eval_accuracy_college_biology": 0.25,
+      "mmlu_eval_accuracy_college_chemistry": 0.25,
+      "mmlu_eval_accuracy_college_computer_science": 0.45454545454545453,
+      "mmlu_eval_accuracy_college_mathematics": 0.18181818181818182,
+      "mmlu_eval_accuracy_college_medicine": 0.4090909090909091,
+      "mmlu_eval_accuracy_college_physics": 0.45454545454545453,
+      "mmlu_eval_accuracy_computer_security": 0.45454545454545453,
+      "mmlu_eval_accuracy_conceptual_physics": 0.3076923076923077,
+      "mmlu_eval_accuracy_econometrics": 0.3333333333333333,
+      "mmlu_eval_accuracy_electrical_engineering": 0.4375,
+      "mmlu_eval_accuracy_elementary_mathematics": 0.2926829268292683,
+      "mmlu_eval_accuracy_formal_logic": 0.35714285714285715,
+      "mmlu_eval_accuracy_global_facts": 0.2,
+      "mmlu_eval_accuracy_high_school_biology": 0.28125,
+      "mmlu_eval_accuracy_high_school_chemistry": 0.4090909090909091,
+      "mmlu_eval_accuracy_high_school_computer_science": 0.3333333333333333,
+      "mmlu_eval_accuracy_high_school_european_history": 0.6111111111111112,
+      "mmlu_eval_accuracy_high_school_geography": 0.5454545454545454,
+      "mmlu_eval_accuracy_high_school_government_and_politics": 0.6190476190476191,
+      "mmlu_eval_accuracy_high_school_macroeconomics": 0.3953488372093023,
+      "mmlu_eval_accuracy_high_school_mathematics": 0.2413793103448276,
+      "mmlu_eval_accuracy_high_school_microeconomics": 0.34615384615384615,
+      "mmlu_eval_accuracy_high_school_physics": 0.35294117647058826,
+      "mmlu_eval_accuracy_high_school_psychology": 0.65,
+      "mmlu_eval_accuracy_high_school_statistics": 0.21739130434782608,
+      "mmlu_eval_accuracy_high_school_us_history": 0.5454545454545454,
+      "mmlu_eval_accuracy_high_school_world_history": 0.38461538461538464,
+      "mmlu_eval_accuracy_human_aging": 0.5217391304347826,
+      "mmlu_eval_accuracy_human_sexuality": 0.3333333333333333,
+      "mmlu_eval_accuracy_international_law": 0.8461538461538461,
+      "mmlu_eval_accuracy_jurisprudence": 0.45454545454545453,
+      "mmlu_eval_accuracy_logical_fallacies": 0.5555555555555556,
+      "mmlu_eval_accuracy_machine_learning": 0.18181818181818182,
+      "mmlu_eval_accuracy_management": 0.18181818181818182,
+      "mmlu_eval_accuracy_marketing": 0.76,
+      "mmlu_eval_accuracy_medical_genetics": 0.8181818181818182,
+      "mmlu_eval_accuracy_miscellaneous": 0.5813953488372093,
+      "mmlu_eval_accuracy_moral_disputes": 0.47368421052631576,
+      "mmlu_eval_accuracy_moral_scenarios": 0.26,
+      "mmlu_eval_accuracy_nutrition": 0.6060606060606061,
+      "mmlu_eval_accuracy_philosophy": 0.4117647058823529,
+      "mmlu_eval_accuracy_prehistory": 0.4,
+      "mmlu_eval_accuracy_professional_accounting": 0.3548387096774194,
+      "mmlu_eval_accuracy_professional_law": 0.3352941176470588,
+      "mmlu_eval_accuracy_professional_medicine": 0.41935483870967744,
+      "mmlu_eval_accuracy_professional_psychology": 0.34782608695652173,
+      "mmlu_eval_accuracy_public_relations": 0.3333333333333333,
+      "mmlu_eval_accuracy_security_studies": 0.48148148148148145,
+      "mmlu_eval_accuracy_sociology": 0.6363636363636364,
+      "mmlu_eval_accuracy_us_foreign_policy": 0.7272727272727273,
+      "mmlu_eval_accuracy_virology": 0.4444444444444444,
+      "mmlu_eval_accuracy_world_religions": 0.6842105263157895,
+      "mmlu_loss": 1.553549027633698,
+      "step": 1309
+    },
+    {
+      "epoch": 20.83,
+      "learning_rate": 0.0002,
+      "loss": 0.0517,
+      "step": 1310
+    },
+    {
+      "epoch": 20.99,
+      "learning_rate": 0.0002,
+      "loss": 0.0219,
+      "step": 1320
+    },
+    {
+      "epoch": 21.15,
+      "learning_rate": 0.0002,
+      "loss": 0.0492,
+      "step": 1330
+    },
+    {
+      "epoch": 21.31,
+      "learning_rate": 0.0002,
+      "loss": 0.0278,
+      "step": 1340
+    },
+    {
+      "epoch": 21.47,
+      "learning_rate": 0.0002,
+      "loss": 0.0138,
+      "step": 1350
+    },
+    {
+      "epoch": 21.63,
+      "learning_rate": 0.0002,
+      "loss": 0.0472,
+      "step": 1360
+    },
+    {
+      "epoch": 21.79,
+      "learning_rate": 0.0002,
+      "loss": 0.037,
+      "step": 1370
+    },
+    {
+      "epoch": 21.95,
+      "learning_rate": 0.0002,
+      "loss": 0.0163,
+      "step": 1380
+    },
+    {
+      "epoch": 22.11,
+      "learning_rate": 0.0002,
+      "loss": 0.0434,
+      "step": 1390
+    },
+    {
+      "epoch": 22.27,
+      "learning_rate": 0.0002,
+      "loss": 0.0234,
+      "step": 1400
+    },
+    {
+      "epoch": 22.43,
+      "learning_rate": 0.0002,
+      "loss": 0.0128,
+      "step": 1410
+    },
+    {
+      "epoch": 22.58,
+      "learning_rate": 0.0002,
+      "loss": 0.0315,
+      "step": 1420
+    },
+    {
+      "epoch": 22.74,
+      "learning_rate": 0.0002,
+      "loss": 0.034,
+      "step": 1430
+    },
+    {
+      "epoch": 22.9,
+      "learning_rate": 0.0002,
+      "loss": 0.0283,
+      "step": 1440
+    },
+    {
+      "epoch": 23.06,
+      "learning_rate": 0.0002,
+      "loss": 0.0327,
+      "step": 1450
+    },
+    {
+      "epoch": 23.22,
+      "learning_rate": 0.0002,
+      "loss": 0.013,
+      "step": 1460
+    },
+    {
+      "epoch": 23.38,
+      "learning_rate": 0.0002,
+      "loss": 0.0346,
+      "step": 1470
+    },
+    {
+      "epoch": 23.54,
+      "learning_rate": 0.0002,
+      "loss": 0.0291,
+      "step": 1480
+    },
+    {
+      "epoch": 23.7,
+      "learning_rate": 0.0002,
+      "loss": 0.0185,
+      "step": 1490
+    },
+    {
+      "epoch": 23.79,
+      "eval_loss": 2.8168447017669678,
+      "eval_runtime": 20.9846,
+      "eval_samples_per_second": 4.765,
+      "eval_steps_per_second": 4.765,
+      "step": 1496
+    },
+    {
+      "epoch": 23.79,
+      "mmlu_eval_accuracy": 0.4276615308582334,
+      "mmlu_eval_accuracy_abstract_algebra": 0.2727272727272727,
+      "mmlu_eval_accuracy_anatomy": 0.5714285714285714,
+      "mmlu_eval_accuracy_astronomy": 0.3125,
+      "mmlu_eval_accuracy_business_ethics": 0.5454545454545454,
+      "mmlu_eval_accuracy_clinical_knowledge": 0.4827586206896552,
+      "mmlu_eval_accuracy_college_biology": 0.25,
+      "mmlu_eval_accuracy_college_chemistry": 0.125,
+      "mmlu_eval_accuracy_college_computer_science": 0.45454545454545453,
+      "mmlu_eval_accuracy_college_mathematics": 0.18181818181818182,
+      "mmlu_eval_accuracy_college_medicine": 0.4090909090909091,
+      "mmlu_eval_accuracy_college_physics": 0.45454545454545453,
+      "mmlu_eval_accuracy_computer_security": 0.45454545454545453,
+      "mmlu_eval_accuracy_conceptual_physics": 0.34615384615384615,
+      "mmlu_eval_accuracy_econometrics": 0.25,
+      "mmlu_eval_accuracy_electrical_engineering": 0.4375,
+      "mmlu_eval_accuracy_elementary_mathematics": 0.2926829268292683,
+      "mmlu_eval_accuracy_formal_logic": 0.35714285714285715,
+      "mmlu_eval_accuracy_global_facts": 0.1,
+      "mmlu_eval_accuracy_high_school_biology": 0.28125,
+      "mmlu_eval_accuracy_high_school_chemistry": 0.3181818181818182,
+      "mmlu_eval_accuracy_high_school_computer_science": 0.5555555555555556,
+      "mmlu_eval_accuracy_high_school_european_history": 0.6111111111111112,
+      "mmlu_eval_accuracy_high_school_geography": 0.5,
+      "mmlu_eval_accuracy_high_school_government_and_politics": 0.5714285714285714,
+      "mmlu_eval_accuracy_high_school_macroeconomics": 0.3953488372093023,
+      "mmlu_eval_accuracy_high_school_mathematics": 0.2413793103448276,
+      "mmlu_eval_accuracy_high_school_microeconomics": 0.3076923076923077,
+      "mmlu_eval_accuracy_high_school_physics": 0.35294117647058826,
+      "mmlu_eval_accuracy_high_school_psychology": 0.6666666666666666,
+      "mmlu_eval_accuracy_high_school_statistics": 0.30434782608695654,
+      "mmlu_eval_accuracy_high_school_us_history": 0.5454545454545454,
+      "mmlu_eval_accuracy_high_school_world_history": 0.38461538461538464,
+      "mmlu_eval_accuracy_human_aging": 0.5217391304347826,
+      "mmlu_eval_accuracy_human_sexuality": 0.5,
+      "mmlu_eval_accuracy_international_law": 0.6923076923076923,
+      "mmlu_eval_accuracy_jurisprudence": 0.5454545454545454,
+      "mmlu_eval_accuracy_logical_fallacies": 0.5,
+      "mmlu_eval_accuracy_machine_learning": 0.18181818181818182,
+      "mmlu_eval_accuracy_management": 0.18181818181818182,
+      "mmlu_eval_accuracy_marketing": 0.8,
+      "mmlu_eval_accuracy_medical_genetics": 0.8181818181818182,
+      "mmlu_eval_accuracy_miscellaneous": 0.5581395348837209,
+      "mmlu_eval_accuracy_moral_disputes": 0.39473684210526316,
+      "mmlu_eval_accuracy_moral_scenarios": 0.3,
+      "mmlu_eval_accuracy_nutrition": 0.6060606060606061,
+      "mmlu_eval_accuracy_philosophy": 0.4117647058823529,
+      "mmlu_eval_accuracy_prehistory": 0.4,
+      "mmlu_eval_accuracy_professional_accounting": 0.25806451612903225,
+      "mmlu_eval_accuracy_professional_law": 0.3352941176470588,
+      "mmlu_eval_accuracy_professional_medicine": 0.3225806451612903,
+      "mmlu_eval_accuracy_professional_psychology": 0.36231884057971014,
+      "mmlu_eval_accuracy_public_relations": 0.3333333333333333,
+      "mmlu_eval_accuracy_security_studies": 0.48148148148148145,
+      "mmlu_eval_accuracy_sociology": 0.6818181818181818,
+      "mmlu_eval_accuracy_us_foreign_policy": 0.7272727272727273,
+      "mmlu_eval_accuracy_virology": 0.4444444444444444,
+      "mmlu_eval_accuracy_world_religions": 0.6842105263157895,
+      "mmlu_loss": 1.4667846477650723,
+      "step": 1496
+    },
+    {
+      "epoch": 23.86,
+      "learning_rate": 0.0002,
+      "loss": 0.026,
+      "step": 1500
+    },
+    {
+      "epoch": 24.02,
+      "learning_rate": 0.0002,
+      "loss": 0.0306,
+      "step": 1510
+    },
+    {
+      "epoch": 24.17,
+      "learning_rate": 0.0002,
+      "loss": 0.0092,
+      "step": 1520
+    },
+    {
+      "epoch": 24.33,
+      "learning_rate": 0.0002,
+      "loss": 0.0281,
+      "step": 1530
+    },
+    {
+      "epoch": 24.49,
+      "learning_rate": 0.0002,
+      "loss": 0.0235,
+      "step": 1540
+    },
+    {
+      "epoch": 24.65,
+      "learning_rate": 0.0002,
+      "loss": 0.03,
+      "step": 1550
+    },
+    {
+      "epoch": 24.81,
+      "learning_rate": 0.0002,
+      "loss": 0.0559,
+      "step": 1560
+    },
+    {
+      "epoch": 24.97,
+      "learning_rate": 0.0002,
+      "loss": 0.0315,
+      "step": 1570
+    },
+    {
+      "epoch": 25.13,
+      "learning_rate": 0.0002,
+      "loss": 0.0236,
+      "step": 1580
+    },
+    {
+      "epoch": 25.29,
+      "learning_rate": 0.0002,
+      "loss": 0.0297,
+      "step": 1590
+    },
+    {
+      "epoch": 25.45,
+      "learning_rate": 0.0002,
+      "loss": 0.0261,
+      "step": 1600
+    },
+    {
+      "epoch": 25.61,
+      "learning_rate": 0.0002,
+      "loss": 0.0314,
+      "step": 1610
+    },
+    {
+      "epoch": 25.77,
+      "learning_rate": 0.0002,
+      "loss": 0.0247,
+      "step": 1620
+    },
+    {
+      "epoch": 25.92,
+      "learning_rate": 0.0002,
+      "loss": 0.0198,
+      "step": 1630
+    },
+    {
+      "epoch": 26.08,
+      "learning_rate": 0.0002,
+      "loss": 0.0251,
+      "step": 1640
+    },
+    {
+      "epoch": 26.24,
+      "learning_rate": 0.0002,
+      "loss": 0.0226,
+      "step": 1650
+    },
+    {
+      "epoch": 26.4,
+      "learning_rate": 0.0002,
+      "loss": 0.0231,
+      "step": 1660
+    },
+    {
+      "epoch": 26.56,
+      "learning_rate": 0.0002,
+      "loss": 0.0219,
+      "step": 1670
+    },
+    {
+      "epoch": 26.72,
+      "learning_rate": 0.0002,
+      "loss": 0.0238,
+      "step": 1680
+    },
+    {
+      "epoch": 26.77,
+      "eval_loss": 2.7842094898223877,
+      "eval_runtime": 20.9327,
+      "eval_samples_per_second": 4.777,
+      "eval_steps_per_second": 4.777,
+      "step": 1683
+    },
+    {
+      "epoch": 26.77,
+      "mmlu_eval_accuracy": 0.4323109289924494,
+      "mmlu_eval_accuracy_abstract_algebra": 0.36363636363636365,
+      "mmlu_eval_accuracy_anatomy": 0.5714285714285714,
+      "mmlu_eval_accuracy_astronomy": 0.3125,
+      "mmlu_eval_accuracy_business_ethics": 0.5454545454545454,
+      "mmlu_eval_accuracy_clinical_knowledge": 0.4482758620689655,
+      "mmlu_eval_accuracy_college_biology": 0.3125,
+      "mmlu_eval_accuracy_college_chemistry": 0.125,
+      "mmlu_eval_accuracy_college_computer_science": 0.45454545454545453,
+      "mmlu_eval_accuracy_college_mathematics": 0.18181818181818182,
+      "mmlu_eval_accuracy_college_medicine": 0.4090909090909091,
+      "mmlu_eval_accuracy_college_physics": 0.45454545454545453,
+      "mmlu_eval_accuracy_computer_security": 0.45454545454545453,
+      "mmlu_eval_accuracy_conceptual_physics": 0.3076923076923077,
+      "mmlu_eval_accuracy_econometrics": 0.3333333333333333,
+      "mmlu_eval_accuracy_electrical_engineering": 0.4375,
+      "mmlu_eval_accuracy_elementary_mathematics": 0.3902439024390244,
+      "mmlu_eval_accuracy_formal_logic": 0.2857142857142857,
+      "mmlu_eval_accuracy_global_facts": 0.1,
+      "mmlu_eval_accuracy_high_school_biology": 0.28125,
+      "mmlu_eval_accuracy_high_school_chemistry": 0.4090909090909091,
+      "mmlu_eval_accuracy_high_school_computer_science": 0.3333333333333333,
+      "mmlu_eval_accuracy_high_school_european_history": 0.6111111111111112,
+      "mmlu_eval_accuracy_high_school_geography": 0.5909090909090909,
+      "mmlu_eval_accuracy_high_school_government_and_politics": 0.5714285714285714,
+      "mmlu_eval_accuracy_high_school_macroeconomics": 0.4186046511627907,
+      "mmlu_eval_accuracy_high_school_mathematics": 0.27586206896551724,
+      "mmlu_eval_accuracy_high_school_microeconomics": 0.3076923076923077,
+      "mmlu_eval_accuracy_high_school_physics": 0.35294117647058826,
+      "mmlu_eval_accuracy_high_school_psychology": 0.65,
+      "mmlu_eval_accuracy_high_school_statistics": 0.2608695652173913,
+      "mmlu_eval_accuracy_high_school_us_history": 0.5454545454545454,
+      "mmlu_eval_accuracy_high_school_world_history": 0.38461538461538464,
+      "mmlu_eval_accuracy_human_aging": 0.4782608695652174,
+      "mmlu_eval_accuracy_human_sexuality": 0.5833333333333334,
+      "mmlu_eval_accuracy_international_law": 0.6153846153846154,
+      "mmlu_eval_accuracy_jurisprudence": 0.5454545454545454,
+      "mmlu_eval_accuracy_logical_fallacies": 0.5555555555555556,
+      "mmlu_eval_accuracy_machine_learning": 0.18181818181818182,
+      "mmlu_eval_accuracy_management": 0.2727272727272727,
+      "mmlu_eval_accuracy_marketing": 0.8,
+      "mmlu_eval_accuracy_medical_genetics": 0.9090909090909091,
+      "mmlu_eval_accuracy_miscellaneous": 0.5697674418604651,
+      "mmlu_eval_accuracy_moral_disputes": 0.4473684210526316,
+      "mmlu_eval_accuracy_moral_scenarios": 0.28,
+      "mmlu_eval_accuracy_nutrition": 0.6060606060606061,
+      "mmlu_eval_accuracy_philosophy": 0.4411764705882353,
+      "mmlu_eval_accuracy_prehistory": 0.4,
+      "mmlu_eval_accuracy_professional_accounting": 0.2903225806451613,
+      "mmlu_eval_accuracy_professional_law": 0.3176470588235294,
+      "mmlu_eval_accuracy_professional_medicine": 0.3225806451612903,
+      "mmlu_eval_accuracy_professional_psychology": 0.37681159420289856,
+      "mmlu_eval_accuracy_public_relations": 0.3333333333333333,
+      "mmlu_eval_accuracy_security_studies": 0.4074074074074074,
+      "mmlu_eval_accuracy_sociology": 0.6818181818181818,
+      "mmlu_eval_accuracy_us_foreign_policy": 0.7272727272727273,
+      "mmlu_eval_accuracy_virology": 0.3333333333333333,
+      "mmlu_eval_accuracy_world_religions": 0.6842105263157895,
+      "mmlu_loss": 1.545924214153489,
+      "step": 1683
+    },
+    {
+      "epoch": 26.88,
+      "learning_rate": 0.0002,
+      "loss": 0.021,
+      "step": 1690
+    },
+    {
+      "epoch": 27.04,
+      "learning_rate": 0.0002,
+      "loss": 0.016,
+      "step": 1700
+    },
+    {
+      "epoch": 27.2,
+      "learning_rate": 0.0002,
+      "loss": 0.0093,
+      "step": 1710
+    },
+    {
+      "epoch": 27.36,
+      "learning_rate": 0.0002,
+      "loss": 0.021,
+      "step": 1720
+    },
+    {
+      "epoch": 27.51,
+      "learning_rate": 0.0002,
+      "loss": 0.0206,
+      "step": 1730
+    },
+    {
+      "epoch": 27.67,
+      "learning_rate": 0.0002,
+      "loss": 0.0191,
+      "step": 1740
+    },
+    {
+      "epoch": 27.83,
+      "learning_rate": 0.0002,
+      "loss": 0.0325,
+      "step": 1750
+    },
+    {
+      "epoch": 27.99,
+      "learning_rate": 0.0002,
+      "loss": 0.0195,
+      "step": 1760
+    },
+    {
+      "epoch": 28.15,
+      "learning_rate": 0.0002,
+      "loss": 0.0113,
+      "step": 1770
+    },
+    {
+      "epoch": 28.31,
+      "learning_rate": 0.0002,
+      "loss": 0.0258,
+      "step": 1780
+    },
+    {
+      "epoch": 28.47,
+      "learning_rate": 0.0002,
+      "loss": 0.0214,
+      "step": 1790
+    },
+    {
+      "epoch": 28.63,
+      "learning_rate": 0.0002,
+      "loss": 0.0248,
+      "step": 1800
+    },
+    {
+      "epoch": 28.79,
+      "learning_rate": 0.0002,
+      "loss": 0.0206,
+      "step": 1810
+    },
+    {
+      "epoch": 28.95,
+      "learning_rate": 0.0002,
+      "loss": 0.0141,
+      "step": 1820
+    },
+    {
+      "epoch": 29.11,
+      "learning_rate": 0.0002,
+      "loss": 0.0337,
+      "step": 1830
+    },
+    {
+      "epoch": 29.26,
+      "learning_rate": 0.0002,
+      "loss": 0.0251,
+      "step": 1840
+    },
+    {
+      "epoch": 29.42,
+      "learning_rate": 0.0002,
+      "loss": 0.0213,
+      "step": 1850
+    },
+    {
+      "epoch": 29.58,
+      "learning_rate": 0.0002,
+      "loss": 0.0266,
+      "step": 1860
+    },
+    {
+      "epoch": 29.74,
+      "learning_rate": 0.0002,
+      "loss": 0.0165,
+      "step": 1870
+    },
+    {
+      "epoch": 29.74,
+      "eval_loss": 2.9622726440429688,
+      "eval_runtime": 21.0118,
+      "eval_samples_per_second": 4.759,
+      "eval_steps_per_second": 4.759,
+      "step": 1870
+    },
+    {
+      "epoch": 29.74,
+      "mmlu_eval_accuracy": 0.4309595180664923,
+      "mmlu_eval_accuracy_abstract_algebra": 0.36363636363636365,
+      "mmlu_eval_accuracy_anatomy": 0.5,
+      "mmlu_eval_accuracy_astronomy": 0.25,
+      "mmlu_eval_accuracy_business_ethics": 0.45454545454545453,
+      "mmlu_eval_accuracy_clinical_knowledge": 0.4482758620689655,
+      "mmlu_eval_accuracy_college_biology": 0.375,
+      "mmlu_eval_accuracy_college_chemistry": 0.375,
+      "mmlu_eval_accuracy_college_computer_science": 0.5454545454545454,
+      "mmlu_eval_accuracy_college_mathematics": 0.18181818181818182,
+      "mmlu_eval_accuracy_college_medicine": 0.4090909090909091,
+      "mmlu_eval_accuracy_college_physics": 0.45454545454545453,
+      "mmlu_eval_accuracy_computer_security": 0.45454545454545453,
+      "mmlu_eval_accuracy_conceptual_physics": 0.3076923076923077,
+      "mmlu_eval_accuracy_econometrics": 0.25,
+      "mmlu_eval_accuracy_electrical_engineering": 0.375,
+      "mmlu_eval_accuracy_elementary_mathematics": 0.2682926829268293,
+      "mmlu_eval_accuracy_formal_logic": 0.2857142857142857,
+      "mmlu_eval_accuracy_global_facts": 0.1,
+      "mmlu_eval_accuracy_high_school_biology": 0.25,
+      "mmlu_eval_accuracy_high_school_chemistry": 0.4090909090909091,
+      "mmlu_eval_accuracy_high_school_computer_science": 0.3333333333333333,
+      "mmlu_eval_accuracy_high_school_european_history": 0.6111111111111112,
+      "mmlu_eval_accuracy_high_school_geography": 0.5454545454545454,
+      "mmlu_eval_accuracy_high_school_government_and_politics": 0.5714285714285714,
+      "mmlu_eval_accuracy_high_school_macroeconomics": 0.37209302325581395,
+      "mmlu_eval_accuracy_high_school_mathematics": 0.2413793103448276,
+      "mmlu_eval_accuracy_high_school_microeconomics": 0.3076923076923077,
+      "mmlu_eval_accuracy_high_school_physics": 0.35294117647058826,
+      "mmlu_eval_accuracy_high_school_psychology": 0.7166666666666667,
+      "mmlu_eval_accuracy_high_school_statistics": 0.34782608695652173,
+      "mmlu_eval_accuracy_high_school_us_history": 0.5454545454545454,
+      "mmlu_eval_accuracy_high_school_world_history": 0.38461538461538464,
+      "mmlu_eval_accuracy_human_aging": 0.4782608695652174,
+      "mmlu_eval_accuracy_human_sexuality": 0.5,
+      "mmlu_eval_accuracy_international_law": 0.6153846153846154,
+      "mmlu_eval_accuracy_jurisprudence": 0.5454545454545454,
+      "mmlu_eval_accuracy_logical_fallacies": 0.5,
+      "mmlu_eval_accuracy_machine_learning": 0.18181818181818182,
+      "mmlu_eval_accuracy_management": 0.2727272727272727,
+      "mmlu_eval_accuracy_marketing": 0.8,
+      "mmlu_eval_accuracy_medical_genetics": 0.8181818181818182,
+      "mmlu_eval_accuracy_miscellaneous": 0.5930232558139535,
+      "mmlu_eval_accuracy_moral_disputes": 0.4473684210526316,
+      "mmlu_eval_accuracy_moral_scenarios": 0.29,
+      "mmlu_eval_accuracy_nutrition": 0.6363636363636364,
+      "mmlu_eval_accuracy_philosophy": 0.4411764705882353,
+      "mmlu_eval_accuracy_prehistory": 0.42857142857142855,
+      "mmlu_eval_accuracy_professional_accounting": 0.2903225806451613,
+      "mmlu_eval_accuracy_professional_law": 0.32941176470588235,
+      "mmlu_eval_accuracy_professional_medicine": 0.3548387096774194,
+      "mmlu_eval_accuracy_professional_psychology": 0.34782608695652173,
+      "mmlu_eval_accuracy_public_relations": 0.4166666666666667,
+      "mmlu_eval_accuracy_security_studies": 0.4074074074074074,
+      "mmlu_eval_accuracy_sociology": 0.6818181818181818,
+      "mmlu_eval_accuracy_us_foreign_policy": 0.7272727272727273,
+      "mmlu_eval_accuracy_virology": 0.3888888888888889,
+      "mmlu_eval_accuracy_world_religions": 0.6842105263157895,
+      "mmlu_loss": 1.5418881053417668,
+      "step": 1870
+    },
+    {
+      "epoch": 29.82,
+      "step": 1875,
+      "total_flos": 1.2913425725443277e+17,
+      "train_loss": 0.3238988001147906,
+      "train_runtime": 28078.6679,
+      "train_samples_per_second": 1.068,
+      "train_steps_per_second": 0.067
+    }
+  ],
+  "max_steps": 1875,
+  "num_train_epochs": 31,
+  "total_flos": 1.2913425725443277e+17,
+  "trial_name": null,
+  "trial_params": null
+}

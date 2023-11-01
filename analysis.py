@@ -7,6 +7,7 @@ import pickle
 import itertools
 import statistics
 import numpy as np
+from datetime import timedelta
 import matplotlib.pyplot as plt
 from collections import defaultdict
 
@@ -206,7 +207,7 @@ def plot_grassmann(grassmann_matrices=None):
                         os.makedirs(saveDir)
 
                     fig, ax = plt.subplots()
-                    cax = ax.matshow(upper_diagonal)
+                    cax = ax.imshow(upper_diagonal, interpolation='nearest', aspect='auto')
                     fig.colorbar(cax)
                     ax.xaxis.tick_bottom()
                     ax.set_title(f"Subspace distance: {comparison}\nlayer {layerIndex}, module {fragment}, matrix {matrix}")
@@ -216,7 +217,7 @@ def plot_grassmann(grassmann_matrices=None):
                     plt.close()
 
                     fig, ax = plt.subplots()
-                    cax = ax.matshow(lower_diagonal)
+                    cax = ax.imshow(lower_diagonal, interpolation='nearest', aspect='auto')
                     fig.colorbar(cax)
                     ax.xaxis.tick_bottom()
                     ax.set_title(f"Subspace distance: {comparison}\nlayer {layerIndex}, module {fragment}, matrix {matrix}")
@@ -292,6 +293,54 @@ def print_absolute(absolute_matrices=None):
 
     exit()
 
+def plot_loss():
+    with open("training/trainer_state/alpaca-2-7b-r64-t.json") as f:
+        data = json.load(f)
+
+        train_loss = []
+        eval_loss = []
+        for step in data["log_history"]:
+            if "loss" in step:
+                train_loss.append((step["step"], step["loss"]))
+            elif "mmlu_loss" in step:
+                eval_loss.append((step["step"], step["mmlu_loss"]))
+
+        plt.plot(*zip(*train_loss), label="Train loss")
+        plt.plot(*zip(*eval_loss), label="Eval loss")
+        plt.legend()
+        plt.xlabel("Step")
+        plt.ylabel("Loss")
+        plt.title("Loss over training steps")
+        plt.show()
+
+def print_runtime():
+    runtimes = defaultdict(list)
+    costs = {
+        7: 0.36,
+        13: 0.36,
+        70: 1.99
+    }
+
+    for filename in os.listdir("training/all_results"):
+        with open(os.path.join("training/all_results", filename)) as f:
+            modelMatch = re.search(r"-([0-9]+)b-r([0-9]+)", filename)
+            paramCount = int(modelMatch.group(1))
+            rank = int(modelMatch.group(2))
+
+            if paramCount == 7 and rank == 32:
+                continue
+
+            data = json.load(f)
+            runtimes[paramCount].append(data["train_runtime"])
+            #print(filename, timedelta(seconds=data["train_runtime"]))
+
+    print(runtimes)
+    for paramCount in runtimes:
+        mean = statistics.mean(runtimes[paramCount])
+        print(paramCount, timedelta(seconds=mean), mean / 3600 * costs[paramCount])
+
+    exit()
+
 def analyze(models):
     grassmann_matrices = analyze_grassmann(models)
     plot_grassmann(grassmann_matrices)
@@ -307,6 +356,9 @@ if __name__ == '__main__':
     #plot_grassmann()
     #print_absolute()
 
+    #print_runtime()
+    plot_loss()
+
     models = {}
     for directory in os.listdir(PATH):
         if not specificModels or directory in specificModels:
@@ -316,7 +368,7 @@ if __name__ == '__main__':
     #print(models["alpaca-2-13b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape) # 5120
     #print(models["alpaca-2-70b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape) # 8192
 
-    analyze_absolute(models)
+    #analyze_absolute(models)
 
     #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
 
