@@ -14,4 +14,4 @@ RUN pip install -U matplotlib
 RUN git config --global credential.helper store
 #huggingface-cli login
 
-RUN mv /home/qlora/lora.py /usr/local/lib/python3.10/dist-packages/peft/tuners/lora.py
+#RUN mv /home/qlora/lora.py /usr/local/lib/python3.10/dist-packages/peft/tuners/lora.py
