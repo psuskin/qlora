@@ -233,6 +233,7 @@ def plot_grassmann(grassmann_matrices=None):
 def analyze_absolute(models):
     # Absolute value change analysis
     absolute_matrices = rec_dd()
+    singulars = rec_dd()
     for model in models:
         print(model)
         for layerIndex in models[model].layers:
@@ -241,7 +242,10 @@ def analyze_absolute(models):
                     init = models[model].layers[layerIndex].modules[fragment][matrix]["init"].matrix
                     result = models[model].layers[layerIndex].modules[fragment][matrix]["result"].matrix
 
-                    absolute_matrices[model][layerIndex][fragment][matrix] = result - init
+                    absolute_matrices[model][layerIndex][fragment][matrix] = np.sum(np.absolute(result - init))
+
+                    if layerIndex == 0 and "q_proj" in fragment:
+                        singulars[model][layerIndex][fragment][matrix] = np.linalg.svd(result - init)[1]
 
                     """
                     if model == "alpaca-2-7b-r64" and layerIndex == 0:
@@ -262,6 +266,11 @@ def analyze_absolute(models):
     with open("grassmann/absolute.pickle", "wb") as handle:
         pickle.dump(absolute_matrices_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
     print("Saved absolute matrix differences")
+
+    singulars_dict = ddict2dict(singulars)
+    with open("grassmann/singulars.pickle", "wb") as handle:
+        pickle.dump(singulars_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    print("Saved singular values")
     
     return absolute_matrices_dict
 
@@ -285,8 +294,8 @@ def print_absolute(absolute_matrices=None):
                 if not factors[contextLength][fragment]:
                     factors[contextLength][fragment]["A"] = []
                     factors[contextLength][fragment]["B"] = []
-                factors[contextLength][fragment]["A"].append(r * contextLength / np.sum(np.absolute(absolute_matrices[model][layerIndex][fragment]["A"])))
-                factors[contextLength][fragment]["B"].append(r * contextLength / np.sum(np.absolute(absolute_matrices[model][layerIndex][fragment]["B"])))
+                factors[contextLength][fragment]["A"].append(r * contextLength / absolute_matrices[model][layerIndex][fragment]["A"])
+                factors[contextLength][fragment]["B"].append(r * contextLength / absolute_matrices[model][layerIndex][fragment]["B"])
 
     for c in factors:
         for f in factors[c]:
@@ -294,29 +303,13 @@ def print_absolute(absolute_matrices=None):
 
     exit()
 
-def print_absolute_singular(absolute_matrices=None):
-    if not absolute_matrices:
-        with open("grassmann/absolute.pickle", "rb") as handle:
-            absolute_matrices = pickle.load(handle)
-
-    #print(absolute_matrices)
-
-    singulars = rec_dd() # A * ...
-    for model in absolute_matrices:
-        for layerIndex in absolute_matrices[model]:
-            for fragment in absolute_matrices[model][layerIndex]:
-                layerMatch = re.search(r"-([0-9]+)b-r([0-9]+)", model)
-                paramCount = int(layerMatch.group(1))
-                r = int(layerMatch.group(2))
-
-                if not singulars[paramCount][r]["A"]:
-                    singulars[paramCount][r]["A"] = []
-                    singulars[paramCount][r]["B"] = []
-                singulars[paramCount][r]["A"].append(np.linalg.svd(absolute_matrices[model][layerIndex][fragment]["A"])[1])
-                singulars[paramCount][r]["B"].append(np.linalg.svd(absolute_matrices[model][layerIndex][fragment]["B"])[1])
+def print_absolute_singular(singulars=None):
+    if not singulars:
+        with open("grassmann/singulars.pickle", "rb") as handle:
+            singulars = pickle.load(handle)
 
     print(singulars)
-
+    
     exit()
 
 def plot_loss():
@@ -386,7 +379,7 @@ if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
     #plot_grassmann()
-    #print_absolute()
+    print_absolute()
 
     #print_runtime()
     #plot_loss()
