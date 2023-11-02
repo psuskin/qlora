@@ -299,19 +299,25 @@ def plot_loss():
 
         train_loss = []
         eval_loss = []
+        mmlu_loss = []
         for step in data["log_history"]:
             if "loss" in step:
                 train_loss.append((step["step"], step["loss"]))
+            elif "eval_loss" in step:
+                eval_loss.append((step["step"], step["eval_loss"]))
             elif "mmlu_loss" in step:
-                eval_loss.append((step["step"], step["mmlu_loss"]))
+                mmlu_loss.append((step["step"], step["mmlu_loss"]))
 
         plt.plot(*zip(*train_loss), label="Train loss")
         plt.plot(*zip(*eval_loss), label="Eval loss")
+        plt.plot(*zip(*mmlu_loss), label="MMLU loss")
         plt.legend()
         plt.xlabel("Step")
         plt.ylabel("Loss")
         plt.title("Loss over training steps")
         plt.show()
+
+    exit()
 
 def print_runtime():
     runtimes = defaultdict(list)
@@ -342,11 +348,11 @@ def print_runtime():
     exit()
 
 def analyze(models):
-    grassmann_matrices = analyze_grassmann(models)
-    plot_grassmann(grassmann_matrices)
+    #grassmann_matrices = analyze_grassmann(models)
+    #plot_grassmann(grassmann_matrices)
 
-    #absolute_matrices = analyze_absolute(models)
-    #print_absolute(absolute_matrices)
+    absolute_matrices = analyze_absolute(models)
+    print_absolute(absolute_matrices)
 
 specificModels = []#["alpaca-2-7b-r64", "alpaca-2-7b-r8"]
 
