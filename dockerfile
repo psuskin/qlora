@@ -11,6 +11,7 @@ CMD ["jupyter", "lab", "--ip='*'", "--NotebookApp.allow_origin='*'", "--port=888
 
 RUN pip install -U openpyxl
 RUN pip install -U matplotlib
+RUN pip install -U nltk
 RUN git config --global credential.helper store
 #huggingface-cli login
 

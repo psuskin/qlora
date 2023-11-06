@@ -15,7 +15,7 @@ rec_dd = lambda: defaultdict(rec_dd)
 # TODO: change this for param count to test
 paramCountToEvaluate = 7
 
-maxSamples = 100
+maxSamples = 1000
 
 def ddict2dict(d):
     for k, v in d.items():
@@ -38,19 +38,18 @@ def bleu():
         if paramCount != paramCountToEvaluate:
             continue
 
-        print(paramCount, rank)
-
         foundationModelName = f"meta-llama/Llama-2-{paramCount}b-hf"
         foundationModels.add(foundationModelName)
         _, model, tokenizer = load_model(foundationModelName, os.path.join(modelDir, filename, "checkpoint-1875", "adapter_model"))
+
+        print(paramCount, rank)
 
         for i, sample in enumerate(data):
             if not i % 2:
                 continue
 
             if i > 2 * maxSamples:
-                # break
-                pass
+                break
 
             output = generate(model, tokenizer, sample["input"], False)
             target = sample["output"]
@@ -93,14 +92,14 @@ def bleu():
                 bleuScores[paramCount][0] = []
             bleuScores[paramCount][0].append(bleuScore)
 
-    for paramCount in bleuScores:
-        for rank in bleuScores[paramCount]:
-            print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]))
-
     bleu_dict = ddict2dict(bleuScores)
     with open("bleu.pickle", "wb") as handle:
         pickle.dump(bleu_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
     print("Saved bleu scores")
+
+    for paramCount in bleuScores:
+        for rank in bleuScores[paramCount]:
+            print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]))
 
 if __name__ == "__main__":
     bleu()

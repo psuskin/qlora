@@ -211,8 +211,8 @@ def plot_grassmann(grassmann_matrices=None):
                     fig.colorbar(cax)
                     ax.xaxis.tick_bottom()
                     ax.set_title(f"Subspace distance: {comparison}\nlayer {layerIndex}, module {fragment}, matrix {matrix}")
-                    ax.set_xlabel("j")
-                    ax.set_ylabel("i")
+                    ax.set_xlabel("i")
+                    ax.set_ylabel("j")
                     plt.savefig(os.path.join(saveDir, "upper.png"))
                     plt.close()
 
@@ -221,8 +221,8 @@ def plot_grassmann(grassmann_matrices=None):
                     fig.colorbar(cax)
                     ax.xaxis.tick_bottom()
                     ax.set_title(f"Subspace distance: {comparison}\nlayer {layerIndex}, module {fragment}, matrix {matrix}")
-                    ax.set_xlabel("j")
-                    ax.set_ylabel("i")
+                    ax.set_xlabel("i")
+                    ax.set_ylabel("j")
                     plt.savefig(os.path.join(saveDir, "lower.png"))
                     plt.close()
 
@@ -244,7 +244,7 @@ def analyze_absolute(models):
 
                     absolute_matrices[model][layerIndex][fragment][matrix] = np.sum(np.absolute(result - init))
 
-                    if layerIndex == 0 and "q_proj" in fragment:
+                    if layerIndex == 0:
                         singulars[model][layerIndex][fragment][matrix] = np.linalg.svd(result - init)[1]
 
                     """
@@ -379,12 +379,12 @@ if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
     #plot_grassmann()
-    print_absolute()
+    #print_absolute()
 
     #print_runtime()
     #plot_loss()
 
-    print_absolute_singular()
+    #print_absolute_singular()
 
     models = {}
     for directory in os.listdir(PATH):
@@ -399,4 +399,4 @@ if __name__ == '__main__':
 
     #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
 
-    #analyze(models)
+    analyze(models)
