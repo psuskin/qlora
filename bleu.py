@@ -49,7 +49,8 @@ def bleu():
                 continue
 
             if i > 2 * maxSamples:
-                break
+                # break
+                pass
 
             output = generate(model, tokenizer, sample["input"], False)
             target = sample["output"]
