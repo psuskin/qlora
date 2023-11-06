@@ -308,7 +308,22 @@ def print_absolute_singular(singulars=None):
         with open("grassmann/singulars.pickle", "rb") as handle:
             singulars = pickle.load(handle)
 
-    print(singulars)
+    #print(singulars)
+
+    for model in singulars:
+        for layer in singulars[model]:
+            for fragment in singulars[model][layer]:
+                for matrix in singulars[model][layer][fragment]:
+                    saveDir = os.path.join("grassmann", "singulars", model)
+                    if not os.path.isdir(saveDir):
+                        os.makedirs(saveDir)
+
+                    fig, ax = plt.subplots()
+                    cax = ax.imshow(singulars[model][layer][fragment][matrix][np.newaxis, :], interpolation='nearest', aspect='auto')
+                    fig.colorbar(cax)
+                    ax.xaxis.tick_bottom()
+                    plt.savefig(os.path.join(saveDir, f"{layer}_{fragment}_{matrix}.png"))
+                    plt.close()
     
     exit()
 
@@ -384,7 +399,7 @@ if __name__ == '__main__':
     #print_runtime()
     #plot_loss()
 
-    #print_absolute_singular()
+    print_absolute_singular()
 
     models = {}
     for directory in os.listdir(PATH):
