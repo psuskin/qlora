@@ -406,6 +406,16 @@ def print_runtime():
 
     exit()
 
+def print_bleu():
+    with open("bleu.pickle", "rb") as f:
+        bleuScores = pickle.load(f)
+
+    for paramCount in bleuScores:
+        for rank in bleuScores[paramCount]:
+            print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]))
+
+    exit()
+
 def analyze(models):
     #grassmann_matrices = analyze_grassmann(models)
     #plot_grassmann(grassmann_matrices)
@@ -424,7 +434,9 @@ if __name__ == '__main__':
     #print_runtime()
     #plot_loss()
 
-    print_absolute_singular()
+    # print_absolute_singular()
+
+    print_bleu()
 
     models = {}
     for directory in os.listdir(PATH):
