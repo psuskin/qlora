@@ -311,19 +311,44 @@ def print_absolute_singular(singulars=None):
     #print(singulars)
 
     for model in singulars:
+        saveDir = os.path.join("grassmann", "singulars", model)
+        if not os.path.isdir(saveDirLinear := os.path.join(saveDir, "linear")):
+            os.makedirs(saveDirLinear)
+        if not os.path.isdir(saveDirLog := os.path.join(saveDir, "log")):
+            os.makedirs(saveDirLog)
         for layer in singulars[model]:
+            allFig, allAx = plt.subplots()
+            allAx.set_xlabel("Singular value index")
+            allAx.set_xlabel("Singular value")
+            allAx.set_title(f"Singular values of adapter differences over initialized state:\n{model}, layer {layer}")
             for fragment in singulars[model][layer]:
                 for matrix in singulars[model][layer][fragment]:
-                    saveDir = os.path.join("grassmann", "singulars", model)
-                    if not os.path.isdir(saveDir):
-                        os.makedirs(saveDir)
-
+                    """
                     fig, ax = plt.subplots()
                     cax = ax.imshow(singulars[model][layer][fragment][matrix][np.newaxis, :], interpolation='nearest', aspect='auto')
                     fig.colorbar(cax)
                     ax.xaxis.tick_bottom()
                     plt.savefig(os.path.join(saveDir, f"{layer}_{fragment}_{matrix}.png"))
                     plt.close()
+                    """
+
+                    allAx.plot(singulars[model][layer][fragment][matrix], label=f"{fragment}_{matrix}")    
+
+                    fig, ax = plt.subplots()
+                    ax.plot(singulars[model][layer][fragment][matrix])
+                    ax.set_xlabel("Singular value index")
+                    ax.set_xlabel("Singular value")
+                    ax.set_title(f"Singular values of adapter differences over initialized state:\n{model}, layer {layer}, {fragment}, {matrix}")
+                    plt.savefig(os.path.join(saveDirLinear, f"{layer}_{fragment}_{matrix}.png"))
+                    ax.set_yscale("log")
+                    plt.savefig(os.path.join(saveDirLog, f"{layer}_{fragment}_{matrix}.png"))
+                    plt.close(fig)
+            
+            allAx.legend()
+            plt.savefig(os.path.join(saveDirLinear, f"allAdapters_{layer}.png"))
+            allAx.set_yscale("log")
+            plt.savefig(os.path.join(saveDirLog, f"allAdapters_{layer}_log.png"))
+            plt.close(allFig)
     
     exit()
 
