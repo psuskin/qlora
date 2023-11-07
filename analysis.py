@@ -412,7 +412,7 @@ def print_bleu():
 
     for paramCount in bleuScores:
         for rank in bleuScores[paramCount]:
-            print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]))
+            print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]), f"{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
 
     exit()
 
