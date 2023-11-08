@@ -56,10 +56,16 @@ def count(path, sequencePart="output", maxTokens=max_sequence_length):
     print(s.describe())
 
     samplesUnderMaxLength = sum(1 for tokenCount in tokenCounts if tokenCount < maxTokens)
-    print(f"Samples under max sequence length: {samplesUnderMaxLength} (approx. {float(samplesUnderMaxLength) / len(tokenCounts)}).\n")
+    print(f"Samples under max sequence length: {samplesUnderMaxLength} (approx. {float(samplesUnderMaxLength) / len(tokenCounts)}).")
 
     samplesOverMaxLength = [jsonArray[i][sequencePart] for i in range(len(tokenCounts)) if tokenCounts[i] > maxTokens]
     #print("Samples over max sequence length: ", samplesOverMaxLength)
+
+    wordCounts = [len(jsonObject[sequencePart].split()) for jsonObject in jsonArray]
+    tokensPerWord = [t / w for w, t in zip(wordCounts, tokenCounts)]
+    print(f"Average tokens per word: {sum(tokensPerWord) / len(tokensPerWord)}.")
+
+    print()
 
 #count("data/en_articles_autoregressive.json", "output", 2000)
 
