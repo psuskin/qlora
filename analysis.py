@@ -406,13 +406,33 @@ def print_runtime():
 
     exit()
 
+def max_index(lst):
+    if not lst:
+        return -1
+
+    max_val = max(lst)
+    max_indices = [i for i, val in enumerate(lst) if val == max_val]
+
+    if len(max_indices) == 1:
+        return max_indices[0]
+    else:
+        return -1
+
 def print_bleu():
     with open("bleu.pickle", "rb") as f:
         bleuScores = pickle.load(f)
 
     for paramCount in bleuScores:
         for rank in bleuScores[paramCount]:
-            print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]), f"{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
+            print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]), f"{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
+
+    models = [f"{paramCount}-{rank}" for paramCount in bleuScores for rank in bleuScores[paramCount]]
+    winners = defaultdict(int)
+    for scores in zip(*[bleuScores[paramCount][rank] for paramCount in bleuScores for rank in bleuScores[paramCount]]):
+        if (winner := max_index(scores)) != -1:
+            winners[models[winner]] += 1
+
+    print(winners)
 
     exit()
 
