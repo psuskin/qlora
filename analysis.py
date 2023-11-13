@@ -424,14 +424,25 @@ def print_bleu():
 
     for paramCount in bleuScores:
         for rank in bleuScores[paramCount]:
+            values, bins = np.histogram(bleuScores[paramCount][rank], bins=100)
+            #print(bins)
+
+            cumulative = np.cumsum(values)
+            plt.plot(bins[:-1], cumulative, label=f"{paramCount}-{rank}: {sum(i == 1 for i in bleuScores[paramCount][rank])} perfect scores", linestyle="dashed" if paramCount == 13 else None)
+
+            # plt.plot(bins[:-2], values[:-1], label=f"{paramCount}-{rank}")
+
             print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]), f"{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
+    plt.legend()
+    plt.xlabel("BLEU score")
+    plt.ylabel("Cumulative count (dataset size of 630 samples)")
+    plt.show()
 
     models = [f"{paramCount}-{rank}" for paramCount in bleuScores for rank in bleuScores[paramCount]]
     winners = defaultdict(int)
     for scores in zip(*[bleuScores[paramCount][rank] for paramCount in bleuScores for rank in bleuScores[paramCount]]):
         if (winner := max_index(scores)) != -1:
             winners[models[winner]] += 1
-
     print(winners)
 
     exit()
