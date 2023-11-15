@@ -422,13 +422,33 @@ def print_bleu():
     with open("bleu.pickle", "rb") as f:
         bleuScores = pickle.load(f)
 
+    colors = {
+        0: "gray",
+        64: "blue",
+        32: "orange",
+        16: "green",
+        8: "red",
+        4: "purple",
+        2: "brown",
+        1: "pink"
+    }
     for paramCount in bleuScores:
-        for rank in bleuScores[paramCount]:
+        values, bins = np.histogram(bleuScores[paramCount][0], bins=100)
+        #print(bins)
+
+        cumulative = np.cumsum(values)
+        plt.plot(bins[:-1], cumulative, label=f"{paramCount}-{0}: {sum(i == 1 for i in bleuScores[paramCount][0])} perfect scores", linestyle="dashed" if paramCount == 13 else None, color=colors[0])
+
+        # plt.plot(bins[:-2], values[:-1], label=f"{paramCount}-{0}")
+
+        print(paramCount, 0, statistics.mean(bleuScores[paramCount][0]), statistics.stdev(bleuScores[paramCount][0]), f"{sum(i < 0.12 for i in bleuScores[paramCount][0])} / {len(bleuScores[paramCount][0])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][0])} / {len(bleuScores[paramCount][0])}")
+    for paramCount in bleuScores:
+        for rank in sorted(bleuScores[paramCount])[1:]:
             values, bins = np.histogram(bleuScores[paramCount][rank], bins=100)
             #print(bins)
 
             cumulative = np.cumsum(values)
-            plt.plot(bins[:-1], cumulative, label=f"{paramCount}-{rank}: {sum(i == 1 for i in bleuScores[paramCount][rank])} perfect scores", linestyle="dashed" if paramCount == 13 else None)
+            plt.plot(bins[:-1], cumulative, label=f"{paramCount}-{rank}: {sum(i == 1 for i in bleuScores[paramCount][rank])} perfect scores", linestyle="dashed" if paramCount == 13 else None, color=colors[rank])
 
             # plt.plot(bins[:-2], values[:-1], label=f"{paramCount}-{rank}")
 
