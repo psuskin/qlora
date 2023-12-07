@@ -433,17 +433,7 @@ def print_bleu():
         1: "pink"
     }
     for paramCount in bleuScores:
-        values, bins = np.histogram(bleuScores[paramCount][0], bins=100)
-        #print(bins)
-
-        cumulative = np.cumsum(values)
-        plt.plot(bins[:-1], cumulative, label=f"{paramCount}-{0}: {sum(i == 1 for i in bleuScores[paramCount][0])} perfect scores", linestyle="dashed" if paramCount == 13 else None, color=colors[0])
-
-        # plt.plot(bins[:-2], values[:-1], label=f"{paramCount}-{0}")
-
-        print(paramCount, 0, statistics.mean(bleuScores[paramCount][0]), statistics.stdev(bleuScores[paramCount][0]), f"{sum(i < 0.12 for i in bleuScores[paramCount][0])} / {len(bleuScores[paramCount][0])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][0])} / {len(bleuScores[paramCount][0])}")
-    for paramCount in bleuScores:
-        for rank in sorted(bleuScores[paramCount])[1:]:
+        for rank in sorted(bleuScores[paramCount]):
             values, bins = np.histogram(bleuScores[paramCount][rank], bins=100)
             #print(bins)
 
@@ -476,7 +466,29 @@ def analyze(models):
 
 specificModels = []#["alpaca-2-7b-r64", "alpaca-2-7b-r8"]
 
+import scipy.stats as stats
+def plotNF4():
+    values = [-1.0, -0.6961928009986877, -0.5250730514526367,
+-0.39491748809814453, -0.28444138169288635, -0.18477343022823334,
+-0.09105003625154495, 0.0, 0.07958029955625534, 0.16093020141124725,
+0.24611230194568634, 0.33791524171829224, 0.44070982933044434,
+0.5626170039176941, 0.7229568362236023, 1.0]
+
+    mu = 0
+    variance = 1
+    sigma = 1 / 1.848
+    x = np.linspace(mu - 3*sigma, mu + 3*sigma, 100)
+    plt.plot(x, stats.norm.pdf(x, mu, sigma))
+    for value in values:
+        # plt.axvline(x=value, color="red")
+        plt.vlines(x=value, ymin=0, ymax=stats.norm.pdf(value, mu, sigma), color="red")
+    plt.show()
+
+    exit()
+
 if __name__ == '__main__':
+    plotNF4()
+
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
     #plot_grassmann()
@@ -485,7 +497,7 @@ if __name__ == '__main__':
     #print_runtime()
     #plot_loss()
 
-    # print_absolute_singular()
+    #print_absolute_singular()
 
     print_bleu()
 
