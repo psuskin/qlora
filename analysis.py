@@ -422,6 +422,12 @@ def print_bleu():
     with open("bleu.pickle", "rb") as f:
         bleuScores = pickle.load(f)
 
+    for paramCount in bleuScores:
+        for rank in sorted(bleuScores[paramCount]):
+            plt.plot(bleuScores[paramCount][rank], label=f"{paramCount}-{rank}")
+    plt.show()
+    plt.close()
+
     colors = {
         0: "gray",
         64: "blue",
@@ -475,19 +481,19 @@ def plotNF4():
 0.5626170039176941, 0.7229568362236023, 1.0]
 
     mu = 0
-    variance = 1
     sigma = 1 / 1.848
     x = np.linspace(mu - 3*sigma, mu + 3*sigma, 100)
     plt.plot(x, stats.norm.pdf(x, mu, sigma))
     for value in values:
         # plt.axvline(x=value, color="red")
+        #print(f"({value}, 0)\n({value}, {stats.norm.pdf(value, mu, sigma)})")
         plt.vlines(x=value, ymin=0, ymax=stats.norm.pdf(value, mu, sigma), color="red")
     plt.show()
 
     exit()
 
 if __name__ == '__main__':
-    plotNF4()
+    #plotNF4()
 
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
