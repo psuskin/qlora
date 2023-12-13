@@ -11,7 +11,7 @@ from datetime import timedelta
 import matplotlib.pyplot as plt
 from collections import defaultdict
 
-PATH = "/workspace/analysis"
+PATH = "/home/psuskin/repos/analysis"
 
 USE_CPU = True
 

@@ -8,7 +8,7 @@ import statistics
 from collections import defaultdict
 from nltk.translate.bleu_score import sentence_bleu
 
-modelDir = "/workspace/analysis"
+modelDir = "/home/psuskin/repos/analysis"
 
 rec_dd = lambda: defaultdict(rec_dd)
 

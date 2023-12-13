@@ -68,7 +68,7 @@ def generate(model, tokenizer, prompt, finetuned=False, EN=True, max_new_tokens=
     return text.replace(promptAlpaca, '').strip()
 
 if __name__ == "__main__":
-    base_model, finetuned_model, tokenizer = load_model('huggyllama/llama-7b', '/workspace/output/guanaco-7b/checkpoint-1875/adapter_model')
+    base_model, finetuned_model, tokenizer = load_model('huggyllama/llama-7b', 'output/guanaco-7b-autoregressive/checkpoint-1000/adapter_model')
 
     while (prompt := input("Enter prompt: ")) != "exit":
-        print(f"\nNetwork output: {generate(finetuned_model, tokenizer, prompt, True)}\n")
+        print(f"\nNetwork output: {generate(finetuned_model, tokenizer, prompt, False)}\n")
