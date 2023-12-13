@@ -6,7 +6,8 @@ from transformers import (
     LlamaTokenizer
 )
 
-model_name_or_path = "huggyllama/llama-7b"
+#model_name_or_path = "huggyllama/llama-7b"
+model_name_or_path = "meta-llama/Llama-2-7b-hf"
 cache_dir = None
 
 DEFAULT_PAD_TOKEN = "[PAD]"
@@ -20,7 +21,7 @@ tokenizer = AutoTokenizer.from_pretrained(
     use_fast=False, # Fast tokenizer giving issues.
     tokenizer_type='llama' if 'llama' in model_name_or_path else None, # Needed for HF name change
     trust_remote_code=False,
-    use_auth_token=False,
+    use_auth_token=True,
 )
 if tokenizer._pad_token is None:
     tokenizer.add_special_tokens(dict(pad_token=DEFAULT_PAD_TOKEN))
@@ -71,8 +72,19 @@ def count(path, sequencePart="output", maxTokens=max_sequence_length):
 
 #count("data/en_articles_alpaca.json")
 
-count("data/en_articles_alpaca.json", "input", 1024)
-count("data/en_articles_alpaca.json", "output", 1024)
+#count("data/en_articles_alpaca.json", "input", 1024)
+#count("data/en_articles_alpaca.json", "output", 1024)
 
 #count("data/de_articles_alpaca.json", "input", 1024)
 #count("data/de_articles_alpaca.json", "output", 1024)
+
+example = tokenizer(
+    ["This evaluation serves the analysis of recorded BDE time tickets."],
+    max_length=2**20,
+    truncation=True,
+    add_special_tokens=False,
+)
+
+subwords = tokenizer.convert_ids_to_tokens(example["input_ids"][0])
+
+print(subwords)
