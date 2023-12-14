@@ -655,6 +655,14 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
             eval_dataset = dataset['test']
         if args.max_eval_samples is not None and len(eval_dataset) > args.max_eval_samples:
             eval_dataset = eval_dataset.select(range(args.max_eval_samples))
+
+        evalSamples = []
+        for sample in eval_dataset:
+            evalSamples.append(sample)
+        with open("evalSamples.json", 'w', encoding='utf-8') as f:
+            json.dump(evalSamples, f, ensure_ascii=False, indent=4)
+        print("Saved evaluation samples.")
+
         if args.group_by_length:
             eval_dataset = eval_dataset.map(lambda x: {'length': len(x['input']) + len(x['output'])})
     if args.do_train:

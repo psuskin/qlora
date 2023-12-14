@@ -357,8 +357,8 @@ def plot_loss():
         data = json.load(f)
 
         train_loss = []
-        eval_loss = []
-        mmlu_loss = []
+        eval_loss = [(1, 3.271456241607666)]
+        mmlu_loss = [(1, 2.9779934809147184)]
         for step in data["log_history"]:
             if "loss" in step:
                 train_loss.append((step["step"], step["loss"]))
@@ -422,11 +422,25 @@ def print_bleu():
     with open("bleu.pickle", "rb") as f:
         bleuScores = pickle.load(f)
 
+    with open("data/en_articles_alpaca.json", encoding="utf-8") as f:
+        data = json.load(f)
+    with open("evalSamples.json", encoding="utf-8") as f:
+        evalSamples = json.load(f)
+    evalIndices = []
+    for sample in evalSamples:
+        if (index := data.index(sample)) % 2:
+            evalIndices.append((index - 1) // 2)
+    print(np.asarray(bleuScores[7][64])[evalIndices])
+
+    bleuScoresNoEval = rec_dd()
     for paramCount in bleuScores:
         for rank in sorted(bleuScores[paramCount]):
             plt.plot(bleuScores[paramCount][rank], label=f"{paramCount}-{rank}")
+            bleuScoresNoEval[paramCount][rank] = [score for i, score in enumerate(bleuScores[paramCount][rank]) if i not in evalIndices]
     plt.show()
     plt.close()
+
+    bleuScores = bleuScoresNoEval
 
     colors = {
         0: "gray",
@@ -501,7 +515,7 @@ if __name__ == '__main__':
     #print_absolute()
 
     #print_runtime()
-    #plot_loss()
+    plot_loss()
 
     #print_absolute_singular()
 
