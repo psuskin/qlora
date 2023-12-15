@@ -529,14 +529,13 @@ def print_differences(differences=None):
         with open("grassmann/differences.pickle", "rb") as handle:
             differences = pickle.load(handle)
 
-    print(differences["alpaca-2-7b-r64"][0]["self_attn.q_proj"]["A"])
+    difference = differences["alpaca-2-7b-r64"][0]["self_attn.q_proj"]["A"]
 
     fig, ax = plt.subplots()
-    cax = ax.imshow(differences["alpaca-2-7b-r64"][0]["self_attn.q_proj"]["A"], interpolation='nearest', aspect='auto')
+    cax = ax.imshow(difference, interpolation='nearest', aspect='auto')
     fig.colorbar(cax)
     ax.xaxis.tick_bottom()
-    plt.show()
-    plt.close()
+    plt.savefig("difference.pdf")
 
     exit()
 
@@ -575,7 +574,7 @@ if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
     #plot_grassmann()
-    #print_absolute()
+    print_absolute()
 
     #print_runtime()
     #plot_loss()
@@ -594,7 +593,7 @@ if __name__ == '__main__':
     #print(models["alpaca-2-13b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape) # 5120
     #print(models["alpaca-2-70b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape) # 8192
 
-    analyze_absolute(models)
+    #analyze_absolute(models)
 
     #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
 
