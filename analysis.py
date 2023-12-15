@@ -289,7 +289,7 @@ def analyze_absolute(models):
         pickle.dump(singulars_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
     print("Saved singular values")
 
-    differences_dict = ddict2dict(singulars)
+    differences_dict = ddict2dict(differences)
     with open("grassmann/differences.pickle", "wb") as handle:
         pickle.dump(differences_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
     print("Saved differences")
@@ -524,6 +524,22 @@ def print_bleu():
 
     exit()
 
+def print_differences(differences=None):
+    if not differences:
+        with open("grassmann/differences.pickle", "rb") as handle:
+            differences = pickle.load(handle)
+
+    print(differences["alpaca-2-7b-r64"][0]["self_attn.q_proj"]["A"])
+
+    fig, ax = plt.subplots()
+    cax = ax.imshow(differences["alpaca-2-7b-r64"][0]["self_attn.q_proj"]["A"], interpolation='nearest', aspect='auto')
+    fig.colorbar(cax)
+    ax.xaxis.tick_bottom()
+    plt.show()
+    plt.close()
+
+    exit()
+
 def analyze(models):
     #grassmann_matrices = analyze_grassmann(models)
     #plot_grassmann(grassmann_matrices)
@@ -564,7 +580,8 @@ if __name__ == '__main__':
     #print_runtime()
     #plot_loss()
 
-    print_absolute_singular()
+    #print_absolute_singular()
+    #print_differences()
 
     #print_bleu()
 
