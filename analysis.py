@@ -202,6 +202,21 @@ def plot_grassmann(grassmann_matrices=None):
                     grassmann_matrix = grassmann_matrices[comparison][layerIndex][fragment][matrix]
                     upper_diagonal, lower_diagonal = split_grassmann(grassmann_matrix)
 
+                    if comparison == "alpaca-2-7b-r8 - alpaca-2-7b-r64" and matrix == "W":
+                        print("Upper diagonal", np.min(upper_diagonal[upper_diagonal != 0]), np.max(upper_diagonal))
+                        for i in range(upper_diagonal.shape[0]):
+                            for j in range(upper_diagonal.shape[1]):
+                                if upper_diagonal[i, j] != 0:
+                                    print(j+1, 8-i, upper_diagonal[i, j])
+
+                        print("Lower diagonal")
+                        for i in range(lower_diagonal.shape[0]):
+                            for j in range(lower_diagonal.shape[1]):
+                                if lower_diagonal[i, j] != 0:
+                                    print(j+1, 8-i, lower_diagonal[i, j])
+                    else:
+                        continue
+
                     saveDir = os.path.join("grassmann", "plots", comparison, str(layerIndex), fragment, matrix)
                     if not os.path.isdir(saveDir):
                         os.makedirs(saveDir)
@@ -213,7 +228,7 @@ def plot_grassmann(grassmann_matrices=None):
                     ax.set_title(f"Subspace distance: {comparison}\nlayer {layerIndex}, module {fragment}, matrix {matrix}")
                     ax.set_xlabel("i")
                     ax.set_ylabel("j")
-                    plt.savefig(os.path.join(saveDir, "upper.png"))
+                    #plt.savefig(os.path.join(saveDir, "upper.png"))
                     plt.close()
 
                     fig, ax = plt.subplots()
@@ -223,7 +238,7 @@ def plot_grassmann(grassmann_matrices=None):
                     ax.set_title(f"Subspace distance: {comparison}\nlayer {layerIndex}, module {fragment}, matrix {matrix}")
                     ax.set_xlabel("i")
                     ax.set_ylabel("j")
-                    plt.savefig(os.path.join(saveDir, "lower.png"))
+                    #plt.savefig(os.path.join(saveDir, "lower.png"))
                     plt.close()
 
                     #plt.close("all")
@@ -339,15 +354,27 @@ def print_absolute_singular(singulars=None):
                     ax.set_xlabel("Singular value index")
                     ax.set_xlabel("Singular value")
                     ax.set_title(f"Singular values of adapter differences over initialized state:\n{model}, layer {layer}, {fragment}, {matrix}")
-                    plt.savefig(os.path.join(saveDirLinear, f"{layer}_{fragment}_{matrix}.png"))
+                    #plt.savefig(os.path.join(saveDirLinear, f"{layer}_{fragment}_{matrix}.png"))
                     ax.set_yscale("log")
-                    plt.savefig(os.path.join(saveDirLog, f"{layer}_{fragment}_{matrix}.png"))
+                    #plt.savefig(os.path.join(saveDirLog, f"{layer}_{fragment}_{matrix}.png"))
                     plt.close(fig)
+
+                    # if model == "alpaca-2-7b-r64" and layer == 0:
+                    #     print(fragment, matrix)
+                    #     print(*zip(range(1, len(singulars[model][layer][fragment][matrix])+1), singulars[model][layer][fragment][matrix]))
+
+                    # if model == "alpaca-2-7b-r8" and layer == 0:
+                    #     print(fragment, matrix)
+                    #     print(*zip(range(1, len(singulars[model][layer][fragment][matrix])+1), singulars[model][layer][fragment][matrix]))
+
+                    if model == "alpaca-2-7b-r64" and layer == 0:
+                        print(fragment, matrix)
+                        print(*zip(range(1, 9), singulars[model][layer][fragment][matrix][:8]))
             
             allAx.legend()
-            plt.savefig(os.path.join(saveDirLinear, f"allAdapters_{layer}.png"))
+            #plt.savefig(os.path.join(saveDirLinear, f"allAdapters_{layer}.png"))
             allAx.set_yscale("log")
-            plt.savefig(os.path.join(saveDirLog, f"allAdapters_{layer}_log.png"))
+            #plt.savefig(os.path.join(saveDirLog, f"allAdapters_{layer}_log.png"))
             plt.close(allFig)
     
     exit()
@@ -366,6 +393,10 @@ def plot_loss():
                 eval_loss.append((step["step"], step["eval_loss"]))
             elif "mmlu_loss" in step:
                 mmlu_loss.append((step["step"], step["mmlu_loss"]))
+
+        print(*train_loss)
+        print(*eval_loss)
+        print(*mmlu_loss)
 
         plt.plot(*zip(*train_loss), label="Train loss")
         plt.plot(*zip(*eval_loss), label="Eval loss")
@@ -406,21 +437,24 @@ def print_runtime():
 
     exit()
 
-def max_index(lst):
+def max_index(lst, single=False):
     if not lst:
         return -1
 
     max_val = max(lst)
     max_indices = [i for i, val in enumerate(lst) if val == max_val]
 
-    if len(max_indices) == 1:
-        return max_indices[0]
+    if single:
+        if len(max_indices) == 1:
+            return max_indices[0]
+        else:
+            return -1
     else:
-        return -1
+        return max_indices
 
 def print_bleu():
     with open("bleu.pickle", "rb") as f:
-        bleuScores = pickle.load(f)
+        bleuScoresOrig = pickle.load(f)
 
     with open("data/en_articles_alpaca.json", encoding="utf-8") as f:
         data = json.load(f)
@@ -430,50 +464,56 @@ def print_bleu():
     for sample in evalSamples:
         if (index := data.index(sample)) % 2:
             evalIndices.append((index - 1) // 2)
-    print(np.asarray(bleuScores[7][64])[evalIndices])
+    print(np.asarray(bleuScoresOrig[7][64])[evalIndices])
 
     bleuScoresNoEval = rec_dd()
-    for paramCount in bleuScores:
-        for rank in sorted(bleuScores[paramCount]):
-            plt.plot(bleuScores[paramCount][rank], label=f"{paramCount}-{rank}")
-            bleuScoresNoEval[paramCount][rank] = [score for i, score in enumerate(bleuScores[paramCount][rank]) if i not in evalIndices]
-    plt.show()
+    for paramCount in bleuScoresOrig:
+        for rank in sorted(bleuScoresOrig[paramCount]):
+            plt.plot(bleuScoresOrig[paramCount][rank], label=f"{paramCount}-{rank}")
+            bleuScoresNoEval[paramCount][rank] = [score for i, score in enumerate(bleuScoresOrig[paramCount][rank]) if i not in evalIndices]
+    #plt.show()
     plt.close()
 
-    bleuScores = bleuScoresNoEval
+    for bleuScores in [bleuScoresOrig, bleuScoresNoEval]:
+        colors = {
+            0: "gray",
+            64: "blue",
+            32: "orange",
+            16: "green",
+            8: "red",
+            4: "purple",
+            2: "brown",
+            1: "pink"
+        }
+        for paramCount in bleuScores:
+            for rank in sorted(bleuScores[paramCount]):
+                values, bins = np.histogram(bleuScores[paramCount][rank], bins=100)
+                #print(bins)
 
-    colors = {
-        0: "gray",
-        64: "blue",
-        32: "orange",
-        16: "green",
-        8: "red",
-        4: "purple",
-        2: "brown",
-        1: "pink"
-    }
-    for paramCount in bleuScores:
-        for rank in sorted(bleuScores[paramCount]):
-            values, bins = np.histogram(bleuScores[paramCount][rank], bins=100)
-            #print(bins)
+                cumulative = np.cumsum(values)
+                plt.plot(bins[:-1], cumulative, label=f"{paramCount}-{rank}: {sum(i == 1 for i in bleuScores[paramCount][rank])} perfect scores", linestyle="dashed" if paramCount == 13 else None, color=colors[rank])
 
-            cumulative = np.cumsum(values)
-            plt.plot(bins[:-1], cumulative, label=f"{paramCount}-{rank}: {sum(i == 1 for i in bleuScores[paramCount][rank])} perfect scores", linestyle="dashed" if paramCount == 13 else None, color=colors[rank])
+                print(paramCount, rank)
+                print(*zip(bins[:-1], cumulative))
 
-            # plt.plot(bins[:-2], values[:-1], label=f"{paramCount}-{rank}")
+                # plt.plot(bins[:-2], values[:-1], label=f"{paramCount}-{rank}")
 
-            print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]), f"{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
-    plt.legend()
-    plt.xlabel("BLEU score")
-    plt.ylabel("Cumulative count (dataset size of 630 samples)")
-    plt.show()
+                print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]), f"{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
+        plt.legend()
+        plt.xlabel("BLEU score")
+        plt.ylabel("Cumulative count (dataset size of 630 samples)")
+        plt.show()
 
-    models = [f"{paramCount}-{rank}" for paramCount in bleuScores for rank in bleuScores[paramCount]]
-    winners = defaultdict(int)
-    for scores in zip(*[bleuScores[paramCount][rank] for paramCount in bleuScores for rank in bleuScores[paramCount]]):
-        if (winner := max_index(scores)) != -1:
-            winners[models[winner]] += 1
-    print(winners)
+        models = [f"{paramCount}-{rank}" for paramCount in bleuScores for rank in bleuScores[paramCount]]
+        singleWinners = defaultdict(int)
+        multiWinners = defaultdict(int)
+        for scores in zip(*[bleuScores[paramCount][rank] for paramCount in bleuScores for rank in bleuScores[paramCount]]):
+            if (winner := max_index(scores, single=True)) != -1:
+                singleWinners[models[winner]] += 1
+            for winner in max_index(scores):
+                multiWinners[models[winner]] += 1
+        print(singleWinners)
+        print(multiWinners)
 
     exit()
 
@@ -515,11 +555,11 @@ if __name__ == '__main__':
     #print_absolute()
 
     #print_runtime()
-    plot_loss()
+    #plot_loss()
 
-    #print_absolute_singular()
+    print_absolute_singular()
 
-    print_bleu()
+    #print_bleu()
 
     models = {}
     for directory in os.listdir(PATH):
@@ -534,4 +574,4 @@ if __name__ == '__main__':
 
     #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
 
-    analyze(models)
+    #analyze(models)
