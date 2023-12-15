@@ -260,8 +260,7 @@ def analyze_absolute(models):
 
                     absolute_matrices[model][layerIndex][fragment][matrix] = np.sum(np.absolute(result - init))
 
-                    if layerIndex == 0:
-                        singulars[model][layerIndex][fragment][matrix] = np.linalg.svd(result - init, compute_uv=False)
+                    singulars[model][layerIndex][fragment][matrix] = np.linalg.svd(result - init, compute_uv=False)
 
                     """
                     if model == "alpaca-2-7b-r64" and layerIndex == 0:
@@ -276,7 +275,8 @@ def analyze_absolute(models):
                         plt.savefig(os.path.join(saveDir, f"{model}_{layerIndex}_{fragment}_{matrix}.png"))
                         plt.close()
                     """
-                    differences[model][layerIndex][fragment][matrix] = result - init
+                    if model == "alpaca-2-7b-r64" and layerIndex == 0:
+                        differences[model][layerIndex][fragment][matrix] = result - init
 
     # Save to pickle file
     absolute_matrices_dict = ddict2dict(absolute_matrices)
