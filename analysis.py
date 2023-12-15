@@ -234,6 +234,7 @@ def analyze_absolute(models):
     # Absolute value change analysis
     absolute_matrices = rec_dd()
     singulars = rec_dd()
+    differences = rec_dd()
     for model in models:
         print(model)
         for layerIndex in models[model].layers:
@@ -245,7 +246,7 @@ def analyze_absolute(models):
                     absolute_matrices[model][layerIndex][fragment][matrix] = np.sum(np.absolute(result - init))
 
                     if layerIndex == 0:
-                        singulars[model][layerIndex][fragment][matrix] = np.linalg.svd(result - init)[1]
+                        singulars[model][layerIndex][fragment][matrix] = np.linalg.svd(result - init, compute_uv=False)
 
                     """
                     if model == "alpaca-2-7b-r64" and layerIndex == 0:
@@ -260,6 +261,7 @@ def analyze_absolute(models):
                         plt.savefig(os.path.join(saveDir, f"{model}_{layerIndex}_{fragment}_{matrix}.png"))
                         plt.close()
                     """
+                    differences[model][layerIndex][fragment][matrix] = result - init
 
     # Save to pickle file
     absolute_matrices_dict = ddict2dict(absolute_matrices)
@@ -271,6 +273,11 @@ def analyze_absolute(models):
     with open("grassmann/singulars.pickle", "wb") as handle:
         pickle.dump(singulars_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
     print("Saved singular values")
+
+    differences_dict = ddict2dict(singulars)
+    with open("grassmann/differences.pickle", "wb") as handle:
+        pickle.dump(differences_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    print("Saved differences")
     
     return absolute_matrices_dict
 
@@ -515,11 +522,11 @@ if __name__ == '__main__':
     #print_absolute()
 
     #print_runtime()
-    plot_loss()
+    #plot_loss()
 
     #print_absolute_singular()
 
-    print_bleu()
+    #print_bleu()
 
     models = {}
     for directory in os.listdir(PATH):
@@ -530,8 +537,8 @@ if __name__ == '__main__':
     #print(models["alpaca-2-13b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape) # 5120
     #print(models["alpaca-2-70b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape) # 8192
 
-    #analyze_absolute(models)
+    analyze_absolute(models)
 
     #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
 
-    analyze(models)
+    #analyze(models)
