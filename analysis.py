@@ -574,7 +574,7 @@ if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
     #plot_grassmann()
-    print_absolute()
+    #print_absolute()
 
     #print_runtime()
     #plot_loss()
@@ -582,7 +582,7 @@ if __name__ == '__main__':
     #print_absolute_singular()
     #print_differences()
 
-    #print_bleu()
+    print_bleu()
 
     models = {}
     for directory in os.listdir(PATH):
