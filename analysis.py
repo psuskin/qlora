@@ -316,12 +316,12 @@ def print_absolute(absolute_matrices=None):
                 if not factors[contextLength][fragment]:
                     factors[contextLength][fragment]["A"] = []
                     factors[contextLength][fragment]["B"] = []
-                factors[contextLength][fragment]["A"].append(r * contextLength / absolute_matrices[model][layerIndex][fragment]["A"])
-                factors[contextLength][fragment]["B"].append(r * contextLength / absolute_matrices[model][layerIndex][fragment]["B"])
+                factors[contextLength][fragment]["A"].append(absolute_matrices[model][layerIndex][fragment]["A"] / (r * contextLength))
+                factors[contextLength][fragment]["B"].append(absolute_matrices[model][layerIndex][fragment]["B"] / (r * contextLength))
 
     for c in factors:
         for f in factors[c]:
-            print(c, f, statistics.mean(factors[c][f]["A"]), statistics.stdev(factors[c][f]["A"]), statistics.mean(factors[c][f]["B"]), statistics.stdev(factors[c][f]["B"]))
+            print(c, f, 1 / statistics.mean(factors[c][f]["A"]), 1 / statistics.stdev(factors[c][f]["A"]), 1 / statistics.mean(factors[c][f]["B"]), 1 / statistics.stdev(factors[c][f]["B"]))
 
     exit()
 
@@ -574,7 +574,7 @@ if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
     #plot_grassmann()
-    #print_absolute()
+    print_absolute()
 
     #print_runtime()
     #plot_loss()
@@ -582,7 +582,7 @@ if __name__ == '__main__':
     #print_absolute_singular()
     #print_differences()
 
-    print_bleu()
+    #print_bleu()
 
     models = {}
     for directory in os.listdir(PATH):
