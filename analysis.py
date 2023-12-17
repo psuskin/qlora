@@ -424,23 +424,30 @@ def print_runtime():
         70: 1.99
     }
 
+    losses = rec_dd()
+
     for filename in os.listdir("training/all_results"):
         with open(os.path.join("training/all_results", filename)) as f:
             modelMatch = re.search(r"-([0-9]+)b-r([0-9]+)", filename)
             paramCount = int(modelMatch.group(1))
             rank = int(modelMatch.group(2))
 
-            if paramCount == 7 and rank == 32:
-                continue
+            if not (paramCount == 7 and rank == 32):
+                data = json.load(f)
+                runtimes[paramCount].append(data["train_runtime"])
+                #print(filename, timedelta(seconds=data["train_runtime"]))
 
-            data = json.load(f)
-            runtimes[paramCount].append(data["train_runtime"])
-            #print(filename, timedelta(seconds=data["train_runtime"]))
+            losses[paramCount][rank] = data["train_loss"]
 
     print(runtimes)
     for paramCount in runtimes:
         mean = statistics.mean(runtimes[paramCount])
         print(paramCount, timedelta(seconds=mean), mean / 3600 * costs[paramCount])
+
+    print(losses)
+    for paramCount in losses:
+        for rank in losses[paramCount]:
+            print(f"{paramCount}b-r{rank}", losses[paramCount][rank])
 
     exit()
 
@@ -471,7 +478,7 @@ def print_bleu():
     for sample in evalSamples:
         if (index := data.index(sample)) % 2:
             evalIndices.append((index - 1) // 2)
-    print(np.asarray(bleuScoresOrig[7][64])[evalIndices])
+    #print(np.asarray(bleuScoresOrig[7][64])[evalIndices])
 
     bleuScoresNoEval = rec_dd()
     for paramCount in bleuScoresOrig:
@@ -500,16 +507,16 @@ def print_bleu():
                 cumulative = np.cumsum(values)
                 plt.plot(bins[:-1], cumulative, label=f"{paramCount}-{rank}: {sum(i == 1 for i in bleuScores[paramCount][rank])} perfect scores", linestyle="dashed" if paramCount == 13 else None, color=colors[rank])
 
-                print(paramCount, rank)
-                print(*zip(bins[:-1], cumulative))
+                #print(paramCount, rank)
+                #print(*zip(bins[:-1], cumulative))
 
                 # plt.plot(bins[:-2], values[:-1], label=f"{paramCount}-{rank}")
 
-                print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]), f"{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
+                print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]), f"\t{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
         plt.legend()
         plt.xlabel("BLEU score")
         plt.ylabel("Cumulative count (dataset size of 630 samples)")
-        plt.show()
+        #plt.show()
 
         models = [f"{paramCount}-{rank}" for paramCount in bleuScores for rank in bleuScores[paramCount]]
         singleWinners = defaultdict(int)
@@ -576,7 +583,7 @@ if __name__ == '__main__':
     #plot_grassmann()
     print_absolute()
 
-    #print_runtime()
+    print_runtime()
     #plot_loss()
 
     #print_absolute_singular()
