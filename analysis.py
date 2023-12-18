@@ -330,19 +330,23 @@ def print_absolute_singular(singulars=None):
         with open("grassmann/singulars.pickle", "rb") as handle:
             singulars = pickle.load(handle)
 
-    #print(singulars)
+    # print(singulars)
 
+    singularsGeometric = rec_dd()
     for model in singulars:
         saveDir = os.path.join("grassmann", "singulars", model)
         if not os.path.isdir(saveDirLinear := os.path.join(saveDir, "linear")):
             os.makedirs(saveDirLinear)
         if not os.path.isdir(saveDirLog := os.path.join(saveDir, "log")):
             os.makedirs(saveDirLog)
+
         for layer in singulars[model]:
+            """
             allFig, allAx = plt.subplots()
             allAx.set_xlabel("Singular value index")
             allAx.set_xlabel("Singular value")
             allAx.set_title(f"Singular values of adapter differences over initialized state:\n{model}, layer {layer}")
+            """
             for fragment in singulars[model][layer]:
                 for matrix in singulars[model][layer][fragment]:
                     """
@@ -354,6 +358,7 @@ def print_absolute_singular(singulars=None):
                     plt.close()
                     """
 
+                    """
                     allAx.plot(singulars[model][layer][fragment][matrix], label=f"{fragment}_{matrix}")    
 
                     fig, ax = plt.subplots()
@@ -365,6 +370,7 @@ def print_absolute_singular(singulars=None):
                     ax.set_yscale("log")
                     #plt.savefig(os.path.join(saveDirLog, f"{layer}_{fragment}_{matrix}.png"))
                     plt.close(fig)
+                    """
 
                     # if model == "alpaca-2-7b-r64" and layer == 0:
                     #     print(fragment, matrix)
@@ -374,16 +380,43 @@ def print_absolute_singular(singulars=None):
                     #     print(fragment, matrix)
                     #     print(*zip(range(1, len(singulars[model][layer][fragment][matrix])+1), singulars[model][layer][fragment][matrix]))
 
-                    if model == "alpaca-2-7b-r64" and layer == 0:
-                        print(fragment, matrix)
-                        print(*zip(range(1, 9), singulars[model][layer][fragment][matrix][:8]))
+                    # if model == "alpaca-2-7b-r64" and layer == 0:
+                    #     print(fragment, matrix)
+                    #     print(*zip(range(1, 9), singulars[model][layer][fragment][matrix][:8]))
+
+                    for i in range(len(singulars[model][layer][fragment][matrix])):
+                        if not singularsGeometric[model][fragment][matrix][i+1]:
+                            singularsGeometric[model][fragment][matrix][i+1] = []
+                        singularsGeometric[model][fragment][matrix][i+1].append(singulars[model][layer][fragment][matrix][i])
             
+            """
             allAx.legend()
             #plt.savefig(os.path.join(saveDirLinear, f"allAdapters_{layer}.png"))
             allAx.set_yscale("log")
             #plt.savefig(os.path.join(saveDirLog, f"allAdapters_{layer}_log.png"))
             plt.close(allFig)
+            """
     
+    for model in ["alpaca-2-7b-r64", "alpaca-2-7b-r8"]:#singularsGeometric:
+        for fragment in singularsGeometric[model]:
+            for matrix in singularsGeometric[model][fragment]:
+                for i in singularsGeometric[model][fragment][matrix]:
+                    # print(model, fragment, matrix, i, statistics.geometric_mean(singularsGeometric[model][fragment][matrix][i]))
+                    singularsGeometric[model][fragment][matrix][i] = statistics.geometric_mean(singularsGeometric[model][fragment][matrix][i])
+    
+    for model in ["alpaca-2-7b-r64"]:#singularsGeometric:
+        for fragment in singularsGeometric[model]:
+            for matrix in singularsGeometric[model][fragment]:
+                print(model, fragment, matrix)
+                #print(*list(singularsGeometric[model][fragment][matrix].items()))
+                print(*list(singularsGeometric[model][fragment][matrix].items())[:8])
+
+    for model in ["alpaca-2-7b-r8"]:#singularsGeometric:
+        for fragment in singularsGeometric[model]:
+            for matrix in singularsGeometric[model][fragment]:
+                print(model, fragment, matrix)
+                # print(*list(singularsGeometric[model][fragment][matrix].items()))
+
     exit()
 
 def plot_loss():
@@ -581,12 +614,12 @@ if __name__ == '__main__':
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
     #plot_grassmann()
-    print_absolute()
+    #print_absolute()
 
-    print_runtime()
+    #print_runtime()
     #plot_loss()
 
-    #print_absolute_singular()
+    print_absolute_singular()
     #print_differences()
 
     #print_bleu()
