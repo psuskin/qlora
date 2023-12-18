@@ -258,6 +258,9 @@ def analyze_absolute(models):
                     init = models[model].layers[layerIndex].modules[fragment][matrix]["init"].matrix
                     result = models[model].layers[layerIndex].modules[fragment][matrix]["result"].matrix
 
+                    if layerIndex == 0:
+                        absolute_matrices[model][fragment][matrix] = init.shape
+
                     absolute_matrices[model][layerIndex][fragment][matrix] = np.sum(np.absolute(result - init))
 
                     singulars[model][layerIndex][fragment][matrix] = np.linalg.svd(result - init, compute_uv=False)
@@ -308,6 +311,8 @@ def print_absolute(absolute_matrices=None):
     factors = rec_dd() # A * ...
     for model in absolute_matrices:
         for layerIndex in absolute_matrices[model]:
+            if not isinstance(layerIndex, int):
+                continue
             for fragment in absolute_matrices[model][layerIndex]:
                 layerMatch = re.search(r"-([0-9]+)b-r([0-9]+)", model)
                 contextLength = contextLengths[int(layerMatch.group(1))]
@@ -316,12 +321,12 @@ def print_absolute(absolute_matrices=None):
                 if not factors[contextLength][fragment]:
                     factors[contextLength][fragment]["A"] = []
                     factors[contextLength][fragment]["B"] = []
-                factors[contextLength][fragment]["A"].append(absolute_matrices[model][layerIndex][fragment]["A"] / (r * contextLength))
-                factors[contextLength][fragment]["B"].append(absolute_matrices[model][layerIndex][fragment]["B"] / (r * contextLength))
+                factors[contextLength][fragment]["A"].append(absolute_matrices[model][layerIndex][fragment]["A"] / (absolute_matrices[model][fragment]["A"][0] * absolute_matrices[model][fragment]["A"][1]))
+                factors[contextLength][fragment]["B"].append(absolute_matrices[model][layerIndex][fragment]["B"] / (absolute_matrices[model][fragment]["B"][0] * absolute_matrices[model][fragment]["B"][1]))
 
     for c in factors:
         for f in factors[c]:
-            print(c, f, 1 / statistics.mean(factors[c][f]["A"]), 1 / statistics.stdev(factors[c][f]["A"]), 1 / statistics.mean(factors[c][f]["B"]), 1 / statistics.stdev(factors[c][f]["B"]))
+            print(c, f, round(1 / statistics.mean(factors[c][f]["A"]), 2), round(1 / statistics.stdev(factors[c][f]["A"]), 2), round(1 / statistics.mean(factors[c][f]["B"]), 2), round(1 / statistics.stdev(factors[c][f]["B"]), 2))
 
     exit()
 
@@ -545,7 +550,7 @@ def print_bleu():
 
                 # plt.plot(bins[:-2], values[:-1], label=f"{paramCount}-{rank}")
 
-                print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]), f"\t{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
+                print(paramCount, rank, round(statistics.mean(bleuScores[paramCount][rank]), 2), round(statistics.stdev(bleuScores[paramCount][rank]), 2), f"\t{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
         plt.legend()
         plt.xlabel("BLEU score")
         plt.ylabel("Cumulative count (dataset size of 630 samples)")
@@ -619,10 +624,10 @@ if __name__ == '__main__':
     #print_runtime()
     #plot_loss()
 
-    print_absolute_singular()
+    #print_absolute_singular()
     #print_differences()
 
-    #print_bleu()
+    print_bleu()
 
     models = {}
     for directory in os.listdir(PATH):

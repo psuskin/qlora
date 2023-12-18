@@ -3,9 +3,12 @@ from inference import load_model, generate
 import os
 import re
 import json
+import torch
 import pickle
 import statistics
+import numpy as np
 from collections import defaultdict
+from sklearn.decomposition import TruncatedSVD
 from nltk.translate.bleu_score import sentence_bleu
 
 modelDir = "/home/psuskin/repos/analysis"
@@ -101,6 +104,27 @@ def bleu():
         for rank in bleuScores[paramCount]:
             print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]))
 
+import matplotlib.pyplot as plt
+def truncate():
+    filename = "alpaca-2-7b-r64-truncated-r8"
+
+    weights = torch.load(os.path.join(modelDir, filename, "checkpoint-1875", "adapter_model", "adapter_model.bin"))
+
+    for name in weights:
+        matrix = weights[name].detach().cpu().float().numpy()
+
+        U, S, Vt = np.linalg.svd(matrix, full_matrices=False)
+        if "lora_A" in name:
+            matrixTrunc = U[:, :8] @ np.diag(S[:8]) @ Vt[:8, :]
+        elif "lora_B" in name:
+            matrixTrunc = U[:8, :] @ np.diag(S[:8]) @ Vt[:, :8]
+
+        print(np.sum(matrixTrunc - matrix)**2)
+        break
+        weights[name] = torch.from_numpy(matrixTrunc)
+
+    torch.save(weights, os.path.join(modelDir, filename, "checkpoint-1875", "adapter_model", "adapter_model.bin"))
+
 def bleuTrunc():
     bleuScores = rec_dd()
 
@@ -149,4 +173,6 @@ def bleuTrunc():
 
 if __name__ == "__main__":
     # bleu()
-    bleuTrunc()
+
+    truncate()
+    #bleuTrunc()
