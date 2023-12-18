@@ -101,5 +101,52 @@ def bleu():
         for rank in bleuScores[paramCount]:
             print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]))
 
+def bleuTrunc():
+    bleuScores = rec_dd()
+
+    with open("data/en_articles_alpaca.json", encoding="utf-8") as f:
+        data = json.load(f)
+
+    filename = "alpaca-2-7b-r64-truncated-r8"
+
+    modelMatch = re.search(r"-([0-9]+)b-r([0-9]+).*?-r([0-9]+)", filename)
+    paramCount = int(modelMatch.group(1))
+    rank = int(modelMatch.group(2))
+    trunc = int(modelMatch.group(3))
+
+    foundationModelName = f"meta-llama/Llama-2-{paramCount}b-hf"
+    _, model, tokenizer = load_model(foundationModelName, os.path.join(modelDir, filename, "checkpoint-1875", "adapter_model"))
+
+    print(paramCount, rank, trunc)
+
+    for i, sample in enumerate(data):
+        if not i % 2:
+            continue
+
+        if i > 2 * maxSamples:
+            break
+
+        output = generate(model, tokenizer, sample["input"], False)
+        target = sample["output"]
+
+        #print(output, target)
+
+        bleuScore = sentence_bleu([target], output)
+        print(bleuScore)
+
+        if not bleuScores[paramCount][rank]:
+            bleuScores[paramCount][rank] = []
+        bleuScores[paramCount][rank].append(bleuScore)
+
+    bleu_dict = ddict2dict(bleuScores)
+    with open("bleu-trunc-r64-r8.pickle", "wb") as handle:
+        pickle.dump(bleu_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    print("Saved bleu scores")
+
+    for paramCount in bleuScores:
+        for rank in bleuScores[paramCount]:
+            print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]))
+
 if __name__ == "__main__":
-    bleu()
+    # bleu()
+    bleuTrunc()
