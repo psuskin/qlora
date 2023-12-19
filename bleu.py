@@ -108,25 +108,34 @@ import matplotlib.pyplot as plt
 def truncate():
     filename = "alpaca-2-7b-r64-truncated-r8"
 
-    weights = torch.load(os.path.join(modelDir, filename, "checkpoint-1875", "adapter_model", "adapter_model.bin"))
+    inits = torch.load(os.path.join(modelDir, filename, "init-r64-meta-llama", "Llama-2-7b-hf", "adapter_model.bin"))
+    weights = torch.load(os.path.join(modelDir, filename, "checkpoint-1875-r64", "adapter_model", "adapter_model.bin"))
 
+    newWeights = {}
     for name in weights:
+        print(name)
+
+        init = inits[name].detach().cpu().float().numpy()
         matrix = weights[name].detach().cpu().float().numpy()
 
-        U, S, Vt = np.linalg.svd(matrix, full_matrices=False)
-        if "lora_A" in name:
-            matrixTrunc = U[:, :8] @ np.diag(S[:8]) @ Vt[:8, :]
-        elif "lora_B" in name:
-            matrixTrunc = U[:8, :] @ np.diag(S[:8]) @ Vt[:, :8]
+        if 0:
+            print(np.linalg.svd(matrix, compute_uv=False))
+            exit()
 
-        print(np.sum(matrixTrunc - matrix)**2)
-        break
-        weights[name] = torch.from_numpy(matrixTrunc)
+        diff = matrix - init
 
-    torch.save(weights, os.path.join(modelDir, filename, "checkpoint-1875", "adapter_model", "adapter_model.bin"))
+        U, S, Vt = np.linalg.svd(diff, full_matrices=False)
+        print(U.shape, S.shape, Vt.shape)
+        diffTrunc = U[:, :8] @ np.diag(S[:8]) @ Vt[:8, :]
+
+        #print(np.sum(diffTrunc - diff)**2)
+        #print(np.sum((init + diffTrunc) - matrix)**2)
+        newWeights[name] = torch.from_numpy(init + diffTrunc)
+
+    torch.save(newWeights, os.path.join(modelDir, filename, "checkpoint-1875", "adapter_model", "adapter_model.bin"))
 
 def bleuTrunc():
-    bleuScores = rec_dd()
+    bleuScores = {"scores": [], "responses": []}
 
     with open("data/en_articles_alpaca.json", encoding="utf-8") as f:
         data = json.load(f)
@@ -141,7 +150,7 @@ def bleuTrunc():
     foundationModelName = f"meta-llama/Llama-2-{paramCount}b-hf"
     _, model, tokenizer = load_model(foundationModelName, os.path.join(modelDir, filename, "checkpoint-1875", "adapter_model"))
 
-    print(paramCount, rank, trunc)
+    #print(paramCount, rank, trunc)
 
     for i, sample in enumerate(data):
         if not i % 2:
@@ -153,26 +162,22 @@ def bleuTrunc():
         output = generate(model, tokenizer, sample["input"], False)
         target = sample["output"]
 
-        #print(output, target)
+        print(output, target)
 
         bleuScore = sentence_bleu([target], output)
         print(bleuScore)
 
-        if not bleuScores[paramCount][rank]:
-            bleuScores[paramCount][rank] = []
-        bleuScores[paramCount][rank].append(bleuScore)
+        bleuScores["scores"].append(bleuScore)
+        bleuScores["responses"].append(output)
 
-    bleu_dict = ddict2dict(bleuScores)
-    with open("bleu-trunc-r64-r8.pickle", "wb") as handle:
-        pickle.dump(bleu_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    with open(f"bleu-trunc-r{rank}-r{trunc}.pickle", "wb") as handle:
+        pickle.dump(bleuScores, handle, protocol=pickle.HIGHEST_PROTOCOL)
     print("Saved bleu scores")
 
-    for paramCount in bleuScores:
-        for rank in bleuScores[paramCount]:
-            print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]))
+    print(statistics.mean(bleuScores["scores"]), statistics.stdev(bleuScores["scores"]))
 
 if __name__ == "__main__":
     # bleu()
 
-    truncate()
-    #bleuTrunc()
+    #truncate()
+    bleuTrunc()

@@ -507,6 +507,11 @@ def max_index(lst, single=False):
 def print_bleu():
     with open("bleu.pickle", "rb") as f:
         bleuScoresOrig = pickle.load(f)
+    
+    with open("bleu-trunc-r64-r8.pickle", "rb") as f:
+        bleuScoresTrunc = pickle.load(f)
+
+    bleuScoresOrig[7][63] = bleuScoresTrunc["scores"]
 
     with open("data/en_articles_alpaca.json", encoding="utf-8") as f:
         data = json.load(f)
@@ -521,10 +526,10 @@ def print_bleu():
     bleuScoresNoEval = rec_dd()
     for paramCount in bleuScoresOrig:
         for rank in sorted(bleuScoresOrig[paramCount]):
-            plt.plot(bleuScoresOrig[paramCount][rank], label=f"{paramCount}-{rank}")
+            #plt.plot(bleuScoresOrig[paramCount][rank], label=f"{paramCount}-{rank}")
             bleuScoresNoEval[paramCount][rank] = [score for i, score in enumerate(bleuScoresOrig[paramCount][rank]) if i not in evalIndices]
     #plt.show()
-    plt.close()
+    #plt.close()
 
     for bleuScores in [bleuScoresOrig, bleuScoresNoEval]:
         colors = {
@@ -543,7 +548,7 @@ def print_bleu():
                 #print(bins)
 
                 cumulative = np.cumsum(values)
-                plt.plot(bins[:-1], cumulative, label=f"{paramCount}-{rank}: {sum(i == 1 for i in bleuScores[paramCount][rank])} perfect scores", linestyle="dashed" if paramCount == 13 else None, color=colors[rank])
+                #plt.plot(bins[:-1], cumulative, label=f"{paramCount}-{rank}: {sum(i == 1 for i in bleuScores[paramCount][rank])} perfect scores", linestyle="dashed" if paramCount == 13 else None, color=colors[rank])
 
                 #print(paramCount, rank)
                 #print(*zip(bins[:-1], cumulative))
@@ -551,9 +556,9 @@ def print_bleu():
                 # plt.plot(bins[:-2], values[:-1], label=f"{paramCount}-{rank}")
 
                 print(paramCount, rank, round(statistics.mean(bleuScores[paramCount][rank]), 2), round(statistics.stdev(bleuScores[paramCount][rank]), 2), f"\t{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
-        plt.legend()
-        plt.xlabel("BLEU score")
-        plt.ylabel("Cumulative count (dataset size of 630 samples)")
+        #plt.legend()
+        #plt.xlabel("BLEU score")
+        #plt.ylabel("Cumulative count (dataset size of 630 samples)")
         #plt.show()
 
         models = [f"{paramCount}-{rank}" for paramCount in bleuScores for rank in bleuScores[paramCount]]
