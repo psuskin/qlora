@@ -250,6 +250,7 @@ def analyze_absolute(models):
     absolute_matrices = rec_dd()
     singulars = rec_dd()
     differences = rec_dd()
+    sign_changes = rec_dd()
     for model in models:
         print(model)
         for layerIndex in models[model].layers:
@@ -281,6 +282,8 @@ def analyze_absolute(models):
                     if model == "alpaca-2-7b-r64" and layerIndex == 0:
                         differences[model][layerIndex][fragment][matrix] = result - init
 
+                    sign_changes[model][layerIndex][fragment][matrix] = np.sum(np.sign(result) != np.sign(init)) / np.prod(result.shape)
+
     # Save to pickle file
     absolute_matrices_dict = ddict2dict(absolute_matrices)
     with open("grassmann/absolute.pickle", "wb") as handle:
@@ -296,6 +299,11 @@ def analyze_absolute(models):
     with open("grassmann/differences.pickle", "wb") as handle:
         pickle.dump(differences_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
     print("Saved differences")
+
+    sign_changes_dict = ddict2dict(sign_changes)
+    with open("grassmann/sign_changes.pickle", "wb") as handle:
+        pickle.dump(sign_changes_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    print("Saved sign changes")
     
     return absolute_matrices_dict
 
@@ -592,6 +600,34 @@ def print_differences(differences=None):
 
     exit()
 
+def print_sign_changes(sign_changes=None):
+    if not sign_changes:
+        with open("grassmann/sign_changes.pickle", "rb") as handle:
+            sign_changes = pickle.load(handle)
+
+    #print(sign_changes)
+            
+    factors = rec_dd() # A * ...
+    for model in sign_changes:
+        if "trunc" in model:
+            print(model)
+            continue
+        for layerIndex in sign_changes[model]:
+            for fragment in sign_changes[model][layerIndex]:
+                layerMatch = re.search(r"-([0-9]+)b-r([0-9]+)", model)
+                contextLength = int(layerMatch.group(1))
+
+                if not factors[contextLength][fragment]:
+                    factors[contextLength][fragment] = []
+                    factors[contextLength][fragment] = []
+                factors[contextLength][fragment].append(sign_changes[model][layerIndex][fragment]["A"])
+
+    for c in factors:
+        for f in factors[c]:
+            print(c, f, statistics.mean(factors[c][f]), statistics.stdev(factors[c][f]))
+
+    exit()
+
 def analyze(models):
     #grassmann_matrices = analyze_grassmann(models)
     #plot_grassmann(grassmann_matrices)
@@ -632,10 +668,12 @@ if __name__ == '__main__':
     #print_runtime()
     #plot_loss()
 
-    print_absolute_singular()
+    #print_absolute_singular()
     #print_differences()
 
     #print_bleu()
+
+    print_sign_changes()
 
     models = {}
     for directory in os.listdir(PATH):
