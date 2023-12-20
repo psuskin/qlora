@@ -414,13 +414,16 @@ def print_absolute_singular(singulars=None):
             for matrix in singularsGeometric[model][fragment]:
                 print(model, fragment, matrix)
                 #print(*list(singularsGeometric[model][fragment][matrix].items()))
-                print(*list(singularsGeometric[model][fragment][matrix].items())[:8])
+                #print(*list(singularsGeometric[model][fragment][matrix].items())[:8])
 
     for model in ["alpaca-2-7b-r8"]:#singularsGeometric:
         for fragment in singularsGeometric[model]:
             for matrix in singularsGeometric[model][fragment]:
                 print(model, fragment, matrix)
                 # print(*list(singularsGeometric[model][fragment][matrix].items()))
+
+    print([i[0] for i in sorted([(f"{fragment} {matrix}", singularsGeometric[model][fragment][matrix][1]) for model in ["alpaca-2-7b-r64"] for fragment in singularsGeometric[model] for matrix in singularsGeometric[model][fragment]], key=lambda tup: tup[1], reverse=True)])
+    print([i[0] for i in sorted([(f"{fragment} {matrix}", singularsGeometric[model][fragment][matrix][1]) for model in ["alpaca-2-7b-r8"] for fragment in singularsGeometric[model] for matrix in singularsGeometric[model][fragment]], key=lambda tup: tup[1], reverse=True)])
 
     exit()
 
@@ -629,10 +632,10 @@ if __name__ == '__main__':
     #print_runtime()
     #plot_loss()
 
-    #print_absolute_singular()
+    print_absolute_singular()
     #print_differences()
 
-    print_bleu()
+    #print_bleu()
 
     models = {}
     for directory in os.listdir(PATH):
