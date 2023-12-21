@@ -659,7 +659,7 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
         evalSamples = []
         for sample in eval_dataset:
             evalSamples.append(sample)
-        with open("evalSamples.json", 'w', encoding='utf-8') as f:
+        with open(os.path.join(args.output_dir, "evalSamples.json"), 'w', encoding='utf-8') as f:
             json.dump(evalSamples, f, ensure_ascii=False, indent=4)
         print("Saved evaluation samples.")
 
@@ -716,7 +716,7 @@ def train():
     if completed_training:
         print('Detected that training was already completed!')
 
-    set_seed(args.seed)
+    set_seed(0) # Seed was always 0 for analysis. Need to set this even for other seed args if we want to have the exact same evaluation samples.
     model, tokenizer = get_accelerate_model(args, checkpoint_dir)
 
     model.config.use_cache = False
@@ -724,6 +724,8 @@ def train():
 
     data_module = make_data_module(tokenizer=tokenizer, args=args)
     
+    set_seed(args.seed)
+
     trainer = Seq2SeqTrainer(
         model=model,
         tokenizer=tokenizer,

@@ -1,9 +1,6 @@
 wandb/
 output/
 app.py
-init-r64/
-init-r32/
-init-r16/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
