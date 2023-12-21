@@ -669,6 +669,26 @@ def print_sign_changes(sign_changes=None):
 
     exit()
 
+def print_low():
+    with open("bleu.pickle", "rb") as f:
+        bleuScoresOrig = pickle.load(f)
+
+    with open("data/en_articles_alpaca.json", encoding="utf-8") as f:
+        data = json.load(f)
+    with open("evalSamples.json", encoding="utf-8") as f:
+        evalSamples = json.load(f)
+    evalIndices = []
+    for sample in evalSamples:
+        if (index := data.index(sample)) % 2:
+            evalIndices.append((index - 1) // 2)
+
+    bleuScoresNoEval = [(data[2 * i + 1]["output"], score) for i, score in enumerate(bleuScoresOrig[13][64]) if i not in evalIndices]
+
+    for lowScore in sorted(bleuScoresNoEval, key=lambda tup: tup[1])[:10]:
+        print(f"{lowScore[0]}\n")
+
+    exit()
+
 def analyze(models):
     #grassmann_matrices = analyze_grassmann(models)
     #plot_grassmann(grassmann_matrices)
@@ -716,7 +736,9 @@ if __name__ == '__main__':
 
     #print_sign_changes()
 
-    print_adapter_singular()
+    #print_adapter_singular()
+
+    print_low()
 
     models = {}
     for directory in os.listdir(PATH):
