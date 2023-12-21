@@ -249,9 +249,12 @@ def analyze_absolute(models):
     # Absolute value change analysis
     absolute_matrices = rec_dd()
     singulars = rec_dd()
+    singularsAdapter = rec_dd()
     differences = rec_dd()
     sign_changes = rec_dd()
     for model in models:
+        if "trunc" in model:
+            continue
         print(model)
         for layerIndex in models[model].layers:
             for fragment in models[model].layers[layerIndex].modules:
@@ -265,6 +268,8 @@ def analyze_absolute(models):
                     absolute_matrices[model][layerIndex][fragment][matrix] = np.sum(np.absolute(result - init))
 
                     singulars[model][layerIndex][fragment][matrix] = np.linalg.svd(result - init, compute_uv=False)
+
+                    singularsAdapter[model][layerIndex][fragment][matrix] = np.linalg.svd(result, compute_uv=False)
 
                     """
                     if model == "alpaca-2-7b-r64" and layerIndex == 0:
@@ -304,6 +309,11 @@ def analyze_absolute(models):
     with open("grassmann/sign_changes.pickle", "wb") as handle:
         pickle.dump(sign_changes_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
     print("Saved sign changes")
+
+    singularsAdapter_dict = ddict2dict(singularsAdapter)
+    with open("grassmann/singularsAdapter.pickle", "wb") as handle:
+        pickle.dump(singularsAdapter_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    print("Saved singular values of adapter matrices")
     
     return absolute_matrices_dict
 
@@ -433,6 +443,37 @@ def print_absolute_singular(singulars=None):
     print([i[0] for i in sorted([(f"{fragment} {matrix}", singularsGeometric[model][fragment][matrix][1]) for model in ["alpaca-2-7b-r64"] for fragment in singularsGeometric[model] for matrix in singularsGeometric[model][fragment]], key=lambda tup: tup[1], reverse=True)])
     print([i[0] for i in sorted([(f"{fragment} {matrix}", singularsGeometric[model][fragment][matrix][1]) for model in ["alpaca-2-7b-r8"] for fragment in singularsGeometric[model] for matrix in singularsGeometric[model][fragment]], key=lambda tup: tup[1], reverse=True)])
 
+    exit()
+
+def print_adapter_singular(singulars=None):
+    if not singulars:
+        with open("grassmann/singularsAdapter.pickle", "rb") as handle:
+            singulars = pickle.load(handle)
+
+    # print(singulars)
+
+    singularsGeometric = rec_dd()
+    for model in singulars:
+        for layer in singulars[model]:
+            for fragment in singulars[model][layer]:
+                for matrix in singulars[model][layer][fragment]:
+                    for i in range(len(singulars[model][layer][fragment][matrix])):
+                        if not singularsGeometric[model][fragment][matrix][i+1]:
+                            singularsGeometric[model][fragment][matrix][i+1] = []
+                        singularsGeometric[model][fragment][matrix][i+1].append(singulars[model][layer][fragment][matrix][i])
+    
+    for model in ["alpaca-2-7b-r64"]:#singularsGeometric:
+        for fragment in singularsGeometric[model]:
+            for matrix in singularsGeometric[model][fragment]:
+                for i in singularsGeometric[model][fragment][matrix]:
+                    # print(model, fragment, matrix, i, statistics.geometric_mean(singularsGeometric[model][fragment][matrix][i]))
+                    singularsGeometric[model][fragment][matrix][i] = statistics.geometric_mean(singularsGeometric[model][fragment][matrix][i])
+    
+    for model in ["alpaca-2-7b-r64"]:#singularsGeometric:
+        for fragment in singularsGeometric[model]:
+            for matrix in singularsGeometric[model][fragment]:
+                print(model, fragment, matrix)
+                print(*list(singularsGeometric[model][fragment][matrix].items()))
     exit()
 
 def plot_loss():
@@ -673,7 +714,9 @@ if __name__ == '__main__':
 
     #print_bleu()
 
-    print_sign_changes()
+    #print_sign_changes()
+
+    print_adapter_singular()
 
     models = {}
     for directory in os.listdir(PATH):
