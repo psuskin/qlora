@@ -565,6 +565,14 @@ def print_bleu():
 
     bleuScoresOrig[7][63] = bleuScoresTrunc["scores"]
 
+    with open("bleu-7b-r64-seeds.pickle", "rb") as f:
+        bleuScoresSeeds = pickle.load(f)
+
+    bleuScoresOrig[7][65] = bleuScoresSeeds[1]["scores"]
+    bleuScoresOrig[7][66] = bleuScoresSeeds[2]["scores"]
+    bleuScoresOrig[7][67] = bleuScoresSeeds[3]["scores"]
+    bleuScoresOrig[7][68] = bleuScoresSeeds[4]["scores"]
+
     with open("data/en_articles_alpaca.json", encoding="utf-8") as f:
         data = json.load(f)
     with open("evalSamples.json", encoding="utf-8") as f:
@@ -732,13 +740,13 @@ if __name__ == '__main__':
     #print_absolute_singular()
     #print_differences()
 
-    #print_bleu()
+    print_bleu()
 
     #print_sign_changes()
 
     #print_adapter_singular()
 
-    print_low()
+    #print_low()
 
     models = {}
     for directory in os.listdir(PATH):

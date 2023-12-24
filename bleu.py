@@ -104,7 +104,6 @@ def bleu():
         for rank in bleuScores[paramCount]:
             print(paramCount, rank, statistics.mean(bleuScores[paramCount][rank]), statistics.stdev(bleuScores[paramCount][rank]))
 
-import matplotlib.pyplot as plt
 def truncate():
     filename = "alpaca-2-7b-r64-truncated-r8"
 
@@ -176,8 +175,60 @@ def bleuTrunc():
 
     print(statistics.mean(bleuScores["scores"]), statistics.stdev(bleuScores["scores"]))
 
+def bleuSeed():
+    bleuScores = rec_dd()
+
+    with open("data/en_articles_alpaca.json", encoding="utf-8") as f:
+        data = json.load(f)
+
+    outputDir = "output"
+
+    for filename in os.listdir(outputDir):
+        if not "seed" in filename:
+            continue
+
+        modelMatch = re.search(r"-([0-9]+)b-r([0-9]+).*?-seed([0-9]+)", filename)
+        paramCount = int(modelMatch.group(1))
+        rank = int(modelMatch.group(2))
+        seed = int(modelMatch.group(3))
+
+        foundationModelName = f"meta-llama/Llama-2-{paramCount}b-hf"
+        _, model, tokenizer = load_model(foundationModelName, os.path.join(outputDir, filename, "checkpoint-1875", "adapter_model"))
+
+        print(paramCount, rank, seed)
+
+        for i, sample in enumerate(data):
+            if not i % 2:
+                continue
+
+            if i > 2 * maxSamples:
+                break
+
+            output = generate(model, tokenizer, sample["input"], False)
+            target = sample["output"]
+
+            #print(output, target)
+
+            bleuScore = sentence_bleu([target], output)
+            print(bleuScore)
+
+            if not bleuScores[seed]["scores"]:
+                bleuScores[seed]["scores"] = []
+                bleuScores[seed]["responses"] = []
+            bleuScores[seed]["scores"].append(bleuScore)
+            bleuScores[seed]["responses"].append(output)
+
+        print(statistics.mean(bleuScores[seed]["scores"]), statistics.stdev(bleuScores[seed]["scores"], sum([i == 1 for i in bleuScores[seed]["scores"]])))
+
+    bleu_dict = ddict2dict(bleuScores)
+    with open(f"bleu-{paramCount}b-r{rank}-seeds.pickle", "wb") as handle:
+        pickle.dump(bleu_dict, handle, protocol=pickle.HIGHEST_PROTOCOL)
+    print("Saved bleu scores")
+
 if __name__ == "__main__":
     # bleu()
 
     #truncate()
-    bleuTrunc()
+    #bleuTrunc()
+
+    bleuSeed()

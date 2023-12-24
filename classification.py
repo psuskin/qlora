@@ -21,12 +21,14 @@ def finetune():
 
     args = TrainingArguments(
         f"output/{model_checkpoint}-classification",
-        evaluation_strategy = "epoch",
-        save_strategy = "epoch",
+        evaluation_strategy = "steps",
+        save_strategy = "steps",
+        eval_steps=10000,
+        save_steps=10000,
         learning_rate=2e-5,
         per_device_train_batch_size=1,
         per_device_eval_batch_size=1,
-        num_train_epochs=5,
+        max_steps=100000,
         weight_decay=0.01,
     )
 
@@ -52,13 +54,18 @@ def finetune():
 from transformers import pipeline
 
 def inference():
-    model = AutoModelForSequenceClassification.from_pretrained("output/distilbert-base-uncased-classification/checkpoint-2835")
+    model = AutoModelForSequenceClassification.from_pretrained("output/distilbert-base-uncased-classification/checkpoint-30000")
     tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
 
     classifier = pipeline("text-classification", model=model, tokenizer=tokenizer)
 
-    result = classifier("Parts lists describe the composition of a production part. A bill of material consists of parts, which in turn can have a bill of material.")
-    print(result)
+    prompts = [
+        "Which module provides version and copyright information?",
+        "Parts lists describe the composition of a production part. A bill of material consists of parts, which in turn can have a bill of material.",
+    ]
+
+    for prompt in prompts:
+        print(classifier(prompt))
 
 if __name__ == '__main__':
     #finetune()
