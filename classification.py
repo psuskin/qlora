@@ -100,9 +100,9 @@ def inference(modelName):
     classifier = pipeline("text-classification", model=model, tokenizer=tokenizer)
 
     prompts = [
-        "Which module provides version and copyright information?",
-        "How can I calculate the current time in another location?",
-        "Tell me how to test of the conversion of a temperature into the different heat units.",
+        "Which module provides version and copyright information?", # 0
+        "How can I calculate the current time in another location?", # 627
+        "Tell me how to test of the conversion of a temperature into the different heat units.", # 460
         "Where do I record both flexitime and operating data (BDE)?", # 626
         "Where can I check offer/order data?", # 608
         "Help me with inspection of partner data.", # 609
