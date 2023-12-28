@@ -656,12 +656,15 @@ def print_differences(differences=None):
 
     difference = differences["alpaca-2-7b-r64"][0]["self_attn.q_proj"]["A"]
 
+    plotDistribution(difference)
+
     fig, ax = plt.subplots()
     cax = ax.imshow(difference, interpolation='nearest', aspect='auto')
     fig.colorbar(cax)
     ax.xaxis.tick_bottom()
     plt.title("Finetuned adapter delta\n(factor $\it{A}$ of query projection in first layer of LLaMA-2-7b)")
     plt.savefig("difference.pdf")
+    plt.close()
 
     exit()
 
