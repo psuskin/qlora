@@ -7,6 +7,7 @@ import pickle
 import itertools
 import statistics
 import numpy as np
+import scipy.stats as stats
 from datetime import timedelta
 import matplotlib.pyplot as plt
 from collections import defaultdict
@@ -75,8 +76,19 @@ def grassmann(A, B, i, j):
     return np.linalg.norm(Ui.T @ Uj)**2 / min(i, j)
 
 def plotDistribution(matrix):
-    plt.hist(matrix.flatten(), bins=100)
+    mean = np.mean(matrix)
+    std_dev = np.std(matrix)
+    #print(std_dev)
+
+    n, bins, patches = plt.hist(matrix.flatten(), bins=100)
+
+    x = np.linspace(np.min(matrix), np.max(matrix), 1000)
+    y = stats.norm.pdf(x, mean, std_dev)
+    plt.plot(x, y * np.max(n) / np.max(y))
+
     plt.show()
+
+    exit()
 
 def ensureImageSubset(dirOrig, dirTrans):
     if USE_CPU:
@@ -706,7 +718,6 @@ def analyze(models):
 
 specificModels = []#["alpaca-2-7b-r64", "alpaca-2-7b-r8"]
 
-import scipy.stats as stats
 def plotNF4():
     values = [-1.0, -0.6961928009986877, -0.5250730514526367,
 -0.39491748809814453, -0.28444138169288635, -0.18477343022823334,
@@ -726,6 +737,12 @@ def plotNF4():
 
     exit()
 
+def isUniformDistribution(matrix):
+    samples = matrix.flatten()
+
+    #print(np.min(samples), np.max(samples))
+    print(stats.kstest(samples, stats.uniform(loc = np.min(samples), scale = np.max(samples) - np.min(samples)).cdf))
+
 if __name__ == '__main__':
     #plotNF4()
 
@@ -740,13 +757,17 @@ if __name__ == '__main__':
     #print_absolute_singular()
     #print_differences()
 
-    print_bleu()
+    #print_bleu()
 
     #print_sign_changes()
 
     #print_adapter_singular()
 
     #print_low()
+
+    with open("grassmann/result.pickle", "rb") as handle:
+        result = pickle.load(handle)
+        plotDistribution(result)
 
     models = {}
     for directory in os.listdir(PATH):
@@ -759,6 +780,13 @@ if __name__ == '__main__':
 
     #analyze_absolute(models)
 
-    #plotDistribution(models["alpaca-2-7b-r64"].layers[0]["self_attn.q_proj"]["A"]["init"])
+    #isUniformDistribution(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix)  
+    #isUniformDistribution(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["result"].matrix)
+
+    #plotDistribution(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix)
+    #plotDistribution(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["result"].matrix)
+            
+    #with open("grassmann/result.pickle", "wb") as handle:
+        #pickle.dump(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["result"].matrix, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     #analyze(models)
