@@ -78,13 +78,16 @@ def grassmann(A, B, i, j):
 def plotDistribution(matrix):
     mean = np.mean(matrix)
     std_dev = np.std(matrix)
-    #print(std_dev)
+    print(std_dev)
 
     n, bins, patches = plt.hist(matrix.flatten(), bins=100)
 
     x = np.linspace(np.min(matrix), np.max(matrix), 1000)
     y = stats.norm.pdf(x, mean, std_dev)
     plt.plot(x, y * np.max(n) / np.max(y))
+
+    print(np.max(n) / np.max(y))
+    print(*zip(bins, n))
 
     plt.show()
 
@@ -657,6 +660,7 @@ def print_differences(differences=None):
     cax = ax.imshow(difference, interpolation='nearest', aspect='auto')
     fig.colorbar(cax)
     ax.xaxis.tick_bottom()
+    plt.title("Finetuned adapter delta\n(factor $\it{A}$ of query projection in first layer of LLaMA-2-7b)")
     plt.savefig("difference.pdf")
 
     exit()
@@ -755,7 +759,7 @@ if __name__ == '__main__':
     #plot_loss()
 
     #print_absolute_singular()
-    #print_differences()
+    print_differences()
 
     #print_bleu()
 
@@ -765,9 +769,11 @@ if __name__ == '__main__':
 
     #print_low()
 
+    """
     with open("grassmann/result.pickle", "rb") as handle:
         result = pickle.load(handle)
         plotDistribution(result)
+    """
 
     models = {}
     for directory in os.listdir(PATH):
