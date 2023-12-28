@@ -771,8 +771,21 @@ def isUniformDistribution(matrix):
     #print(np.min(samples), np.max(samples))
     print(stats.kstest(samples, stats.uniform(loc = np.min(samples), scale = np.max(samples) - np.min(samples)).cdf))
 
+def testGrassmann():
+    with open("grassmann/result.pickle", "rb") as handle:
+        result = pickle.load(handle)
+
+    Uw1 = svd_left(result, result.T)
+    Uw2 = svd_left(result, result.T)
+
+    print(grassmann(Uw1, Uw2, 5, 5))
+
+    exit()
+
 if __name__ == '__main__':
     #plotNF4()
+
+    testGrassmann()
 
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
