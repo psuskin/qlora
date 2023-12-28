@@ -91,8 +91,6 @@ def plotDistribution(matrix):
 
     plt.show()
 
-    exit()
-
 def ensureImageSubset(dirOrig, dirTrans):
     if USE_CPU:
         weightsOrig = torch.load(dirOrig, map_location="cpu")
@@ -656,8 +654,6 @@ def print_differences(differences=None):
 
     difference = differences["alpaca-2-7b-r64"][0]["self_attn.q_proj"]["A"]
 
-    plotDistribution(difference)
-
     fig, ax = plt.subplots()
     cax = ax.imshow(difference, interpolation='nearest', aspect='auto')
     fig.colorbar(cax)
@@ -716,6 +712,31 @@ def print_low():
 
     exit()
 
+def print_change():
+    with open("grassmann/result.pickle", "rb") as handle:
+        result = pickle.load(handle)
+
+    #plotDistribution(result)
+        
+    with open("grassmann/differences.pickle", "rb") as handle:
+        differences = pickle.load(handle)
+
+    difference = differences["alpaca-2-7b-r64"][0]["self_attn.q_proj"]["A"]
+
+    #plotDistribution(difference)
+
+    #print(np.sum(np.sign(result) != np.sign(result - difference)) / np.prod(result.shape))
+
+    signChangeCount = 0
+    for i in range(result.shape[0]):
+        for j in range(result.shape[1]):
+            if np.sign(result[i, j]) != np.sign(result[i, j] - difference[np.random.randint(difference.shape[0]), np.random.randint(difference.shape[1])]):
+                signChangeCount += 1
+
+    print(signChangeCount / result.size)
+
+    exit()
+
 def analyze(models):
     #grassmann_matrices = analyze_grassmann(models)
     #plot_grassmann(grassmann_matrices)
@@ -762,7 +783,7 @@ if __name__ == '__main__':
     #plot_loss()
 
     #print_absolute_singular()
-    print_differences()
+    #print_differences()
 
     #print_bleu()
 
@@ -772,11 +793,7 @@ if __name__ == '__main__':
 
     #print_low()
 
-    """
-    with open("grassmann/result.pickle", "rb") as handle:
-        result = pickle.load(handle)
-        plotDistribution(result)
-    """
+    print_change()
 
     models = {}
     for directory in os.listdir(PATH):
