@@ -91,6 +91,19 @@ def plotDistribution(matrix):
 
     plt.show()
 
+def plotDistributionNorm(matrix):
+    mean = np.mean(matrix)
+    std_dev = np.std(matrix)
+    print(std_dev)
+
+    n, bins, patches = plt.hist(matrix.flatten(), bins=100, density=True)
+
+    x = np.linspace(np.min(matrix), np.max(matrix), 1000)
+    y = stats.norm.pdf(x, mean, std_dev)
+    plt.plot(x, y)
+
+    plt.show()
+
 def ensureImageSubset(dirOrig, dirTrans):
     if USE_CPU:
         weightsOrig = torch.load(dirOrig, map_location="cpu")
@@ -723,9 +736,13 @@ def print_change():
 
     difference = differences["alpaca-2-7b-r64"][0]["self_attn.q_proj"]["A"]
 
-    #plotDistribution(difference)
+    #print(np.mean(np.abs(difference)) / (np.max(result - difference) - np.min(result - difference)))
+    print(np.mean(np.abs(difference)) / (1 / 32))
 
-    #print(np.sum(np.sign(result) != np.sign(result - difference)) / np.prod(result.shape))
+    #plotDistribution(difference)
+    plotDistributionNorm(difference)
+
+    print(np.sum(np.sign(result) != np.sign(result - difference)) / np.prod(result.shape))
 
     signChangeCount = 0
     for i in range(result.shape[0]):
@@ -785,7 +802,7 @@ def testGrassmann():
 if __name__ == '__main__':
     #plotNF4()
 
-    testGrassmann()
+    #testGrassmann()
 
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
