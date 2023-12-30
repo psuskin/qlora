@@ -220,6 +220,9 @@ def plot_grassmann(grassmann_matrices=None):
         with open("grassmann/matrices.pickle", "rb") as handle:
             grassmann_matrices = pickle.load(handle)
 
+    print(grassmann_matrices["alpaca-2-7b-r8 - alpaca-2-7b-r64"][0]["self_attn.q_proj"]["W"][:2, :2])
+    exit()
+
     for comparison in grassmann_matrices:
         print(comparison)
         for layerIndex in grassmann_matrices[comparison]:
@@ -806,7 +809,7 @@ if __name__ == '__main__':
 
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
-    #plot_grassmann()
+    plot_grassmann()
     #print_absolute()
 
     #print_runtime()
@@ -823,7 +826,7 @@ if __name__ == '__main__':
 
     #print_low()
 
-    print_change()
+    #print_change()
 
     models = {}
     for directory in os.listdir(PATH):
