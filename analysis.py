@@ -802,6 +802,47 @@ def testGrassmann():
 
     exit()
 
+def seedSimilarity(model1, model2):
+    for layerIndex in [0]:#models[model1].layers:
+        for fragment in ["self_attn.q_proj"]:#modles[model1].layers[layerIndex].modules:
+            A1 = models[model1].layers[layerIndex].modules[fragment]["A"]["result"].matrix
+            B1 = models[model1].layers[layerIndex].modules[fragment]["B"]["result"].matrix
+            A2 = models[model2].layers[layerIndex].modules[fragment]["A"]["result"].matrix
+            B2 = models[model2].layers[layerIndex].modules[fragment]["B"]["result"].matrix
+
+            Uw1 = svd_left(A1, B1)
+            Uw2 = svd_left(A2, B2)
+
+            Ar = Uw1.shape[1]
+            Br = Uw2.shape[1]
+
+            if Uw1.shape[0] != Uw2.shape[0]:
+                continue
+
+            grassmann_matrix = np.zeros((Ar, Br))
+            for i in range(1, Ar+1):
+                for j in range(1, Br+1):
+                    #print(i, j)
+                    grassmann_matrix[i-1, j-1] = grassmann(Uw1, Uw2, i, j)
+
+            with open("grassmann/seed.pickle", "wb") as handle:
+                pickle.dump(grassmann_matrix, handle, protocol=pickle.HIGHEST_PROTOCOL)
+
+def plotSeedSimilarity():
+    with open("grassmann/seed.pickle", "rb") as handle:
+        grassmann_matrix = pickle.load(handle)
+
+    fig, ax = plt.subplots()
+    cax = ax.imshow(grassmann_matrix, interpolation='nearest', aspect='auto')
+    fig.colorbar(cax)
+    ax.xaxis.tick_bottom()
+    ax.set_title(f"Subspace similarity")
+    ax.set_xlabel("i")
+    ax.set_ylabel("j")
+    plt.show()
+
+    exit()
+
 if __name__ == '__main__':
     #plotNF4()
 
@@ -809,7 +850,7 @@ if __name__ == '__main__':
 
     #ensureImageSubset(os.path.join(PATH, "alpaca-2-13b-r64/init-r64-meta-llama/Llama-2-13b-hf/adapter_model.bin"), os.path.join(PATH, "/workspace/analysis/alpaca-2-13b-r32/init-r32-meta-llama/Llama-2-13b-hf/adapter_model.bin"))
 
-    plot_grassmann()
+    #plot_grassmann()
     #print_absolute()
 
     #print_runtime()
@@ -828,10 +869,18 @@ if __name__ == '__main__':
 
     #print_change()
 
+    plotSeedSimilarity()
+
     models = {}
     for directory in os.listdir(PATH):
         if not specificModels or directory in specificModels:
             models[directory] = Model(os.path.join(PATH, directory))
+    
+    for directory in os.listdir("output"):
+        if "alpaca" in directory:
+            models[directory] = Model(os.path.join("output", directory))
+
+    seedSimilarity("alpaca-2-7b-r64", "alpaca-2-7b-r64-seed1")
 
     #print(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape)  # 4096
     #print(models["alpaca-2-13b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape) # 5120
