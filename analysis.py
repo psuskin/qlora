@@ -544,6 +544,7 @@ def print_runtime():
     }
 
     losses = rec_dd()
+    runtimesDict = rec_dd()
 
     for filename in os.listdir("training/all_results"):
         with open(os.path.join("training/all_results", filename)) as f:
@@ -557,6 +558,10 @@ def print_runtime():
                 #print(filename, timedelta(seconds=data["train_runtime"]))
 
             losses[paramCount][rank] = data["train_loss"]
+
+            runtimesDict[paramCount][rank] = data["train_runtime"]
+
+    print(runtimesDict)
 
     print(runtimes)
     for paramCount in runtimes:
@@ -859,7 +864,7 @@ if __name__ == '__main__':
     #plot_grassmann()
     #print_absolute()
 
-    #print_runtime()
+    print_runtime()
     #plot_loss()
 
     #print_absolute_singular()
