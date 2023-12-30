@@ -832,6 +832,12 @@ def plotSeedSimilarity():
     with open("grassmann/seed.pickle", "rb") as handle:
         grassmann_matrix = pickle.load(handle)
 
+    if False:
+        with open("simScores.txt", "w") as f:
+            for i in range(grassmann_matrix.shape[0]):
+                for j in range(grassmann_matrix.shape[1]):
+                    f.write(f"{j+1} {64-i} {grassmann_matrix[i, j]}\n")
+
     fig, ax = plt.subplots()
     cax = ax.imshow(grassmann_matrix, interpolation='nearest', aspect='auto')
     fig.colorbar(cax)
