@@ -79,7 +79,8 @@ def count(path, sequencePart="output", maxTokens=max_sequence_length):
 #count("data/de_articles_alpaca.json", "output", 1024)
 
 example = tokenizer(
-    ["This evaluation serves the analysis of recorded BDE time tickets."],
+    #["This evaluation serves the analysis of recorded BDE time tickets."],
+    ["inprovis outprovis"],
     max_length=2**20,
     truncation=True,
     add_special_tokens=False,

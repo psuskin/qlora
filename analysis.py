@@ -713,6 +713,11 @@ def print_sign_changes(sign_changes=None):
 
     exit()
 
+from transformers import (
+    AutoTokenizer,
+    LlamaTokenizer
+)
+import pandas as pd
 def print_low():
     with open("bleu.pickle", "rb") as f:
         bleuScoresOrig = pickle.load(f)
@@ -727,9 +732,66 @@ def print_low():
             evalIndices.append((index - 1) // 2)
 
     bleuScoresNoEval = [(data[2 * i + 1]["output"], score) for i, score in enumerate(bleuScoresOrig[13][64]) if i not in evalIndices]
+    bleuScoresNoEval7 = [(data[2 * i + 1]["output"], score) for i, score in enumerate(bleuScoresOrig[7][64]) if i not in evalIndices]
+    print("Correlation:", np.corrcoef([score for _, score in bleuScoresNoEval], [score for _, score in bleuScoresNoEval7])[0, 1])
 
-    for lowScore in sorted(bleuScoresNoEval, key=lambda tup: tup[1])[:10]:
-        print(f"{lowScore[0]}\n")
+    tokenizer = AutoTokenizer.from_pretrained(
+        "meta-llama/Llama-2-7b-hf",
+        cache_dir=None,
+        padding_side="right",
+        use_fast=False, # Fast tokenizer giving issues.
+        tokenizer_type='llama' if 'llama' in "meta-llama/Llama-2-7b-hf" else None, # Needed for HF name change
+        trust_remote_code=False,
+        use_auth_token=True,
+    )
+    if tokenizer._pad_token is None:
+        tokenizer.add_special_tokens(dict(pad_token="[PAD]"))
+    if 'llama' in "meta-llama/Llama-2-7b-hf" or isinstance(tokenizer, LlamaTokenizer):
+        # LLaMA tokenizer may not have correct special tokens set.
+        # Check and add them if missing to prevent them from being parsed into different tokens.
+        # Note that these are present in the vocabulary.
+        # Note also that `model.config.pad_token_id` is 0 which corresponds to `<unk>` token.
+        print('Adding special tokens.')
+        tokenizer.add_special_tokens({
+                "eos_token": tokenizer.convert_ids_to_tokens(2),
+                "bos_token": tokenizer.convert_ids_to_tokens(1),
+                "unk_token": tokenizer.convert_ids_to_tokens(tokenizer.pad_token_id),
+        })
+
+    badSamples = [lowScore[0] for lowScore in sorted(bleuScoresNoEval, key=lambda tup: tup[1])[:20]]
+    #print(badSamples)
+    print([badSample[:40] for badSample in badSamples])
+    print([lowScore[1] for lowScore in sorted(bleuScoresNoEval, key=lambda tup: tup[1])[:20]])
+
+    badSamplesTokenized = tokenizer(badSamples, max_length=2**20, truncation=True, add_special_tokens=False)
+
+    tokenCounts = [len(input_ids) for input_ids in badSamplesTokenized["input_ids"]]
+    s = pd.Series(tokenCounts)
+    print(s.describe())
+
+    with open("bleu-7b-r64-seeds.pickle", "rb") as f:
+        bleuScoresSeeds = pickle.load(f)
+    responses = bleuScoresSeeds[1]["responses"]
+    origResponses = []
+    for badSample in badSamples:
+        for response in responses:
+            if badSample[:40] in response:
+                origResponses.append(response)
+    #print(origResponses)
+    origResponsesTokenized = tokenizer(origResponses, max_length=2**20, truncation=True, add_special_tokens=False)
+
+    origSamples = []
+    for badSample in badSamples:
+        for sample in data:
+            if badSample[:40] in sample["output"]:
+                origSamples.append(sample["output"])
+    print(len(origSamples))
+    
+    origSamplesTokenized = tokenizer(origSamples, max_length=2**20, truncation=True, add_special_tokens=False)
+
+    tokenCounts = [len(input_ids) for input_ids in origSamplesTokenized["input_ids"]]
+    s = pd.Series(tokenCounts)
+    print(s.describe())
 
     exit()
 
@@ -864,7 +926,7 @@ if __name__ == '__main__':
     #plot_grassmann()
     #print_absolute()
 
-    print_runtime()
+    #print_runtime()
     #plot_loss()
 
     #print_absolute_singular()
@@ -876,11 +938,11 @@ if __name__ == '__main__':
 
     #print_adapter_singular()
 
-    #print_low()
+    print_low()
 
     #print_change()
 
-    plotSeedSimilarity()
+    #plotSeedSimilarity()
 
     models = {}
     for directory in os.listdir(PATH):
@@ -891,7 +953,7 @@ if __name__ == '__main__':
         if "alpaca" in directory:
             models[directory] = Model(os.path.join("output", directory))
 
-    seedSimilarity("alpaca-2-7b-r64", "alpaca-2-7b-r64-seed1")
+    #seedSimilarity("alpaca-2-7b-r64", "alpaca-2-7b-r64-seed1")
 
     #print(models["alpaca-2-7b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape)  # 4096
     #print(models["alpaca-2-13b-r64"].layers[0].modules["self_attn.q_proj"]["A"]["init"].matrix.shape) # 5120
