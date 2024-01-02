@@ -40,7 +40,7 @@ def load_model(model_name_or_path='huggyllama/llama-7b', adapter_path=None):
 
     return base_model, finetuned_model, tokenizer
 
-def generate(model, tokenizer, prompt, finetuned=False, EN=True, max_new_tokens=512, top_p=1, temperature=0.01):
+def generate(model, tokenizer, prompt, finetuned=False, EN=True, max_new_tokens=2000, top_p=1, temperature=0.01):
     if finetuned:
         if EN:
             promptAlpaca = "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\n{instruction}\n\nResponse:".format(instruction=prompt)
@@ -68,7 +68,11 @@ def generate(model, tokenizer, prompt, finetuned=False, EN=True, max_new_tokens=
     return text.replace(promptAlpaca, '').strip()
 
 if __name__ == "__main__":
-    base_model, finetuned_model, tokenizer = load_model('huggyllama/llama-7b', 'output/guanaco-7b-autoregressive/checkpoint-1000/adapter_model')
+    #base_model, finetuned_model, tokenizer = load_model('huggyllama/llama-7b', 'output/guanaco-7b-autoregressive/checkpoint-1000/adapter_model')
+    base_model, finetuned_model, tokenizer = load_model('meta-llama/Llama-2-7b-hf', '/home/psuskin/repos/analysis/alpaca-2-7b-r64/checkpoint-1875/adapter_model')
 
     while (prompt := input("Enter prompt: ")) != "exit":
-        print(f"\nNetwork output: {generate(finetuned_model, tokenizer, prompt, False)}\n")
+        print(f"\nNetwork output: {generate(finetuned_model, tokenizer, prompt, True)}\n")
+
+    while (prompt := input("Enter prompt: ")) != "exit":
+        print(f"\nNetwork output: {generate(base_model, tokenizer, prompt, False, True, 2000, 0.6, 0.9)}\n")
