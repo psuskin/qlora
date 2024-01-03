@@ -654,8 +654,8 @@ def print_bleu():
                 cumulative = np.cumsum(values)
                 #plt.plot(bins[:-1], cumulative, label=f"{paramCount}-{rank}: {sum(i == 1 for i in bleuScores[paramCount][rank])} perfect scores", linestyle="dashed" if paramCount == 13 else None, color=colors[rank])
 
-                print(paramCount, rank)
-                print(*zip(bins[:-1], cumulative))
+                #print(paramCount, rank)
+                #print(*zip(bins[:-1], cumulative))
 
                 # plt.plot(bins[:-2], values[:-1], label=f"{paramCount}-{rank}")
 
@@ -665,7 +665,8 @@ def print_bleu():
                         #print(round(statistics.mean(bleuScores[paramCount][rank]), 2))
                         print(sum(i == 1 for i in bleuScores[paramCount][rank]))
                 """
-
+                #if bleuScores == bleuScoresOrig:
+                #    continue
                 print(paramCount, rank, round(statistics.mean(bleuScores[paramCount][rank]), 2), round(statistics.stdev(bleuScores[paramCount][rank]), 2), f"\t{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
         #plt.legend()
         #plt.xlabel("BLEU score")
@@ -775,7 +776,7 @@ def print_low():
 
     badCount = 20
     badSamples = [lowScore[0] for lowScore in sorted(bleuScoresNoEval, key=lambda tup: tup[1])[:badCount]]
-    #print(badSamples)
+    #print(badSamples[:2])
     print([badSample[:40] for badSample in badSamples])
     print([lowScore[1] for lowScore in sorted(bleuScoresNoEval, key=lambda tup: tup[1])[:badCount]])
 
@@ -796,7 +797,7 @@ def print_low():
         for response in responses:
             if badSample[:40] in response[1]:
                 origResponses.append(response)
-    #print(origResponses)
+    print(origResponses[0])
 
     exit()
 
@@ -937,13 +938,13 @@ if __name__ == '__main__':
     #print_absolute_singular()
     #print_differences()
 
-    print_bleu()
+    #print_bleu()
 
     #print_sign_changes()
 
     #print_adapter_singular()
 
-    #print_low()
+    print_low()
 
     #print_change()
 
