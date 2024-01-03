@@ -663,6 +663,13 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
             json.dump(evalSamples, f, ensure_ascii=False, indent=4)
         print("Saved evaluation samples.")
 
+        trainingSamples = []
+        for sample in dataset['train']:
+            trainingSamples.append(sample)
+        with open(os.path.join(args.output_dir, "trainingSamples.json"), 'w', encoding='utf-8') as f:
+            json.dump(trainingSamples, f, ensure_ascii=False, indent=4)
+        print("Saved training samples.")
+
         if args.group_by_length:
             eval_dataset = eval_dataset.map(lambda x: {'length': len(x['input']) + len(x['output'])})
     if args.do_train:
