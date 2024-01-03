@@ -609,19 +609,29 @@ def print_bleu():
 
     with open("data/en_articles_alpaca.json", encoding="utf-8") as f:
         data = json.load(f)
+    """
     with open("evalSamples.json", encoding="utf-8") as f:
         evalSamples = json.load(f)
     evalIndices = []
     for sample in evalSamples:
         if (index := data.index(sample)) % 2:
             evalIndices.append((index - 1) // 2)
+    """
+    with open("trainingSamples.json", encoding="utf-8") as f:
+        trainingSamples = json.load(f)
+    trainingIndices = []
+    for sample in trainingSamples:
+        if (index := data.index(sample)) % 2:
+            trainingIndices.append((index - 1) // 2)
     #print(np.asarray(bleuScoresOrig[7][64])[evalIndices])
 
     bleuScoresNoEval = rec_dd()
     for paramCount in bleuScoresOrig:
         for rank in sorted(bleuScoresOrig[paramCount]):
             #plt.plot(bleuScoresOrig[paramCount][rank], label=f"{paramCount}-{rank}")
-            bleuScoresNoEval[paramCount][rank] = [score for i, score in enumerate(bleuScoresOrig[paramCount][rank]) if i not in evalIndices]
+
+            #bleuScoresNoEval[paramCount][rank] = [score for i, score in enumerate(bleuScoresOrig[paramCount][rank]) if i not in evalIndices]
+            bleuScoresNoEval[paramCount][rank] = [score for i, score in enumerate(bleuScoresOrig[paramCount][rank]) if i in trainingIndices]
     #plt.show()
     #plt.close()
 
@@ -644,27 +654,23 @@ def print_bleu():
                 cumulative = np.cumsum(values)
                 #plt.plot(bins[:-1], cumulative, label=f"{paramCount}-{rank}: {sum(i == 1 for i in bleuScores[paramCount][rank])} perfect scores", linestyle="dashed" if paramCount == 13 else None, color=colors[rank])
 
-                #print(paramCount, rank)
-                #print(*zip(bins[:-1], cumulative))
+                print(paramCount, rank)
+                print(*zip(bins[:-1], cumulative))
 
                 # plt.plot(bins[:-2], values[:-1], label=f"{paramCount}-{rank}")
+
+                """
+                if bleuScores == bleuScoresNoEval:
+                    if rank < 65 and rank != 63:
+                        #print(round(statistics.mean(bleuScores[paramCount][rank]), 2))
+                        print(sum(i == 1 for i in bleuScores[paramCount][rank]))
+                """
 
                 print(paramCount, rank, round(statistics.mean(bleuScores[paramCount][rank]), 2), round(statistics.stdev(bleuScores[paramCount][rank]), 2), f"\t{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
         #plt.legend()
         #plt.xlabel("BLEU score")
         #plt.ylabel("Cumulative count (dataset size of 630 samples)")
         #plt.show()
-
-        models = [f"{paramCount}-{rank}" for paramCount in bleuScores for rank in bleuScores[paramCount]]
-        singleWinners = defaultdict(int)
-        multiWinners = defaultdict(int)
-        for scores in zip(*[bleuScores[paramCount][rank] for paramCount in bleuScores for rank in bleuScores[paramCount]]):
-            if (winner := max_index(scores, single=True)) != -1:
-                singleWinners[models[winner]] += 1
-            for winner in max_index(scores):
-                multiWinners[models[winner]] += 1
-        print(singleWinners)
-        print(multiWinners)
 
     exit()
 
@@ -724,15 +730,24 @@ def print_low():
 
     with open("data/en_articles_alpaca.json", encoding="utf-8") as f:
         data = json.load(f)
+    """
     with open("evalSamples.json", encoding="utf-8") as f:
         evalSamples = json.load(f)
     evalIndices = []
     for sample in evalSamples:
         if (index := data.index(sample)) % 2:
             evalIndices.append((index - 1) // 2)
+    """
+    with open("trainingSamples.json", encoding="utf-8") as f:
+        trainingSamples = json.load(f)
+    trainingIndices = []
+    for sample in trainingSamples:
+        if (index := data.index(sample)) % 2:
+            trainingIndices.append((index - 1) // 2)
 
-    bleuScoresNoEval = [(data[2 * i + 1]["output"], score) for i, score in enumerate(bleuScoresOrig[13][64]) if i not in evalIndices]
-    bleuScoresNoEval7 = [(data[2 * i + 1]["output"], score) for i, score in enumerate(bleuScoresOrig[7][64]) if i not in evalIndices]
+    bleuScoresNoEval = [(data[2 * i + 1]["output"], score) for i, score in enumerate(bleuScoresOrig[13][64]) if i in trainingIndices]
+    bleuScoresNoEval7 = [(data[2 * i + 1]["output"], score) for i, score in enumerate(bleuScoresOrig[7][64]) if i in trainingIndices]
+    print("Correlation:", np.corrcoef(bleuScoresOrig[13][64], bleuScoresOrig[7][64])[0, 1])
     print("Correlation:", np.corrcoef([score for _, score in bleuScoresNoEval], [score for _, score in bleuScoresNoEval7])[0, 1])
 
     tokenizer = AutoTokenizer.from_pretrained(
@@ -758,10 +773,14 @@ def print_low():
                 "unk_token": tokenizer.convert_ids_to_tokens(tokenizer.pad_token_id),
         })
 
-    badSamples = [lowScore[0] for lowScore in sorted(bleuScoresNoEval, key=lambda tup: tup[1])[:20]]
+    badCount = 20
+    badSamples = [lowScore[0] for lowScore in sorted(bleuScoresNoEval, key=lambda tup: tup[1])[:badCount]]
     #print(badSamples)
     print([badSample[:40] for badSample in badSamples])
-    print([lowScore[1] for lowScore in sorted(bleuScoresNoEval, key=lambda tup: tup[1])[:20]])
+    print([lowScore[1] for lowScore in sorted(bleuScoresNoEval, key=lambda tup: tup[1])[:badCount]])
+
+    badSamples7 = [lowScore[0] for lowScore in sorted(bleuScoresNoEval7, key=lambda tup: tup[1])[:badCount]]
+    print(sum(badSample in badSamples7 for badSample in badSamples))
 
     badSamplesTokenized = tokenizer(badSamples, max_length=2**20, truncation=True, add_special_tokens=False)
 
@@ -771,27 +790,13 @@ def print_low():
 
     with open("bleu-7b-r64-seeds.pickle", "rb") as f:
         bleuScoresSeeds = pickle.load(f)
-    responses = bleuScoresSeeds[1]["responses"]
+    responses = zip(bleuScoresSeeds[1]["scores"], bleuScoresSeeds[1]["responses"])
     origResponses = []
     for badSample in badSamples:
         for response in responses:
-            if badSample[:40] in response:
+            if badSample[:40] in response[1]:
                 origResponses.append(response)
     #print(origResponses)
-    origResponsesTokenized = tokenizer(origResponses, max_length=2**20, truncation=True, add_special_tokens=False)
-
-    origSamples = []
-    for badSample in badSamples:
-        for sample in data:
-            if badSample[:40] in sample["output"]:
-                origSamples.append(sample["output"])
-    print(len(origSamples))
-    
-    origSamplesTokenized = tokenizer(origSamples, max_length=2**20, truncation=True, add_special_tokens=False)
-
-    tokenCounts = [len(input_ids) for input_ids in origSamplesTokenized["input_ids"]]
-    s = pd.Series(tokenCounts)
-    print(s.describe())
 
     exit()
 
@@ -932,13 +937,13 @@ if __name__ == '__main__':
     #print_absolute_singular()
     #print_differences()
 
-    #print_bleu()
+    print_bleu()
 
     #print_sign_changes()
 
     #print_adapter_singular()
 
-    print_low()
+    #print_low()
 
     #print_change()
 

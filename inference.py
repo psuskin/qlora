@@ -69,6 +69,7 @@ def generate(model, tokenizer, prompt, finetuned=False, EN=True, max_new_tokens=
 
 if __name__ == "__main__":
     #base_model, finetuned_model, tokenizer = load_model('huggyllama/llama-7b', 'output/guanaco-7b-autoregressive/checkpoint-1000/adapter_model')
+
     base_model, finetuned_model, tokenizer = load_model('meta-llama/Llama-2-7b-hf', '/home/psuskin/repos/analysis/alpaca-2-7b-r64/checkpoint-1875/adapter_model')
 
     while (prompt := input("Enter prompt: ")) != "exit":
