@@ -634,6 +634,30 @@ def print_bleu():
             bleuScoresNoEval[paramCount][rank] = [score for i, score in enumerate(bleuScoresOrig[paramCount][rank]) if i in trainingIndices]
     #plt.show()
     #plt.close()
+            
+    colorsPerformance = [
+        "dd776e",
+        "e0816d",
+        "e2886c",
+        "e5926b",
+        "e79a69",
+        "e9a268",
+        "ecac67",
+        "e6ad61",
+        "e9b861",
+        "f3c563",
+        "f5ce62",
+        "e2c965",
+        "d4c86a",
+        "c4c56d",
+        "b0be6e",
+        "a4c073",
+        "94bd77",
+        "84bb7b",
+        "73b87e",
+        "63b682",
+        "57bb8a"
+    ]
 
     for bleuScores in [bleuScoresOrig, bleuScoresNoEval]:
         colors = {
@@ -668,6 +692,8 @@ def print_bleu():
                 #if bleuScores == bleuScoresOrig:
                 #    continue
                 print(paramCount, rank, round(statistics.mean(bleuScores[paramCount][rank]), 2), round(statistics.stdev(bleuScores[paramCount][rank]), 2), f"\t{sum(i < 0.12 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}", f"\t{sum(i == 1 for i in bleuScores[paramCount][rank])} / {len(bleuScores[paramCount][rank])}")
+
+                print(colorsPerformance[int(statistics.mean(bleuScores[paramCount][rank]) * len(colorsPerformance))])
         #plt.legend()
         #plt.xlabel("BLEU score")
         #plt.ylabel("Cumulative count (dataset size of 630 samples)")
@@ -938,13 +964,13 @@ if __name__ == '__main__':
     #print_absolute_singular()
     #print_differences()
 
-    #print_bleu()
+    print_bleu()
 
     #print_sign_changes()
 
     #print_adapter_singular()
 
-    print_low()
+    #print_low()
 
     #print_change()
 
