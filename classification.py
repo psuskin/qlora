@@ -75,8 +75,8 @@ If a question does not make any sense, or is not factually coherent, explain why
         text = tokenizer.decode(outputs[0], skip_special_tokens=True)
         response = text.split("[/INST]", 1)[1].strip()
 
-        print(response)
-        exit()
+        #print(response)
+        #exit()
 
         pattern = re.compile(r'\d+\.\s(.+?)(?:\n|$)')
         matches = pattern.findall(response)
@@ -201,7 +201,8 @@ def inference(modelName, threshold=None):
 
         for prompt in prompts:
             output = classifier(prompt[0])[0]
-            print(f"{modules[int(output['label'].replace('LABEL_', ''))]}:\t{output['score']}", prompt[1])
+            label = int(output['label'].replace('LABEL_', ''))
+            print(f"{modules[label]} ({label}):\t{output['score']}", modules[prompt[1]], prompt[1])
     else:
         for prompt in prompts:
             inputs = tokenizer(prompt[0], return_tensors="pt")
@@ -211,7 +212,7 @@ def inference(modelName, threshold=None):
             high_probs = probabilities[0, high_prob_indices]
             labels = sorted(zip(high_prob_indices, high_probs), key=lambda x: x[1], reverse=True)
 
-            print(prompt[0], "Correct module:", modules[prompt[1]])
+            print(prompt[0], "Correct module:", modules[prompt[1]], prompt[1])
             for label in labels:
                 print(f"{modules[label[0]]}:\t{label[1]}")
             print()
@@ -219,7 +220,7 @@ def inference(modelName, threshold=None):
 
 if __name__ == '__main__':
     #instruct()
-    instruct(10)
+    #instruct(10)
 
     #finetune()
     #finetuneNoEval()
@@ -228,4 +229,5 @@ if __name__ == '__main__':
     #inference("distilbert-base-uncased-classification/checkpoint-30000")
     #inference("distilbert-base-uncased-classification-noeval/checkpoint-30000")
     #inference("distilbert-base-uncased-classification-instruct/checkpoint-100000", 0.1)
-    #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000", 0.1)
+    inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000")
+    inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000", 0.1)
