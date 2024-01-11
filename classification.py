@@ -172,13 +172,18 @@ def finetuneNoEval():
 def inference(modelName, threshold=None):
     prompts = [
         "Which module provides version and copyright information?", # 0
+
         "How can I calculate the current time in another location?", # 627
+        "How can I calculate the current time in another location while accounting for discrepancies due to time zones?", # 627
+
         "Tell me how to test of the conversion of a temperature into the different heat units.", # 460
         "Where do I record both flexitime and operating data (BDE)?", # 626
         "Where can I check offer/order data?", # 608
         "Help me with inspection of partner data.", # 609
         "Provide me with resources on inspection of purchasing data.", # 610
+
         "Parts lists describe the composition of a production part. A bill of material consists of parts, which in turn can have a bill of material.", # 45
+        "Which module am I referencing? Parts lists describe the composition of a production part. A bill of material consists of parts, which in turn can have a bill of material.", # 45
     ]
 
     model = AutoModelForSequenceClassification.from_pretrained(f"output/{modelName}")
