@@ -708,13 +708,19 @@ def print_differences(differences=None):
 
     difference = differences["alpaca-2-7b-r64"][0]["self_attn.q_proj"]["A"]
 
-    fig, ax = plt.subplots()
-    cax = ax.imshow(difference, interpolation='nearest', aspect='auto')
-    fig.colorbar(cax)
-    ax.xaxis.tick_bottom()
-    plt.title("Finetuned adapter delta\n(factor $\it{A}$ of query projection in first layer of LLaMA-2-7b)")
-    plt.savefig("difference.pdf")
-    plt.close()
+    if False:
+        fig, ax = plt.subplots()
+        cax = ax.imshow(difference, interpolation='nearest', aspect='auto')
+        fig.colorbar(cax)
+        ax.xaxis.tick_bottom()
+        plt.title("Finetuned adapter delta\n(factor $\it{A}$ of query projection in first layer of LLaMA-2-7b)")
+        plt.savefig("difference.pdf")
+        plt.close()
+    else:
+        img = plt.imshow(difference, interpolation='nearest', aspect='auto')
+        plt.axis('off')
+        plt.savefig("differencePlain.pdf", bbox_inches='tight', pad_inches=0)
+        plt.close()
 
     exit()
 
@@ -962,9 +968,9 @@ if __name__ == '__main__':
     #plot_loss()
 
     #print_absolute_singular()
-    #print_differences()
+    print_differences()
 
-    print_bleu()
+    #print_bleu()
 
     #print_sign_changes()
 
