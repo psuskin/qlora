@@ -1,0 +1,2510 @@
+[
+    {
+        "input": "Which module is responsible for displaying the version number of the software?",
+        "label": 0
+    },
+    {
+        "input": "Which module is responsible for recording logistical and MRP movements and quantities by company code?",
+        "label": 1
+    },
+    {
+        "input": "Which module is responsible for maintaining street addresses?",
+        "label": 3
+    },
+    {
+        "input": "Which module is responsible for managing and organizing addresses for communication and shipping purposes?",
+        "label": 4
+    },
+    {
+        "input": "Which module is responsible for allowing users to search using the dictionary and list fields?",
+        "label": 5
+    },
+    {
+        "input": "Which module is responsible for handling advance VAT returns, according to the description?",
+        "label": 6
+    },
+    {
+        "input": "Which module is responsible for managing the flight plan of an aircraft?",
+        "label": 7
+    },
+    {
+        "input": "Which module is responsible for displaying the current date and time?",
+        "label": 8
+    },
+    {
+        "input": "Which module is responsible for displaying all uses of a part in parts lists?",
+        "label": 9
+    },
+    {
+        "input": "Which module is responsible for displaying the usage of a workstation in production orders?",
+        "label": 10
+    },
+    {
+        "input": "Which module is responsible for selecting parts and/or warehouses for consumption?",
+        "label": 11
+    },
+    {
+        "input": "Which module is responsible for analyzing recorded BDE time tickets?",
+        "label": 12
+    },
+    {
+        "input": "Which module is responsible for creating a new app from an existing one?",
+        "label": 13
+    },
+    {
+        "input": "Which module is responsible for generating a new module using a template?",
+        "label": 14
+    },
+    {
+        "input": "Which module is responsible for creating a new app by inheriting and modifying an existing app?",
+        "label": 15
+    },
+    {
+        "input": "Which module is responsible for displaying documents from existing approval processes that the current user can approve?",
+        "label": 16
+    },
+    {
+        "input": "Which module is responsible for managing recurring tasks in the system?",
+        "label": 17
+    },
+    {
+        "input": "Which module is responsible for displaying all modules and apps of the AppsWarehouse®?",
+        "label": 18
+    },
+    {
+        "input": "Which module is responsible for determining the loaded modules of the current ClassiX® instance?",
+        "label": 19
+    },
+    {
+        "input": "Which module is responsible for valuing the inventory for a given financial year and determining the automatic depreciation possible for tax purposes?",
+        "label": 20
+    },
+    {
+        "input": "Which module is responsible for reconciling postings within financial accounting to accounts for fixed assets?",
+        "label": 21
+    },
+    {
+        "input": "Which module is responsible for tracking the development of fixed assets from their original acquisition or production costs to their residual book value on the balance sheet date?",
+        "label": 22
+    },
+    {
+        "input": "Which module is responsible for creating documents with documents from the document master?",
+        "label": 23
+    },
+    {
+        "input": "Which module is responsible for managing the creation and insertion of characteristics tables?",
+        "label": 24
+    },
+    {
+        "input": "Which module is responsible for creating a conditional attribute that determines the value of a wrapped data field using a conditional table?",
+        "label": 25
+    },
+    {
+        "input": "Which module is responsible for determining the value of a wrapped data field using a formula?",
+        "label": 26
+    },
+    {
+        "input": "Which module is responsible for preset material characteristics in ClassiX®?",
+        "label": 27
+    },
+    {
+        "input": "Which module is responsible for changing the value of an attribute in the app?",
+        "label": 28
+    },
+    {
+        "input": "Which module is responsible for listing all attributes, regardless of their type (preset, calculated, conditional, or table)?",
+        "label": 29
+    },
+    {
+        "input": "Which module is responsible for allowing objects to have freely definable attributes?",
+        "label": 30
+    },
+    {
+        "input": "Which module is responsible for determining the characteristics of a variant part?",
+        "label": 31
+    },
+    {
+        "input": "Which module is responsible for enabling the gradual and conditional expression of attributes in product configuration?",
+        "label": 32
+    },
+    {
+        "input": "Which module is responsible for wrapping a dynamic data field with a value specification?",
+        "label": 33
+    },
+    {
+        "input": "Which module is responsible for sending trace instructions from the program code to the auditing app?",
+        "label": 34
+    },
+    {
+        "input": "Which module is responsible for providing a clear overview of material bottlenecks for selected parts in a given period?",
+        "label": 35
+    },
+    {
+        "input": "Which module is responsible for evaluating the existence and replenishment time of planned goods receipts during the date control?",
+        "label": 36
+    },
+    {
+        "input": "Which module is responsible for displaying the annual and period balances of offers, orders, invoices, and credit notes booked in the business areas?",
+        "label": 37
+    },
+    {
+        "input": "Which module displays the annual and period balances of cost centre, cost type, and cost unit accounts posted in cost accounting?",
+        "label": 38
+    },
+    {
+        "input": "Which module is responsible for displaying the annual and period balances of a general ledger or personal account in financial accounting?",
+        "label": 39
+    },
+    {
+        "input": "Which module is responsible for maintaining the bank details of partner objects, as described in the module description?",
+        "label": 40
+    },
+    {
+        "input": "Which module is responsible for managing a register of bank codes or bank identification numbers to protect against incorrect entries?",
+        "label": 41
+    },
+    {
+        "input": "Which module is responsible for collecting data operations that are below the visible range and preventing error messages from being output directly to the user?",
+        "label": 42
+    },
+    {
+        "input": "Which module is responsible for managing the conditional list of individual BOM items, also known as variants, in a bill of material?",
+        "label": 43
+    },
+    {
+        "input": "Which module is responsible for creating and managing invoices?",
+        "label": 44
+    },
+    {
+        "input": "Which module is responsible for managing the composition of a production part?",
+        "label": 45
+    },
+    {
+        "input": "Which module is responsible for recording individual parts list entries?",
+        "label": 46
+    },
+    {
+        "input": "Which module is responsible for identifying blockages in the machine?",
+        "label": 47
+    },
+    {
+        "input": "Which module is primarily responsible for preparing budget offers (short offers) in support of sales/field service?",
+        "label": 48
+    },
+    {
+        "input": "Which module is responsible for defining the various sales areas or markets based on the business segments?",
+        "label": 49
+    },
+    {
+        "input": "Which module is responsible for maintaining production times?",
+        "label": 50
+    },
+    {
+        "input": "Which module is responsible for adjusting the display of the calendar according to the location's week starting day?",
+        "label": 51
+    },
+    {
+        "input": "Which module is responsible for generating the reversal document?",
+        "label": 52
+    },
+    {
+        "input": "Which module is responsible for calculating the planned workload of an employee?",
+        "label": 53
+    },
+    {
+        "input": "Which module is responsible for managing the inheritance of vehicles from parts in the CyberEnterprise® Enterprise Model?",
+        "label": 54
+    },
+    {
+        "input": "Which module is responsible for managing the distribution of vouchers to customers?",
+        "label": 55
+    },
+    {
+        "input": "Which module is responsible for managing the purchase and sale of vehicle stock in the application?",
+        "label": 56
+    },
+    {
+        "input": "Which module is responsible for recording the expenditure/receipts of a cash office?",
+        "label": 57
+    },
+    {
+        "input": "Which module manages the process of assigning payment terms to purchase orders?",
+        "label": 58
+    },
+    {
+        "input": "Which module is responsible for displaying the costs accrued on cost centers for a selected posting period?",
+        "label": 59
+    },
+    {
+        "input": "Which module is responsible for displaying the current costs and planned costs (with variance in %) of a selected posting period for a cost centre?",
+        "label": 60
+    },
+    {
+        "input": "Which module is responsible for managing the down payment requests and final invoices described in the payment plan amounts?",
+        "label": 61
+    },
+    {
+        "input": "Which module is responsible for entering received cheques in the entry books?",
+        "label": 62
+    },
+    {
+        "input": "Which module is responsible for copying sales types, sales articles, and complete offers or orders in ClassiX®?",
+        "label": 63
+    },
+    {
+        "input": "Which module is responsible for displaying the classes of the CyberEnterprise® enterprise model in a tree structure?",
+        "label": 64
+    },
+    {
+        "input": "Which module is responsible for displaying the summary of the commission account balance list during a specific posting period?",
+        "label": 65
+    },
+    {
+        "input": "Which module is responsible for generating account sheets/statements of cost accounts in the operational accounting system?",
+        "label": 66
+    },
+    {
+        "input": "Which module is responsible for displaying the accumulated costs posted in financial accounting?",
+        "label": 67
+    },
+    {
+        "input": "Which module is responsible for displaying the table columns?",
+        "label": 68
+    },
+    {
+        "input": "Which module is responsible for capturing and maintaining monolingual or multilingual notes on objects?",
+        "label": 69
+    },
+    {
+        "input": "Which module is responsible for recording the client's agreement with a representative for the payment of a commission?",
+        "label": 70
+    },
+    {
+        "input": "Which module is responsible for assigning accounts based on the classification term \"sales statistics\"?",
+        "label": 71
+    },
+    {
+        "input": "Which module is responsible for storing customer-specific conditions in a customer role, which are automatically adopted when a quotation/order is created?",
+        "label": 72
+    },
+    {
+        "input": "Which module is responsible for creating and managing condition groups for different types of orders?",
+        "label": 73
+    },
+    {
+        "input": "Which module is responsible for calculating and applying additional fees or discounts to the price of a document?",
+        "label": 74
+    },
+    {
+        "input": "Which module is responsible for defining the warranty period and number of shifts for a business object?",
+        "label": 75
+    },
+    {
+        "input": "Which module is responsible for the professional title \"Berater\"?",
+        "label": 76
+    },
+    {
+        "input": "Which module is responsible for creating projects and SOFs using an Excel template?",
+        "label": 77
+    },
+    {
+        "input": "Which module is responsible for maintaining the relationships between affiliated companies, including specifying which company is the parent or parent company, or which other companies are subordinates or subsidiaries?",
+        "label": 78
+    },
+    {
+        "input": "Which module is responsible for cost type accounting?",
+        "label": 79
+    },
+    {
+        "input": "Which module is responsible for maintaining and displaying cost centers?",
+        "label": 80
+    },
+    {
+        "input": "Which module is responsible for managing internal cost objects, such as own development orders or trade fair appearances?",
+        "label": 81
+    },
+    {
+        "input": "Which module is responsible for managing cost objects related to marketing and sales activities?",
+        "label": 82
+    },
+    {
+        "input": "Which module is responsible for listing the costs accrued on cost units?",
+        "label": 83
+    },
+    {
+        "input": "Which module is responsible for managing sales cost objects, such as projects?",
+        "label": 84
+    },
+    {
+        "input": "Which module is responsible for managing and tracking costs associated with different business objects, such as cost objects, inventory objects, and documents?",
+        "label": 85
+    },
+    {
+        "input": "Which module is responsible for managing cost objects, including sales opportunities, framework agreements, and internal cost objects?",
+        "label": 86
+    },
+    {
+        "input": "Which module is responsible for assigning cost elements to a higher-level account in financial accounting?",
+        "label": 87
+    },
+    {
+        "input": "Which module is responsible for supporting the Euro symbol and other French special characters in Windows?",
+        "label": 88
+    },
+    {
+        "input": "Which module is responsible for displaying the totals and balance list for vendor accounts during a specific posting period?",
+        "label": 89
+    },
+    {
+        "input": "Which module is responsible for displaying the costs accrued on cost elements for a selected posting period?",
+        "label": 90
+    },
+    {
+        "input": "Which module is responsible for creating business management evaluations (BWA) using classification keys (such as \"P&L,\" \"BWA,\" or \"TAS)?",
+        "label": 91
+    },
+    {
+        "input": "Which module in ClassiX® is responsible for managing current or cash accounts?",
+        "label": 92
+    },
+    {
+        "input": "Which module is responsible for converting currencies when a user initiates a conversion?",
+        "label": 93
+    },
+    {
+        "input": "Which module is responsible for storing the negotiated price of a sales item?",
+        "label": 94
+    },
+    {
+        "input": "Which module is responsible for maintaining access nodes and weighted access paths in a high bay warehouse?",
+        "label": 95
+    },
+    {
+        "input": "Which module is responsible for creating packing lists for internal deliveries to construction sites?",
+        "label": 96
+    },
+    {
+        "input": "Which module is responsible for managing the API keys?",
+        "label": 97
+    },
+    {
+        "input": "Which module is responsible for managing the fixed assets or assets of a company?",
+        "label": 99
+    },
+    {
+        "input": "Which module is responsible for saving the contents of individual mails in a campaign?",
+        "label": 100
+    },
+    {
+        "input": "Which module in ClassiX® is responsible for maintaining postcode registers for different countries?",
+        "label": 101
+    },
+    {
+        "input": "Which module is responsible for loading, comparing, and maintaining commodity codes according to the combined nomenclature of the EU and the SOVA master file of the Federal Statistical Office in Germany?",
+        "label": 102
+    },
+    {
+        "input": "Which module is responsible for handling the conditional logic of the table entries?",
+        "label": 103
+    },
+    {
+        "input": "Which module is responsible for maintaining business-relevant data for contact persons, such as their function, department, and business email and telephone extensions?",
+        "label": 104
+    },
+    {
+        "input": "Which module is responsible for maintaining the number ranges used in the system for master data, such as customers, G/L accounts, and parts?",
+        "label": 105
+    },
+    {
+        "input": "Which module is responsible for maintaining credit card information for partner objects?",
+        "label": 106
+    },
+    {
+        "input": "Which module is responsible for converting currencies in the system?",
+        "label": 107
+    },
+    {
+        "input": "Which module is responsible for managing the software offers (SaaS) used by clients in their respective user accounts?",
+        "label": 108
+    },
+    {
+        "input": "Which module is responsible for defining possible data fields and commands for loading all objects of a data connector?",
+        "label": 109
+    },
+    {
+        "input": "Which module is responsible for describing the attributes and methods of classes?",
+        "label": 110
+    },
+    {
+        "input": "Which module is responsible for setting the margin settings of a document?",
+        "label": 111
+    },
+    {
+        "input": "Which module is responsible for managing and organizing documents in a transaction-based system?",
+        "label": 112
+    },
+    {
+        "input": "Which module is responsible for managing digital documents in ClassiX®?",
+        "label": 113
+    },
+    {
+        "input": "Which module is responsible for creating specialized G/L accounts such as reconciliation accounts, cash accounts, tax accounts, and cash discount accounts?",
+        "label": 114
+    },
+    {
+        "input": "Which module is responsible for managing the company's own production process equipment, instruments, or complex industrial plants?",
+        "label": 115
+    },
+    {
+        "input": "Which module is responsible for tracking the hours worked by field service technicians?",
+        "label": 116
+    },
+    {
+        "input": "Which module is responsible for creating an intermediate storage document when a commodity is ordered from a supplier and sent to a packaging company for delivery to a customer?",
+        "label": 117
+    },
+    {
+        "input": "Which module is responsible for assigning IP addresses to network objects?",
+        "label": 118
+    },
+    {
+        "input": "Which module is responsible for creating and maintaining gozintographs?",
+        "label": 119
+    },
+    {
+        "input": "Which module is responsible for providing options for processing in modules where options are available?",
+        "label": 120
+    },
+    {
+        "input": "Which module is responsible for setting the distinction between a \"Regression\" or a \"Classifying\" neural network?",
+        "label": 121
+    },
+    {
+        "input": "Which module is responsible for automatically generating specifications for variant parts when there are no distinct sub-parts available for booking into the warehouse as surplus or remaining quantity?",
+        "label": 122
+    },
+    {
+        "input": "Which module is responsible for maintaining a multilingual vocabulary in ClassiX®?",
+        "label": 123
+    },
+    {
+        "input": "Which module is responsible for displaying the transactions that originate from a specific company or contact person in the window title?",
+        "label": 124
+    },
+    {
+        "input": "Which module is responsible for recording production data through the use of different windows?",
+        "label": 125
+    },
+    {
+        "input": "Which module is responsible for creating return documents to return goods to suppliers?",
+        "label": 126
+    },
+    {
+        "input": "Which module is responsible for transferring lists from the ClassiX system to other programs, such as Excel?",
+        "label": 127
+    },
+    {
+        "input": "Which module is responsible for creating a sales bill of materials using articles and sets?",
+        "label": 128
+    },
+    {
+        "input": "Which module is responsible for managing customer relationships and sales activities in SAP Business One?",
+        "label": 129
+    },
+    {
+        "input": "Which module is responsible for maintaining the data of meaning objects when they are used together with words in ClassiX®?",
+        "label": 130
+    },
+    {
+        "input": "Which module is responsible for indicating the current processing status of documents?",
+        "label": 131
+    },
+    {
+        "input": "Which module is responsible for automatically determining the status of master data in ClassiX®?",
+        "label": 132
+    },
+    {
+        "input": "Which module is responsible for managing stock quantities of parts in a warehouse or storage aids?",
+        "label": 133
+    },
+    {
+        "input": "Which module is responsible for visually structuring or organizing business objects, such as parts, articles, customers, or financial accounts?",
+        "label": 134
+    },
+    {
+        "input": "Which module is responsible for attaching text modules as conditions to different documents in ClassiX®?",
+        "label": 135
+    },
+    {
+        "input": "Which module is responsible for posting documents to accounts/monitors?",
+        "label": 136
+    },
+    {
+        "input": "Which module is responsible for managing user authentication and authorization for web services?",
+        "label": 137
+    },
+    {
+        "input": "Which module is responsible for displaying a list of all currently open windows in the app?",
+        "label": 138
+    },
+    {
+        "input": "Which module is responsible for defining business processes as a sequence of states?",
+        "label": 139
+    },
+    {
+        "input": "Which module is responsible for creating and managing business processes?",
+        "label": 140
+    },
+    {
+        "input": "Which module is responsible for recording an employee's full-day absences due to illness?",
+        "label": 141
+    },
+    {
+        "input": "Which module is responsible for creating and assigning working time models for employees and cost centers?",
+        "label": 142
+    },
+    {
+        "input": "Which module is responsible for evaluating the recorded working times based on the flexitime rules?",
+        "label": 143
+    },
+    {
+        "input": "Which module is responsible for maintaining the calendar for financial years for financial accounting, asset accounting, and cost accounting?",
+        "label": 144
+    },
+    {
+        "input": "Which module manages the client selection process when logging in to the system?",
+        "label": 145
+    },
+    {
+        "input": "Which module is responsible for backing up the current database at any time?",
+        "label": 146
+    },
+    {
+        "input": "Which module is responsible for loading a data connector from a file?",
+        "label": 147
+    },
+    {
+        "input": "Which module is responsible for displaying the graphical representation of the CyberEnterprise Browser?",
+        "label": 148
+    },
+    {
+        "input": "Which module is responsible for reading and displaying the fields of files in dBase format?",
+        "label": 149
+    },
+    {
+        "input": "Which module is responsible for displaying the totals and balance list for customer accounts during a specific posting period?",
+        "label": 150
+    },
+    {
+        "input": "Which module is responsible for creating and managing dynamic data fields in the application?",
+        "label": 151
+    },
+    {
+        "input": "Which module is responsible for maintaining the document presettings for internal objects such as clients, accounts, and users?",
+        "label": 152
+    },
+    {
+        "input": "Which module is responsible for confirming delivery dates of orders?",
+        "label": 153
+    },
+    {
+        "input": "Which module is responsible for dispatching delivery notes?",
+        "label": 154
+    },
+    {
+        "input": "Which module is responsible for displaying the list of delivery note items in the selection window?",
+        "label": 155
+    },
+    {
+        "input": "Which module is responsible for recording delivery notes?",
+        "label": 156
+    },
+    {
+        "input": "Which module is responsible for providing the list of required data fields as a DataSource for on-time delivery performance evaluation?",
+        "label": 157
+    },
+    {
+        "input": "Which module is responsible for controlling the flow of a dialogue between a user and a programme?",
+        "label": 158
+    },
+    {
+        "input": "Which module is responsible for managing the positions of direct delivery notes?",
+        "label": 159
+    },
+    {
+        "input": "Which module is responsible for entering goods delivered directly to the customer in the direct delivery mask?",
+        "label": 160
+    },
+    {
+        "input": "Which module is responsible for changing the complete structure of a parts list in a production part role to better reflect the actual manufacturing process of the part in production?",
+        "label": 161
+    },
+    {
+        "input": "Which module is responsible for generating interest-free loans to customers as a guarantee for contract fulfillment or short/medium-term financing in the capital goods and plant construction sectors?",
+        "label": 162
+    },
+    {
+        "input": "Which module is responsible for managing the down payment as a guarantee for the supplier's fulfillment of the contract?",
+        "label": 163
+    },
+    {
+        "input": "Which module is responsible for managing the assignment of domains to clients, warehouses, or cost centers?",
+        "label": 164
+    },
+    {
+        "input": "Which module is responsible for providing an overview of down payment requests and final invoices still to be issued?",
+        "label": 165
+    },
+    {
+        "input": "Which module is responsible for reading in a DTAUS file format and displaying the data in an edited form for domestic payments in Germany?",
+        "label": 166
+    },
+    {
+        "input": "Which module is responsible for reading in a DTAZV file format?",
+        "label": 167
+    },
+    {
+        "input": "Which module is responsible for creating the reminder proposal list after entering selection criteria and pressing the \"Lists\" button?",
+        "label": 168
+    },
+    {
+        "input": "Which module is responsible for confirming the VAT registration number of a customer in another EU country through the Internet address http://www.bzst.bund.de?",
+        "label": 169
+    },
+    {
+        "input": "Which module is responsible for displaying the automatically generated emails?",
+        "label": 170
+    },
+    {
+        "input": "Which module is responsible for displaying the summary of an employee's expense account balance list for a specific posting period?",
+        "label": 171
+    },
+    {
+        "input": "Which module is responsible for reading a single cell from an Excel file specified for test purposes?",
+        "label": 172
+    },
+    {
+        "input": "Which module is responsible for reading an entire Excel file?",
+        "label": 173
+    },
+    {
+        "input": "Which module is responsible for exporting old data from the system to Excel?",
+        "label": 174
+    },
+    {
+        "input": "Which module is responsible for elegantly extending enumerations in the classix.num or the corresponding customer derivation?",
+        "label": 175
+    },
+    {
+        "input": "Which module is responsible for manually posting documents about planned receipts/issues in the logistics account?",
+        "label": 176
+    },
+    {
+        "input": "Which module is responsible for documenting the connections between people in a professional setting?",
+        "label": 177
+    },
+    {
+        "input": "Which module is responsible for managing and organizing frequently used contacts or telephone numbers in a tree-like structure?",
+        "label": 178
+    },
+    {
+        "input": "Which module is responsible for generating account sheets/statements based on financial transactions?",
+        "label": 179
+    },
+    {
+        "input": "Which module is responsible for processing all financial transactions related to booking events in financial accounting?",
+        "label": 180
+    },
+    {
+        "input": "Which module is responsible for copying a document as a reversal posting?",
+        "label": 181
+    },
+    {
+        "input": "Which module is responsible for posting documents manually in financial accounting?",
+        "label": 182
+    },
+    {
+        "input": "Which module is responsible for listing the bookings of a certain period?",
+        "label": 183
+    },
+    {
+        "input": "Which module is responsible for determining the connection between sub-ledgers and the general ledger in financial accounting?",
+        "label": 184
+    },
+    {
+        "input": "Which module displays the financial status of companies or persons across all partner functions?",
+        "label": 185
+    },
+    {
+        "input": "Which module is responsible for recording an employee's presence and absence times on a company site in hours?",
+        "label": 186
+    },
+    {
+        "input": "Which module is responsible for creating and managing digital circulars in CyberEnterprise®?",
+        "label": 187
+    },
+    {
+        "input": "Which module is responsible for carrying out order and/or sales planning simultaneously?",
+        "label": 188
+    },
+    {
+        "input": "Which module is responsible for generating and managing user-generated calculation rules in the ClassiX® system?",
+        "label": 189
+    },
+    {
+        "input": "Which module is responsible for automatically carrying forward the balances of G/L and personal accounts from one fiscal year to the next?",
+        "label": 190
+    },
+    {
+        "input": "Which module is responsible for editing a gozintograph in the form of a Gantt chart?",
+        "label": 191
+    },
+    {
+        "input": "Which module is responsible for editing the supply chain of an order in the form of a Gantt chart?",
+        "label": 192
+    },
+    {
+        "input": "Which module is responsible for displaying the termination mode (termination: forward/backward) on the right above the graph?",
+        "label": 193
+    },
+    {
+        "input": "Which module is responsible for displaying the capacity utilization graphically?",
+        "label": 194
+    },
+    {
+        "input": "Which module is responsible for maintaining the G/L accounts defined as reconciliation accounts in financial accounting?",
+        "label": 195
+    },
+    {
+        "input": "Which module is responsible for maintaining the G/L accounts defined as cash accounts in financial accounting?",
+        "label": 196
+    },
+    {
+        "input": "Which module is responsible for creating account evaluations for balance sheet and/or P&L accounts and/or person accounts structured by means of classification terms?",
+        "label": 197
+    },
+    {
+        "input": "Which module is responsible for creating AppsWarehouse® modules based on templates (*.gen)?",
+        "label": 198
+    },
+    {
+        "input": "Which module is responsible for displaying the totals and balances list?",
+        "label": 199
+    },
+    {
+        "input": "Which module is responsible for compiling the results table in the Graphical Data Query Assistant?",
+        "label": 200
+    },
+    {
+        "input": "Which module is responsible for generating the ClassiX® help in HTML format?",
+        "label": 201
+    },
+    {
+        "input": "Which module is responsible for automatically consuming excess quantities of disposable parts in ClassiX®?",
+        "label": 202
+    },
+    {
+        "input": "Which module is responsible for creating and deleting part or service-role relationships?",
+        "label": 203
+    },
+    {
+        "input": "Which module is responsible for creating storage bins?",
+        "label": 204
+    },
+    {
+        "input": "Which module is responsible for showing each index in the database with all its information?",
+        "label": 205
+    },
+    {
+        "input": "Which module is responsible for initializing the fiscal year?",
+        "label": 206
+    },
+    {
+        "input": "Which module is responsible for creating a customer provision document from a parts request?",
+        "label": 207
+    },
+    {
+        "input": "Which module is responsible for posting registered assembly certificates in the financial accounting?",
+        "label": 208
+    },
+    {
+        "input": "Which module is responsible for collecting data on incoming goods from other EU countries?",
+        "label": 209
+    },
+    {
+        "input": "Which module is responsible for displaying the total revenue of final invoices without freight surcharges?",
+        "label": 210
+    },
+    {
+        "input": "Which module is responsible for analyzing inventories to draw conclusions about their quality?",
+        "label": 211
+    },
+    {
+        "input": "Which module is responsible for providing a quick overview of the current stock levels?",
+        "label": 212
+    },
+    {
+        "input": "Which module is responsible for analyzing multiple inventories together?",
+        "label": 213
+    },
+    {
+        "input": "Which module in the app is responsible for tracking and managing inventory levels in the warehouse?",
+        "label": 214
+    },
+    {
+        "input": "Which module is responsible for dividing previously selected inventory items into freely selectable value ranges?",
+        "label": 215
+    },
+    {
+        "input": "Which module is responsible for importing stock data from a materials management system into the ClassiX system?",
+        "label": 216
+    },
+    {
+        "input": "Which module is responsible for carrying out inventory sampling using the stratification procedure in the window?",
+        "label": 217
+    },
+    {
+        "input": "Which module is responsible for recording the counting results of an inventory on a tablet PC or smart phone?",
+        "label": 218
+    },
+    {
+        "input": "Which module is responsible for recording current inventories in the app?",
+        "label": 219
+    },
+    {
+        "input": "Which module is responsible for creating invoice items?",
+        "label": 220
+    },
+    {
+        "input": "Which module is responsible for creating recurring outgoing invoices?",
+        "label": 221
+    },
+    {
+        "input": "Which module is responsible for maintaining sales-specific data, such as sales price and last purchase price, for a part?",
+        "label": 222
+    },
+    {
+        "input": "Which module is responsible for maintaining the part master?",
+        "label": 223
+    },
+    {
+        "input": "Which module is responsible for searching for specific movements of a part in the context of orders and part requests?",
+        "label": 224
+    },
+    {
+        "input": "Which module is responsible for selecting released (order-specific) production parts lists before or during the creation of a gozintograph?",
+        "label": 225
+    },
+    {
+        "input": "Which module is responsible for displaying the selection window for sales order, stock order, and advance requirement items with a completely exploded and technically released bill of materials?",
+        "label": 226
+    },
+    {
+        "input": "Which module is responsible for searching for parts based on logistical criteria or filters visible in the window?",
+        "label": 227
+    },
+    {
+        "input": "Which module is responsible for managing the growth of the parts master due to external and internal variance?",
+        "label": 228
+    },
+    {
+        "input": "Which module is responsible for recording time sheets by the day?",
+        "label": 229
+    },
+    {
+        "input": "Which module is responsible for recording and maintaining time sheets for project-related billing purposes?",
+        "label": 230
+    },
+    {
+        "input": "Which module is responsible for creating the work plans that describe the work steps required to produce a manufacturing part?",
+        "label": 231
+    },
+    {
+        "input": "Which module is responsible for defining different resources in a work sequence, such as due to different characteristics of the part to be produced?",
+        "label": 232
+    },
+    {
+        "input": "Which module is responsible for recording individual work sequences at a workstation/resource?",
+        "label": 233
+    },
+    {
+        "input": "Which module is responsible for handling user-defined access keys (function keys) that can call specific applications?",
+        "label": 234
+    },
+    {
+        "input": "Which module is responsible for determining the set of rules according to which Key Performance Indicators (KPIs) are defined?",
+        "label": 235
+    },
+    {
+        "input": "Which module is responsible for determining key figures from posting processes and master data?",
+        "label": 236
+    },
+    {
+        "input": "Which module is responsible for displaying all relevant data on and about a supplier at a glance?",
+        "label": 237
+    },
+    {
+        "input": "Which module is responsible for storing information about languages?",
+        "label": 238
+    },
+    {
+        "input": "Which module is responsible for displaying the company's home page (www address) in the module description?",
+        "label": 239
+    },
+    {
+        "input": "Which module is responsible for splitting the name into separate parts and searching for them in the company master data using wildcards?",
+        "label": 240
+    },
+    {
+        "input": "Which module is responsible for displaying the list of names and titles of companies in the window?",
+        "label": 241
+    },
+    {
+        "input": "Which module is responsible for temporarily storing a list in a buffer memory?",
+        "label": 242
+    },
+    {
+        "input": "Which module is responsible for displaying texts in the different operating languages in the CyberEnterprise business OS?",
+        "label": 243
+    },
+    {
+        "input": "Which module is responsible for displaying system texts in different operating languages on the CyberEnterprise platform?",
+        "label": 244
+    },
+    {
+        "input": "Which module is responsible for loading ClassiX®'s own DLLs?",
+        "label": 245
+    },
+    {
+        "input": "Which module is responsible for creating, maintaining, and managing location-specific data?",
+        "label": 246
+    },
+    {
+        "input": "Which module is responsible for selecting the client with which you want to work?",
+        "label": 247
+    },
+    {
+        "input": "Which module is responsible for determining the client you want to work with and registering you as an additional user in the system?",
+        "label": 248
+    },
+    {
+        "input": "Which module is responsible for producing or ordering sub-assemblies in advance for scheduling reasons, as described in the module description?",
+        "label": 249
+    },
+    {
+        "input": "Which module is responsible for generating a production parts list for order items without requiring a manual input of production parts?",
+        "label": 250
+    },
+    {
+        "input": "Which module is responsible for finding parts request items with reduced requirement quantities due to cancellations or secondary planning?",
+        "label": 251
+    },
+    {
+        "input": "Which module is responsible for listing periodical bookings on cost types?",
+        "label": 252
+    },
+    {
+        "input": "Which module is responsible for displaying documents from the MRP account and logistics account?",
+        "label": 253
+    },
+    {
+        "input": "Which module is responsible for displaying the disposition status of documents across all document types?",
+        "label": 254
+    },
+    {
+        "input": "Which module is responsible for displaying the selection window for transactions posted in one or more status monitors?",
+        "label": 255
+    },
+    {
+        "input": "Which module displays bookings on commission accounts?",
+        "label": 256
+    },
+    {
+        "input": "Which module is responsible for displaying the list of vendor postings for a single posting period?",
+        "label": 257
+    },
+    {
+        "input": "Which module is responsible for listing bookings on debtor accounts?",
+        "label": 258
+    },
+    {
+        "input": "Which module displays bookings on employee accounts?",
+        "label": 259
+    },
+    {
+        "input": "Which module is responsible for displaying an optimal overview of order items with a delivery status?",
+        "label": 260
+    },
+    {
+        "input": "Which module is responsible for displaying the list of booked work sequences or work orders?",
+        "label": 261
+    },
+    {
+        "input": "Which module is responsible for displaying production order items that have been started but not yet finished?",
+        "label": 262
+    },
+    {
+        "input": "Which module is responsible for managing the display and further processing of parts within the logistics supply chain in a company?",
+        "label": 263
+    },
+    {
+        "input": "Which module is responsible for managing the display and further processing of parts to be provided within the logistics supply chain in a company?",
+        "label": 264
+    },
+    {
+        "input": "Which module is responsible for managing the storage of goods in the warehouse?",
+        "label": 265
+    },
+    {
+        "input": "Which module is responsible for displaying all cost-relevant documents of an order, a group of order items, or individual order items?",
+        "label": 266
+    },
+    {
+        "input": "Which module is responsible for sending the message \"NEW_CYBER\" to start an application without entering a client or user?",
+        "label": 267
+    },
+    {
+        "input": "Which module is responsible for taking over the rights of another user account?",
+        "label": 268
+    },
+    {
+        "input": "Which module is responsible for allowing a logged-in user to swap their login with another user's account?",
+        "label": 269
+    },
+    {
+        "input": "Which module is responsible for confirming logoff when a user presses or selects the logoff button or menu item?",
+        "label": 270
+    },
+    {
+        "input": "Which module is responsible for starting an application by entering a user and password?",
+        "label": 271
+    },
+    {
+        "input": "Which module is responsible for assigning machines to workplaces?",
+        "label": 272
+    },
+    {
+        "input": "Which module is responsible for assigning maintenance plans to machines?",
+        "label": 273
+    },
+    {
+        "input": "Which module is responsible for managing cyclical payment plans for sales orders with the order type \"maintenance contract\"?",
+        "label": 274
+    },
+    {
+        "input": "Which module is responsible for calibrating or checking the measuring accuracy of tools?",
+        "label": 275
+    },
+    {
+        "input": "Which module is responsible for creating and persisting members in the ClassiX® system?",
+        "label": 276
+    },
+    {
+        "input": "Which module is responsible for creating Meta-Access objects automatically for data fields via the ObjectCrawler?",
+        "label": 277
+    },
+    {
+        "input": "Which module is responsible for displaying the inheritance path of the CyberEnterprise classes?",
+        "label": 278
+    },
+    {
+        "input": "Which module is responsible for implementing the ObjectCrawler in Classix?",
+        "label": 279
+    },
+    {
+        "input": "Which module is responsible for creating the meta object \"customer\"?",
+        "label": 280
+    },
+    {
+        "input": "Which module is responsible for the toggle button (red/green circle) that allows the user to switch between editing and normal modes in the ClassiX Shell?",
+        "label": 281
+    },
+    {
+        "input": "Which module is responsible for calculating/resolving formulas or conditions in ClassiX when variables (usually attributes) are missing?",
+        "label": 282
+    },
+    {
+        "input": "Which module is responsible for importing account statements from banks in the context of online banking as files in MT940 format?",
+        "label": 283
+    },
+    {
+        "input": "Which module is responsible for creating the neural network?",
+        "label": 284
+    },
+    {
+        "input": "Which module is responsible for querying the network data stored in the system?",
+        "label": 285
+    },
+    {
+        "input": "Which module is responsible for adding people, employees, and contact persons to lists in Newsletter2Go?",
+        "label": 286
+    },
+    {
+        "input": "Which module is responsible for counting all objects in the database?",
+        "label": 287
+    },
+    {
+        "input": "Which module is responsible for querying data from the ClassiX® object-oriented database using SQL?",
+        "label": 288
+    },
+    {
+        "input": "Which module is responsible for providing an easy-to-use input window for editing objects in an ordinal term?",
+        "label": 289
+    },
+    {
+        "input": "Which module is responsible for creating data connectors for objects found through web crawling?",
+        "label": 290
+    },
+    {
+        "input": "Which module is responsible for displaying objects and collections in the CyberEnterprise Inspector?",
+        "label": 291
+    },
+    {
+        "input": "Which module is responsible for displaying the three-dimensional view of objects and their connections?",
+        "label": 292
+    },
+    {
+        "input": "Which module is responsible for creating and managing user manuals and documents that are provided to customers?",
+        "label": 293
+    },
+    {
+        "input": "Which module is responsible for creating an offer or an order in the main window?",
+        "label": 294
+    },
+    {
+        "input": "Which module is responsible for displaying the list of positions to which the dates are transferred in the \"Set Dates\" window?",
+        "label": 295
+    },
+    {
+        "input": "Which module is responsible for displaying the Word document in the preview when an item is double-clicked in the order?",
+        "label": 296
+    },
+    {
+        "input": "Which module is responsible for managing identical variant parts with slightly different specifications in an order or quotation?",
+        "label": 297
+    },
+    {
+        "input": "Which module is responsible for managing the offer/order items' creation, modification, and deletion?",
+        "label": 298
+    },
+    {
+        "input": "Which module is responsible for transferring selected order items from other applications to the calling application?",
+        "label": 299
+    },
+    {
+        "input": "Which module is responsible for determining the delivery or provision status of one or more order items?",
+        "label": 300
+    },
+    {
+        "input": "Which module is responsible for creating customer/sales item or sales item/customer statistics for certain periods of time?",
+        "label": 301
+    },
+    {
+        "input": "Which module is responsible for creating commission taker (representative)/sales item or sales item/commission taker(representative) statistics for specific periods of time?",
+        "label": 302
+    },
+    {
+        "input": "Which module is responsible for creating supplier/article or article/supplier statistics for certain periods of time?",
+        "label": 303
+    },
+    {
+        "input": "Which module is responsible for establishing a connection between a contact in Outlook and a contact in ClassiX®?",
+        "label": 304
+    },
+    {
+        "input": "Which module is responsible for creating one-time addresses for individuals?",
+        "label": 305
+    },
+    {
+        "input": "Which module is responsible for maintaining open item objects?",
+        "label": 306
+    },
+    {
+        "input": "Which module is responsible for searching specifically for individual open items?",
+        "label": 307
+    },
+    {
+        "input": "Which module is responsible for displaying the open items for customers, vendors, and employees?",
+        "label": 308
+    },
+    {
+        "input": "Which module is responsible for displaying the journal entry belonging to the OR?",
+        "label": 309
+    },
+    {
+        "input": "Which module displays a separate list of down payment requests still open from suppliers in the upper part of the screen?",
+        "label": 310
+    },
+    {
+        "input": "Which module is responsible for displaying the list of open down payment requests for customers in the upper part of the screen?",
+        "label": 311
+    },
+    {
+        "input": "Which module is responsible for automatically making reminder proposals after entering a few selection criteria?",
+        "label": 312
+    },
+    {
+        "input": "Which module is responsible for managing the creation and maintenance of documentation for open items?",
+        "label": 313
+    },
+    {
+        "input": "Which module is responsible for displaying a better overview of postings for clearing accounts?",
+        "label": 314
+    },
+    {
+        "input": "Which module is responsible for producing order items based on their master bills of materials?",
+        "label": 315
+    },
+    {
+        "input": "Which module is responsible for organizing and summarizing items from a technical perspective?",
+        "label": 316
+    },
+    {
+        "input": "Which module is responsible for the functionality of comparing structure nodes by dragging and dropping nodes from the grouping window into designated fields?",
+        "label": 317
+    },
+    {
+        "input": "Which module is responsible for dividing any number of order items into groups?",
+        "label": 318
+    },
+    {
+        "input": "Which module is responsible for assigning a cycle and a period to a maintenance contract order?",
+        "label": 319
+    },
+    {
+        "input": "Which module is responsible for issuing and registering invoices after order processing has completed?",
+        "label": 320
+    },
+    {
+        "input": "Which module is responsible for efficiently entering single-stage, unstructured quotes or orders?",
+        "label": 321
+    },
+    {
+        "input": "Which module is responsible for categorizing contract faults based on customer error messages?",
+        "label": 322
+    },
+    {
+        "input": "Which module is responsible for evaluating the quotation/order header statistics?",
+        "label": 323
+    },
+    {
+        "input": "Which module is responsible for creating text blocks in sales documents that consist only of text and are printed when the document is printed?",
+        "label": 324
+    },
+    {
+        "input": "Which module is responsible for managing the entire organisational hierarchy, including all employees and cost centers, using the cost centre plan as a diagram?",
+        "label": 325
+    },
+    {
+        "input": "Which module is responsible for creating proofs of origin for individual items of customer or warehouse orders?",
+        "label": 326
+    },
+    {
+        "input": "Which module is responsible for entering delivery notes and invoices for orders that are to be delivered or invoiced completely or all open positions?",
+        "label": 327
+    },
+    {
+        "input": "Which module is responsible for synchronizing contacts from MS Outlook® with the CyberEnterprise® PS database in import mode?",
+        "label": 328
+    },
+    {
+        "input": "Which module is responsible for planning the provision of own goods to a supplier?",
+        "label": 329
+    },
+    {
+        "input": "Which module of AppsWarehouse® manages the record-keeping of how many packages have been delivered or collected?",
+        "label": 330
+    },
+    {
+        "input": "Which module is responsible for defining the outer packaging of a product?",
+        "label": 331
+    },
+    {
+        "input": "Which module is responsible for specifying the packaging of the goods in the delivery note?",
+        "label": 332
+    },
+    {
+        "input": "Which module is responsible for allowing users to search for contact persons and companies via complex query options?",
+        "label": 333
+    },
+    {
+        "input": "Which module is responsible for creating and deleting partner-role relationships?",
+        "label": 334
+    },
+    {
+        "input": "Which module is responsible for defining partial payments in sales and purchasing?",
+        "label": 335
+    },
+    {
+        "input": "Which module is responsible for setting a new password for a user who has forgotten theirs?",
+        "label": 336
+    },
+    {
+        "input": "Which module is responsible for releasing open items from a payment proposal list for payment?",
+        "label": 337
+    },
+    {
+        "input": "Which module is responsible for releasing open items from a payment proposal list for payment?",
+        "label": 338
+    },
+    {
+        "input": "Which module is responsible for releasing open items from a payment proposal list for payment?",
+        "label": 339
+    },
+    {
+        "input": "Which module is responsible for creating a proof of open items paid with a payment run?",
+        "label": 340
+    },
+    {
+        "input": "Which module is responsible for building a payment proposal list from open items in the financial accounting system?",
+        "label": 341
+    },
+    {
+        "input": "Which module is responsible for creating a financial accounting payment document when open items are selected from a payment proposal list?",
+        "label": 342
+    },
+    {
+        "input": "Which module is responsible for releasing open items from a payment proposal list for payment?",
+        "label": 343
+    },
+    {
+        "input": "Which module is responsible for calling up standardised programme procedures to measure the performance of an installed system?",
+        "label": 344
+    },
+    {
+        "input": "Which module is responsible for maintaining a person's basic information, such as their name, date of birth, and address?",
+        "label": 345
+    },
+    {
+        "input": "Which module is responsible for displaying the person's name?",
+        "label": 346
+    },
+    {
+        "input": "Which module is responsible for splitting a name into multiple parts using spaces and line breaks before searching for those parts in the person master?",
+        "label": 347
+    },
+    {
+        "input": "Which module is responsible for collecting and displaying the names and titles of persons in the list?",
+        "label": 348
+    },
+    {
+        "input": "Which module is responsible for listing incoming invoices and/or incoming credit notes?",
+        "label": 349
+    },
+    {
+        "input": "Which module is responsible for creating a new requisition?",
+        "label": 350
+    },
+    {
+        "input": "Which module is responsible for managing the publication process, from creation to distribution?",
+        "label": 351
+    },
+    {
+        "input": "Which module is responsible for displaying the summary of suppliers' down payment accounts during a specific posting period?",
+        "label": 352
+    },
+    {
+        "input": "Which module is responsible for displaying the summary of a customer's down payment accounts, including the debit and credit values for the selected posting period?",
+        "label": 353
+    },
+    {
+        "input": "Which module is responsible for customizing icons and cursors?",
+        "label": 354
+    },
+    {
+        "input": "Which module is responsible for displaying \"intelligent\" hard copies of screen windows in a print preview?",
+        "label": 355
+    },
+    {
+        "input": "Which module is responsible for importing supplier price lists into the database?",
+        "label": 356
+    },
+    {
+        "input": "Which module is responsible for creating and editing important notes related to prices?",
+        "label": 357
+    },
+    {
+        "input": "Which module is responsible for maintaining the conditional price or discount/surcharge tables?",
+        "label": 358
+    },
+    {
+        "input": "Which module is responsible for automatically increasing or decreasing prices for a group of supplier agreements of ordered articles?",
+        "label": 359
+    },
+    {
+        "input": "Which module is responsible for automatically increasing or decreasing the price of a group of sales items?",
+        "label": 360
+    },
+    {
+        "input": "Which module is responsible for printing receipts?",
+        "label": 361
+    },
+    {
+        "input": "Which module is responsible for managing printers for this machine via the Windows driver?",
+        "label": 362
+    },
+    {
+        "input": "Which module is responsible for creating type plates for selected order items?",
+        "label": 363
+    },
+    {
+        "input": "Which module is responsible for creating a new project in the program?",
+        "label": 364
+    },
+    {
+        "input": "Which module is responsible for planning resources in advance of offers or orders?",
+        "label": 365
+    },
+    {
+        "input": "Which module is responsible for creating preliminary requirements documents to reserve goods in advance?",
+        "label": 366
+    },
+    {
+        "input": "Which module is responsible for giving a descriptive name to a dynamic data field?",
+        "label": 367
+    },
+    {
+        "input": "Which module is responsible for processing data automatically in the background without user interaction?",
+        "label": 368
+    },
+    {
+        "input": "Which module is responsible for creating and managing task subfolders that are manually created by users?",
+        "label": 369
+    },
+    {
+        "input": "Which module is responsible for maintaining the in-house service's production data?",
+        "label": 370
+    },
+    {
+        "input": "Which module is responsible for creating a new production part from the input window of the parts master via the menu item \"New\" button in the editing/list window of the production part?",
+        "label": 371
+    },
+    {
+        "input": "Which module is responsible for controlling the profiling of processes in the app?",
+        "label": 372
+    },
+    {
+        "input": "Which module is responsible for reserving the required resources for a project during the initial planning stage?",
+        "label": 373
+    },
+    {
+        "input": "Which module is responsible for displaying the target 0 costs (costs from the project planning) in the module?",
+        "label": 374
+    },
+    {
+        "input": "Which module is responsible for creating a new project app that can be started independently?",
+        "label": 375
+    },
+    {
+        "input": "Which module is responsible for order/sales planning (SOFs)?",
+        "label": 376
+    },
+    {
+        "input": "Which module is responsible for automatically generating production orders from parts requests?",
+        "label": 377
+    },
+    {
+        "input": "Which module is responsible for providing general project data to ClassiX® users?",
+        "label": 378
+    },
+    {
+        "input": "Which module is responsible for recording individual parts-to-be-provided in a parts-to-be-provided list?",
+        "label": 379
+    },
+    {
+        "input": "Which module is responsible for assigning cost elements/g/L accounts to purchasing statistics groups?",
+        "label": 380
+    },
+    {
+        "input": "Which module is responsible for releasing an invoice for order items that have reached the company without a goods receipt document?",
+        "label": 381
+    },
+    {
+        "input": "Which module is responsible for creating a complaint document when goods are taken from the warehouse for a customer's needs but are later determined to be defective?",
+        "label": 382
+    },
+    {
+        "input": "Which module is responsible for reminding suppliers of their delivery dates?",
+        "label": 383
+    },
+    {
+        "input": "Which module is responsible for generating purchase requisitions to determine the price of one or more items?",
+        "label": 384
+    },
+    {
+        "input": "Which module manages the process of adding items to a shopping cart?",
+        "label": 385
+    },
+    {
+        "input": "Which module is responsible for ensuring that an order is created cleanly?",
+        "label": 386
+    },
+    {
+        "input": "Which module is responsible for displaying the user's orders to be signed, with the lists displayed separately for 1st and 2nd signature?",
+        "label": 387
+    },
+    {
+        "input": "Which module is responsible for replenishing the warehouse manually?",
+        "label": 388
+    },
+    {
+        "input": "Which module is responsible for triggering orders based on requisitions?",
+        "label": 389
+    },
+    {
+        "input": "Which module is responsible for approving requisitions that are not automatically approved due to the absence of the \"Approval\" checkbox?",
+        "label": 390
+    },
+    {
+        "input": "Which module is responsible for storing information about the services offered by the external service provider?",
+        "label": 391
+    },
+    {
+        "input": "Which module is responsible for enabling the ordering of individual parts at a group/total price?",
+        "label": 392
+    },
+    {
+        "input": "Which module is responsible for recording and releasing incoming credit notes?",
+        "label": 393
+    },
+    {
+        "input": "Which module is responsible for the general overview of the workflow of incoming invoices?",
+        "label": 394
+    },
+    {
+        "input": "Which module is responsible for manually entering invoice items?",
+        "label": 395
+    },
+    {
+        "input": "Which module is responsible for displaying the list window of incoming invoice items?",
+        "label": 396
+    },
+    {
+        "input": "Which module is responsible for creating purchase requisitions for approved requisitions?",
+        "label": 397
+    },
+    {
+        "input": "Which module is responsible for reminding suppliers of their obligations if they have not responded to a price request?",
+        "label": 398
+    },
+    {
+        "input": "Which module is responsible for determining the price of one or more articles based on an order enquiry?",
+        "label": 399
+    },
+    {
+        "input": "Which module is responsible for automatically combining items into price groups when using order sets?",
+        "label": 400
+    },
+    {
+        "input": "Which module is responsible for determining the prices for subsequent connection orders?",
+        "label": 401
+    },
+    {
+        "input": "Which module is responsible for creating a requirement coverage item that represents a planned receipt from the MRP perspective?",
+        "label": 402
+    },
+    {
+        "input": "Which module is responsible for reading price lists from different suppliers into a separate database?",
+        "label": 403
+    },
+    {
+        "input": "Which module is responsible for saving each import of the EU, US, UK, CH, and UN sanctions lists as an anti-terror screening log?",
+        "label": 404
+    },
+    {
+        "input": "Which module is responsible for comparing a company's own business partners with the sanctions lists?",
+        "label": 405
+    },
+    {
+        "input": "Which module is responsible for adding persons/companies/one-time addresses from one's own database or Outlook contacts to the whitelist or blacklist during a comparison with regard to the information in the sanctions lists?",
+        "label": 406
+    },
+    {
+        "input": "Which module is responsible for conducting regular name checks on one's own business partners to ensure they are not sanctioned?",
+        "label": 407
+    },
+    {
+        "input": "Which module is responsible for updating and comparing anti-terrorism or other sanctions lists in the Pythia database?",
+        "label": 408
+    },
+    {
+        "input": "Which module is responsible for sending alert messages from changed window objects?",
+        "label": 409
+    },
+    {
+        "input": "Which module is responsible for executing the basic arithmetic operations (addition, subtraction, multiplication, and division) on the left side of the module?",
+        "label": 410
+    },
+    {
+        "input": "Which module is responsible for creating a vector with test data?",
+        "label": 411
+    },
+    {
+        "input": "Which module is responsible for displaying the normal button at the beginning of the test?",
+        "label": 412
+    },
+    {
+        "input": "Which module is responsible for adding and removing conditions to the table in the upper area?",
+        "label": 413
+    },
+    {
+        "input": "Which module is responsible for checking the correct function of the normal wrapper?",
+        "label": 414
+    },
+    {
+        "input": "Which module is responsible for displaying the current date?",
+        "label": 415
+    },
+    {
+        "input": "Which module is responsible for restoring environment parameters (stack data, variables) after a deadlock occurs within a transaction?",
+        "label": 416
+    },
+    {
+        "input": "Which module is responsible for testing the interactive functionality of dictionaries?",
+        "label": 417
+    },
+    {
+        "input": "Which module is responsible for creating a sample data structure via the 'File' menu?",
+        "label": 418
+    },
+    {
+        "input": "Which module is responsible for representing the character set that includes the letters of the English alphabet?",
+        "label": 419
+    },
+    {
+        "input": "Which module is responsible for checking the formula calculation for transient/persistent objects and comparing the calculated results with the expected values?",
+        "label": 420
+    },
+    {
+        "input": "Which module is responsible for creating the transient object in the test?",
+        "label": 421
+    },
+    {
+        "input": "Which module is responsible for the testing of widget types?",
+        "label": 422
+    },
+    {
+        "input": "Which module is responsible for creating the variant part with a list of characteristics, including POWER_MOTOR, NUMBER OF ROTATION, and DIAMETER?",
+        "label": 423
+    },
+    {
+        "input": "Which module is responsible for unlinking references in the module?",
+        "label": 424
+    },
+    {
+        "input": "Which module is responsible for filling the window with a number of records using the 'Edit' menu?",
+        "label": 425
+    },
+    {
+        "input": "Which module is responsible for adjusting the column widths of a ListView with the flag AUTO_POSITION when the window is scrolled or resized?",
+        "label": 426
+    },
+    {
+        "input": "Which module is responsible for handling exceptions in a ListView?",
+        "label": 427
+    },
+    {
+        "input": "Which module is responsible for displaying a list of objects in a user interface?",
+        "label": 428
+    },
+    {
+        "input": "Which module is responsible for updating the underlying collection after moving entries with the arrow buttons?",
+        "label": 429
+    },
+    {
+        "input": "Which module is responsible for updating the collection behind a moved entry in the ListView?",
+        "label": 430
+    },
+    {
+        "input": "Which module is responsible for formatting data in an ObjectListView?",
+        "label": 431
+    },
+    {
+        "input": "Which module is responsible for displaying the names of both CX_PERSON and CX_LEGAL_PERSON objects in the first column of the list?",
+        "label": 432
+    },
+    {
+        "input": "Which module is responsible for preparing the three data sets that are used for XML export?",
+        "label": 433
+    },
+    {
+        "input": "Which module is responsible for counting and comparing sent and received messages?",
+        "label": 434
+    },
+    {
+        "input": "Which module is responsible for starting Word with a double click on the text field?",
+        "label": 435
+    },
+    {
+        "input": "Which module is responsible for displaying the OLE widget container?",
+        "label": 436
+    },
+    {
+        "input": "Which module is responsible for creating and managing queries with pattern matching?",
+        "label": 437
+    },
+    {
+        "input": "Which module is responsible for the functionality of selecting a specific day of the month and a number of subsequent days in the periodic date?",
+        "label": 438
+    },
+    {
+        "input": "Which module is responsible for formatting telephone numbers according to locales?",
+        "label": 439
+    },
+    {
+        "input": "Which module is responsible for displaying the original image after selecting an image file?",
+        "label": 440
+    },
+    {
+        "input": "Which module is responsible for converting a string of letters and numbers into a letterbox number?",
+        "label": 441
+    },
+    {
+        "input": "Which module is responsible for generating sample data for the printing functionality?",
+        "label": 442
+    },
+    {
+        "input": "Which module is responsible for testing the correct function of queries and indexes in the database?",
+        "label": 443
+    },
+    {
+        "input": "Which module is responsible for executing queries entered in the edit field and displaying the result at the bottom of the list?",
+        "label": 444
+    },
+    {
+        "input": "Which module is responsible for creating and editing the Current Units Conversion Table?",
+        "label": 445
+    },
+    {
+        "input": "Which module is responsible for pointing transient objects to persistent objects through dynamic data fields?",
+        "label": 446
+    },
+    {
+        "input": "Which module is responsible for reloading inherited modules?",
+        "label": 447
+    },
+    {
+        "input": "Which module is responsible for restoring environment parameters (stack data, variables) when a deadlock occurs within a transaction?",
+        "label": 448
+    },
+    {
+        "input": "Which module is responsible for the \"Round\" functionality in the test?",
+        "label": 449
+    },
+    {
+        "input": "Which module is responsible for setting permissions on the five windows in the test?",
+        "label": 450
+    },
+    {
+        "input": "Which module is responsible for displaying objects for each country in the list of countries?",
+        "label": 451
+    },
+    {
+        "input": "Which module is responsible for handling simple input widgets?",
+        "label": 452
+    },
+    {
+        "input": "Which module is responsible for allowing the user to enter a date in the middle field?",
+        "label": 453
+    },
+    {
+        "input": "Which module is responsible for handling time-related operations, such as adding or subtracting time intervals?",
+        "label": 454
+    },
+    {
+        "input": "Which module is responsible for displaying the long log window after starting the module?",
+        "label": 455
+    },
+    {
+        "input": "Which module is responsible for displaying all available devices in the upper part of the screen?",
+        "label": 456
+    },
+    {
+        "input": "Which module is responsible for handling time-related operations, such as adding or subtracting time intervals?",
+        "label": 457
+    },
+    {
+        "input": "Which module is responsible for displaying the time in the window at the top?",
+        "label": 458
+    },
+    {
+        "input": "Which module is responsible for testing/checking the transmission of messages of a CX_TIMED_TRIGGER object for various time and date forms?",
+        "label": 459
+    },
+    {
+        "input": "Which module is responsible for converting a temperature into different heat units?",
+        "label": 460
+    },
+    {
+        "input": "Which module is responsible for determining the preceding or subsequent documents for a class CX_TRANSACTION?",
+        "label": 461
+    },
+    {
+        "input": "Which module is responsible for testing the addition and subtraction of integers?",
+        "label": 462
+    },
+    {
+        "input": "Which module is responsible for enabling and monitoring the execution of tests written in C++ in the ClassiX® DLLs?",
+        "label": 463
+    },
+    {
+        "input": "Which module is responsible for creating a test environment that allows InstantView® tests to be carried out, monitored, and a report generated?",
+        "label": 464
+    },
+    {
+        "input": "Which module is responsible for reverting vectors?",
+        "label": 465
+    },
+    {
+        "input": "Which module is responsible for detecting errors when accessing the data of a \"wrapped\" object?",
+        "label": 466
+    },
+    {
+        "input": "Which module is responsible for recording the quality assurance documents?",
+        "label": 467
+    },
+    {
+        "input": "Which module is responsible for searching for information using categorized search terms by object type?",
+        "label": 468
+    },
+    {
+        "input": "Which module is responsible for searching objects by their color?",
+        "label": 469
+    },
+    {
+        "input": "Which module is responsible for providing the basis for displaying data from the database?",
+        "label": 470
+    },
+    {
+        "input": "Which module is responsible for managing the creation and issuance of goods receipt slips?",
+        "label": 471
+    },
+    {
+        "input": "Which module is responsible for selecting different states of documents from the goods receipt business process, such as goods receipt items, quality assurance items, and direct delivery items?",
+        "label": 472
+    },
+    {
+        "input": "Which module is responsible for recording goods receipts?",
+        "label": 473
+    },
+    {
+        "input": "Which module is responsible for scanning barcodes and storing them in the storage aids?",
+        "label": 474
+    },
+    {
+        "input": "Which module is responsible for sending messages to other ClassiX® users in the network?",
+        "label": 475
+    },
+    {
+        "input": "Which module is responsible for assigning lists of objects to an REP in the CyberEnterprise® enterprise model?",
+        "label": 476
+    },
+    {
+        "input": "Which module is responsible for printing reports belonging to a list?",
+        "label": 477
+    },
+    {
+        "input": "Which module is responsible for processing external partner requests, such as customer or supplier inquiries?",
+        "label": 478
+    },
+    {
+        "input": "Which module is responsible for generating order-specific production parts lists?",
+        "label": 479
+    },
+    {
+        "input": "Which module is responsible for generating order-specific production work plans based on master routings?",
+        "label": 480
+    },
+    {
+        "input": "Which module is responsible for creating predefined combinations of resources called resource plans in a project network?",
+        "label": 481
+    },
+    {
+        "input": "Which module is responsible for defining the constraints on an attribute's value range through the \"Constraint\" data field?",
+        "label": 482
+    },
+    {
+        "input": "Which module is responsible for collecting addresses of companies and individuals to create a route plan?",
+        "label": 483
+    },
+    {
+        "input": "Which module is responsible for calculating the cost of a set of parts?",
+        "label": 484
+    },
+    {
+        "input": "Which module is responsible for managing the inventory of sales merchandise?",
+        "label": 485
+    },
+    {
+        "input": "Which module is responsible for managing the production bill of materials for an order?",
+        "label": 486
+    },
+    {
+        "input": "Which module is responsible for assigning characteristics to conditional individual parts in sets?",
+        "label": 487
+    },
+    {
+        "input": "Which module is responsible for managing the sales price of an item?",
+        "label": 488
+    },
+    {
+        "input": "Which module is responsible for managing the sales set's part number?",
+        "label": 489
+    },
+    {
+        "input": "Which module is responsible for creating statistics on sales items?",
+        "label": 490
+    },
+    {
+        "input": "Which module is responsible for generating the order-specific production parts list for a part on a sales order item?",
+        "label": 491
+    },
+    {
+        "input": "Which module is responsible for managing the sales of special parts that are only sold once to customers outside the normal product range?",
+        "label": 492
+    },
+    {
+        "input": "Which module is responsible for managing customer relationships and sales activities in SAP Business One?",
+        "label": 493
+    },
+    {
+        "input": "Which module is responsible for displaying statistics on the frequency of customer complaints?",
+        "label": 494
+    },
+    {
+        "input": "Which module is responsible for mapping returns from customers in the system, including both customer-initiated returns (complaints) and company-initiated recall actions?",
+        "label": 495
+    },
+    {
+        "input": "Which module is responsible for displaying the login screen of HESTIA WMS after switching on the mobile terminal?",
+        "label": 496
+    },
+    {
+        "input": "Which module is responsible for managing employee logons and logoffs in HESTIA WMS?",
+        "label": 497
+    },
+    {
+        "input": "Which module is responsible for managing employee requests for information about article stocks?",
+        "label": 498
+    },
+    {
+        "input": "Which module is responsible for providing information about article stocks?",
+        "label": 499
+    },
+    {
+        "input": "Which module is responsible for providing information about the stock in a storage bin when an employee needs it?",
+        "label": 500
+    },
+    {
+        "input": "Which module is responsible for managing employee requests for information about stock in storage bins?",
+        "label": 501
+    },
+    {
+        "input": "Which module is responsible for scanning the storage bin barcode and the article barcode?",
+        "label": 502
+    },
+    {
+        "input": "Which module is responsible for recording differences or changes of state of an article's quantity in a storage bin after scanning the article's barcode?",
+        "label": 503
+    },
+    {
+        "input": "Which module is responsible for adjusting stock?",
+        "label": 504
+    },
+    {
+        "input": "Which module is responsible for scanning the storage bin and article to display the quantity with assigned status?",
+        "label": 505
+    },
+    {
+        "input": "Which module is responsible for transferring stock or parts thereof from one storage bin to another?",
+        "label": 506
+    },
+    {
+        "input": "Which module is responsible for transferring entire storage aids, including the goods contained therein?",
+        "label": 507
+    },
+    {
+        "input": "Which module is responsible for managing the inventory of goods in the warehouse?",
+        "label": 508
+    },
+    {
+        "input": "Which module is responsible for reconciling differences between entered quantities and the Domain Studio?",
+        "label": 509
+    },
+    {
+        "input": "Which module is responsible for printing labels with an optional quantity field?",
+        "label": 510
+    },
+    {
+        "input": "Which module is responsible for printing delivery notes and invoices?",
+        "label": 511
+    },
+    {
+        "input": "Which module is responsible for selecting a label printer?",
+        "label": 512
+    },
+    {
+        "input": "Which module is responsible for printing the labels for a storage bin?",
+        "label": 513
+    },
+    {
+        "input": "Which module is responsible for processing the receipt of goods into the warehouse when the goods are delivered by a third-party logistics provider?",
+        "label": 514
+    },
+    {
+        "input": "Which module is responsible for putting away received goods directly into a final storage bin without any intermediate storage?",
+        "label": 515
+    },
+    {
+        "input": "Which module is responsible for creating a credit note or returns document in the host system before customer returns arrive at the warehouse?",
+        "label": 516
+    },
+    {
+        "input": "Which module is responsible for receiving goods from suppliers?",
+        "label": 517
+    },
+    {
+        "input": "Which module is responsible for processing customer orders under the menu item of the mobile terminal?",
+        "label": 518
+    },
+    {
+        "input": "Which module is responsible for indicating the storage location where the goods are to be picked?",
+        "label": 519
+    },
+    {
+        "input": "Which module is responsible for recording the customer's order and specifications in the order office?",
+        "label": 520
+    },
+    {
+        "input": "Which module is responsible for placing an entire storage aid on another?",
+        "label": 521
+    },
+    {
+        "input": "Which module is responsible for moving individual parts from one storage aid to another?",
+        "label": 522
+    },
+    {
+        "input": "Which module is responsible for assigning individual parts to a shipping container?",
+        "label": 523
+    },
+    {
+        "input": "Which module is responsible for selecting a picking list and picking the goods from it in the picking zone?",
+        "label": 524
+    },
+    {
+        "input": "Which module is responsible for assigning picks to warehouse employees?",
+        "label": 525
+    },
+    {
+        "input": "Which module is responsible for transferring goods from the goods receipt area to the final storage bins?",
+        "label": 526
+    },
+    {
+        "input": "Which module is responsible for distributing goods into individual storage bins when the goods are located on a storage aid (license)?",
+        "label": 527
+    },
+    {
+        "input": "Which module is responsible for ensuring the security of the stacker's data?",
+        "label": 528
+    },
+    {
+        "input": "Which module is responsible for setting the pick list of items in a shopping cart?",
+        "label": 529
+    },
+    {
+        "input": "Which module is responsible for defining the picking zone in a warehouse management system?",
+        "label": 530
+    },
+    {
+        "input": "Which module is responsible for giving goods the status \"inspection\" before they are released for use?",
+        "label": 531
+    },
+    {
+        "input": "Which module is responsible for scanning the goods before they are stored in the final location?",
+        "label": 532
+    },
+    {
+        "input": "Which module is responsible for setting the work zone when a user clicks on a task in a project?",
+        "label": 533
+    },
+    {
+        "input": "Which module is responsible for indicating which pick containers in the staging area are ready for dispatch?",
+        "label": 534
+    },
+    {
+        "input": "Which module is responsible for maintaining the status of a period, such as whether it has started, ended, or been interrupted?",
+        "label": 535
+    },
+    {
+        "input": "Which module is responsible for managing user rights in ClassiX®?",
+        "label": 536
+    },
+    {
+        "input": "Which module is responsible for managing user rights?",
+        "label": 537
+    },
+    {
+        "input": "Which module is responsible for managing user rights, as described in the module description?",
+        "label": 538
+    },
+    {
+        "input": "Which module is responsible for assigning access rights to individual objects?",
+        "label": 539
+    },
+    {
+        "input": "Which module is responsible for managing user rights in ClassiX®, including the ability to restrict access to the system?",
+        "label": 540
+    },
+    {
+        "input": "Which module is responsible for assigning serial numbers to parts?",
+        "label": 541
+    },
+    {
+        "input": "Which module is responsible for creating and managing service call items?",
+        "label": 542
+    },
+    {
+        "input": "Which module is responsible for recording and scheduling service requests, error messages, or problems of a customer?",
+        "label": 543
+    },
+    {
+        "input": "Which module sets the session and validity date to the system date of the computer when the program is started?",
+        "label": 544
+    },
+    {
+        "input": "Which module is responsible for creating and managing parts lists?",
+        "label": 545
+    },
+    {
+        "input": "Which module is responsible for limiting the number of list items?",
+        "label": 546
+    },
+    {
+        "input": "Which module is responsible for setting the country location?",
+        "label": 547
+    },
+    {
+        "input": "Which module is responsible for displaying all transactions in the \"Pending\" status?",
+        "label": 548
+    },
+    {
+        "input": "Which module is responsible for displaying the transitions between the states of a business process?",
+        "label": 549
+    },
+    {
+        "input": "Which module is responsible for transferring registered invoices/credit notes to the financial accounting department?",
+        "label": 550
+    },
+    {
+        "input": "Which module is responsible for creating dynamic data fields?",
+        "label": 551
+    },
+    {
+        "input": "Which module is responsible for creating a spare parts list with unique spare parts numbers for a complex system?",
+        "label": 552
+    },
+    {
+        "input": "Which module is responsible for managing the sales of spare parts that are not part of the normal product range, such as those used for repairs or custom orders?",
+        "label": 553
+    },
+    {
+        "input": "Which module is responsible for creating and maintaining prefixes in the ClassiX® system?",
+        "label": 554
+    },
+    {
+        "input": "Which module is responsible for assigning cost types/goods accounts to advance accounts?",
+        "label": 555
+    },
+    {
+        "input": "Which module is responsible for maintaining the operational data of \"own\" employees (CX_STAFF_MEMBER)?",
+        "label": 556
+    },
+    {
+        "input": "Which module is responsible for triggering events when a user logs in to the ClassiX machine?",
+        "label": 557
+    },
+    {
+        "input": "Which module is responsible for calculating the expected value of incoming orders based on order/sales planning documents?",
+        "label": 558
+    },
+    {
+        "input": "Which module is responsible for displaying all recorded assembly hours together in the results list?",
+        "label": 559
+    },
+    {
+        "input": "Which module is responsible for displaying all items that a customer has been offered?",
+        "label": 561
+    },
+    {
+        "input": "Which module is responsible for displaying all items that a customer has ordered but not yet invoiced?",
+        "label": 562
+    },
+    {
+        "input": "Which module is responsible for processing orders without assignment to a sales area?",
+        "label": 563
+    },
+    {
+        "input": "Which module is responsible for outputting the confirmed production hours for a selected period?",
+        "label": 564
+    },
+    {
+        "input": "Which module is responsible for coordinating between sales and production?",
+        "label": 565
+    },
+    {
+        "input": "Which module is responsible for displaying parts consumption?",
+        "label": 566
+    },
+    {
+        "input": "Which module is responsible for listing the actual costs incurred for sales orders according to their invoicing status?",
+        "label": 567
+    },
+    {
+        "input": "Which module is responsible for providing detailed information about the status of a document in a process?",
+        "label": 568
+    },
+    {
+        "input": "Which module maintains or displays logistics part data, such as staging type and logistics indicator?",
+        "label": 569
+    },
+    {
+        "input": "Which module is responsible for creating and managing warehouses in the CyberEnterprise business OS?",
+        "label": 570
+    },
+    {
+        "input": "Which module is responsible for general price formation on the position of excess quantities from customer orders?",
+        "label": 571
+    },
+    {
+        "input": "Which module is responsible for creating internal orders to increase production parts in stock?",
+        "label": 572
+    },
+    {
+        "input": "Which module is responsible for creating a rework for a sales order item?",
+        "label": 573
+    },
+    {
+        "input": "Which module is responsible for conducting a sequential test on inventory documents?",
+        "label": 574
+    },
+    {
+        "input": "Which module is responsible for the extended input of data for the selection of storage bin objects?",
+        "label": 575
+    },
+    {
+        "input": "Which module is responsible for the overview and evaluation of warehouse stocks?",
+        "label": 576
+    },
+    {
+        "input": "Which module is responsible for transferring goods from one storage bin to another?",
+        "label": 577
+    },
+    {
+        "input": "Which module is responsible for listing all stock movements that still need to be processed, including stock placements, removals, and transfers?",
+        "label": 578
+    },
+    {
+        "input": "Which module is responsible for tracking the consumption value \"consumed.quantity\" in the warehouse statistics when the source warehouse is the main client's warehouse and the warehouse is dispositive?",
+        "label": 579
+    },
+    {
+        "input": "Which module is responsible for processing and posting storage, retrieval, and stock transfer documents using a mobile barcode scanner?",
+        "label": 580
+    },
+    {
+        "input": "Which module is responsible for managing the receipt and processing of transfer orders in the warehouse?",
+        "label": 581
+    },
+    {
+        "input": "Which module is responsible for displaying the dispositive stock of a part?",
+        "label": 582
+    },
+    {
+        "input": "Which module is responsible for holding suppliers' specific data for an order item, such as a negotiated price, a separate order number, or order text?",
+        "label": 583
+    },
+    {
+        "input": "Which module is responsible for listing supplier-order item combinations?",
+        "label": 584
+    },
+    {
+        "input": "Which module is responsible for exporting objects as XML files?",
+        "label": 585
+    },
+    {
+        "input": "Which module is responsible for creating system messages with reference to a predecessor?",
+        "label": 586
+    },
+    {
+        "input": "Which module is responsible for providing access to TAPI-enabled communication devices in CyberEnterprise?",
+        "label": 587
+    },
+    {
+        "input": "Which module is responsible for creating and managing work orders?",
+        "label": 588
+    },
+    {
+        "input": "Which module manages the creation of tax rates for financial accounting purposes?",
+        "label": 589
+    },
+    {
+        "input": "Which module is responsible for displaying the input window for telecommunication objects?",
+        "label": 590
+    },
+    {
+        "input": "Which module is responsible for listing telephone numbers?",
+        "label": 591
+    },
+    {
+        "input": "Which module is responsible for testing the bill of material and routing breakdowns?",
+        "label": 592
+    },
+    {
+        "input": "Which module is responsible for determining the variables on which a formula's calculated value depends?",
+        "label": 593
+    },
+    {
+        "input": "Which module is responsible for testing the accuracy of mathematical formulas used in scientific calculations?",
+        "label": 594
+    },
+    {
+        "input": "Which module is responsible for comparing the planned and absent times of employees within the ClassiX Personnel Time Management?",
+        "label": 595
+    },
+    {
+        "input": "Which module is responsible for managing the equipment assigned to a tool?",
+        "label": 596
+    },
+    {
+        "input": "Which module is responsible for managing the inheritance of vehicles from parts in the CyberEnterprise® Enterprise Model?",
+        "label": 597
+    },
+    {
+        "input": "Which module is responsible for providing an overview of a transaction and its subsequent documents?",
+        "label": 598
+    },
+    {
+        "input": "Which module is responsible for creating invoices automatically from orders?",
+        "label": 599
+    },
+    {
+        "input": "Which module is responsible for performing quick and easy calculations with units?",
+        "label": 600
+    },
+    {
+        "input": "Which module is responsible for defining and storing standard units of measurement in the ClassiX system?",
+        "label": 601
+    },
+    {
+        "input": "Which module is responsible for defining the conversion between different units of measure for parts in the system?",
+        "label": 602
+    },
+    {
+        "input": "Which module is responsible for overwriting the values in a list with values from the clipboard?",
+        "label": 603
+    },
+    {
+        "input": "Which module is responsible for maintaining the users who are allowed to use the ClassiX® applications?",
+        "label": 604
+    },
+    {
+        "input": "Which module is responsible for displaying the user hierarchy in the company?",
+        "label": 605
+    },
+    {
+        "input": "Which module is responsible for checking the data in the system for accuracy and completeness?",
+        "label": 606
+    },
+    {
+        "input": "Which module is responsible for executing inspection runs and starting or evaluating them in other apps?",
+        "label": 607
+    },
+    {
+        "input": "Which module is responsible for checking the availability of offers/orders?",
+        "label": 608
+    },
+    {
+        "input": "Which module is responsible for inspecting partner data for quality assurance purposes?",
+        "label": 609
+    },
+    {
+        "input": "Which module is responsible for analyzing purchasing data to identify trends and patterns?",
+        "label": 610
+    },
+    {
+        "input": "Which module is responsible for calculating and tracking employee holiday entitlement?",
+        "label": 611
+    },
+    {
+        "input": "Which module is responsible for setting the temporal validity of an object?",
+        "label": 612
+    },
+    {
+        "input": "Which module is responsible for creating and displaying a VAT advance return?",
+        "label": 613
+    },
+    {
+        "input": "Which module is responsible for managing the inheritance relationship between vehicles and parts in the ClassiX® system?",
+        "label": 614
+    },
+    {
+        "input": "Which module is responsible for controlling and monitoring all inbound and outbound business processes in the warehouse, such as goods receipt and goods issue?",
+        "label": 615
+    },
+    {
+        "input": "Which module is responsible for managing the warehouse execution documents listed in the \"Winding\" work area?",
+        "label": 616
+    },
+    {
+        "input": "Which module is responsible for starting the Web Service of the CyberEnterprise business OS?",
+        "label": 617
+    },
+    {
+        "input": "Which module is responsible for displaying the list of open windows on a computer?",
+        "label": 618
+    },
+    {
+        "input": "Which module is responsible for displaying the material and labor costs of open orders that have not yet been delivered?",
+        "label": 619
+    },
+    {
+        "input": "Which module is responsible for managing the assignment of workplaces, employees, warehouses, and properties to resources?",
+        "label": 620
+    },
+    {
+        "input": "Which module is responsible for displaying the flow of a business process?",
+        "label": 621
+    },
+    {
+        "input": "Which module is responsible for organizing individual employees into work departments based on their skills and expertise?",
+        "label": 622
+    },
+    {
+        "input": "Which module is responsible for tracking an employee's daily working hours?",
+        "label": 623
+    },
+    {
+        "input": "Which module is responsible for managing the allocation of workstations in the system?",
+        "label": 624
+    },
+    {
+        "input": "Which module is responsible for recording data for flexitime accounting at time recording terminals?",
+        "label": 625
+    },
+    {
+        "input": "Which module is responsible for recording flexitime and operating data using a barcode recording device?",
+        "label": 626
+    },
+    {
+        "input": "Which module is responsible for calculating the current time in another location, taking into account summer and winter time?",
+        "label": 627
+    },
+    {
+        "input": "Which module is responsible for processing Z4 (and Z1) reports automatically and creating a CSV file that can be read directly into the online form of the Deutsche Bundesbank?",
+        "label": 628
+    },
+    {
+        "input": "Which module is responsible for containing the printable invoice in a PDF format?",
+        "label": 629
+    }
+]

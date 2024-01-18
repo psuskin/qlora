@@ -5,6 +5,7 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification, Trai
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 
 # Instruct
+import os
 import re
 import json
 import torch
@@ -134,6 +135,22 @@ def finetune():
 def finetuneNoEval(promptsPerClass):
     #dataset = Dataset.from_json('data/en_articles_classification_int.json')
     #dataset = Dataset.from_json('data/en_articles_classification_instruct.json')
+    if not os.path.exists(f"data/en_articles_classification_instruct{promptsPerClass}.json"):
+        with open(f"data/en_articles_classification_instruct10.json", encoding="utf-8") as f:
+            data = json.load(f)
+        
+        dataByLabel = {}
+        for sample in data:
+            label = sample['label']
+            if label not in dataByLabel:
+                dataByLabel[label] = []
+            dataByLabel[label].append(sample)
+        
+        truncatedData = []
+        for label in dataByLabel:
+            truncatedData.extend({"input": sample['input'], "label": sample['label']} for sample in dataByLabel[label][:promptsPerClass])
+        with open(f"data/en_articles_classification_instruct{promptsPerClass}.json", "w", encoding="utf-8") as f:
+            json.dump(truncatedData, f, ensure_ascii=False, indent=4)
     dataset = Dataset.from_json(f'data/en_articles_classification_instruct{promptsPerClass}.json')
 
     tokenizer = AutoTokenizer.from_pretrained(model_checkpoint, use_fast=True)
@@ -154,6 +171,7 @@ def finetuneNoEval(promptsPerClass):
         per_device_train_batch_size=1,
         max_steps=100000,
         weight_decay=0.01,
+        report_to="none",
     )
 
     def compute_metrics(eval_pred):
@@ -225,9 +243,12 @@ if __name__ == '__main__':
     #finetune()
     #finetuneNoEval()
     #finetuneNoEval(10)
+    finetuneNoEval(1)
+    finetuneNoEval(5)
+    finetuneNoEval(8)
 
     #inference("distilbert-base-uncased-classification/checkpoint-30000")
     #inference("distilbert-base-uncased-classification-noeval/checkpoint-30000")
     #inference("distilbert-base-uncased-classification-instruct/checkpoint-100000", 0.1)
-    inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000")
-    inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000", 0.1)
+    #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000")
+    #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000", 0.1)
