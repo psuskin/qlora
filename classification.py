@@ -236,6 +236,46 @@ def inference(modelName, threshold=None):
             print()
             #print(outputs.logits.argmax(-1))
 
+def analysis(modelNames, samplesFromEnd=2):
+    correctPredictions = {}
+    averageConfidence = {}
+
+    for modelName in modelNames:
+        model = AutoModelForSequenceClassification.from_pretrained(f"output/{modelName}")
+        tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
+
+        with open("data/en_articles_classification_instruct10.json", encoding="utf-8") as f:
+            data = json.load(f)
+
+        dataByLabel = {}
+        for sample in data:
+            label = sample['label']
+            if label not in dataByLabel:
+                dataByLabel[label] = []
+            dataByLabel[label].append(sample)
+
+        correctPrediction = 0
+        confidences = []
+        for label in dataByLabel:
+            testSamples = dataByLabel[label][-samplesFromEnd:]
+            for sample in testSamples:
+                inputs = tokenizer(sample['input'], return_tensors="pt")
+                outputs = model(**inputs)
+                probabilities = torch.nn.functional.softmax(outputs.logits, dim=-1).flatten()
+                labels = sorted(zip(range(len(dataByLabel)), probabilities), key=lambda x: x[1], reverse=True)
+                if label == labels[0][0]:
+                    correctPrediction += 1
+                for labelTuple in labels:
+                    if labelTuple[0] == label:
+                        confidences.append(labelTuple[1])
+                        break
+        
+        correctPredictions[modelName] = (correctPrediction, len(dataByLabel) * samplesFromEnd)
+        averageConfidence[modelName] = sum(confidences) / len(confidences)
+
+    print(correctPredictions)
+    print(averageConfidence)
+
 if __name__ == '__main__':
     #instruct()
     #instruct(10)
@@ -243,12 +283,17 @@ if __name__ == '__main__':
     #finetune()
     #finetuneNoEval()
     #finetuneNoEval(10)
-    finetuneNoEval(1)
-    finetuneNoEval(5)
-    finetuneNoEval(8)
+    #finetuneNoEval(1)
+    #finetuneNoEval(5)
+    #finetuneNoEval(8)
 
     #inference("distilbert-base-uncased-classification/checkpoint-30000")
     #inference("distilbert-base-uncased-classification-noeval/checkpoint-30000")
     #inference("distilbert-base-uncased-classification-instruct/checkpoint-100000", 0.1)
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000")
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000", 0.1)
+
+    analysis(["distilbert-base-uncased-classification-instruct1/checkpoint-100000",
+              "distilbert-base-uncased-classification-instruct5/checkpoint-100000",
+              "distilbert-base-uncased-classification-instruct8/checkpoint-100000",
+              "distilbert-base-uncased-classification-instruct10/checkpoint-100000"], 2)
