@@ -240,33 +240,36 @@ def inference(modelName, threshold=None):
             #print(outputs.logits.argmax(-1))
 
 def analysis(modelNames, samplesFromEnd=2):
+    with open("data/en_articles_classification_instruct10.json", encoding="utf-8") as f:
+        data = json.load(f)
+
+    dataByLabel = {}
+    for sample in data:
+        label = sample['label']
+        if label not in dataByLabel:
+            dataByLabel[label] = []
+        dataByLabel[label].append(sample)
+
+    testData = {label: dataByLabel[label][-samplesFromEnd:] for label in dataByLabel}
+
     correctPredictions = {}
     averageConfidence = {}
     confidence = {}
-
+    response = {}
     for modelName in modelNames:
         model = AutoModelForSequenceClassification.from_pretrained(f"output/{modelName}")
         tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
 
-        with open("data/en_articles_classification_instruct10.json", encoding="utf-8") as f:
-            data = json.load(f)
-
-        dataByLabel = {}
-        for sample in data:
-            label = sample['label']
-            if label not in dataByLabel:
-                dataByLabel[label] = []
-            dataByLabel[label].append(sample)
-
         correctPrediction = 0
         confidences = []
-        for label in dataByLabel:
-            testSamples = dataByLabel[label][-samplesFromEnd:]
-            for sample in testSamples:
+        responses = []
+        for label in testData:
+            for sample in testData[label]:
                 inputs = tokenizer(sample['input'], return_tensors="pt")
                 outputs = model(**inputs)
                 probabilities = torch.nn.functional.softmax(outputs.logits, dim=-1).flatten().detach().cpu().numpy()
                 labels = sorted(zip(range(len(dataByLabel)), probabilities), key=lambda x: x[1], reverse=True)
+                responses.append(labels)
                 if label == labels[0][0]:
                     correctPrediction += 1
                 for labelTuple in labels:
@@ -277,9 +280,11 @@ def analysis(modelNames, samplesFromEnd=2):
         correctPredictions[modelName] = (correctPrediction, len(dataByLabel) * samplesFromEnd)
         averageConfidence[modelName] = sum(confidences) / len(confidences)
         confidence[modelName] = confidences
+        response[modelName] = responses
 
-    print(correctPredictions)
-    print(averageConfidence)
+    print("Correct predictions:", correctPredictions)
+    print("Average confidence:", averageConfidence)
+    print("Correlation between 5 and 8 samples per module:", {np.corrcoef(confidence['distilbert-base-uncased-classification-instruct5/checkpoint-100000'], confidence['distilbert-base-uncased-classification-instruct8/checkpoint-100000'])[0, 1]})
     for modelName in modelNames:
         values, bins = np.histogram(confidence[modelName], bins=100)
 
@@ -291,6 +296,13 @@ def analysis(modelNames, samplesFromEnd=2):
     plt.ylabel(f"Cumulative count (dataset size of {correctPredictions[modelNames[0]][1]} samples)")
     plt.title("Cumulative distribution of confidence")
     plt.show()
+    plt.close()
+
+    print()
+    print("Worst performing samples:")
+    worstSamples = sorted(zip([sample for label in testData for sample in testData[label]], confidence["distilbert-base-uncased-classification-instruct10/checkpoint-100000"], response["distilbert-base-uncased-classification-instruct10/checkpoint-100000"]), key=lambda x: x[1])[:5]
+    for sample in worstSamples:
+        print(f"\t{sample[0]['input']}\n\t\tCorrect module: {modules[sample[0]['label']]} ({sample[1]:.2f})\n\t\tPredicted module: {modules[sample[2][0][0]]} ({sample[2][0][1]:.2f})")
 
 if __name__ == '__main__':
     #instruct()
