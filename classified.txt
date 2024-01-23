@@ -1,18 +1,31 @@
 Correlation between 5 and 8 samples per module: {0.695148347123803}
 
 Worst performing samples:
+        ALMOST IDENTICAL
         Which module is responsible for displaying the financial accounting balances of a general or personal account?
                 Correct module: loggiocm (0.03)
                 Predicted module: loggiocr (0.96)
+
+        ALMOST IDENTICAL
         Which module is responsible for ensuring that vehicles are properly maintained and updated in the CyberEnterprise® Enterprise Model?
                 Correct module: truck (0.09)
                 Predicted module: car (0.91)
+
+        BAD PROMPT
         Which module is responsible for the functionality described in the module description?
                 Correct module: sessiond (0.12)
                 Predicted module: resoljob (0.30)
+
+        BAD PROMPT
         Which module is responsible for the functionality described in the module description?
                 Correct module: qm_wrapper_qm (0.14)
                 Predicted module: resoljob (0.30)
+
+        IDENTICAL
         Which module is responsible for handling time-related conversions, such as converting between different time zones?
                 Correct module: qm_spanTime_qm (0.20)
                 Predicted module: qm_term_qm (0.80)
+
+CONCLUSION:
+        In the case of (nearly) identical samples, the first sample that was fed to the model is presumably the one that is output given a corresponding prompt.
+        There are bad prompts (3 occurences) in the dataset, which are not the fault of the model. The bad prompt as a sample for resoljob module is presumably the first that was fed into the model.
