@@ -239,7 +239,7 @@ def inference(modelName, threshold=None):
             print()
             #print(outputs.logits.argmax(-1))
 
-def analysis(modelNames, samplesFromEnd=2):
+def analysis(modelName, samplesPerModule, checkpoint, samplesFromEnd=2):
     with open("data/en_articles_classification_instruct10.json", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -256,8 +256,9 @@ def analysis(modelNames, samplesFromEnd=2):
     averageConfidence = {}
     confidence = {}
     response = {}
-    for modelName in modelNames:
-        model = AutoModelForSequenceClassification.from_pretrained(f"output/{modelName}")
+    for sampleCount in samplesPerModule:
+        currentModel = modelName.format(sampleCount, checkpoint)
+        model = AutoModelForSequenceClassification.from_pretrained(f"output/{currentModel}")
         tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
 
         correctPrediction = 0
@@ -277,32 +278,36 @@ def analysis(modelNames, samplesFromEnd=2):
                         confidences.append(labelTuple[1])
                         break
         
-        correctPredictions[modelName] = (correctPrediction, len(dataByLabel) * samplesFromEnd)
-        averageConfidence[modelName] = sum(confidences) / len(confidences)
-        confidence[modelName] = confidences
-        response[modelName] = responses
+        correctPredictions[currentModel] = (correctPrediction, len(dataByLabel) * samplesFromEnd)
+        averageConfidence[currentModel] = sum(confidences) / len(confidences)
+        confidence[currentModel] = confidences
+        response[currentModel] = responses
 
     print("Correct predictions:", correctPredictions)
     print("Average confidence:", averageConfidence)
-    print("Correlation between 5 and 8 samples per module:", {np.corrcoef(confidence['distilbert-base-uncased-classification-instruct5/checkpoint-100000'], confidence['distilbert-base-uncased-classification-instruct8/checkpoint-100000'])[0, 1]})
-    for modelName in modelNames:
-        values, bins = np.histogram(confidence[modelName], bins=100)
+    print("Correlation between 5 and 8 samples per module:", {np.corrcoef(confidence[modelName.format(5, checkpoint)], confidence[modelName.format(8, checkpoint)])[0, 1]})
+    for sampleCount in samplesPerModule:
+        currentModel = modelName.format(sampleCount, checkpoint)
+        values, bins = np.histogram(confidence[currentModel], bins=100)
 
         cumulative = np.cumsum(values)
 
-        plt.plot(bins[:-1], cumulative, label=f"s{re.search(r'instruct([0-9]+)', modelName).group(1)}: {correctPredictions[modelName][0]}, {averageConfidence[modelName]:.2f}")
+        plt.plot(bins[:-1], cumulative, label=f"s{re.search(r'instruct([0-9]+)', currentModel).group(1)}: {correctPredictions[currentModel][0]}, {averageConfidence[currentModel]:.2f}")
     plt.legend()
     plt.xlabel("Confidence in correct module")
-    plt.ylabel(f"Cumulative count (dataset size of {correctPredictions[modelNames[0]][1]} samples)")
+    plt.ylabel(f"Cumulative count (dataset size of {correctPredictions[modelName.format(samplesPerModule[0], checkpoint)][1]} samples)")
     plt.title("Cumulative distribution of confidence")
     plt.show()
     plt.close()
 
-    print()
-    print("Worst performing samples:")
-    worstSamples = sorted(zip([sample for label in testData for sample in testData[label]], confidence["distilbert-base-uncased-classification-instruct10/checkpoint-100000"], response["distilbert-base-uncased-classification-instruct10/checkpoint-100000"]), key=lambda x: x[1])[:5]
-    for sample in worstSamples:
-        print(f"\t{sample[0]['input']}\n\t\tCorrect module: {modules[sample[0]['label']]} ({sample[1]:.2f})\n\t\tPredicted module: {modules[sample[2][0][0]]} ({sample[2][0][1]:.2f})")
+    for sampleCount in [8, 10]:
+        print()
+
+        currentModel = modelName.format(sampleCount, checkpoint)
+        print(f"Worst performing samples ({sampleCount} samples per module):")
+        worstSamples = sorted(zip([sample for label in testData for sample in testData[label]], confidence[currentModel], response[currentModel]), key=lambda x: x[1])[:5]
+        for sample in worstSamples:
+            print(f"\t{sample[0]['input']}\n\t\tCorrect module: {modules[sample[0]['label']]} ({sample[1]:.2f})\n\t\tPredicted module: {modules[sample[2][0][0]]} ({sample[2][0][1]:.2f})")
 
 if __name__ == '__main__':
     #instruct()
@@ -321,7 +326,5 @@ if __name__ == '__main__':
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000")
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000", 0.1)
 
-    analysis(["distilbert-base-uncased-classification-instruct1/checkpoint-100000",
-              "distilbert-base-uncased-classification-instruct5/checkpoint-100000",
-              "distilbert-base-uncased-classification-instruct8/checkpoint-100000",
-              "distilbert-base-uncased-classification-instruct10/checkpoint-100000"], 2)
+    #analysis("distilbert-base-uncased-classification-instruct{0}/checkpoint-{1}", [1, 5, 8, 10], 100000, 2)
+    analysis("distilbert-base-uncased-classification-instruct{0}/checkpoint-{1}", [1, 5, 8, 10], 50000, 2)

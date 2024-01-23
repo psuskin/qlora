@@ -1,6 +1,8 @@
+PREFACE: These results are for the final checkpoint (100000). Results show negligible improvement after checkpoint 50000.
+
 Correlation between 5 and 8 samples per module: {0.695148347123803}
 
-Worst performing samples:
+Worst performing samples (10 samples per module):
         ALMOST IDENTICAL
         Which module is responsible for displaying the financial accounting balances of a general or personal account?
                 Correct module: loggiocm (0.03)
@@ -28,4 +30,34 @@ Worst performing samples:
 
 CONCLUSION:
         In the case of (nearly) identical samples, the first sample that was fed to the model is presumably the one that is output given a corresponding prompt.
-        There are bad prompts (3 occurences) in the dataset, which are not the fault of the model. The bad prompt as a sample for resoljob module is presumably the first that was fed into the model.
+        There are bad prompts in the dataset. The bad prompt as a sample for resoljob module is presumably the first of its kind that was fed into the model.
+
+Worst performing samples (8 samples per module):
+        BAD PROMPT
+        Which module is the main task of this module?
+                Correct module: purchinv (0.00)
+                Predicted module: login (0.76)
+
+        BAD PROMPT
+        Which module is responsible for providing the functionality described in the module description?
+                Correct module: inventoryFrequencyDistribution (0.00)
+                Predicted module: secmessg (0.99)
+
+        UNIQUE - though the prompt is reasonable and distinctive, CX_VALUE occurs many times in training samples for the attrslot module, while appearing in none of the training samples for the qm_condBag_qm module.
+        Which module is responsible for returning a CX_VALUE as result if the whole condition is fulfilled?
+                Correct module: qm_condBag_qm (0.00)
+                Predicted module: attrslot (0.99)
+
+        UNIQUE - though the prompt is reasonable and distinctive, successor of an order occurs many times in the training samples for the odocu module, while appearning in none of the training samples for the statwprg module.
+        Which module is responsible for displaying all successors of an order?
+                Correct module: statwprg (0.00)
+                Predicted module: odocu (1.00)
+
+        BAD PROMPT
+        Which module is responsible for the functionality described in the module description?
+                Correct module: sessiond (0.00)
+                Predicted module: secmessg (0.99)
+
+CONCLUSION:
+        Same issue with bad prompts as before.
+        Some modules (particularly ones with long descriptions) need more training samples to cover their functionality.
