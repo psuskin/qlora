@@ -23,7 +23,7 @@ modules = ['about', 'accarea', 'access', 'address', 'addrtyp', 'advancedSearch',
 
 classificationDataFile = "classificationData.pkl.gz"
 
-def instruct(promptsPerClass=3):
+def instruct(promptsPerClass=None):
     instructModel = "meta-llama/Llama-2-7b-chat-hf"
 
     tokenizer = AutoTokenizer.from_pretrained(instructModel)
@@ -48,7 +48,7 @@ def instruct(promptsPerClass=3):
     with open("data/en_articles_classification_int.json", encoding="utf-8") as f:
         data = json.load(f)
     for module in data:
-        prompts.append((f"I will now provide you with a description of a module. Please generate {promptsPerClass} prompts that query which module is responsible for some given functionality, where this functionality stems from the module description, and the prompts use various formulations to ask which module is being described.\n\nModule description: {module['input']}", module['label']))
+        prompts.append((f"I will now provide you with a description of a module. Please generate {promptsPerClass if promptsPerClass else 3 + int(np.ceil(len(module['input'].split()) / 6))} prompts that query which module is responsible for some given functionality, where this functionality stems from the module description, and the prompts use various formulations to ask which module is being described.\n\nModule description: {module['input']}", module['label']))
     
     instructions = []
     for prompt, label in prompts:
@@ -62,17 +62,13 @@ If a question does not make any sense, or is not factually coherent, explain why
 {prompt} [/INST]
         """
 
-        #print(prompt)
-        if label % 100 == 0:
-            print(label)
-
         inputs = tokenizer(llamaPrompt, return_tensors="pt").to('cuda')
 
         outputs = model.generate(
             **inputs, 
             generation_config=GenerationConfig(
                 do_sample=True,
-                max_new_tokens=2048,
+                max_new_tokens=4096,
                 top_p=1,
                 temperature=0.01,
             )
@@ -81,15 +77,16 @@ If a question does not make any sense, or is not factually coherent, explain why
         text = tokenizer.decode(outputs[0], skip_special_tokens=True)
         response = text.split("[/INST]", 1)[1].strip()
 
-        #print(response)
-        #exit()
+        if label % 100 == 0:
+            print(label)
+            print(response)
 
         pattern = re.compile(r'\d+\.\s(.+?)(?:\n|$)')
         matches = pattern.findall(response)
         for match in matches:
             instructions.append({"input": match.strip("\""), "label": label})
 
-    with open(f"data/en_articles_classification_instruct{promptsPerClass}.json", "w", encoding="utf-8") as f:
+    with open(f"data/en_articles_classification_instruct{promptsPerClass if promptsPerClass else ''}.json", "w", encoding="utf-8") as f:
         json.dump(instructions, f, ensure_ascii=False, indent=4)
 
 def finetuneNoEval(model_checkpoint, promptsPerClass):
@@ -123,7 +120,7 @@ def finetuneNoEval(model_checkpoint, promptsPerClass):
     args = TrainingArguments(
         f"output/{model_checkpoint}-classification-instruct{promptsPerClass}",
         save_strategy = "steps",
-        save_steps=10000,
+        save_steps=20000,
         learning_rate=2e-5,
         per_device_train_batch_size=1,
         max_steps=150000,
@@ -277,6 +274,7 @@ def analysis(modelName, specs, samplesFromEnd=2):
 
 if __name__ == '__main__':
     #instruct(10)
+    instruct()
 
     #finetuneNoEval("distilbert-base-uncased", 10)
     #finetuneNoEval("distilbert-base-uncased", 1)
@@ -291,7 +289,7 @@ if __name__ == '__main__':
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000")
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000", 0.1)
 
-    #exit()
+    exit()
 
     analysis("{0}bert-base-uncased-classification-instruct{1}/checkpoint-{2}", [
         ("distil", 1, 50000),
