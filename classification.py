@@ -15,9 +15,13 @@ from transformers import AutoModelForCausalLM, BitsAndBytesConfig, GenerationCon
 from transformers import pipeline
 
 # Analysis
+import gzip
+import pickle
 import matplotlib.pyplot as plt
 
 modules = ['about', 'accarea', 'access', 'address', 'addrtyp', 'advancedSearch', 'advatsta', 'airplane', 'alarmclk', 'alocitem', 'alocwork', 'analyitd', 'analypdc', 'appCopierEdit', 'appGeneratorEdit', 'appInheritorEdit', 'approvalTransactions', 'appsched', 'appsWHBrowser', 'appsWHModuleSynchronise', 'assetAccountBalanceList', 'assetAccountTxnList', 'assetsAnalysisList', 'associatl', 'atsetobj', 'attrcbag', 'attrform', 'attribut', 'attributeValueEdit', 'attrilst', 'attrisat', 'attrisit', 'attrnode', 'attrslot', 'auditing', 'autopcal', 'autoplst', 'balanbus', 'balancos', 'balanfac', 'bankaedt', 'bankcode', 'batcerr', 'billcond', 'billing', 'billofma', 'billsing', 'blockers', 'budofedt', 'busiseg', 'busiyear', 'calendar', 'canceltxn', 'capacityPlanning', 'car', 'carbonco', 'CarPrio', 'cashDeposit', 'cashdisc', 'ccacbals', 'ccacbstr', 'chargbas', 'cheqregi', 'clipboard', 'clsstree', 'cmacbals', 'coacstat', 'cobjrept', 'columvar', 'comment', 'commiss', 'condaccn', 'condcond', 'condiset', 'condtedc', 'condtion', 'consult', 'coobwizz', 'corporateGroupEdit', 'costbook', 'costcent', 'costiobj', 'costmobj', 'costObjectiveBalanceList', 'costosel', 'costpobj', 'costsobj', 'costtype', 'cp_1252', 'cracbals', 'ctacbals', 'ctacbstr', 'curracc', 'currencyExchange', 'customagr', 'cxAccessNode', 'cxAccessoryList', 'cxApiKey', 'cxApplication', 'cxAsset', 'cxCampaign', 'cxCity', 'cxCombinedNomenclature', 'cxConditionedBag', 'cxContact', 'cxCounter', 'cxCreditCardAccount', 'cxCurrencyTable', 'cxCyberClient', 'cxDataConnector', 'cxDataField', 'cxDocument', 'cxDocumentComponent', 'cxDocumentIndex', 'cxGeneralLedger', 'cxIndustrialPlant', 'cxInstallationCharges', 'cxIntermediateStocking', 'cxIpAddress', 'cxItemDemand', 'cxModuleSettings', 'cxNeuralNetwork', 'cxPattItemNumber', 'cxPhrase', 'cxProceedings', 'cxProductionDataCapture', 'cxPurchaseReturn', 'cxReport', 'cxSalesProductConfiguration', 'cxSapBusinessOneStock', 'cxSignification', 'cxStateMonitor', 'cxStateStructure', 'cxStockSpace', 'cxStructure', 'cxTextCondition', 'cxTxnDescriptor', 'cxWebService', 'cxWidget', 'cxWorkflow', 'cxWorkFlowRoute', 'cxWorkTimeEvent', 'cxWorkTimeModel', 'cxWorkTimeRule', 'cxWorkTimeYear', 'cyber', 'databaseManage', 'dataConnectorImport', 'dataConnectorWebBrowser', 'dbaseviw', 'deacbals', 'defslot', 'deftrans', 'deliconf', 'delidisp', 'deliisel', 'delinote', 'deliveryNoteItemList', 'dialogue', 'directShipmentItem', 'dirshipm', 'dispobom', 'dnpycus', 'dnpysup', 'domadecl', 'dprcbook', 'dtausedt', 'dtazvedt', 'dunnsele', 'ecvatsta', 'eMailSentStatus', 'exacbals', 'excelcel', 'excelReader', 'eximport', 'ExpandNum', 'extdispo', 'family', 'favourit', 'fiacstat', 'finabook', 'finacopy', 'finajour', 'financialLoggingsList', 'finpcacc', 'finstand', 'flextime', 'floatfil', 'forecast', 'formula', 'fwdfabal', 'gantitdm', 'gantosup', 'gantt', 'gantwork', 'geledcla', 'geleddep', 'generalLedgerBalancesStructureList', 'genmodul', 'glacbals', 'graphicalQueryWizard', 'helpgen', 'holdinre', 'icastedt', 'ImportStockSpace', 'indexmgr', 'initsdat', 'inprovis', 'instchbook', 'intrastat', 'intrastat', 'invanaly', 'invcontr', 'inventoryAnalysis', 'inventoryCheck', 'inventoryFrequencyDistribution', 'inventoryImport', 'inventoryStratification', 'inventoryTaking', 'inventry', 'invoiitm', 'invoimaint', 'item', 'item', 'itemAlloc', 'itemDispositionEdit', 'itemDispositionLoggingsSelect', 'itemsea', 'itemVarianceAnalyze', 'jobRecordByDayWin', 'jobrecrd', 'jobsched', 'jobscond', 'jobssing', 'keyshtct', 'kpiAuditor', 'kpiMonitor', 'kpisupmo', 'language', 'legalPersonDeduplicate', 'legalPersonDuplicatesList', 'legalPersonNamesList', 'listvcol', 'literalAppsWH', 'literalSystem', 'loadeddlls', 'localeEdit', 'logcyber', 'logcyuse', 'loggiadm', 'loggibom', 'loggicid', 'loggicos', 'loggidac', 'loggidit', 'loggings', 'loggiocm', 'loggiocr', 'loggiode', 'loggioex', 'loggipic', 'loggipit', 'loggipoi', 'loggiprov', 'loggirit', 'loggisto', 'loggiwip', 'login', 'loginAgent', 'loginAlias', 'logout', 'loguser', 'machine', 'maintenc', 'maintpaym', 'masttool', 'member', 'metaaccs', 'metainfo', 'metamodl', 'metaobj', 'miniwb', 'missingAttributes', 'mt940edt', 'neuralNetworkLoad', 'neuralNetworkQuery', 'newsletter2Go', 'objcount', 'objctsql', 'objectStructureEdit', 'objectWebCrawler', 'objinsp', 'objnavi', 'odocu', 'offorder', 'offorder', 'offorder', 'offorita', 'offoritt', 'oitemsel', 'oitmsupp', 'olapCustomerList', 'olapRepresentativeList', 'olapSupplierList', 'olsync', 'onewaypa', 'openitem', 'openItemTxnSelect', 'openlist', 'opitcmac', 'opitcrac', 'opitdbac', 'opitdunn', 'opitexac', 'opitglac', 'orderAllocationResolve', 'orderfav', 'orderfav', 'ordergrp', 'ordermaint', 'orderPaymentStatisticsList', 'orderqui', 'orderrisk', 'orderStateStatisticsList', 'ordertxt', 'organizationChart', 'origpart', 'ortodnin', 'outlook', 'outprovis', 'packaccn', 'packitem', 'packload', 'parquery', 'partnerCastEdit', 'partpaym', 'password', 'paychequ', 'paydtaus', 'paydtazv', 'payevdnc', 'paymprop', 'paymt101', 'paysepa', 'performa', 'person', 'personDeduplicate', 'personDuplicatesList', 'personNamesList', 'pinvbook', 'plusbutton', 'pmedia', 'ppcrbals', 'ppdebals', 'presentationManagerEdit', 'preview', 'pricecal', 'PriceDiscount', 'PriceDiscountTable', 'prichap', 'prichas', 'print', 'printer', 'printtyp', 'prjgen', 'prjnmoni', 'processes_advancedemand', 'processes_attribute', 'processes_qm_bat', 'procfold', 'prodserv', 'product', 'Profiling', 'projaloc', 'projcost', 'projectGeneratorEdit', 'projinfo', 'proorder', 'proquery', 'provsing', 'pstgroup', 'purcappr', 'purccomp', 'purcdunn', 'purchaseInquiry', 'purchaseItem', 'purchaseOrder', 'purchaseOrderSignature', 'purchaseProposalsList', 'purchaseRequisition', 'purchaseRequisitionLoggingsList', 'purchaseService', 'purchaseSet', 'purchcre', 'purchinv', 'purchinvitem', 'purchinvlog', 'puriauto', 'puridunn', 'puriitem', 'purogedt', 'puroitem', 'purqitem', 'pusaitem', 'Pythia_cxAntiTerrorScreening', 'Pythia_sanctionsListMatch', 'Pythia_sanctionsListMonitor', 'Pythia_sanctionsListQuery', 'Pythia_xmlimprt_py', 'qm_alert_qm', 'qm_arithmetic_qm', 'qm_asciiFile_qm', 'qm_button_qm', 'qm_condBag_qm', 'qm_condWrapper_qm', 'qm_date_qm', 'qm_deadlock_qm', 'qm_dictionary_qm', 'qm_dragndrop_qm', 'qm_font_qm', 'qm_formula_qm', 'qm_garbage_qm', 'qm_grpwid_qm', 'qm_itempattern_qm', 'qm_link_qm', 'qm_listview_qm', 'qm_listviewAutoPos_qm', 'qm_listviewExceptions_qm', 'qm_listviewOboxEdit_qm', 'qm_listviewOboxUpDown_qm', 'qm_listviewOboxUpDown2_qm', 'qm_listviewSetFormat_qm', 'qm_listviewSort_qm', 'qm_listviewxml_qm', 'qm_message_qm', 'qm_mlole_qm', 'qm_olectl_qm', 'qm_patternQuery_qm', 'qm_periodicDate_qm', 'qm_phone_qm', 'qm_picture_qm', 'qm_pobox_qm', 'qm_printing_qm', 'qm_query_qm', 'qm_queryExist_qm', 'qm_rates_qm', 'qm_refbasedptr_qm', 'qm_reload_qm', 'qm_resume_qm', 'qm_rounding_qm', 'qm_security_qm', 'qm_setLocale_qm', 'qm_simplwid_qm', 'qm_spanDate_qm', 'qm_spanTime_qm', 'qm_systemObject_qm', 'qm_telephony_qm', 'qm_term_qm', 'qm_time_qm', 'qm_timedTrigger_qm', 'qm_tmprture_qm', 'qm_txnByCond_qm', 'qm_unit_qm', 'qm_unittestDLL_qm', 'qm_unittestIV_qm', 'qm_vector_qm', 'qm_wrapper_qm', 'qualassu', 'query', 'queryatt', 'queryWizard', 'receitem', 'receivingItemStatusList', 'receving', 'registerStorageAids', 'remotmsg', 'repclass', 'reporting', 'request', 'resolbom', 'resoljob', 'resset', 'restrict', 'routePlanningEdit', 'sacoest', 'salebase', 'salecedt', 'salecond', 'saleitem', 'saleset', 'salesItemOrderStatisticsList', 'salesOrderEngineering', 'salexitm', 'sapBusinessOneInterfaceMonitor', 'sarestat', 'saretour', 'scanner_login_app_scanner', 'scanner_main_app_scanner', 'scanner_main_info_iteminfo_app_scanner', 'scanner_main_info_queryitem_app_scanner', 'scanner_main_info_querystorage_app_scanner', 'scanner_main_info_storageinfo_app_scanner', 'scanner_main_maintenance_adjustinventory_adjustinventorydown_app_scanner', 'scanner_main_maintenance_adjustinventory_adjustinventoryup_app_scanner', 'scanner_main_maintenance_adjustinventory_app_scanner', 'scanner_main_maintenance_adjustinventory_changestatus_app_scanner', 'scanner_main_maintenance_relocate_app_scanner', 'scanner_main_maintenance_relocate_license_app_scanner', 'scanner_main_maintenance_stocktaking_app_scanner', 'scanner_main_maintenance_stocktaking_cyclecountstorage_app_scanner', 'scanner_main_print_labelorreport_app_scanner', 'scanner_main_print_printdocument_app_scanner', 'scanner_main_print_printitemlabel_app_scanner', 'scanner_main_print_printstoragelabel_app_scanner', 'scanner_main_processes_inbound_app_scanner', 'scanner_main_processes_inbound_directputaway_app_scanner', 'scanner_main_processes_inbound_receivefromcustomer_app_scanner', 'scanner_main_processes_inbound_receivefromsupplier_app_scanner', 'scanner_main_processes_outbound_app_scanner', 'scanner_main_processes_outbound_pick_app_scanner', 'scanner_main_processes_outbound_shiptocustomer_app_scanner', 'scanner_main_processes_outbound_shiptocustomer_consolidatelicense_app_scanner', 'scanner_main_processes_outbound_shiptocustomer_consolidatelooseitems_app_scanner', 'scanner_main_processes_outbound_shiptocustomer_identifylicensesofshipment_app_scanner', 'scanner_main_processes_outbound_shiptocustomer_pickandcollect_app_scanner', 'scanner_main_processes_outbound_shiptocustomer_pickanddrop_app_scanner', 'scanner_main_processes_transport_putaway_app_scanner', 'scanner_main_processes_transport_putaway_looseitemsputaway_app_scanner', 'scanner_select_forktruck_app_scanner', 'scanner_select_picklist_nui_app_scanner', 'scanner_select_pickzone_app_scanner', 'scanner_select_status_app_scanner', 'scanner_select_storage_app_scanner', 'scanner_select_workzone_app_scanner', 'scanner_show_consolidationstoragesstatus_app_scanner', 'schedule', 'secclass', 'secgroup', 'secmessg', 'secobjec', 'secsystm', 'serinumb', 'serviitt', 'servinqu', 'sessiond', 'setalloc', 'setlimit', 'setlocal', 'showmoni', 'showwrkf', 'sinvbook', 'slotsbas', 'spardire', 'sparitem', 'specifier', 'sstgroup', 'staffmem', 'startset', 'statfoca', 'statinst', 'statistx', 'statofit', 'statoitm', 'statordr', 'statpodc', 'statprpl', 'statturn', 'statwprg', 'statwrap', 'stoaccnt', 'stock', 'stockInput', 'stockOrder', 'stockOrder', 'stockSequentialTest', 'stockSpaceQuery', 'StockStatistics', 'stockSwitching', 'stocktxn', 'stockWithdrawal', 'stomobil', 'stotrans', 'substock', 'supplierAgreement', 'supplierItemList', 'synchrDB', 'sysnote', 'tapi', 'task', 'taxrate', 'telecomEdit', 'telecrep', 'testAllocation', 'testattr', 'testform', 'timeoffc', 'tool', 'truck', 'txnhisto', 'unitbill', 'unitCalculator', 'units', 'unittabl', 'updFClip', 'user', 'userhier', 'utilaccn', 'utilitem', 'utilofor', 'utilpart', 'utilpurc', 'vacaopen', 'validity', 'vatreturn', 'vehicle', 'warehouseMonitor', 'warehouseMonitor', 'webservice', 'windows', 'wipAccount', 'workarea', 'workflowGraphList', 'workgrup', 'workingTimeAccount', 'workstat', 'workTimeFlexiCalculate', 'workTimeTerminal', 'worldClock', 'z4report', 'ZUGFeRD']
+
+classificationDataFile = "classificationData.pkl.gz"
 
 def instruct(promptsPerClass=3):
     instructModel = "meta-llama/Llama-2-7b-chat-hf"
@@ -122,7 +126,7 @@ def finetuneNoEval(model_checkpoint, promptsPerClass):
         save_steps=10000,
         learning_rate=2e-5,
         per_device_train_batch_size=1,
-        max_steps=100000,
+        max_steps=150000,
         weight_decay=0.01,
         report_to="none",
     )
@@ -164,7 +168,7 @@ def inference(modelName, threshold=None):
     ]
 
     model = AutoModelForSequenceClassification.from_pretrained(f"output/{modelName}")
-    tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
+    tokenizer = AutoTokenizer.from_pretrained(re.search(r'(.*?)-classification', modelName).group(1))
 
     if not threshold:
         classifier = pipeline("text-classification", model=model, tokenizer=tokenizer)
@@ -188,7 +192,7 @@ def inference(modelName, threshold=None):
             print()
             #print(outputs.logits.argmax(-1))
 
-def analysis(modelName, samplesPerModule, checkpoint, samplesFromEnd=2):
+def analysis(modelName, specs, samplesFromEnd=2):
     with open("data/en_articles_classification_instruct10.json", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -201,60 +205,73 @@ def analysis(modelName, samplesPerModule, checkpoint, samplesFromEnd=2):
 
     testData = {label: dataByLabel[label][-samplesFromEnd:] for label in dataByLabel}
 
-    correctPredictions = {}
-    averageConfidence = {}
-    confidence = {}
-    response = {}
-    for sampleCount in samplesPerModule:
-        currentModel = modelName.format(sampleCount, checkpoint)
-        model = AutoModelForSequenceClassification.from_pretrained(f"output/{currentModel}")
-        tokenizer = AutoTokenizer.from_pretrained("distilbert-base-uncased")
+    if os.path.exists(classificationDataFile):
+        with gzip.open(classificationDataFile, "rb") as f:
+            classificationData = pickle.load(f)
+    else:
+        classificationData = {}
+    
+    change = False
+    for spec in specs:
+        currentModel = modelName.format(*spec)
+        if currentModel in classificationData:
+            continue
+        else:
+            change = True
+            model = AutoModelForSequenceClassification.from_pretrained(f"output/{currentModel}")
+            tokenizer = AutoTokenizer.from_pretrained(f"{spec[0]}bert-base-uncased")
 
-        correctPrediction = 0
-        confidences = []
-        responses = []
-        for label in testData:
-            for sample in testData[label]:
-                inputs = tokenizer(sample['input'], return_tensors="pt")
-                outputs = model(**inputs)
-                probabilities = torch.nn.functional.softmax(outputs.logits, dim=-1).flatten().detach().cpu().numpy()
-                labels = sorted(zip(range(len(dataByLabel)), probabilities), key=lambda x: x[1], reverse=True)
-                responses.append(labels)
-                if label == labels[0][0]:
-                    correctPrediction += 1
-                for labelTuple in labels:
-                    if labelTuple[0] == label:
-                        confidences.append(labelTuple[1])
-                        break
-        
-        correctPredictions[currentModel] = (correctPrediction, len(dataByLabel) * samplesFromEnd)
-        averageConfidence[currentModel] = sum(confidences) / len(confidences)
-        confidence[currentModel] = confidences
-        response[currentModel] = responses
+            correctPrediction = 0
+            confidences = []
+            responses = []
+            for label in testData:
+                for sample in testData[label]:
+                    inputs = tokenizer(sample['input'], return_tensors="pt")
+                    outputs = model(**inputs)
+                    probabilities = torch.nn.functional.softmax(outputs.logits, dim=-1).flatten().detach().cpu().numpy()
+                    labels = sorted(zip(range(len(dataByLabel)), probabilities), key=lambda x: x[1], reverse=True)
+                    responses.append(labels)
+                    if label == labels[0][0]:
+                        correctPrediction += 1
+                    for labelTuple in labels:
+                        if labelTuple[0] == label:
+                            confidences.append(labelTuple[1])
+                            break
+            
+            classificationData[currentModel] = {}
+            classificationData[currentModel]['correctPredictions'] = (correctPrediction, len(dataByLabel) * samplesFromEnd)
+            classificationData[currentModel]['confidence'] = confidences
+            classificationData[currentModel]['response'] = responses
+    if change:
+        with gzip.open(classificationDataFile, "wb") as f:
+            pickle.dump(classificationData, f)
 
-    print("Correct predictions:", correctPredictions)
-    print("Average confidence:", averageConfidence)
-    print("Correlation between 5 and 8 samples per module:", {np.corrcoef(confidence[modelName.format(5, checkpoint)], confidence[modelName.format(8, checkpoint)])[0, 1]})
-    for sampleCount in samplesPerModule:
-        currentModel = modelName.format(sampleCount, checkpoint)
-        values, bins = np.histogram(confidence[currentModel], bins=100)
+    print("Correct predictions:", [classificationData[modelName.format(*spec)]['correctPredictions'] for spec in specs])
+    print("Average confidence:", [np.average(classificationData[modelName.format(*spec)]['confidence']) for spec in specs])
+    if (comp1 := ("distil", 5, 50000)) in specs and (comp2 := ("distil", 8, 50000)) in specs:
+        print("Correlation between 5 and 8 samples per module (distilbert):", {np.corrcoef(classificationData[modelName.format(*comp1)]['confidence'], classificationData[modelName.format(*comp2)]['confidence'])[0, 1]})
+    for spec in specs:
+        currentModel = modelName.format(*spec)
+        values, bins = np.histogram(classificationData[currentModel]['confidence'], bins=100)
 
         cumulative = np.cumsum(values)
 
-        plt.plot(bins[:-1], cumulative, label=f"s{re.search(r'instruct([0-9]+)', currentModel).group(1)}: {correctPredictions[currentModel][0]}, {averageConfidence[currentModel]:.2f}")
+        plt.plot(bins[:-1], cumulative, label=f"{spec[0]}bert-s{spec[1]}-c{spec[2]}: {classificationData[currentModel]['correctPredictions'][0]}, {np.average(classificationData[currentModel]['confidence']):.2f}")
     plt.legend()
     plt.xlabel("Confidence in correct module")
-    plt.ylabel(f"Cumulative count (dataset size of {correctPredictions[modelName.format(samplesPerModule[0], checkpoint)][1]} samples)")
+    plt.ylabel(f"Cumulative count (dataset size of {classificationData[modelName.format(*specs[0])]['correctPredictions'][1]} samples)")
     plt.title("Cumulative distribution of confidence")
     plt.show()
     plt.close()
 
-    for sampleCount in [8, 10]:
+    for spec in [("distil", 10, 50000), ("distil", 8, 50000), ("", 8, 120000)]:
+        if not spec in specs:
+            continue
         print()
 
-        currentModel = modelName.format(sampleCount, checkpoint)
-        print(f"Worst performing samples ({sampleCount} samples per module):")
-        worstSamples = sorted(zip([sample for label in testData for sample in testData[label]], confidence[currentModel], response[currentModel]), key=lambda x: x[1])[:5]
+        currentModel = modelName.format(*spec)
+        print(f"Worst performing samples ({spec[0]}bert, {spec[1]} samples per module):")
+        worstSamples = sorted(zip([sample for label in testData for sample in testData[label]], classificationData[currentModel]['confidence'], classificationData[currentModel]['response']), key=lambda x: x[1])[:5]
         for sample in worstSamples:
             print(f"\t{sample[0]['input']}\n\t\tCorrect module: {modules[sample[0]['label']]} ({sample[1]:.2f})\n\t\tPredicted module: {modules[sample[2][0][0]]} ({sample[2][0][1]:.2f})")
 
@@ -265,9 +282,7 @@ if __name__ == '__main__':
     #finetuneNoEval("distilbert-base-uncased", 1)
     #finetuneNoEval("distilbert-base-uncased", 5)
     #finetuneNoEval("distilbert-base-uncased", 8)
-    finetuneNoEval("bert-base-uncased", 10)
-    #finetuneNoEval("bert-base-uncased", 1)
-    #finetuneNoEval("bert-base-uncased", 5)
+    #finetuneNoEval("bert-base-uncased", 10)
     #finetuneNoEval("bert-base-uncased", 8)
 
     #inference("distilbert-base-uncased-classification/checkpoint-30000")
@@ -276,5 +291,15 @@ if __name__ == '__main__':
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000")
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000", 0.1)
 
-    #analysis("distilbert-base-uncased-classification-instruct{0}/checkpoint-{1}", [1, 5, 8, 10], 100000, 2)
-    #analysis("distilbert-base-uncased-classification-instruct{0}/checkpoint-{1}", [1, 5, 8, 10], 50000, 2)
+    #exit()
+
+    analysis("{0}bert-base-uncased-classification-instruct{1}/checkpoint-{2}", [
+        ("distil", 1, 50000),
+        ("distil", 5, 50000),
+        ("distil", 8, 50000),
+        ("distil", 8, 100000),
+        ("distil", 10, 50000),
+        ("", 8, 100000),
+        ("", 8, 150000),
+        ("", 10, 100000)
+        ], 2)
