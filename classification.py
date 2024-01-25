@@ -23,7 +23,7 @@ modules = ['about', 'accarea', 'access', 'address', 'addrtyp', 'advancedSearch',
 
 classificationDataFile = "classificationData.pkl.gz"
 
-def instruct(promptsPerClass=None):
+def instruct(promptsPerClass=""):
     instructModel = "meta-llama/Llama-2-7b-chat-hf"
 
     tokenizer = AutoTokenizer.from_pretrained(instructModel)
@@ -86,10 +86,10 @@ If a question does not make any sense, or is not factually coherent, explain why
         for match in matches:
             instructions.append({"input": match.strip("\""), "label": label})
 
-    with open(f"data/en_articles_classification_instruct{promptsPerClass if promptsPerClass else ''}.json", "w", encoding="utf-8") as f:
+    with open(f"data/en_articles_classification_instruct{promptsPerClass}.json", "w", encoding="utf-8") as f:
         json.dump(instructions, f, ensure_ascii=False, indent=4)
 
-def finetuneNoEval(model_checkpoint, promptsPerClass):
+def finetuneNoEval(model_checkpoint, promptsPerClass=""):
     if not os.path.exists(f"data/en_articles_classification_instruct{promptsPerClass}.json"):
         with open(f"data/en_articles_classification_instruct10.json", encoding="utf-8") as f:
             data = json.load(f)
@@ -123,7 +123,7 @@ def finetuneNoEval(model_checkpoint, promptsPerClass):
         save_steps=20000,
         learning_rate=2e-5,
         per_device_train_batch_size=1,
-        max_steps=150000,
+        max_steps=200000,
         weight_decay=0.01,
         report_to="none",
     )
@@ -144,7 +144,8 @@ def finetuneNoEval(model_checkpoint, promptsPerClass):
         compute_metrics=compute_metrics,
     )
 
-    trainer.train()
+    trainer.train("output/bert-base-uncased-classification-instruct/checkpoint-140000")
+    #trainer.train()
 
 def inference(modelName, threshold=None):
     prompts = [
@@ -261,7 +262,7 @@ def analysis(modelName, specs, samplesFromEnd=2):
     plt.show()
     plt.close()
 
-    for spec in [("distil", 10, 50000), ("distil", 8, 50000), ("", 8, 120000)]:
+    for spec in [("distil", 10, 50000), ("distil", 8, 50000), ("", 8, 120000), ("", "", 200000)]:
         if not spec in specs:
             continue
         print()
@@ -274,7 +275,7 @@ def analysis(modelName, specs, samplesFromEnd=2):
 
 if __name__ == '__main__':
     #instruct(10)
-    instruct()
+    #instruct()
 
     #finetuneNoEval("distilbert-base-uncased", 10)
     #finetuneNoEval("distilbert-base-uncased", 1)
@@ -282,6 +283,7 @@ if __name__ == '__main__':
     #finetuneNoEval("distilbert-base-uncased", 8)
     #finetuneNoEval("bert-base-uncased", 10)
     #finetuneNoEval("bert-base-uncased", 8)
+    #finetuneNoEval("bert-base-uncased")
 
     #inference("distilbert-base-uncased-classification/checkpoint-30000")
     #inference("distilbert-base-uncased-classification-noeval/checkpoint-30000")
@@ -289,7 +291,7 @@ if __name__ == '__main__':
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000")
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000", 0.1)
 
-    exit()
+    #exit()
 
     analysis("{0}bert-base-uncased-classification-instruct{1}/checkpoint-{2}", [
         ("distil", 1, 50000),
@@ -299,5 +301,7 @@ if __name__ == '__main__':
         ("distil", 10, 50000),
         ("", 8, 100000),
         ("", 8, 150000),
-        ("", 10, 100000)
+        ("", 10, 100000),
+        ("", "", 140000),
+        ("", "", 200000),
         ], 2)
