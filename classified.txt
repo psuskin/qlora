@@ -30,7 +30,7 @@ Worst performing samples (10 samples per module):
 
 CONCLUSION:
         In the case of (nearly) identical samples, the first sample that was fed to the model is presumably the one that is output given a corresponding prompt.
-        There are bad prompts in the dataset. The bad prompt as a sample for resoljob module is presumably the first of its kind that was fed into the model.
+        There are bad prompts in the dataset. The bad prompt as a sample for resoljob module is presumably the first (or LAST) of its kind that was fed into the model.
 
 Worst performing samples (8 samples per module):
         BAD PROMPT
@@ -48,7 +48,7 @@ Worst performing samples (8 samples per module):
                 Correct module: qm_condBag_qm (0.00)
                 Predicted module: attrslot (0.99)
 
-        UNIQUE - though the prompt is reasonable and distinctive, successor of an order occurs many times in the training samples for the odocu module, while appearning in none of the training samples for the statwprg module.
+        UNIQUE - though the prompt is reasonable and distinctive, "successor of an order" occurs many times in the training samples for the odocu module, while appearning in none of the training samples for the statwprg module.
         Which module is responsible for displaying all successors of an order?
                 Correct module: statwprg (0.00)
                 Predicted module: odocu (1.00)
