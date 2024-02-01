@@ -331,6 +331,71 @@ def analysis(modelName, specs, samplesFromEnd=2):
         for sample in worstSamples:
             print(f"\t{sample[0]['input']}\n\t\tCorrect module: {modules[sample[0]['label']]} ({sample[1]:.2f})\n\t\tPredicted module: {modules[sample[2][0][0]]} ({sample[2][0][1]:.2f})")
 
+def analysisDescription(modelName, specs):
+    with open("data/en_articles_classification_instruct10.json", encoding="utf-8") as f:
+        data = json.load(f)
+
+    dataByLabel = {}
+    for sample in data:
+        label = sample['label']
+        if label not in dataByLabel:
+            dataByLabel[label] = []
+        dataByLabel[label].append(sample)
+
+    with open("data/en_articles_classification_int.json", encoding="utf-8") as f:
+        data = json.load(f)
+
+    testData = {sample["label"]: sample["input"] for sample in data}
+
+    classificationData = {}
+
+    for spec in specs:
+        currentModel = modelName.format(*spec)
+
+        model = AutoModelForSequenceClassification.from_pretrained(f"output/{currentModel}")
+        tokenizer = AutoTokenizer.from_pretrained(f"{spec[0]}bert-base-uncased")
+
+        correctPrediction = 0
+        confidences = []
+        responses = []
+
+        for label in testData:
+            inputs = tokenizer(testData[label], return_tensors="pt")
+            if len(inputs['input_ids'][0]) > 512:
+                continue
+
+            outputs = model(**inputs)
+            probabilities = torch.nn.functional.softmax(outputs.logits, dim=-1).flatten().detach().cpu().numpy()
+            labels = sorted(zip(range(len(dataByLabel)), probabilities), key=lambda x: x[1], reverse=True)
+            responses.append(labels)
+            if label == labels[0][0]:
+                correctPrediction += 1
+            for labelTuple in labels:
+                if labelTuple[0] == label:
+                    confidences.append(labelTuple[1])
+                    break
+
+        classificationData[currentModel] = {}
+        classificationData[currentModel]['correctPredictions'] = (correctPrediction, len(dataByLabel))
+        classificationData[currentModel]['confidence'] = confidences
+        classificationData[currentModel]['response'] = responses
+
+    print("Correct predictions:", [classificationData[modelName.format(*spec)]['correctPredictions'] for spec in specs])
+    print("Average confidence:", [np.average(classificationData[modelName.format(*spec)]['confidence']) for spec in specs])
+    for spec in specs:
+        currentModel = modelName.format(*spec)
+        values, bins = np.histogram(classificationData[currentModel]['confidence'], bins=100)
+
+        cumulative = np.cumsum(values)
+
+        plt.plot(bins[:-1], cumulative, label=f"{spec[0]}bert-s{spec[1]}-c{spec[2]}: {classificationData[currentModel]['correctPredictions'][0]}, {np.average(classificationData[currentModel]['confidence']):.2f}")
+    plt.legend()
+    plt.xlabel("Confidence in correct module")
+    plt.ylabel(f"Cumulative count (dataset size of {classificationData[modelName.format(*specs[0])]['correctPredictions'][1]} samples)")
+    plt.title("Cumulative distribution of confidence")
+    plt.show()
+    plt.close()
+
 if __name__ == '__main__':
     #instruct(10)
     #instruct()
@@ -354,6 +419,22 @@ if __name__ == '__main__':
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000", 0.1)
 
     #inference("../../bert.cpp/models/bert-base-uncased-classification-instruct10", 0.1)
+    #inference("../../bert.cpp/models/bert-base-uncased-classification-instruct", 0.1)
+    analysisDescription("../../{0}bert.cpp/models/bert-base-uncased-classification-instruct{1}{2}", [
+        ("", 10, ""),
+        ("", "", ""),
+        ])
+    """
+    with open("data/en_articles_classification_instruct.json", encoding="utf-8") as f:
+        data = json.load(f)
+    dataByLabel = {}
+    for sample in data:
+        label = sample['label']
+        if label not in dataByLabel:
+            dataByLabel[label] = []
+        dataByLabel[label].append(sample)
+    print(max(len(dataByLabel[label]) for label in dataByLabel), min(len(dataByLabel[label]) for label in dataByLabel))
+    """
 
     exit()
 
