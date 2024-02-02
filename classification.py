@@ -399,6 +399,7 @@ def analysisDescription(modelName, specs):
 if __name__ == '__main__':
     #instruct(10)
     #instruct()
+    instruct(80)
 
     #relatedModules = group()
     #relatedModules = [['car', 'truck', 'vehicle'], ['cmacbals', 'cracbals', 'deacbals', 'exacbals', 'ppcrbals', 'ppdebals'], ['costmobj', 'costsobj'], ['cxSapBusinessOneStock', 'sapBusinessOneInterfaceMonitor'], ['dtausedt', 'dtazvedt'], ['jobRecordByDayWin', 'jobrecrd'], ['loggiocm', 'loggiocr', 'loggiode', 'loggioex'], ['loggiprov', 'loggirit'], ['member', 'specifier'], ['opitcrac', 'opitdbac'], ['paydtaus', 'paydtazv'], ['prichap', 'prichas'], ['qm_deadlock_qm', 'qm_resume_qm'], ['qm_listviewOboxUpDown_qm', 'qm_listviewOboxUpDown2_qm'], ['qm_spanTime_qm', 'qm_term_qm'], ['scanner_main_info_iteminfo_app_scanner', 'scanner_main_info_storageinfo_app_scanner'], ['scanner_main_maintenance_adjustinventory_adjustinventorydown_app_scanner', 'scanner_main_maintenance_adjustinventory_adjustinventoryup_app_scanner'], ['utilpart', 'utilpurc']]
@@ -420,10 +421,12 @@ if __name__ == '__main__':
 
     #inference("../../bert.cpp/models/bert-base-uncased-classification-instruct10", 0.1)
     #inference("../../bert.cpp/models/bert-base-uncased-classification-instruct", 0.1)
+    """
     analysisDescription("../../{0}bert.cpp/models/bert-base-uncased-classification-instruct{1}{2}", [
         ("", 10, ""),
         ("", "", ""),
         ])
+    """
     """
     with open("data/en_articles_classification_instruct.json", encoding="utf-8") as f:
         data = json.load(f)
