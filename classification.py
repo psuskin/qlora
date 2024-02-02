@@ -92,6 +92,28 @@ If a question does not make any sense, or is not factually coherent, explain why
     with open(f"data/en_articles_classification_instruct{promptsPerClass}.json", "w", encoding="utf-8") as f:
         json.dump(instructions, f, ensure_ascii=False, indent=4)
 
+def instructUniform(samplesPerClass=80):
+    with open("data/en_articles_classification_instruct.json", encoding="utf-8") as f:
+        data = json.load(f)
+
+    dataByLabel = {}
+    for sample in data:
+        label = sample['label']
+        if label not in dataByLabel:
+            dataByLabel[label] = []
+        dataByLabel[label].append(sample)
+
+    for label in dataByLabel:
+        currentSamples = dataByLabel[label]
+        while len(dataByLabel[label]) < samplesPerClass:
+            dataByLabel[label].extend(currentSamples)
+
+        if len(dataByLabel[label]) > samplesPerClass:
+            dataByLabel[label] = dataByLabel[label][:samplesPerClass]
+
+    with open(f"data/en_articles_classification_instruct{samplesPerClass}uniform.json", "w", encoding="utf-8") as f:
+        json.dump([sample for label in dataByLabel for sample in dataByLabel[label]], f, ensure_ascii=False, indent=4)
+
 def group():
     with open("data/en_articles_classification.json", encoding="utf-8") as f:
         data = json.load(f)
@@ -399,7 +421,8 @@ def analysisDescription(modelName, specs):
 if __name__ == '__main__':
     #instruct(10)
     #instruct()
-    instruct(80)
+    #instruct(80)
+    instructUniform()
 
     #relatedModules = group()
     #relatedModules = [['car', 'truck', 'vehicle'], ['cmacbals', 'cracbals', 'deacbals', 'exacbals', 'ppcrbals', 'ppdebals'], ['costmobj', 'costsobj'], ['cxSapBusinessOneStock', 'sapBusinessOneInterfaceMonitor'], ['dtausedt', 'dtazvedt'], ['jobRecordByDayWin', 'jobrecrd'], ['loggiocm', 'loggiocr', 'loggiode', 'loggioex'], ['loggiprov', 'loggirit'], ['member', 'specifier'], ['opitcrac', 'opitdbac'], ['paydtaus', 'paydtazv'], ['prichap', 'prichas'], ['qm_deadlock_qm', 'qm_resume_qm'], ['qm_listviewOboxUpDown_qm', 'qm_listviewOboxUpDown2_qm'], ['qm_spanTime_qm', 'qm_term_qm'], ['scanner_main_info_iteminfo_app_scanner', 'scanner_main_info_storageinfo_app_scanner'], ['scanner_main_maintenance_adjustinventory_adjustinventorydown_app_scanner', 'scanner_main_maintenance_adjustinventory_adjustinventoryup_app_scanner'], ['utilpart', 'utilpurc']]
