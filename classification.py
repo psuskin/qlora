@@ -224,8 +224,8 @@ def finetuneNoEval(model_checkpoint, promptsPerClass=""):
         compute_metrics=compute_metrics,
     )
 
-    trainer.train("output/bert-base-uncased-classification-instruct/checkpoint-140000")
-    #trainer.train()
+    #trainer.train("output/bert-base-uncased-classification-instruct/checkpoint-140000")
+    trainer.train()
 
 def inference(modelName, threshold=None):
     prompts = [
@@ -422,7 +422,7 @@ if __name__ == '__main__':
     #instruct(10)
     #instruct()
     #instruct(80)
-    instructUniform()
+    #instructUniform()
 
     #relatedModules = group()
     #relatedModules = [['car', 'truck', 'vehicle'], ['cmacbals', 'cracbals', 'deacbals', 'exacbals', 'ppcrbals', 'ppdebals'], ['costmobj', 'costsobj'], ['cxSapBusinessOneStock', 'sapBusinessOneInterfaceMonitor'], ['dtausedt', 'dtazvedt'], ['jobRecordByDayWin', 'jobrecrd'], ['loggiocm', 'loggiocr', 'loggiode', 'loggioex'], ['loggiprov', 'loggirit'], ['member', 'specifier'], ['opitcrac', 'opitdbac'], ['paydtaus', 'paydtazv'], ['prichap', 'prichas'], ['qm_deadlock_qm', 'qm_resume_qm'], ['qm_listviewOboxUpDown_qm', 'qm_listviewOboxUpDown2_qm'], ['qm_spanTime_qm', 'qm_term_qm'], ['scanner_main_info_iteminfo_app_scanner', 'scanner_main_info_storageinfo_app_scanner'], ['scanner_main_maintenance_adjustinventory_adjustinventorydown_app_scanner', 'scanner_main_maintenance_adjustinventory_adjustinventoryup_app_scanner'], ['utilpart', 'utilpurc']]
@@ -435,6 +435,8 @@ if __name__ == '__main__':
     #finetuneNoEval("bert-base-uncased", 10)
     #finetuneNoEval("bert-base-uncased", 8)
     #finetuneNoEval("bert-base-uncased")
+    finetuneNoEval("distilbert-base-uncased", 80)
+    finetuneNoEval("distilbert-base-uncased", "80uniform")
 
     #inference("distilbert-base-uncased-classification/checkpoint-30000")
     #inference("distilbert-base-uncased-classification-noeval/checkpoint-30000")
