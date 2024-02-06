@@ -115,6 +115,89 @@ def instructUniform(samplesPerClass=80):
     with open(f"data/en_articles_classification_instruct{samplesPerClass}uniform.json", "w", encoding="utf-8") as f:
         json.dump([sample for label in dataByLabel for sample in dataByLabel[label]], f, ensure_ascii=False, indent=4)
 
+def instructBullet():
+    instructModel = "meta-llama/Llama-2-7b-chat-hf"
+
+    tokenizer = AutoTokenizer.from_pretrained(instructModel)
+    # Fixing some of the early LLaMA HF conversion issues.
+    tokenizer.bos_token_id = 1
+
+    # Load the model (use bf16 for faster inference)
+    model = AutoModelForCausalLM.from_pretrained(
+        instructModel,
+        torch_dtype=torch.bfloat16,
+        device_map={"": 0},
+        load_in_4bit=True,
+        quantization_config=BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_use_double_quant=True,
+            bnb_4bit_quant_type='nf4',
+        )
+    )
+
+    with open("data/en_articles_classification_int.json", encoding="utf-8") as f:
+        data = json.load(f)
+    
+    bullets = {}
+    for module in data:
+        prompt = f"I will now provide you with the description of a module. Please generate as many numbered bullet points as necessary in order to cover each relevant aspect of the module description.\n\nModule description: {module['input']}"
+        # https://huggingface.co/blog/llama2
+        llamaPrompt = f"""<s>[INST] <<SYS>>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.
+<</SYS>>
+
+{prompt} [/INST]"""
+
+        inputs = tokenizer(llamaPrompt, return_tensors="pt").to('cuda')       
+
+        outputs = model.generate(
+            **inputs, 
+            generation_config=GenerationConfig(
+                do_sample=True,
+                max_new_tokens=4096,
+                top_p=1,
+                temperature=0.01,
+            )
+        )
+
+        text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+        response = text.split("[/INST]", 1)[1].strip()
+
+        if label % 100 == 0:
+            print(label)
+            print(response)
+
+        pattern = re.compile(r'\d+\.\s(.+?)(?:\n|$)')
+        matches = pattern.findall(response)
+        bullets[label] = {"bullets": [match.strip("\"") for match in matches], "description": module['input']}
+
+    with open(f"data/bullets.json", "w", encoding="utf-8") as f:
+        json.dump(bullets, f, ensure_ascii=False, indent=4)
+
+    instructions = []
+    for label in bullets:
+        #for bullet in bullets[label]:
+        moduleDescription = bullets[label]["description"]
+        bulletList = "\n - ".join(bullets[label]["bullets"])
+        prompt = f"I will now provide you with the description of a module, followed by a list of bullet points detailing each relevant aspect of the module description. Please generate a prompt for each bullet point that queries which module is responsible for some given functionality, where this functionality stems from the module description, and the prompts use various formulations to ask which module is being described.\n\nModule description: {moduleDescription}\n\nBullet points:\n{bulletList}"
+        llamaPrompt = f"""<s>[INST] <<SYS>>
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.
+<</SYS>>
+
+{prompt} [/INST]"""
+        pattern = re.compile(r'\d+\.\s(.+?)(?:\n|$)')
+        matches = pattern.findall(response)
+        for match in matches:
+            instructions.append({"input": match.strip("\""), "label": label})
+
+    with open(f"data/en_articles_classification_instructBullet.json", "w", encoding="utf-8") as f:
+        json.dump(instructions, f, ensure_ascii=False, indent=4)
+
 def group():
     with open("data/en_articles_classification.json", encoding="utf-8") as f:
         data = json.load(f)
