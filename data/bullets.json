@@ -1,0 +1,15 @@
+{
+    "0": {
+        "bullets": [
+            "Version information: The module should display the version number of the software or application being used.",
+            "Copyright information: The module should list the copyright holder or owners of the software or application, including their names and contact information (if applicable).",
+            "Date of creation: The module should display the date when the software or application was created or released.",
+            "Last updated date: The module should display the date when the software or application was last updated or modified.",
+            "Legal information: The module may include legal notices or disclaimers related to the use of the software or application, such as terms of service, licensing agreements, or privacy policies.",
+            "Technical information: The module may provide technical details about the software or application, such as programming languages used, frameworks employed, or hardware requirements.",
+            "Documentation: The module may include links to official documentation or guides for using the software or application, such as user manuals, API references, or developer guides.",
+            "Support information: The module may provide information on how to obtain support or assistance for the software or application, such as contact details for customer support teams, forums or discussion groups, or troubleshooting resources."
+        ],
+        "description": "Display and listing of version and copyright information."
+    }
+}

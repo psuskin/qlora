@@ -1,0 +1,42 @@
+[
+    {
+        "input": "Which module displays the version number of the software or application being used?",
+        "label": 0
+    },
+    {
+        "input": "Which module is responsible for listing the copyright information of the software or application?",
+        "label": 0
+    },
+    {
+        "input": "Which module shows the version and copyright information of the software or application?",
+        "label": 0
+    },
+    {
+        "input": "What module displays the current version number of the software or application?",
+        "label": 0
+    },
+    {
+        "input": "Which module provides the copyright details of the software or application?",
+        "label": 0
+    },
+    {
+        "input": "Which module displays the version and copyright information for the current software or application?",
+        "label": 0
+    },
+    {
+        "input": "What module is responsible for displaying the version number and copyright information of the software or application?",
+        "label": 0
+    },
+    {
+        "input": "Which module shows the version and copyright details of the software or application?",
+        "label": 0
+    },
+    {
+        "input": "Which module provides the version number and copyright information of the software or application?",
+        "label": 0
+    },
+    {
+        "input": "Which module is responsible for displaying the copyright information of the software or application?",
+        "label": 0
+    }
+]
