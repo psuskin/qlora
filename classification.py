@@ -141,7 +141,7 @@ def instructBullet():
     
     bullets = {}
     for module in data:
-        prompt = f"I will now provide you with the description of a module. Please generate as many numbered bullet points as necessary in order to cover each relevant aspect of the module description.\n\nModule description: {module['input']}"
+        prompt = f"I will now provide you with the description of a module. Please generate a numbered list covering each relevant aspect of the module description.\n\nModule description: {module['input']}"
         # https://huggingface.co/blog/llama2
         llamaPrompt = f"""<s>[INST] <<SYS>>
 You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
@@ -179,21 +179,31 @@ If a question does not make any sense, or is not factually coherent, explain why
 
     instructions = []
     for label in bullets:
-        #for bullet in bullets[label]:
         moduleDescription = bullets[label]["description"]
-        bulletList = "\n - ".join(bullets[label]["bullets"])
-        prompt = f"I will now provide you with the description of a module, followed by a list of bullet points detailing each relevant aspect of the module description. Please generate a prompt for each bullet point that queries which module is responsible for some given functionality, where this functionality stems from the module description, and the prompts use various formulations to ask which module is being described.\n\nModule description: {moduleDescription}\n\nBullet points:\n{bulletList}"
-        llamaPrompt = f"""<s>[INST] <<SYS>>
+        for bullet in bullets[label]["bullets"]:
+            prompt = f"I will now provide you with the description of a module, followed by a relevant aspect of the module description. Please generate a prompt based on the provided aspect that queries which module is responsible for some given functionality, where this functionality stems from the module description, and the prompts use various formulations to ask which module is being described.\n\nModule description: {moduleDescription}\n\nAspect:\n{bullet}"
+            llamaPrompt = f"""<s>[INST] <<SYS>>
 You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
 
 If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.
 <</SYS>>
 
 {prompt} [/INST]"""
-        pattern = re.compile(r'\d+\.\s(.+?)(?:\n|$)')
-        matches = pattern.findall(response)
-        for match in matches:
-            instructions.append({"input": match.strip("\""), "label": label})
+            inputs = tokenizer(llamaPrompt, return_tensors="pt").to('cuda')       
+
+            outputs = model.generate(
+                **inputs, 
+                generation_config=GenerationConfig(
+                    do_sample=True,
+                    max_new_tokens=4096,
+                    top_p=1,
+                    temperature=0.01,
+                )
+            )
+
+            text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+            response = text.split("[/INST]", 1)[1].strip()
+            instructions.append({"input": response, "label": label})
 
     with open(f"data/en_articles_classification_instructBullet.json", "w", encoding="utf-8") as f:
         json.dump(instructions, f, ensure_ascii=False, indent=4)
