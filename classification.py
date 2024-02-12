@@ -51,7 +51,7 @@ def instruct(promptsPerClass=""):
             )
         )
     else:
-        instructModel = "jphme/em_german_7b_v01"
+        instructModel = "jphme/Llama-2-13b-chat-german"
 
         tokenizer = AutoTokenizer.from_pretrained(instructModel)
         tokenizer.pad_token_id=tokenizer.eos_token_id
@@ -59,7 +59,6 @@ def instruct(promptsPerClass=""):
         # Load the model (use bf16 for faster inference)
         model = AutoModelForCausalLM.from_pretrained(
             instructModel,
-            torch_dtype=torch.bfloat16,
             device_map={"": 0},
             load_in_4bit=True,
             quantization_config=BitsAndBytesConfig(
@@ -71,13 +70,13 @@ def instruct(promptsPerClass=""):
         )
 
     prompts = []
-    with open(f"data/{"en" if EN else "de"}_articles_classification_int.json", encoding="utf-8") as f:
+    with open(f"data/{'en' if EN else 'de'}_articles_classification_int.json", encoding="utf-8") as f:
         data = json.load(f)
     for module in data:
         if EN:
             prompt = f"I will now provide you with a description of a module. Please generate {promptsPerClass if promptsPerClass else 3 + int(np.ceil(len(module['input'].split()) / 6))} prompts that query which module is responsible for some given functionality, where this functionality stems from the module description, and the prompts use various formulations to ask which module is being described.\n\nModule description: {module['input']}"
         else:
-            prompt = f"Ich gebe dir im Folgenden eine Beschreibung eines Moduls. Bitte generiere {promptsPerClass if promptsPerClass else 3 + int(np.ceil(len(module['input'].split()) / 6))} Prompts, die abfragen, welches Modul für eine bestimmte Funktionalität verantwortlich ist, wobei diese Funktionalität aus der Modulbeschreibung stammt und die Prompts verschiedene Formulierungen verwenden, um zu fragen, welches Modul beschrieben wird.\n\nModulbeschreibung: {module['input']}"
+            prompt = f"Ich gebe dir im Folgenden eine Beschreibung eines einzelnen Moduls. Bitte generiere {promptsPerClass if promptsPerClass else 3 + int(np.ceil(len(module['input'].split()) / 6))} unterschiedliche Prompts, die abfragen, welches Modul für eine bestimmte Funktionalität verantwortlich ist, wobei diese Funktionalität aus der gegebenen Modulbeschreibung stammt und die Prompts verschiedene Formulierungen verwenden, um zu fragen, was für ein Modul beschrieben wird.\n\nModulbeschreibung: {module['input']}"
         prompts.append((prompt, module['label']))
     
     instructions = []
@@ -93,6 +92,7 @@ def instruct(promptsPerClass=""):
     {prompt} [/INST]"""
         else:
             llamaPrompt = f"Du bist ein hilfreicher Assistent. USER: {prompt} ASSISTANT:"
+
         inputs = tokenizer(llamaPrompt, return_tensors="pt").to('cuda')
 
         outputs = model.generate(
@@ -102,11 +102,12 @@ def instruct(promptsPerClass=""):
                 max_new_tokens=4096,
                 top_p=1,
                 temperature=0.01,
+                repetition_penalty=1.2
             )
         )
 
         text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-        response = text.split("[/INST]", 1)[1].strip()
+        response = text.split("[/INST]" if EN else "ASSISTANT:", 1)[1].strip()
 
         if label % 100 == 0:
             print(label)
@@ -117,7 +118,7 @@ def instruct(promptsPerClass=""):
         for match in matches:
             instructions.append({"input": match.strip("\""), "label": label})
 
-    with open(f"data/{"en" if EN else "de"}_articles_classification_instruct{promptsPerClass}.json", "w", encoding="utf-8") as f:
+    with open(f"data/{'en' if EN else 'de'}_articles_classification_instruct{promptsPerClass}.json", "w", encoding="utf-8") as f:
         json.dump(instructions, f, ensure_ascii=False, indent=4)
 
 def instructUniform(samplesPerClass=80):
@@ -300,8 +301,8 @@ def group():
     return merge_tuples(related)
 
 def finetuneNoEval(model_checkpoint, promptsPerClass=""):
-    if not os.path.exists(f"data/{"en" if EN else "de"}_articles_classification_instruct{promptsPerClass}.json"):
-        with open(f"data/{"en" if EN else "de"}_articles_classification_instruct10.json", encoding="utf-8") as f:
+    if not os.path.exists(f"data/{'en' if EN else 'de'}_articles_classification_instruct{promptsPerClass}.json"):
+        with open(f"data/{'en' if EN else 'de'}_articles_classification_instruct10.json", encoding="utf-8") as f:
             data = json.load(f)
         
         dataByLabel = {}
@@ -314,9 +315,9 @@ def finetuneNoEval(model_checkpoint, promptsPerClass=""):
         truncatedData = []
         for label in dataByLabel:
             truncatedData.extend({"input": sample['input'], "label": sample['label']} for sample in dataByLabel[label][:promptsPerClass])
-        with open(f"data/{"en" if EN else "de"}_articles_classification_instruct{promptsPerClass}.json", "w", encoding="utf-8") as f:
+        with open(f"data/{'en' if EN else 'de'}_articles_classification_instruct{promptsPerClass}.json", "w", encoding="utf-8") as f:
             json.dump(truncatedData, f, ensure_ascii=False, indent=4)
-    dataset = Dataset.from_json(f'data/{"en" if EN else "de"}_articles_classification_instruct{promptsPerClass}.json')
+    dataset = Dataset.from_json(f"data/{'en' if EN else 'de'}_articles_classification_instruct{promptsPerClass}.json")
 
     tokenizer = AutoTokenizer.from_pretrained(model_checkpoint, use_fast=True)
 
@@ -328,7 +329,7 @@ def finetuneNoEval(model_checkpoint, promptsPerClass=""):
     model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=630)
 
     args = TrainingArguments(
-        f"output/{model_checkpoint}-classification-instruct{promptsPerClass}{"" if EN else "de"}",
+        f"output/{model_checkpoint}-classification-instruct{promptsPerClass}{'' if EN else 'de'}",
         save_strategy = "steps",
         save_steps=20000,
         learning_rate=2e-5,
@@ -361,22 +362,25 @@ def inference(modelName, threshold=None):
     prompts = [
         ("Which module provides version and copyright information?", 0),
 
-        ("How can I calculate the current time in another location?", 627), # 627
-        ("How can I calculate the current time in another location while accounting for discrepancies due to time zones?", 627), # 627
-        ("With which module can I calculate the current time in another location while accounting for discrepancies due to time zones?", 627), # 627
+        ("How can I calculate the current time in another location?", 627),
+        ("How can I calculate the current time in another location while accounting for discrepancies due to time zones?", 627),
+        ("With which module can I calculate the current time in another location while accounting for discrepancies due to time zones?", 627),
 
-        ("Tell me how to test the conversion of a temperature into the different heat units.", 460), # 460
-        ("Where do I record both flexitime and operating data (BDE)?", 626), # 626
-        ("Where can I check offer/order data?", 608), # 608
-        ("Help me with inspection of partner data.", 609), # 609
-        ("Provide me with resources on inspection of purchasing data.", 610), # 610
+        ("Tell me how to test the conversion of a temperature into the different heat units.", 460),
+        ("Where do I record both flexitime and operating data (BDE)?", 626),
+        ("Where can I check offer/order data?", 608),
+        ("Help me with inspection of partner data.", 609),
+        ("Provide me with resources on inspection of purchasing data.", 610),
 
-        ("Parts lists describe the composition of a production part. A bill of material consists of parts, which in turn can have a bill of material.", 45), # 45
-        ("Which module am I referencing? Parts lists describe the composition of a production part. A bill of material consists of parts, which in turn can have a bill of material.", 45), # 45
+        ("Parts lists describe the composition of a production part. A bill of material consists of parts, which in turn can have a bill of material.", 45),
+        ("Which module am I referencing? Parts lists describe the composition of a production part. A bill of material consists of parts, which in turn can have a bill of material.", 45),
+        
+        ("Welches Modul ist dafür verantwortlich, Informationen über Versionen und Urheberrecht anzuzeigen?", 0),
+        ("Anzeige und Auflistung der Versions- und Urheberrechtsinformationen.", 0),
     ]
 
     model = AutoModelForSequenceClassification.from_pretrained(f"output/{modelName}")
-    tokenizer = AutoTokenizer.from_pretrained(re.search(r'/(.*?)-classification', modelName).group(1))
+    tokenizer = AutoTokenizer.from_pretrained(re.search(r'(.*?)-classification', modelName).group(1))
 
     if not threshold:
         classifier = pipeline("text-classification", model=model, tokenizer=tokenizer)
@@ -486,18 +490,17 @@ def analysis(modelName, specs, samplesFromEnd=2):
 def analysisDescription(modelName, specs):
     with open("data/en_articles_classification_instruct10.json", encoding="utf-8") as f:
         data = json.load(f)
-
-    dataByLabel = {}
-    for sample in data:
-        label = sample['label']
-        if label not in dataByLabel:
-            dataByLabel[label] = []
-        dataByLabel[label].append(sample)
-
+    uniqueLabelCountEN = len(set([sample['label'] for sample in data]))
     with open("data/en_articles_classification_int.json", encoding="utf-8") as f:
         data = json.load(f)
+    testDataEN = {sample["label"]: sample["input"] for sample in data}
 
-    testData = {sample["label"]: sample["input"] for sample in data}
+    with open("data/de_articles_classification_instruct10.json", encoding="utf-8") as f:
+        data = json.load(f)
+    uniqueLabelCountDE = len(set([sample['label'] for sample in data]))
+    with open("data/de_articles_classification_int.json", encoding="utf-8") as f:
+        data = json.load(f)
+    testDataDE = {sample["label"]: sample["input"] for sample in data}
 
     if os.path.exists(classificationDataFileDesc):
         with gzip.open(classificationDataFileDesc, "rb") as f:
@@ -519,6 +522,8 @@ def analysisDescription(modelName, specs):
             confidences = []
             responses = []
 
+            testData = testDataEN if spec[3] == "" else testDataDE
+            uniqueLabelCount = uniqueLabelCountEN if spec[3] == "" else uniqueLabelCountDE
             for label in testData:
                 inputs = tokenizer(testData[label], return_tensors="pt")
                 if len(inputs['input_ids'][0]) > 512:
@@ -526,7 +531,7 @@ def analysisDescription(modelName, specs):
 
                 outputs = model(**inputs)
                 probabilities = torch.nn.functional.softmax(outputs.logits, dim=-1).flatten().detach().cpu().numpy()
-                labels = sorted(zip(range(len(dataByLabel)), probabilities), key=lambda x: x[1], reverse=True)
+                labels = sorted(zip(range(uniqueLabelCount), probabilities), key=lambda x: x[1], reverse=True)
                 responses.append(labels)
                 if label == labels[0][0]:
                     correctPrediction += 1
@@ -536,7 +541,7 @@ def analysisDescription(modelName, specs):
                         break
 
             classificationData[currentModel] = {}
-            classificationData[currentModel]['correctPredictions'] = (correctPrediction, len(dataByLabel))
+            classificationData[currentModel]['correctPredictions'] = (correctPrediction, uniqueLabelCount)
             classificationData[currentModel]['confidence'] = confidences
             classificationData[currentModel]['response'] = responses
     if change:
@@ -551,7 +556,7 @@ def analysisDescription(modelName, specs):
 
         cumulative = np.cumsum(values)
 
-        plt.plot(bins[:-1], cumulative, label=f"{spec[0]}bert-s{spec[1]}-c{spec[2]}: {classificationData[currentModel]['correctPredictions'][0]}, {np.average(classificationData[currentModel]['confidence']):.2f}")
+        plt.plot(bins[:-1], cumulative, label=f"{spec[0]}bert-s{spec[1]}-c{spec[2]}{spec[3]}: {classificationData[currentModel]['correctPredictions'][0]}, {np.average(classificationData[currentModel]['confidence']):.2f}")
     plt.legend()
     plt.xlabel("Confidence in correct module")
     plt.ylabel(f"Cumulative count (dataset size of {classificationData[modelName.format(*specs[0])]['correctPredictions'][1]} samples)")
@@ -564,7 +569,7 @@ if __name__ == '__main__':
     #instruct()
     #instruct(80)
     #instructUniform()
-    instructBullet()
+    #instructBullet()
 
     #relatedModules = group()
     #relatedModules = [['car', 'truck', 'vehicle'], ['cmacbals', 'cracbals', 'deacbals', 'exacbals', 'ppcrbals', 'ppdebals'], ['costmobj', 'costsobj'], ['cxSapBusinessOneStock', 'sapBusinessOneInterfaceMonitor'], ['dtausedt', 'dtazvedt'], ['jobRecordByDayWin', 'jobrecrd'], ['loggiocm', 'loggiocr', 'loggiode', 'loggioex'], ['loggiprov', 'loggirit'], ['member', 'specifier'], ['opitcrac', 'opitdbac'], ['paydtaus', 'paydtazv'], ['prichap', 'prichas'], ['qm_deadlock_qm', 'qm_resume_qm'], ['qm_listviewOboxUpDown_qm', 'qm_listviewOboxUpDown2_qm'], ['qm_spanTime_qm', 'qm_term_qm'], ['scanner_main_info_iteminfo_app_scanner', 'scanner_main_info_storageinfo_app_scanner'], ['scanner_main_maintenance_adjustinventory_adjustinventorydown_app_scanner', 'scanner_main_maintenance_adjustinventory_adjustinventoryup_app_scanner'], ['utilpart', 'utilpurc']]
@@ -585,18 +590,17 @@ if __name__ == '__main__':
     #inference("distilbert-base-uncased-classification-instruct/checkpoint-100000", 0.1)
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000")
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000", 0.1)
-
-    #inference("../../bert.cpp/models/bert-base-uncased-classification-instruct10", 0.1)
-    #inference("../../bert.cpp/models/bert-base-uncased-classification-instruct", 0.1)
+    inference("distilbert-base-uncased-classification-instruct10de/checkpoint-100000", 0.1)
     
     exit()
 
-    analysisDescription("{0}bert-base-uncased-classification-instruct{1}/checkpoint-{2}", [
-        ("distil", 80, "180000"),
-        ("distil", "80uniform", "180000"),
-        ("", "", 140000),
-        ("", 8, 100000),
-        ("", 10, 100000),
+    analysisDescription("{0}bert-base-uncased-classification-instruct{1}{3}/checkpoint-{2}", [
+        ("distil", 80, "180000", ""),
+        ("distil", "80uniform", "180000", ""),
+        ("", "", 140000, ""),
+        ("", 8, 100000, ""),
+        ("", 10, 100000, ""),
+        ("distil", 10, 100000, "de"),
         ])
     
     """
