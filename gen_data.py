@@ -138,6 +138,8 @@ def alpaca(path, max_words=2000/3):
 
         if len(description) < 3:
             print(name, description)
+        if len(cleanSequence(description + '.')) < 2:
+            continue
 
         inputSequence = "\n\n".join([
             "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.",
@@ -197,6 +199,8 @@ def classification(path):
             print(name, description)
 
         inputSequence = cleanSequence(description + '.')
+        if len(inputSequence) < 2:
+            continue
         jsonArray.append({"input": inputSequence, "label": name})
 
         for block in article["blocks"]:
@@ -231,6 +235,8 @@ def classificationInt(path):
             print(name, description)
 
         inputSequence = cleanSequence(description + '.')
+        if len(inputSequence) < 2:
+            continue
         jsonArray.append({"input": inputSequence, "label": i})
         i += 1
 
@@ -248,7 +254,7 @@ def classificationInt(path):
 
 if __name__ == "__main__":
     #autoregressive("data/en_articles_autoregressive.json")
-    #alpaca("data/en_articles_alpaca.json")
+    alpaca("data/en_articles_alpaca.json")
     #corpus("data/en_articles_corpus.txt")
-    #classification("data/en_articles_classification.json")
+    classification("data/en_articles_classification.json")
     classificationInt("data/en_articles_classification_int.json")

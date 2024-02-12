@@ -144,6 +144,8 @@ def alpaca(path, max_words=2000/3):
 
         if len(description) < 3:
             print(name, description)
+        if len(cleanSequence(description + '.')) < 2:
+            continue
 
         inputSequence = "\n\n".join([
             "Unten steht eine Anweisung, die eine Aufgabe beschreibt, gepaart mit einer Eingabe, die weiteren Kontext liefert. Schreiben Sie eine Antwort, die die Aufgabe angemessen erfüllt.",
@@ -183,7 +185,82 @@ def alpaca(path, max_words=2000/3):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(jsonArray, f, ensure_ascii=False, indent=4)
 
+def classification(path):
+    with open("de_articles.json") as f:
+        articles = json.load(f)
+
+    jsonArray = []
+
+    for article in articles["articles"]:
+        name = article["module"]
+        description = cut(article["description"]["text"]).strip()
+
+        if not description or not article["blocks"]:
+            continue
+
+        if name in tooLong:
+            continue
+
+        if len(description) < 3:
+            print(name, description)
+
+        inputSequence = cleanSequence(description + '.')
+        if len(inputSequence) < 2:
+            continue
+        jsonArray.append({"input": inputSequence, "label": name})
+
+        for block in article["blocks"]:
+            description = cut(block["description"]["text"]).strip()
+            if not "Win" in block["name"] or not description:
+                continue
+
+            inputSequence = cleanSequence(description + '.')
+            jsonArray.append({"input": inputSequence, "label": name})
+
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(jsonArray, f, ensure_ascii=False, indent=4)
+
+def classificationInt(path):
+    with open("de_articles.json") as f:
+        articles = json.load(f)
+
+    jsonArray = []
+
+    i = 0
+    for article in articles["articles"]:
+        name = article["module"]
+        description = cut(article["description"]["text"]).strip()
+
+        if not description or not article["blocks"]:
+            continue
+
+        if name in tooLong:
+            continue
+
+        if len(description) < 3:
+            print(name, description)
+
+        inputSequence = cleanSequence(description + '.')
+        if len(inputSequence) < 2:
+            continue
+        jsonArray.append({"input": inputSequence, "label": i})
+        i += 1
+
+        for block in article["blocks"]:
+            description = cut(block["description"]["text"]).strip()
+            if not "Win" in block["name"] or not description:
+                continue
+
+            inputSequence = cleanSequence(description + '.')
+            jsonArray.append({"input": inputSequence, "label": i})
+            i += 1
+
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(jsonArray, f, ensure_ascii=False, indent=4)
+
 if __name__ == "__main__":
     #autoregressive("data/de_articles_autoregressive.json")
     alpaca("data/de_articles_alpaca.json")
     #corpus("data/de_articles_corpus.txt")
+    classification("data/de_articles_classification.json")
+    classificationInt("data/de_articles_classification_int.json")
