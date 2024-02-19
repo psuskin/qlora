@@ -261,6 +261,6 @@ def classificationInt(path):
 if __name__ == "__main__":
     #autoregressive("data/de_articles_autoregressive.json")
     alpaca("data/de_articles_alpaca.json")
-    #corpus("data/de_articles_corpus.txt")
+    corpus("data/de_articles_corpus.txt")
     classification("data/de_articles_classification.json")
     classificationInt("data/de_articles_classification_int.json")
