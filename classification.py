@@ -1,8 +1,9 @@
 # Finetuning
 import numpy as np
 from datasets import Dataset
-from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer
+from transformers import AutoTokenizer, AutoModelForSequenceClassification, TrainingArguments, Trainer, DataCollatorWithPadding
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support
+import evaluate
 
 # Instruct
 import os
@@ -358,6 +359,77 @@ def finetuneNoEval(model_checkpoint, promptsPerClass=""):
     #trainer.train("output/bert-base-uncased-classification-instruct/checkpoint-140000")
     trainer.train()
 
+def finetuneNoEvalMulti(model_checkpoint, relatedModules, promptsPerClass=""):
+    if not os.path.exists(f"data/{'en' if EN else 'de'}_articles_classification_instruct{promptsPerClass}.json"):
+        with open(f"data/{'en' if EN else 'de'}_articles_classification_instruct10.json", encoding="utf-8") as f:
+            data = json.load(f)
+        
+        dataByLabel = {}
+        for sample in data:
+            label = sample['label']
+            if label not in dataByLabel:
+                dataByLabel[label] = []
+            dataByLabel[label].append(sample)
+        
+        truncatedData = []
+        for label in dataByLabel:
+            truncatedData.extend({"input": sample['input'], "label": sample['label']} for sample in dataByLabel[label][:promptsPerClass])
+        with open(f"data/{'en' if EN else 'de'}_articles_classification_instruct{promptsPerClass}.json", "w", encoding="utf-8") as f:
+            json.dump(truncatedData, f, ensure_ascii=False, indent=4)
+    dataset = Dataset.from_json(f"data/{'en' if EN else 'de'}_articles_classification_instruct{promptsPerClass}.json")
+
+    tokenizer = AutoTokenizer.from_pretrained(model_checkpoint, use_fast=True)
+
+    def tokenize_function(example):
+        text = example['input']
+        example = tokenizer(text, padding="max_length", truncation=True)
+        for group in relatedModules:
+            if example['label'] in group:
+                example['labels'] = [modules.index(label) for label in group]
+                break
+        else:
+            example['labels'] = [example['label']]
+
+        return example
+
+    tokenized_dataset = dataset.map(tokenize_function)
+
+    data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
+
+    model = AutoModelForSequenceClassification.from_pretrained(model_checkpoint, num_labels=630, problem_type="multi_label_classification")
+
+    args = TrainingArguments(
+        f"output/{model_checkpoint}-multiclassification-instruct{promptsPerClass}{'' if EN else 'de'}",
+        save_strategy = "steps",
+        save_steps=20000,
+        learning_rate=2e-5,
+        per_device_train_batch_size=1,
+        max_steps=200000,
+        weight_decay=0.01,
+        report_to="none",
+    )
+
+    clf_metrics = evaluate.combine(["accuracy", "f1", "precision", "recall"])
+    def sigmoid(x):
+        return 1/(1 + np.exp(-x))
+    def compute_metrics(eval_pred):
+        logits, labels = eval_pred
+        predictions = sigmoid(logits)
+        predictions = (predictions > 0.5).astype(int).reshape(-1)
+        return clf_metrics.compute(predictions=predictions, references=labels.astype(int).reshape(-1))
+
+    trainer = Trainer(
+        model,
+        args,
+        train_dataset=tokenized_dataset,
+        tokenizer=tokenizer,
+        compute_metrics=compute_metrics,
+        data_collator=data_collator,
+    )
+
+    #trainer.train("output/bert-base-uncased-classification-instruct/checkpoint-140000")
+    trainer.train()
+
 def inference(modelName, threshold=None):
     prompts = [
         ("Which module provides version and copyright information?", 0),
@@ -572,8 +644,9 @@ if __name__ == '__main__':
     #instructBullet()
 
     #relatedModules = group()
-    #relatedModules = [['car', 'truck', 'vehicle'], ['cmacbals', 'cracbals', 'deacbals', 'exacbals', 'ppcrbals', 'ppdebals'], ['costmobj', 'costsobj'], ['cxSapBusinessOneStock', 'sapBusinessOneInterfaceMonitor'], ['dtausedt', 'dtazvedt'], ['jobRecordByDayWin', 'jobrecrd'], ['loggiocm', 'loggiocr', 'loggiode', 'loggioex'], ['loggiprov', 'loggirit'], ['member', 'specifier'], ['opitcrac', 'opitdbac'], ['paydtaus', 'paydtazv'], ['prichap', 'prichas'], ['qm_deadlock_qm', 'qm_resume_qm'], ['qm_listviewOboxUpDown_qm', 'qm_listviewOboxUpDown2_qm'], ['qm_spanTime_qm', 'qm_term_qm'], ['scanner_main_info_iteminfo_app_scanner', 'scanner_main_info_storageinfo_app_scanner'], ['scanner_main_maintenance_adjustinventory_adjustinventorydown_app_scanner', 'scanner_main_maintenance_adjustinventory_adjustinventoryup_app_scanner'], ['utilpart', 'utilpurc']]
+    relatedModules = [['car', 'truck', 'vehicle'], ['cmacbals', 'cracbals', 'deacbals', 'exacbals', 'ppcrbals', 'ppdebals'], ['costmobj', 'costsobj'], ['cxSapBusinessOneStock', 'sapBusinessOneInterfaceMonitor'], ['dtausedt', 'dtazvedt'], ['jobRecordByDayWin', 'jobrecrd'], ['loggiocm', 'loggiocr', 'loggiode', 'loggioex'], ['loggiprov', 'loggirit'], ['member', 'specifier'], ['opitcrac', 'opitdbac'], ['paydtaus', 'paydtazv'], ['prichap', 'prichas'], ['qm_deadlock_qm', 'qm_resume_qm'], ['qm_listviewOboxUpDown_qm', 'qm_listviewOboxUpDown2_qm'], ['qm_spanTime_qm', 'qm_term_qm'], ['scanner_main_info_iteminfo_app_scanner', 'scanner_main_info_storageinfo_app_scanner'], ['scanner_main_maintenance_adjustinventory_adjustinventorydown_app_scanner', 'scanner_main_maintenance_adjustinventory_adjustinventoryup_app_scanner'], ['utilpart', 'utilpurc']]
     #print(relatedModules)
+    finetuneNoEvalMulti("distilbert-base-uncased", relatedModules, 10)
 
     #finetuneNoEval("distilbert-base-uncased", 10)
     #finetuneNoEval("distilbert-base-uncased", 1)
@@ -590,7 +663,7 @@ if __name__ == '__main__':
     #inference("distilbert-base-uncased-classification-instruct/checkpoint-100000", 0.1)
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000")
     #inference("distilbert-base-uncased-classification-instruct10/checkpoint-100000", 0.1)
-    inference("distilbert-base-uncased-classification-instruct10de/checkpoint-100000", 0.1)
+    #inference("distilbert-base-uncased-classification-instruct10de/checkpoint-100000", 0.1)
     
     exit()
 
