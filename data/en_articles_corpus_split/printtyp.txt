@@ -1,0 +1,1 @@
+printtyp: Create type plates for selected order items. Module name: printtyp.mod. Classes: CX_SALES_SET.

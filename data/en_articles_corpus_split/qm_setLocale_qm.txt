@@ -1,0 +1,1 @@
+qm_setLocale_qm: This module is not a test in the actual sense, but it only shows whether the locales settings are correctly created and/or read in. You can browse through the list of countries, display objects for each country and various country-specific information such as public holidays, telephone area codes, country codes etc. Module name: reload_qm.mod.

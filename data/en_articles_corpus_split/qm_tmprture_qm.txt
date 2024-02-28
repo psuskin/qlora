@@ -1,0 +1,1 @@
+qm_tmprture_qm: Not yet supported at present. Test of the conversion of a temperature into the different heat units. Functionality: Enter the initial temperature and it will be converted automatically. If the temperature falls below the absolute zero point of 0 Kelvin, a message is displayed in the status bar and the value is set to 0. Module name: reload_qm.mod.

@@ -1,0 +1,1 @@
+scanner_main_processes_outbound_shiptocustomer_consolidatelicense_app_scanner: If an entire storage aid is to be placed on another (e.g. a pick box on a pallet), this function is used. Select filing method: Select whether only the contents of the first pick container or the pick container itself is deposited.

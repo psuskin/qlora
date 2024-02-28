@@ -1,0 +1,1 @@
+scanner_main_maintenance_stocktaking_inventory_app_scanner: . storage location selection: Registration of the counting position by selecting the storage location and the article, as well as the registration of the counted quantity.

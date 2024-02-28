@@ -1,0 +1,1 @@
+inventoryAnalysis: With this app one or more inventories can be analysed together. List window: This window is used to list the inventories to be analysed. Module name: inventoryAnalysis.app. Classes: CX_INVENTORY. Security: In addition to restricting access rights via the class and its data fields, the module can be restricted in its use via some of the received messages.

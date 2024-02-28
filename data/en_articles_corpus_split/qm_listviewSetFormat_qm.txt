@@ -1,0 +1,1 @@
+qm_listviewSetFormat_qm: Test of SetFormat with ObjectListView. Module name: reload_qm.mod.

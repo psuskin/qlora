@@ -1,0 +1,1 @@
+webservice: This module can be used to manage (start, stop, monitor) the Web Service of the CyberEnterprise business OS. It is a central component of the CyberEnterprise business OS MorphIT user layer. Option window: All settings for the Web Service can be made here. Module name: webservice.mod. Classes: CX_"Class.

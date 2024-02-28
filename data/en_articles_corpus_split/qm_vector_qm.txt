@@ -1,0 +1,1 @@
+qm_vector_qm: During this test, all functions that affect vectors are checked for correct operation. With the buttons the functions 'Revert', 'Join', 'Delete', 'Insert' and 'GetVector' can be checked. The result of each function is displayed at the bottom of the window. Module name: reload_qm.mod.

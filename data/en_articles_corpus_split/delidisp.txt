@@ -1,0 +1,1 @@
+delidisp: This window is used for quick entry of the delivery note dispatch data. Module name: delidisp.mod. Classes: CX_DELIVERY_NOTE.

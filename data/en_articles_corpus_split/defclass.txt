@@ -1,0 +1,1 @@
+defclass. Functionality: This window is used to maintain pseudo classes. Module name: defclass.mod. Classes: CX_META_CLASS.

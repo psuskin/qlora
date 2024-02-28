@@ -1,0 +1,1 @@
+scanner_select_status_app_scanner: This function is used to give the goods to be stored the status "inspection", for example, if the goods must be checked before they are released for use. The state is selected by marking the corresponding line and confirming with OK.

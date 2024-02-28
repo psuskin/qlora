@@ -1,0 +1,1 @@
+scanner_show_consolidationstoragesstatus_app_scanner: If there are queued pick containers in the staging area, then this function can be used to indicate which of these pick containers are ready for dispatch.

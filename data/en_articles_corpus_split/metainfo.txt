@@ -1,0 +1,1 @@
+metainfo: This app displays the inheritance path of the CyberEnterprise classes and their defined attributes and methods. Furthermore, all dynamic data fields (slots) defined in the system, all methods of the SystemObject and the class methods that can be used in queries are displayed. Module name: metainfo.mod. Classes: CX_VESSEL.

@@ -1,0 +1,1 @@
+keyshtct: With this module, access keys (function keys: e.g. F3 or F5 or corresponding system events) can be defined for a user to call specific applications. Editing window: This window is used to maintain application access keys. Module name: keyshtct.mod. Classes: CX_EXPANDABLE_CONTAINER.

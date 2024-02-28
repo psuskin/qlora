@@ -1,0 +1,1 @@
+deliauto: . (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with the trademark reference"®"). List window: This window is used for listing . Module name: deliauto.mod. Classes: -.

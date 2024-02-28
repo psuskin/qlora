@@ -1,0 +1,1 @@
+scanner_main_print_printitemlabel_app_scanner: This function is used to select a label printer and then to select the quantity (number) of labels to be printed. Print article label: .

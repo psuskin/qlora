@@ -1,0 +1,1 @@
+salesinvitemsel: . (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with the trademark reference"®"). Selection window: This window is used to select an invoice item. Module name: salesinvitemsel.mod. Classes: -.

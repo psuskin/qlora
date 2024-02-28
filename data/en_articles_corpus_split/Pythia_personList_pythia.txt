@@ -1,0 +1,1 @@
+Pythia_personList_pythia. Description: This module is used to display and search for blocked persons. These are persons with whom business transactions are prohibited by UN and EU resolutions. List window: This window is used to list the blocked persons. Module name: partnedp_py.mod. Classes: CX_PERSON.

@@ -1,0 +1,1 @@
+qm_time_qm: This test checks functions at a time. In the window at the top you can enter a time and after pressing 'Enter' the corresponding functions are displayed. In the fields 'SetHour', 'SetMinute', 'SetSecond' and 'SetHundredthSecond' the corresponding values can also be changed directly. Module name: reload_qm.mod.

@@ -1,0 +1,1 @@
+scanner_serialnumbersandbatches_collect_app_scanner: . Add serial numbers: . Page2: . Page3: . Page4: .

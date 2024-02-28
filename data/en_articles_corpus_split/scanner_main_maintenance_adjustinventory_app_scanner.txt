@@ -1,0 +1,1 @@
+scanner_main_maintenance_adjustinventory_app_scanner: Under this menu item, all functions for adjusting stock, adding and deducting stock (defect/loss) and status changes (available, quarantine etc.) can be called up. Help: Help 1 Help 2 Help 3.

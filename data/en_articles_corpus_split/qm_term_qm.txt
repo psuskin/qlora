@@ -1,0 +1,1 @@
+qm_term_qm: The time period works in the same way as the module for the date period (see above), except that you have to enter times here. Module name: reload_qm.mod.

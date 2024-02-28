@@ -1,0 +1,1 @@
+logout: This app is called up when a user presses or selects the button or menu item to log off. With this app, the user can confirm logoff or select certain settings. Module name: logout.app. Classes: CX_USER. Security: In addition to restricting access rights via the class and its data fields, the module can be restricted in its use via some of the received messages.

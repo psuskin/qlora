@@ -1,0 +1,1 @@
+scanner_main_maintenance_stocktaking_cyclecountstorage_app_scanner: The entered quantities are not booked directly in the host system, differences are reconciled with the Domain Studio with the host system.

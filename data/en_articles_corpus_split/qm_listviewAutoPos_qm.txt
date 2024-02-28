@@ -1,0 +1,1 @@
+qm_listviewAutoPos_qm: For playing there is a ListView with the flag AUTO_POSITION and some entries of different width. By scrolling and enlarging and reducing the window you can see how and when a ListView with the flag AUTO_POSITION adjusts the column widths. Module name: reload_qm.mod.

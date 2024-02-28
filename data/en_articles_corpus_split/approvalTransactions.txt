@@ -1,0 +1,1 @@
+approvalTransactions: Display documents from existing approval processes. Only documents that the current user can approve are displayed, i.e. this user must be the approver or representative of an approver.

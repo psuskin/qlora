@@ -1,0 +1,1 @@
+pmedia: All printed matter of the publishers is managed with this. Input window: Window for maintenance of printed material. Selection window: This window is used to select a publication. Module name: pmedia.mod. Classes: CX_PRINT_MEDIA.

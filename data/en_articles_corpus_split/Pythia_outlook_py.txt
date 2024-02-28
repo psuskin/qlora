@@ -1,0 +1,1 @@
+Pythia_outlook_py. Description: This module compares Outlook contacts with the personal data in the Pythia database. List window: This window lists the Outlook contacts whose names have hits in the Pythia database. When the window is opened, the default folder containing your contacts is loaded and displayed. Module name: outlook_py.mod. Classes: CX_PERSON.

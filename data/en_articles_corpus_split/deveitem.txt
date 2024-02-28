@@ -1,0 +1,1 @@
+deveitem. Input window: This window is used to maintain development parts. List window: This window serves to list the development parts. Selection window: This window is used to select a development part. Option window: All settings for the search can be made here. The window can only be closed with the "OK" button.

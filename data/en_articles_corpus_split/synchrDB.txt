@@ -1,0 +1,1 @@
+synchrDB: With this module objects can be exported or imported as XML files. Exporting data: This window lists all the objects that have been modified since the last database synchronization (export). Importing data: This window is used to list changed objects. Module name: synchrDB.mod. Classes: CX_"Class.

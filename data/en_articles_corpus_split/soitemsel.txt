@@ -1,0 +1,1 @@
+soitemsel: . (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with the trademark reference"®"). Selection window: This window is used for selection . Module name: soitemsel.mod. Classes: -.

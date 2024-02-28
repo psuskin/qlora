@@ -1,0 +1,1 @@
+loggidit: This module displays the disposition status of documents across all document types. The main purpose of this view is to check whether documents have been "stuck" within logistics, i.e. documents have not been processed further. List window: This window lists the documents according to the selected MRP status. Module name: loggidit.mod. Classes: CX_TRANSACTION.

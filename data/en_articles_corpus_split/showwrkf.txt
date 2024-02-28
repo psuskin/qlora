@@ -1,0 +1,1 @@
+showwrkf: Display of transitions between the states of a business process. Functionality: You can call up the input window of the current business process by double-clicking on a state or business process. Module name: showwrkf.mod. Classes: CX_WORK_FLOW.

@@ -1,0 +1,1 @@
+qm_phone_qm: This module tests the formatting according to the set locales. If a telephone number is entered above (with or without area code, or just an extension number e.g. '-33'), the text fields should show appropriately formatted telephone numbers. Module name: reload_qm.mod.

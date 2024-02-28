@@ -1,0 +1,1 @@
+scanner_main_processes_transport_app_scanner: . Transport of goods: Storage This function is used to put away goods identified in goods receipt from the goods receipt area to the final storage bins. Help: Help 1 Help 2 Help 3.

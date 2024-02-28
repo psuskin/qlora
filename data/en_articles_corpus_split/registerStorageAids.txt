@@ -1,0 +1,1 @@
+registerStorageAids: Simple recording of storage aids with a barcode scanner.

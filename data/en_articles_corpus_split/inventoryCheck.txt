@@ -1,0 +1,1 @@
+inventoryCheck: This app summarises various test routines for the proper operation of a warehouse with Hestia WMS. Input window: The various test routines are called up from this window. Module name: inventoryCheck.app. Classes: CX_"Class.

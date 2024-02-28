@@ -1,0 +1,1 @@
+scanner_select_picklist_nui_app_scanner: Setting the pick list. Selection window: Pick list selection.

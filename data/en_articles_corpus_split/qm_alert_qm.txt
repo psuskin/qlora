@@ -1,0 +1,1 @@
+qm_alert_qm: The alert test checks whether 'alert' messages from changed window objects are sent correctly. For this purpose all window objects are created in the window and as soon as the user (the tester) changes the content somewhere, a corresponding message should appear in the large text field at the bottom. Module name: reload_qm.mod.

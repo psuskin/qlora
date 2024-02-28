@@ -1,0 +1,1 @@
+scanner_select_layout_app_scanner: . Selection window: .

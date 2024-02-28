@@ -1,0 +1,1 @@
+scanner_main_processes_inbound_app_scanner: All functions related to the processing of goods receipts into the warehouse can be called up under Processes -> Goods Receipt. Help: Help 1 Help 2 Help 3.

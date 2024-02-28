@@ -1,0 +1,1 @@
+vacaopen: This module is used to open/create the annual accounts for employees for the respective holiday entitlement. Selection window: This window is used to call up the creation of annual leave accounts of employees. Module name: vacaopen.mod. Classes: -.

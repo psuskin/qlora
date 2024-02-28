@@ -1,0 +1,1 @@
+scanner_main_processes_outbound_shiptocustomer_consolidatelooseitems_app_scanner: If individual parts are to be placed from one storage aid to another, then this function is used.

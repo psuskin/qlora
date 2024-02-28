@@ -1,0 +1,1 @@
+columvar: The display of a table can be changed by specifying the table columns. Input window: This window is used to maintain table columns. Module name: columvar.mod. Classes: CX_CONDITIONED_BAG.

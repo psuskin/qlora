@@ -1,0 +1,1 @@
+organizationChart: This network represents the entire organisational hierarchy (or only parts of it), optionally with all employees, using the cost centre plan as a diagram. Security: In addition to restricting access rights via the class and its data fields, the module can be restricted in its use via some of the received messages.

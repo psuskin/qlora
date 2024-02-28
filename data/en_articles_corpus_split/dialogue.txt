@@ -1,0 +1,1 @@
+dialogue: Programme control by query dialogue. Module name: dialogue.mod. Classes: -.

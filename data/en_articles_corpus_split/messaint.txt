@@ -1,0 +1,1 @@
+messaint. Functionality: This window is used to display relations between technical requests and technical tasks. Module name: messaint.mod. Classes: CX_REQUEST CX_TASK CX_LINK_TXN.

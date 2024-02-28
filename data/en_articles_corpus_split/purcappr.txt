@@ -1,0 +1,1 @@
+purcappr: The incoming invoice for order items that have reached the company without a goods receipt document can be released. To do this, you must select the order items (only those that have not yet been delivered or released are displayed) and press the "OK" button. Module name: purcappr.mod. Classes: CX_PURCHASE_ORDER.

@@ -1,0 +1,1 @@
+scanner_select_workzone_app_scanner: Setting the work zone. Selection window: Selection of the working zone.

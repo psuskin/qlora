@@ -1,0 +1,1 @@
+Pythia_legalPersonList_pythia. Description: This module is used to display and search for blocked companies. These are companies with whom business transactions are prohibited by UN and EU resolutions. List window: This window is used to list the blocked companies. Module name: partnedc_py.mod. Classes: CX_LEGAL_PERSON.

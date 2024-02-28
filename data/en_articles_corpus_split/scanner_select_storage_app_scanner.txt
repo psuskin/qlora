@@ -1,0 +1,1 @@
+scanner_select_storage_app_scanner: The goods are brought to the final storage place and this is scanned for direct storage. Selection window: Selection of the storage place.

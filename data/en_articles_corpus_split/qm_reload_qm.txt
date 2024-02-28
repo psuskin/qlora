@@ -1,0 +1,1 @@
+qm_reload_qm: This test checks the reloading of inherited modules. The number of reloads and the delay between them can be set. Module name: reload_qm.mod.

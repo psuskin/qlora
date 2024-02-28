@@ -1,0 +1,1 @@
+odbcTestSuite: . (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with the trademark reference"®"). Input window: This window is used for the maintenance of .

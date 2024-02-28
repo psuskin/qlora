@@ -1,0 +1,1 @@
+userhier: Shows the user hierarchy in the company. Functionality: You can also take over the supervisor / employee by Drag&Drop. When you double-click on a user, the input window for users is opened. Module name: userhier.mod. Classes: CX_USER_HIERARCHY.

@@ -1,0 +1,1 @@
+scanner_main_processes_inbound_checkin_app_scanner: . Receiving goods: This window is used to identify the items, quantities and, if applicable, units of measure and condition of the goods.

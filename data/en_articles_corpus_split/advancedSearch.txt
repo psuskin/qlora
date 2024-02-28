@@ -1,0 +1,1 @@
+advancedSearch: The advanced search allows you to search using the dictionary and the fields in the list. You can freely define the search. Module name: advancedSearch.app.

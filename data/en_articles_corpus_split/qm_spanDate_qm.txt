@@ -1,0 +1,1 @@
+qm_spanDate_qm: This test checks functions for date periods. Any date can be entered in the middle field and then assigned to the upper or lower date period using the corresponding buttons. This way you can create 2 different periods. At the bottom you can see the results, e.g. if the two periods overlap or even include each other completely. Module name: reload_qm.mod.

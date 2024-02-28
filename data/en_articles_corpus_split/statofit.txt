@@ -1,0 +1,1 @@
+statofit: Using the offer position statistics, offer positions can be searched and evaluated using various filters. For example, all items that a customer has been offered can be displayed. Module name: statoitm.mod. Classes: -.

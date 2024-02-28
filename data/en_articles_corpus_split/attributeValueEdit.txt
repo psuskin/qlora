@@ -1,0 +1,1 @@
+attributeValueEdit: This app is used to change the value of an attribute. Input window: This window is used to maintain attribute values. Module name: attributeValueEdit.app. Classes: CX_SLOT_ATTRIBUTE. Security: In addition to restricting access rights via the class and its data fields, the module can be restricted in its use via some of the received messages.

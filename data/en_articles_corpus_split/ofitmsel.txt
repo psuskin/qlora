@@ -1,0 +1,1 @@
+ofitmsel. Functionality: This window is used to select an offer item. Module name: ofitmsel.mod. Classes: CX_LINK_TXN.

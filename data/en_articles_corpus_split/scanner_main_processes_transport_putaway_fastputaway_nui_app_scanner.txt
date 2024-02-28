@@ -1,0 +1,1 @@
+scanner_main_processes_transport_putaway_fastputaway_nui_app_scanner: . Quick storage: .

@@ -1,0 +1,1 @@
+windows: Display the list of open windows. Functionality: A window can be activated with a double click. Module name: windows.mod.

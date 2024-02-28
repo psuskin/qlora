@@ -1,0 +1,1 @@
+setlimit: Limit the number of list items. Functionality: You can change the limit for a list by entering the desired value and confirming it with the RETURN key or the OK button. Module name: setlimit.mod. Classes: -.

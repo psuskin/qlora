@@ -1,0 +1,1 @@
+objcount: The module is used to count all objects in the database and provides an overview of which objects can be found in the database and how often. Functionality: Counts all objects in the database and breaks down the frequency by class. Module name: objcount.mod. Classes: CXS_SEGMENT CXS_CLUSTER.

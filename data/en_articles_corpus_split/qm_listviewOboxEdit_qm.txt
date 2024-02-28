@@ -1,0 +1,1 @@
+qm_listviewOboxEdit_qm: Test of OboxEdit with ObjectListView. Module name: reload_qm.mod.

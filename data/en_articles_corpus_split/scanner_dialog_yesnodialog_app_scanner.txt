@@ -1,0 +1,1 @@
+scanner_dialog_yesnodialog_app_scanner: . Please decide: .

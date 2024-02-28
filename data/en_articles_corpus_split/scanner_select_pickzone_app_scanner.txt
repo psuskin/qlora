@@ -1,0 +1,1 @@
+scanner_select_pickzone_app_scanner: Defining the picking zone. Selection window: Pick zone selection.

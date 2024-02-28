@@ -1,0 +1,1 @@
+gantwork: With this module the capacity utilisation can be displayed graphically. Graphic: Used to display the capacity utilisation. Module name: gantwork.mod. Class: -.

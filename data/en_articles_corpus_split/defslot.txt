@@ -1,0 +1,1 @@
+defslot: Dynamic data fields can be defined in this window. Module name: defclass.mod. Classes: CX_VESSEL.

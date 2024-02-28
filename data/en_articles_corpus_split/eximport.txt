@@ -1,0 +1,1 @@
+eximport: This window is used to import or export Excel documents. Its main purpose is to export old data to Excel, or to import new data from old systems into the system. Input window: This window allows you to import/export files. Module name: eximport.mod. Classes: -.

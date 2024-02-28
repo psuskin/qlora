@@ -1,0 +1,1 @@
+PriceDiscountTable: This module is used to maintain conditional price or discount/surcharge tables. Note: The strictest or stricter condition of two or more must always be at the top, as the table is worked through from top to bottom and the first hit is taken as the answer!. Module name: pricediscounttable.mod. Classes: -.

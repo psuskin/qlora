@@ -1,0 +1,1 @@
+dbaseviw: With this module, files in dBase format can be read and their fields displayed. Functionality: In this window, you can select the file to be displayed and start reading the records in the file. Module name: dbaseviw.mod. Classes: CX_DBASE_FILE.

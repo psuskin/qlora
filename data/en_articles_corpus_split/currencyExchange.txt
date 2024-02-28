@@ -1,0 +1,1 @@
+currencyExchange: Conversion of convertible currencies. Functionality: You can enter a base currency in the From Currency field. Then, by changing the target currency, the converted currency is displayed. The Euro currencies are calculated even without defining a currency table, if Euro conversion is registered. Module name: currexch.mod. Classes: CX_CURRENCY_RATE.

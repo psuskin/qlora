@@ -1,0 +1,1 @@
+qm_refbasedptr_qm: This test checks the mechanism by which transient objects may point to persistent objects via dynamic data fields. This test runs on its own and if no error message appears, it can be considered successful. Module name: reload_qm.mod.

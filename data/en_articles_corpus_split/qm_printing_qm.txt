@@ -1,0 +1,1 @@
+qm_printing_qm: This is used to test the printing. There are tabs for lists, trees, OLE & text and input fields. In each case a few sample data can be generated and then previewed or printed. With the button 'Print with .' you can select the printer and with 'Print with settings' you can access the printer options. Module name: reload_qm.mod.

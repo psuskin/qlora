@@ -1,0 +1,1 @@
+scanner_select_forktruck_app_scanner: Securing the stacker. Selection window: Choice of the forklift truck.

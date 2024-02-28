@@ -1,0 +1,1 @@
+scanner_main_maintenance_stocktaking_snrcountstorage_app_scanner: . Storage location selection: . Storage location information: . Serial number overview: .

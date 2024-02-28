@@ -1,0 +1,1 @@
+scanner_main_processes_outbound_app_scanner: The functions for processing customer orders are called up under this menu item of the mobile terminal. Outgoing goods: The goods issue to customer knows the following submenus:. Help: Help 1 Help 2 Help 3.

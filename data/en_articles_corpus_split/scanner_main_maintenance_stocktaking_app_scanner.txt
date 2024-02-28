@@ -1,0 +1,1 @@
+scanner_main_maintenance_stocktaking_app_scanner: All functions related to the inventory of goods in the warehouse can be called up under this menu item. The inventories themselves are planned by the warehouse management in the Hestia Warehouse Monitor. Help: Help 1 Help 2 Help 3.

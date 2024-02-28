@@ -1,0 +1,1 @@
+scanner_main_processes_transport_putaway_looseitemsputaway_app_scanner: This process is selected if the goods to be put away are to be distributed into individual storage bins. It is assumed that the goods are located on a storage aid (licence). Storage: After these two entries, the employee is shown the storage location (s) where the goods can be stored.

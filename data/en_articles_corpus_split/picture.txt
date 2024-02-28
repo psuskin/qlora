@@ -1,0 +1,1 @@
+picture. Input window: This window is used for maintaining images. You can select an image by entering the desired number in the Number field and confirming with RETURN. If you want to open the list window, you can select the menu item "Search". List window: Used to list the images. Selection window: This window is used to select an image. Module name: picture.mod. Classes: -.

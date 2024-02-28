@@ -1,0 +1,1 @@
+qm_txnByCond_qm: For class CX_TRANSACTION, the functions for determining preceding or subsequent documents are tested. Module name: txnByCond_qm.mod.

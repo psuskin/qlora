@@ -1,0 +1,1 @@
+service. Functionality: The window is used to execute service functions in the ClassiX® system. Search fields: none. Module name: service.mod. Classes: -.

@@ -1,0 +1,1 @@
+qm_picture_qm: This test tries to find errors in the processing of images. After starting, the user is prompted to specify an image file. This image is then displayed in 3 different modes, once the original, then dynamically positioned and stretched. A click on the button 'Original Image' asks the user to select an image file again. Module name: reload_qm.mod.

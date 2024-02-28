@@ -1,0 +1,1 @@
+scanner_main_maintenance_relocate_standardcontainer_app_scanner: . Standard container: After scanning the licence you will be taken to the container selection.

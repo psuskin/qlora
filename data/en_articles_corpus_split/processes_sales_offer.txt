@@ -1,0 +1,1 @@
+processes_sales_offer. Offer: With this module you can create a new offer. {img type="fileId" fileId="306" thumb="box" width="100%"} Please refer to the module documentation for detailed information on use.

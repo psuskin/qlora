@@ -1,0 +1,1 @@
+modgen. Module name: modgen.cxp. Classes: -. Security: In addition to restricting access rights via the class and its data fields, the module can be restricted in its use via some of the received messages. Received messages: none.

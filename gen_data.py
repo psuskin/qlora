@@ -1,5 +1,6 @@
 import json
 import re
+import os
 
 import random
 
@@ -82,6 +83,26 @@ def corpus(path):
             sequence = cleanSequence(sequence)
 
             f.write(sequence + "\n")
+
+def corpusSplit(path):
+    with open("en_articles.json") as f:
+        articles = json.load(f)
+
+    os.makedirs(path, exist_ok=True)
+
+    for article in articles["articles"]:
+        sequence = article["module"]
+        if article["description"]["text"] and not article["description"]["text"].isspace():
+            sequence += ": " + article["description"]["text"].strip()
+        sequence += ". "
+        
+        for block in article["blocks"]:
+            sequence += joinBlock(block["name"], block["description"]["text"])
+
+        sequence = cleanSequence(sequence)
+
+        with open(os.path.join(path, f'{article["module"]}.txt'), "w", encoding="utf-8") as f:
+            f.write(sequence)
 
 def alpaca(path, max_words=2000/3):
     dataStrings = {
@@ -254,7 +275,8 @@ def classificationInt(path):
 
 if __name__ == "__main__":
     #autoregressive("data/en_articles_autoregressive.json")
-    alpaca("data/en_articles_alpaca.json")
+    #alpaca("data/en_articles_alpaca.json")
     #corpus("data/en_articles_corpus.txt")
-    classification("data/en_articles_classification.json")
-    classificationInt("data/en_articles_classification_int.json")
+    corpusSplit("data/en_articles_corpus_split")
+    #classification("data/en_articles_classification.json")
+    #classificationInt("data/en_articles_classification_int.json")

@@ -1,0 +1,1 @@
+reporting: From this window, you can print all reports belonging to a list or copy the contents of the list to the clipboard. New reports can also be created from this module. Technical Documentation: The module serves as a general interface when it comes to data export from ClassiX® system. Module name: Reporting.mod. Classes: CX_REPORT.

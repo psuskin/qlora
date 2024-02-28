@@ -1,0 +1,1 @@
+alarmclk: This module is used to output the date and time, and an alarm time can be set via the menu. Alarm clock window: This window displays the current date and time. Wake-up window: This window is used to maintain the alarm time. Module name: alarmclk.mod.

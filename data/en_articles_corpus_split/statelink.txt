@@ -1,0 +1,1 @@
+statelink: . (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with the trademark reference"®"). Input window: This window is used to maintain process route dependencies. List window: This window is used for listing . Selection window: This window is used for selection . Module name: statelink.mod. Classes: CX_STATE_LINK.

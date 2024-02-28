@@ -1,0 +1,1 @@
+utilpurc: This module is used for the inspection of purchasing data. Results window: This window lists the data to be checked as a result of an inspection run. Module name: utilpurc.mod.

@@ -1,0 +1,1 @@
+dunnsele: This module is used for the selection for the automated proposal of (debit-side) reminders. After entering the selection criteria and pressing the "Lists" button, a reminder proposal list is created from which reminders can be sent. Module name: dark. mod. Classes: -.

@@ -1,0 +1,1 @@
+workTimeFlexiCloseMonth. Functionality: This window is used for the flexitime monthly statement. Module name: flexclos.mod. Classes: CX_FLEXTIMER.

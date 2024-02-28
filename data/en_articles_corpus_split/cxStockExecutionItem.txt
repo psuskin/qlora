@@ -1,0 +1,1 @@
+cxStockExecutionItem: . List window: This window is used for listing . Module name: cxStockExecutionItem.mod. Classes: CX_"Class. Security: In addition to restricting access rights via the class and its data fields, the module can be restricted in its use via some of the received messages. Module name: stockExecutionItemList.app. Classes: CX_"Class.

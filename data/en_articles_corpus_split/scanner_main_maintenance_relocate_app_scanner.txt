@@ -1,0 +1,1 @@
+scanner_main_maintenance_relocate_app_scanner: Functions for the transfer of stock or parts thereof from one storage bin to another can be called up under this menu item. Help: Help 1 Help 2 Help 3.

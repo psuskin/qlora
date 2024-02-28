@@ -1,0 +1,1 @@
+fiacstat: This module is used to output/print account sheets/account statements. List window: An account sheet/account statement is output for a selected period. Selection window: This window is used to select the accounts for which the account sheets are to be output/printed. Module name: fiacstat.mod. Classes: CX_MONITOR.

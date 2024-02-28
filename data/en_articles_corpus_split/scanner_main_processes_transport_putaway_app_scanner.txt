@@ -1,0 +1,1 @@
+scanner_main_processes_transport_putaway_app_scanner: This function is used to transfer goods identified in the goods receipt area from the goods receipt area to the final storage bins. Storage: The following entry points are available. Help: Help 1 Help 2 Help 3.

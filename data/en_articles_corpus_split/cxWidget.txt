@@ -1,0 +1,1 @@
+cxWidget: This app lists all started (currently open) windows. Launched apps: This window is used to list all open windows. Module name: winlist.mod. Classes: -.

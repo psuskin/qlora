@@ -1,0 +1,1 @@
+coacstat: This module is used to output/print account sheets/account statements of the cost accounts of the operational accounting. List window: An account sheet/account statement is output for a selected period. Selection window: This window is used to select the cost accounts for which the account sheets are to be printed. Module name: coacstat.mod. Classes: -.

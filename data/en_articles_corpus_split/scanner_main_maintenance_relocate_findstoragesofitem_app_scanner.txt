@@ -1,0 +1,1 @@
+scanner_main_maintenance_relocate_findstoragesofitem_app_scanner: . Select item: . Select storage location: .

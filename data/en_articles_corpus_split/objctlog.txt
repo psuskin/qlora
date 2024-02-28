@@ -1,0 +1,1 @@
+objctlog. Input window: This window is used to change the display of the change history of data fields of an object. Module name: objctlog.mod. Classes: CX_"Class.
