@@ -1,0 +1,1 @@
+This is the description of the module "qm_time_qm" with the name "Event object (CX_TIME)": This test checks functions at a time. In the window at the top you can enter a time and after pressing 'Enter' the corresponding functions are displayed. In the fields 'SetHour', 'SetMinute', 'SetSecond' and 'SetHundredthSecond' the corresponding values can also be changed directly.

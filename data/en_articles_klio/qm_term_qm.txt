@@ -1,0 +1,1 @@
+This is the description of the module "qm_term_qm" with the name "Comparison of dates": The time period works in the same way as the module for the date period (see above), except that you have to enter times here.

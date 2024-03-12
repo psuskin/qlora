@@ -1,0 +1,1 @@
+This is the description of the module "qm_listviewxml_qm" with the name "ObjectListView::XML export": Here the XML export into a file can be tested. Three data sets are prepared. A click on "Export" opens a dialog where an XML file for the output has to be entered. Then the list is exported via XML export.

@@ -1,0 +1,1 @@
+This is the description of the module "printtyp" with the name "Type plates": Create type plates for selected order items.

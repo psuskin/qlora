@@ -1,0 +1,1 @@
+This is the description of the functionality of the module "service" with the name "English:Service" regarding Functionality: The window is used to execute service functions in the ClassiX® system. This is the description of the functionality of the module "service" with the name "English:Service" regarding Search fields: none.

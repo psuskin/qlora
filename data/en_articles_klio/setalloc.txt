@@ -1,0 +1,1 @@
+This is the description of the module "setalloc" with the name "Allocation set": This module is the basic module for allocation sets, from this module the processing modules for parts lists and work plans are derived, among others.

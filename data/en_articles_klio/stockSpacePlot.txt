@@ -1,0 +1,1 @@
+This is the description of the module "stockSpacePlot" with the name "Storage location drawing": . This is the description of the functionality of the module "stockSpacePlot" with the name "Storage location drawing" regarding Input window: This window is used for the maintenance of .

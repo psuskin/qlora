@@ -1,0 +1,1 @@
+This is the description of the module "scanner_main_print_printstoragelabel_app_scanner" with the name "Scanner Print storage location label": Printing the labels for a storage bin.

@@ -1,0 +1,1 @@
+This is the description of the module "setlimit" with the name "Set limit for lists": Limit the number of list items. This is the description of the functionality of the module "setlimit" with the name "Set limit for lists" regarding Functionality: You can change the limit for a list by entering the desired value and confirming it with the RETURN key or the OK button.

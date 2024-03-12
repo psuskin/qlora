@@ -1,0 +1,1 @@
+This is the description of the module "qm_phone_qm" with the name "Telephone object (CX_PHONE)": This module tests the formatting according to the set locales. If a telephone number is entered above (with or without area code, or just an extension number e.g. '-33'), the text fields should show appropriately formatted telephone numbers.

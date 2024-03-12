@@ -1,0 +1,1 @@
+This is the description of the module "scanner_main_maintenance_relocate_license_app_scanner" with the name "Scanner Relocate all items or licence": Function to transfer entire storage aids. The goods contained therein are thereby implicitly moved as well.

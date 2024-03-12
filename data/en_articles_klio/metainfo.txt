@@ -1,0 +1,1 @@
+This is the description of the module "metainfo" with the name "English:Metainfo": This app displays the inheritance path of the CyberEnterprise classes and their defined attributes and methods. Furthermore, all dynamic data fields (slots) defined in the system, all methods of the SystemObject and the class methods that can be used in queries are displayed.

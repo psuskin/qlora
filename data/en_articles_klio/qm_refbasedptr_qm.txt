@@ -1,0 +1,1 @@
+This is the description of the module "qm_refbasedptr_qm" with the name "Reference-based pointer slot": This test checks the mechanism by which transient objects may point to persistent objects via dynamic data fields. This test runs on its own and if no error message appears, it can be considered successful.

@@ -1,0 +1,1 @@
+This is the description of the functionality of the module "workTimeFlexiCloseMonth" with the name "Flexitime monthly statement" regarding Functionality: This window is used for the flexitime monthly statement.

@@ -1,0 +1,1 @@
+This is the description of the module "salebase" with the name "Goods for sale": Basis for sales merchandise modules. This is the description of the functionality of the module "salebase" with the name "Goods for sale" regarding Functionality: see sales articles, sales set, spare part, special sales part, services.

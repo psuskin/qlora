@@ -1,0 +1,1 @@
+This is the description of the module "qm_txnByCond_qm" with the name "Conditional predecessor and successor documents": For class CX_TRANSACTION, the functions for determining preceding or subsequent documents are tested.

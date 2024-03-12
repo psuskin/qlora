@@ -1,0 +1,1 @@
+This is the description of the module "purcappr" with the name "Release incoming invoice": The incoming invoice for order items that have reached the company without a goods receipt document can be released. To do this, you must select the order items (only those that have not yet been delivered or released are displayed) and press the "OK" button.

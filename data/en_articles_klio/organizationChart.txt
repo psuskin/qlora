@@ -1,0 +1,1 @@
+This is the description of the module "organizationChart" with the name "Organisation chart for cost centre plan": This network represents the entire organisational hierarchy (or only parts of it), optionally with all employees, using the cost centre plan as a diagram.

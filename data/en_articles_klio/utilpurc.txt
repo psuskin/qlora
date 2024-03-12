@@ -1,0 +1,1 @@
+This is the description of the module "utilpurc" with the name "Inspection - Purchasing": This module is used for the inspection of purchasing data. This is the description of the functionality of the module "utilpurc" with the name "Inspection - Purchasing" regarding Results window: This window lists the data to be checked as a result of an inspection run.

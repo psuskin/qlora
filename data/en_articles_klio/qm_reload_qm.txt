@@ -1,0 +1,1 @@
+This is the description of the module "qm_reload_qm" with the name "Quality assurance - Reload": This test checks the reloading of inherited modules. The number of reloads and the delay between them can be set.

@@ -1,0 +1,1 @@
+This is the description of the module "workflowGraphList" with the name "Workflow graph": This module shows the flow of a business process. The individual states as well as the transitions between the states are shown. Optionally, branched processes can also be displayed, if they represent a condition for a transition. General documentation on business processes.

@@ -1,0 +1,1 @@
+This is the description of the functionality of the module "testchrg" with the name "Test surcharges and discounts" regarding Functionality: The module tests the selected instalment / cash discount conditions. To do this, you must enter a date and an amount. After pressing the Test button all due payments appear in the list.

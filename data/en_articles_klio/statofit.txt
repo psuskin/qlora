@@ -1,0 +1,1 @@
+This is the description of the module "statofit" with the name "Offer items statistics": Using the offer position statistics, offer positions can be searched and evaluated using various filters. For example, all items that a customer has been offered can be displayed.

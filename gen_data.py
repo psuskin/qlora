@@ -104,6 +104,35 @@ def corpusSplit(path):
         with open(os.path.join(path, f'{article["module"]}.txt'), "w", encoding="utf-8") as f:
             f.write(sequence)
 
+def klio(path):
+    with open("en_articles.json") as f:
+        articles = json.load(f)
+
+    os.makedirs(path, exist_ok=True)
+
+    for article in articles["articles"]:
+        module = article["module"]
+        name = article["name"]
+
+        sequence = ""
+
+        if article["description"]["text"] and not article["description"]["text"].isspace():
+            sequence += f'This is the description of the module "{module}" with the name "{name}": {cut(article["description"]["text"]).strip()}. '
+
+        for block in article["blocks"]:
+            joinedBlock = cut(joinBlock(block["name"], block["description"]["text"]))
+
+            if joinedBlock:
+                if joinedBlock.split(":")[0].strip() in ["Module name", "Classes", "Security"]:
+                    continue
+
+                sequence += f'This is the description of the functionality of the module "{module}" with the name "{name}" regarding {joinedBlock}'
+
+        sequence = cleanSequence(sequence)
+
+        with open(os.path.join(path, f'{article["module"]}.txt'), "w", encoding="utf-8") as f:
+            f.write(sequence)
+
 def alpaca(path, max_words=2000/3):
     dataStrings = {
         "query": {
@@ -277,6 +306,8 @@ if __name__ == "__main__":
     #autoregressive("data/en_articles_autoregressive.json")
     #alpaca("data/en_articles_alpaca.json")
     #corpus("data/en_articles_corpus.txt")
-    corpusSplit("data/en_articles_corpus_split")
+    #corpusSplit("data/en_articles_corpus_split")
     #classification("data/en_articles_classification.json")
     #classificationInt("data/en_articles_classification_int.json")
+
+    klio("data/en_articles_klio")

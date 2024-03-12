@@ -1,0 +1,1 @@
+This is the description of the module "deliauto" with the name "Automatic creation of delivery notes": . This is the description of the functionality of the module "deliauto" with the name "Automatic creation of delivery notes" regarding List window: This window is used for listing .

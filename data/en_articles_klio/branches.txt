@@ -1,0 +1,1 @@
+This is the description of the functionality of the module "branches" with the name "Subsidiaries" regarding Functionality: With this module you can document the relationships between different companies. You can drop companies in the input field "Headquarters" or in the object box "Branches" (Drag&Drop).

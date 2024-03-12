@@ -19,6 +19,7 @@ from transformers import pipeline
 import gzip
 import pickle
 import matplotlib.pyplot as plt
+from collections import OrderedDict
 
 # Group
 from nltk.translate.bleu_score import sentence_bleu
@@ -562,17 +563,17 @@ def analysis(modelName, specs, samplesFromEnd=2):
         for sample in worstSamples:
             print(f"\t{sample[0]['input']}\n\t\tCorrect module: {modules[sample[0]['label']]} ({sample[1]:.2f})\n\t\tPredicted module: {modules[sample[2][0][0]]} ({sample[2][0][1]:.2f})")
 
-def analysisDescription(modelName, specs):
+def analysisDescription(modelName, specs, grouping=None):
     with open("data/en_articles_classification_instruct10.json", encoding="utf-8") as f:
         data = json.load(f)
-    uniqueLabelCountEN = len(set([sample['label'] for sample in data]))
+    label2moduleEN = OrderedDict([(i, modules[i]) for i in set([sample['label'] for sample in data])])
     with open("data/en_articles_classification_int.json", encoding="utf-8") as f:
         data = json.load(f)
     testDataEN = {sample["label"]: sample["input"] for sample in data}
 
     with open("data/de_articles_classification_instruct10.json", encoding="utf-8") as f:
         data = json.load(f)
-    uniqueLabelCountDE = len(set([sample['label'] for sample in data]))
+    label2moduleDE = OrderedDict([(i, modules[i]) for i in set([sample['label'] for sample in data])])
     with open("data/de_articles_classification_int.json", encoding="utf-8") as f:
         data = json.load(f)
     testDataDE = {sample["label"]: sample["input"] for sample in data}
@@ -587,7 +588,36 @@ def analysisDescription(modelName, specs):
     for spec in specs:
         currentModel = modelName.format(*spec)
         if currentModel in classificationData:
-            continue
+            if not grouping:
+                continue
+            else:
+                if "grouping" in classificationData[currentModel]:
+                    continue
+                else:
+                    # change = True
+
+                    correctPrediction = 0
+                    totalPrediction = 0
+                    confidences = []
+
+                    label2module = label2moduleEN if spec[3] == "" else label2moduleDE
+                    testData = testDataEN if spec[3] == "" else testDataDE
+                    for label, response in zip(testData, classificationData[currentModel]['response']):
+                        if label not in label2module:
+                            continue
+                        for group in grouping:
+                            if label2module[label] in group:
+                                indices = [modules.index(module) for module in group if module in label2module.values()]
+                                # Check if top n response tuples are all contained in the indices
+                                if all([response[i][0] in indices for i in range(len(indices))]):
+                                    correctPrediction += 1
+                                confidences.append([response[i][1] for i in indices])
+                                totalPrediction += 1
+                                break
+
+                    classificationData[currentModel]['grouping'] = {}
+                    classificationData[currentModel]['grouping']['correctPredictions'] = (correctPrediction, totalPrediction)
+                    classificationData[currentModel]['grouping']['confidence'] = confidences
         else:
             change = True
             model = AutoModelForSequenceClassification.from_pretrained(f"output/{currentModel}")
@@ -598,7 +628,7 @@ def analysisDescription(modelName, specs):
             responses = []
 
             testData = testDataEN if spec[3] == "" else testDataDE
-            uniqueLabelCount = uniqueLabelCountEN if spec[3] == "" else uniqueLabelCountDE
+            uniqueLabelCount = len(label2module)
             for label in testData:
                 inputs = tokenizer(testData[label], return_tensors="pt")
                 if len(inputs['input_ids'][0]) > 512:
@@ -638,6 +668,10 @@ def analysisDescription(modelName, specs):
     plt.title("Cumulative distribution of confidence")
     plt.show()
     plt.close()
+
+    if grouping is not None:
+        print("Correct predictions:", [classificationData[modelName.format(*spec)]['grouping']['correctPredictions'] for spec in specs])
+        print("Average confidence:", [np.average(classificationData[modelName.format(*spec)]['grouping']['confidence']) for spec in specs])
 
 if __name__ == '__main__':
     #instruct(10)
@@ -679,7 +713,9 @@ if __name__ == '__main__':
         ("", 10, 100000, "", ""),
         ("distil", 10, 100000, "de", ""),
         ("distil", 10, 80000, "", "multi"),
-        ])
+        ],
+        grouping=relatedModules
+        )
     
     """
     with open("data/en_articles_classification_instruct.json", encoding="utf-8") as f:

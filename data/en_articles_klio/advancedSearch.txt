@@ -1,0 +1,1 @@
+This is the description of the module "advancedSearch" with the name "Advanced search": The advanced search allows you to search using the dictionary and the fields in the list. You can freely define the search.
