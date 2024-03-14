@@ -1,1 +1,1 @@
-This is the description of the module "resscond" with the name "Conditional allocation of a resource": . This is the description of the functionality of the module "resscond" with the name "Conditional allocation of a resource" regarding Input window: This window is used to maintain resource plan variants.
+This is the description of the functionality of the module "resscond" with the name "Conditional allocation of a resource" regarding Input window: This window is used to maintain resource plan variants.

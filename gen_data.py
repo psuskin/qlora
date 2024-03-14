@@ -116,8 +116,9 @@ def klio(path):
 
         sequence = ""
 
-        if article["description"]["text"] and not article["description"]["text"].isspace():
-            sequence += f'This is the description of the module "{module}" with the name "{name}": {cut(article["description"]["text"]).strip()}. '
+        description = cut(article["description"]["text"]).strip()
+        if description:
+            sequence += f'This is the description of the module "{module}" with the name "{name}": {description}. '
 
         for block in article["blocks"]:
             joinedBlock = cut(joinBlock(block["name"], block["description"]["text"]))
