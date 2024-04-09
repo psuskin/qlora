@@ -107,10 +107,6 @@ If a question does not make any sense, or is not factually coherent, explain why
         with open("instructOutput.txt", "a", encoding="utf-8") as f:
             f.write(llamaPrompt + "\n" + response + "\n\n")
         # exit()
-            
-        # Free memory to avoid OutOfMemoryError
-        del inputs
-        del outputs
 
         #pattern = re.compile(r'\d+\.\s(.+?)(?:\n|$)')
         #matches = pattern.findall(response)
