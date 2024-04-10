@@ -50,7 +50,6 @@ def instruct(promptsPerClass=10):
             )
         )
 
-    prompts = []
     for file in os.listdir("data/en_articles_klio"):
         description = open(f"data/en_articles_klio/{file}", encoding="utf-8").read()
 
@@ -71,14 +70,12 @@ Here are the requirements:
 - The question should query some relevant aspect of the module's functionality which is described in the module description.
 - Please use both the imperative and interrogative forms and try not to repeat verbs for the questions to maximize variety.
 - If the information you plan to query seems module-specific, please reference the module name in the query.
-- NEVER REFER TO A MODULE IN A QUESTION WITHOUT USING ITS NAME. This means to never use the word "module", like saying "the module" or "this module", in a question if you are not providing the module name.
+- NEVER REFER TO A MODULE IN A QUESTION WITHOUT USING ITS NAME. This means to never use the word "module" in a question if you are not providing the module name. For example, NEVER use the terms "the module" or "this module" in a question.
 
 Module description: {text}"""
             else:
                 prompt = f"Ich gebe dir im Folgenden eine Beschreibung eines einzelnen Moduls. Bitte generiere {promptsPerClass} Frage-Antwort Paare, bei denen die Frage einen relevanten Aspekt der Funktionalität des Moduls abfragt und die Antwort eine genaue und hilfreiche Reaktion zur entsprechenden Frage bietet.\n\nModulbeschreibung: {text}"
-            prompts.append(prompt)
-        
-        for prompt in prompts:
+
             if EN:
                 # https://huggingface.co/blog/llama2
                 llamaPrompt = f"""<s>[INST] <<SYS>>
@@ -104,8 +101,8 @@ Module description: {text}"""
                 )
             )
 
-            text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-            response = text.split("[/INST]" if EN else "ASSISTANT:", 1)[1].strip()
+            output = tokenizer.decode(outputs[0], skip_special_tokens=True)
+            response = output.split("[/INST]" if EN else "ASSISTANT:", 1)[1].strip()
 
             # Free GPU memory
             #del inputs
