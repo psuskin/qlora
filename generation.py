@@ -12,7 +12,7 @@ EN = True
 
 def instruct(promptsPerClass=10):
     if EN:
-        instructModel = "meta-llama/Llama-2-13b-chat-hf"
+        instructModel = "meta-llama/Llama-2-7b-chat-hf"
 
         tokenizer = AutoTokenizer.from_pretrained(instructModel)
         # Fixing some of the early LLaMA HF conversion issues.
@@ -52,97 +52,72 @@ def instruct(promptsPerClass=10):
 
     prompts = []
     for file in os.listdir("data/en_articles_klio"):
-        text = open(f"data/en_articles_klio/{file}", encoding="utf-8").read()
-        
-        if EN:
-            prompt = f"""In the following, I will provide you with the description of a module. Please generate {promptsPerClass} numbered question-answer pairs of the format 1. Q: question A: answer, where the question queries some relevant aspect of the module's functionality and the answer provides an accurate and helpful response to the corresponding question.
+        description = open(f"data/en_articles_klio/{file}", encoding="utf-8").read()
+
+        texts = [""]
+        for block in description.split("This is the description of"):
+            if block:
+                if len(texts[-1].split()) + len(block.split()) < 1000:
+                    texts[-1] += block
+                else:
+                    texts.append(block)
+
+        for text in texts:
+            if EN:
+                prompt = f"""In the following, you will be provided with the description of a module. Your task is to generate questions referencing this module description from the perspective of an unfamiliar user who would like to know more about a certain functionality. Please generate as many questions as you deem reasonable based on the scope of the module description.
 
 Here are the requirements:
-- The questions should be based on the module description.
-- The answers should be accurate and helpful.
-- The answers should not contain any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content.
-- The responses should be socially unbiased and positive in nature.
-- If a question is not factually coherent, explain why instead of providing an incorrect answer.
-- If you do not know the answer to a question, please do not provide false information.
-- The questions should be varied and cover different aspects of the module's functionality.
-- Either an imperative or interrogative form can be used for the questions.
-- Try not to repeat the verb for the questions to maximize variety.
+- The question should query some relevant aspect of the module's functionality which is described in the module description.
+- Please use both the imperative and interrogative forms and try not to repeat verbs for the questions to maximize variety.
+- If the information you plan to query seems module-specific, please reference the module name in the query.
+- NEVER REFER TO A MODULE IN A QUESTION WITHOUT USING ITS NAME. This means to never use the word "module", like saying "the module" or "this module", in a question if you are not providing the module name.
 
 Module description: {text}"""
-        else:
-            prompt = f"Ich gebe dir im Folgenden eine Beschreibung eines einzelnen Moduls. Bitte generiere {promptsPerClass} Frage-Antwort Paare, bei denen die Frage einen relevanten Aspekt der Funktionalität des Moduls abfragt und die Antwort eine genaue und hilfreiche Reaktion zur entsprechenden Frage bietet.\n\nModulbeschreibung: {text}"
-        prompts.append(prompt)
-    
-    instructions = []
-    for prompt in prompts:
-        if EN:
-            # https://huggingface.co/blog/llama2
-            llamaPrompt = f"""<s>[INST] <<SYS>>
-You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+            else:
+                prompt = f"Ich gebe dir im Folgenden eine Beschreibung eines einzelnen Moduls. Bitte generiere {promptsPerClass} Frage-Antwort Paare, bei denen die Frage einen relevanten Aspekt der Funktionalität des Moduls abfragt und die Antwort eine genaue und hilfreiche Reaktion zur entsprechenden Frage bietet.\n\nModulbeschreibung: {text}"
+            prompts.append(prompt)
+        
+        for prompt in prompts:
+            if EN:
+                # https://huggingface.co/blog/llama2
+                llamaPrompt = f"""<s>[INST] <<SYS>>
+    You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
 
-If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.
-<</SYS>>
+    If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.
+    <</SYS>>
 
-{prompt} [/INST]"""
-        else:
-            llamaPrompt = f"Du bist ein hilfreicher Assistent. USER: {prompt} ASSISTANT:"
+    {prompt} [/INST]"""
+            else:
+                llamaPrompt = f"Du bist ein hilfreicher Assistent. USER: {prompt} ASSISTANT:"
 
-        inputs = tokenizer(llamaPrompt, return_tensors="pt").to('cuda')
+            inputs = tokenizer(llamaPrompt, return_tensors="pt").to('cuda')
 
-        outputs = model.generate(
-            **inputs, 
-            generation_config=GenerationConfig(
-                do_sample=True,
-                max_new_tokens=4096,
-                top_p=1,
-                temperature=0.01,
-                repetition_penalty=1.2
+            outputs = model.generate(
+                **inputs, 
+                generation_config=GenerationConfig(
+                    do_sample=True,
+                    max_new_tokens=4096,
+                    top_p=1,
+                    temperature=0.01,
+                    repetition_penalty=1.2
+                )
             )
-        )
 
-        text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-        response = text.split("[/INST]" if EN else "ASSISTANT:", 1)[1].strip()
+            text = tokenizer.decode(outputs[0], skip_special_tokens=True)
+            response = text.split("[/INST]" if EN else "ASSISTANT:", 1)[1].strip()
 
-        #print(llamaPrompt, response)
-        with open("instructOutput.txt", "a", encoding="utf-8") as f:
-            f.write(llamaPrompt + "\n" + response + "\n\n")
-        # exit()
+            # Free GPU memory
+            #del inputs
+            #del outputs
+            #torch.cuda.empty_cache()
 
-        #pattern = re.compile(r'\d+\.\s(.+?)(?:\n|$)')
-        #matches = pattern.findall(response)
-        #for match in matches:
-        #    pair = match.split("A:")
-        #    if len(pair) == 2:
-        #        instructions.append({"input": "In the following is a query. Write an appropriate response.\n\n### Query: " + pair[0].replace("Q:", "").strip().strip("\"") + "\n\n###Response:", "output": pair[1].strip().strip("\"")})
-
-    #with open(f"data/{'en' if EN else 'de'}_articles_generation_instruct{promptsPerClass}.json", "w", encoding="utf-8") as f:
-    #    json.dump(instructions, f, ensure_ascii=False, indent=4)
+            #print(llamaPrompt, response)
+            with open("instructOutput.txt", "a", encoding="utf-8") as f:
+                f.write(llamaPrompt + "\n" + response + "\n\n")
 
 def parseInstruct():
     with open("instructOutput.txt", "r", encoding="utf-8") as f:
         lines = f.readlines()
-
-    # Example instruct format:
-    # 1. Q: What is the purpose of the Order Report module?
-    # A: The Order Report module allows users to view and manage orders in a list format, providing detailed information about each order.
-    # 2. Q: How does the List Window in the Order Report module work?
-    # A: The List Window displays all orders in a tabular format, allowing users to sort, filter, and search for specific orders based on various criteria such as date, customer, product, etc.
-    # 3. Q: Can I customize the columns displayed in the List Window?
-    # A: Yes, users can choose which columns they want to display in the List Window by using the column picklist feature.
-    # 4. Q: Is it possible to export data from the List Window to a spreadsheet or other software?
-    # A: Yes, users can export data from the List Window to a CSV file or other formats like Excel, PDF, etc., using the built-in export feature.
-    # 5. Q: How does the Search function in the List Window work?
-    # A: Users can use the search bar to find specific orders quickly by entering keywords related to the order, such as the customer name, product name, or order date.
-    # 6. Q: Can I print reports directly from the List Window?
-    # A: Yes, users can print reports directly from the List Window using the built-in printing feature.
-    # 7. Q: Are there any options to customize the look and feel of the List Window?
-    # A: Yes, users can customize the appearance of the List Window by changing colors, fonts, and layouts to suit their preferences.
-    # 8. Q: Does the Order Report module integrate with other modules or systems?
-    # A: Yes, the Order Report module can integrate with other modules such as inventory management, accounting, and shipping to provide a comprehensive overview of the business operations.
-    # 9. Q: Can I create custom views in the List Window based on my specific needs?
-    # A: Yes, users can create custom views based on their specific needs by selecting the desired fields and sorting them in a way that makes sense for their business.
-    # 10. Q: Is there a limit to the number of orders that can be displayed in the List Window?
-    # A: No, there is no limit to the number of orders that can be displayed in the List Window, making it suitable for businesses of all sizes.
 
     modules = []
 
@@ -230,8 +205,8 @@ def inference(modelName, adapter_path):
         print(prompt, response)
 
 if __name__ == '__main__':
-    # instruct()
+    instruct()
 
-    parseInstruct()
+    # parseInstruct()
 
     # inference("distilbert-base-uncased-classification/checkpoint-30000")
