@@ -57,6 +57,7 @@ def instruct(promptsPerClass=10):
         texts = [""]
         for block in description.split("This is the description of"):
             if block:
+                block = "This is the description of" + block
                 if len(texts[-1].split()) + len(block.split()) < 1000:
                     texts[-1] += block
                 else:
@@ -113,7 +114,7 @@ Module description: {text}"""
 
             #print(llamaPrompt, response)
             with open("instructOutput.txt", "a", encoding="utf-8") as f:
-                f.write(llamaPrompt + "\n" + response + "\n\n")
+                f.write(text + "\n" + response + "\n\n")
 
 def parseInstruct():
     with open("instructOutput.txt", "r", encoding="utf-8") as f:
