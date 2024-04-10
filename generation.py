@@ -118,6 +118,56 @@ If a question does not make any sense, or is not factually coherent, explain why
     #with open(f"data/{'en' if EN else 'de'}_articles_generation_instruct{promptsPerClass}.json", "w", encoding="utf-8") as f:
     #    json.dump(instructions, f, ensure_ascii=False, indent=4)
 
+def parseInstruct():
+    with open("instructOutput.txt", "r", encoding="utf-8") as f:
+        lines = f.readlines()
+
+    # Example instruct format:
+    # 1. Q: What is the purpose of the Order Report module?
+    # A: The Order Report module allows users to view and manage orders in a list format, providing detailed information about each order.
+    # 2. Q: How does the List Window in the Order Report module work?
+    # A: The List Window displays all orders in a tabular format, allowing users to sort, filter, and search for specific orders based on various criteria such as date, customer, product, etc.
+    # 3. Q: Can I customize the columns displayed in the List Window?
+    # A: Yes, users can choose which columns they want to display in the List Window by using the column picklist feature.
+    # 4. Q: Is it possible to export data from the List Window to a spreadsheet or other software?
+    # A: Yes, users can export data from the List Window to a CSV file or other formats like Excel, PDF, etc., using the built-in export feature.
+    # 5. Q: How does the Search function in the List Window work?
+    # A: Users can use the search bar to find specific orders quickly by entering keywords related to the order, such as the customer name, product name, or order date.
+    # 6. Q: Can I print reports directly from the List Window?
+    # A: Yes, users can print reports directly from the List Window using the built-in printing feature.
+    # 7. Q: Are there any options to customize the look and feel of the List Window?
+    # A: Yes, users can customize the appearance of the List Window by changing colors, fonts, and layouts to suit their preferences.
+    # 8. Q: Does the Order Report module integrate with other modules or systems?
+    # A: Yes, the Order Report module can integrate with other modules such as inventory management, accounting, and shipping to provide a comprehensive overview of the business operations.
+    # 9. Q: Can I create custom views in the List Window based on my specific needs?
+    # A: Yes, users can create custom views based on their specific needs by selecting the desired fields and sorting them in a way that makes sense for their business.
+    # 10. Q: Is there a limit to the number of orders that can be displayed in the List Window?
+    # A: No, there is no limit to the number of orders that can be displayed in the List Window, making it suitable for businesses of all sizes.
+
+    modules = []
+
+    currentModules = []
+    for line in lines:
+        if "Module description:" in line:
+            if currentModules:
+                modules.append(currentModules)
+                currentModules = []
+        elif ("Q:" in line or "A:" in line) and not "of the format" in line:
+            currentModules.append(line)
+
+
+    instructions = []
+    for module in modules:
+        for i in range(0, len(module), 2):
+            try:
+                instructions.append({"input": "In the following is a query. Write an appropriate response.\n\n### Query: " + module[i].split("Q:")[1].strip().strip("\"") + "\n\n###Response:", "output": module[i+1].split("A:")[1].strip().strip("\"")})
+            except:
+                # print(module[i], module[i+1])
+                print(module)
+
+    with open(f"data/en_articles_generation_instruct10.json", "w", encoding="utf-8") as f:
+        json.dump(instructions, f, ensure_ascii=False, indent=4)
+
 def inference(modelName, adapter_path):
     prompts = [
         ("Which module provides version and copyright information?", 0),
@@ -180,6 +230,8 @@ def inference(modelName, adapter_path):
         print(prompt, response)
 
 if __name__ == '__main__':
-    instruct()
+    # instruct()
+
+    parseInstruct()
 
     # inference("distilbert-base-uncased-classification/checkpoint-30000")
