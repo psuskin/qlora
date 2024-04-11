@@ -53,12 +53,18 @@ def instruct(promptsPerClass=10):
     with open("instructOutput.txt", "r", encoding="utf-8") as f:
         text = f.read()
 
+    encountered = False
     pattern = re.compile(r'\d+\.\s(.+?)(?:\n|$)')
     instructionSets = text.split("This is the description of")
     for instructionSet in instructionSets:
         if instructionSet:
             instructions = re.findall(pattern, instructionSet)
             for instruction in instructions:
+                if not encountered:
+                    if instruction == 'Are there any manual changes that can be made to the disposition type and/or procurement time of individual parts in the "cxItemDemand" module in SAP?':
+                        encountered = True
+                    continue
+
                 description = "This is the description of" + instructionSet.split("\n")[0]
                 prompt = f"""In the following, you will be provided with the description of a module, as well as a query referencing this description which may or may not be answerable based solely on the information provided in the module description. Your task is to assess whether or not the query can be answered with the information provided in the module description. If the query can be answered without additional information, provide the answer. Otherwise, state that the information is not currently available.
 
