@@ -53,8 +53,10 @@ def instruct(promptsPerClass=10):
     with open("instructOutput.txt", "r", encoding="utf-8") as f:
         text = f.read()
 
+    text.replace("in SAP", "in classix")
+
     encountered = False
-    pattern = re.compile(r'\d+\.\s(.+?)(?:\n|$)')
+    pattern = re.compile(r'^\d+\.\s(.+?)(?:\n|$)', re.MULTILINE)
     instructionSets = text.split("This is the description of")
     for instructionSet in instructionSets:
         if instructionSet:
