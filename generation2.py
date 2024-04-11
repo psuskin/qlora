@@ -60,9 +60,7 @@ def instruct(promptsPerClass=10):
             instructions = re.findall(pattern, instructionSet)
             for instruction in instructions:
                 description = "This is the description of" + instructionSet.split("\n")[0]
-                prompt = f"""In the following, you will be provided with the description of a module, as well as a query referencing this description. Some, but not all, of these queries can be answered with the information provided in the module description. Your task is to generate a response to the query based on the information provided in the module description IF AND ONLY IF the query can be answered with this information. If the query cannot be answered with the information provided, please simply state that the information is not currently available.
-
-MANY OF THE QUERIES ARE SPECIFICALLY MEANT TO BE UNANSWERABLE WITH THE INFORMATION PROVIDED. IF THE QUERY CANNOT BE ANSWERED WITH THE INFORMATION PROVIDED, DO NOT PROVIDE A FICTICIOUS RESPONSE AND SIMPLY STATE THAT THE INFORMATION IS NOT CURRENTLY AVAILABLE. 
+                prompt = f"""In the following, you will be provided with the description of a module, as well as a query referencing this description which may or may not be answerable based solely on the information provided in the module description. Your task is to assess whether or not the query can be answered with the information provided in the module description. If the query can be answered without additional information, provide the answer. Otherwise, state that the information is not currently available.
 
 Module description: {description}
 
