@@ -12,7 +12,7 @@ EN = True
 
 def instruct(promptsPerClass=10):
     if EN:
-        instructModel = "meta-llama/Llama-2-7b-chat-hf"
+        instructModel = "meta-llama/Llama-2-13b-chat-hf"
 
         tokenizer = AutoTokenizer.from_pretrained(instructModel)
         # Fixing some of the early LLaMA HF conversion issues.
@@ -79,19 +79,19 @@ Module description: {text}"""
             if EN:
                 # https://huggingface.co/blog/llama2
                 llamaPrompt = f"""<s>[INST] <<SYS>>
-    You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
+You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
 
-    If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.
-    <</SYS>>
+If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.
+<</SYS>>
 
-    {prompt} [/INST]"""
+{prompt} [/INST]"""
             else:
                 llamaPrompt = f"Du bist ein hilfreicher Assistent. USER: {prompt} ASSISTANT:"
 
             inputs = tokenizer(llamaPrompt, return_tensors="pt").to('cuda')
 
             outputs = model.generate(
-                **inputs, 
+                **inputs,
                 generation_config=GenerationConfig(
                     do_sample=True,
                     max_new_tokens=4096,
@@ -112,34 +112,6 @@ Module description: {text}"""
             #print(llamaPrompt, response)
             with open("instructOutput.txt", "a", encoding="utf-8") as f:
                 f.write(text + "\n" + response + "\n\n")
-
-def parseInstruct():
-    with open("instructOutput.txt", "r", encoding="utf-8") as f:
-        lines = f.readlines()
-
-    modules = []
-
-    currentModules = []
-    for line in lines:
-        if "Module description:" in line:
-            if currentModules:
-                modules.append(currentModules)
-                currentModules = []
-        elif ("Q:" in line or "A:" in line) and not "of the format" in line:
-            currentModules.append(line)
-
-
-    instructions = []
-    for module in modules:
-        for i in range(0, len(module), 2):
-            try:
-                instructions.append({"input": "In the following is a query. Write an appropriate response.\n\n### Query: " + module[i].split("Q:")[1].strip().strip("\"") + "\n\n###Response:", "output": module[i+1].split("A:")[1].strip().strip("\"")})
-            except:
-                # print(module[i], module[i+1])
-                print(module)
-
-    with open(f"data/en_articles_generation_instruct10.json", "w", encoding="utf-8") as f:
-        json.dump(instructions, f, ensure_ascii=False, indent=4)
 
 def inference(modelName, adapter_path):
     prompts = [
@@ -204,7 +176,5 @@ def inference(modelName, adapter_path):
 
 if __name__ == '__main__':
     instruct()
-
-    # parseInstruct()
 
     # inference("distilbert-base-uncased-classification/checkpoint-30000")
