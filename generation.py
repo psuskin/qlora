@@ -64,15 +64,11 @@ def instruct(promptsPerClass=10):
 
         for text in texts:
             if EN:
-                prompt = f"""In the following, you will be provided with the description of a module. Your task is to generate questions referencing this module description from the perspective of an unfamiliar user who would like to know more about a certain functionality. Please generate as many questions as you deem reasonable based on the scope of the module description.
+                prompt = f"""In the following, you will be provided with the description of a module. Your task is to generate as many realistic questions as possible referencing this module description from the perspective of an unfamiliar user who would like to know more about a certain functionality specific to the provided module. Start with questions that can easily be answered based on the module description, such as "What is the purpose of the module <module name>?". Please use both the imperative and interrogative forms and try not to repeat verbs for the questions to maximize variety.
 
-Here are the requirements:
-- The question should query some relevant aspect of the module's functionality which is described in the module description.
-- Please use both the imperative and interrogative forms and try not to repeat verbs for the questions to maximize variety.
-- If the information you plan to query seems module-specific, please reference the module name in the query.
-- NEVER REFER TO A MODULE IN A QUESTION WITHOUT USING ITS NAME. This means to never use the word "module" in a question if you are not providing the module name. For example, NEVER use the terms "the module" or "this module" in a question.
+If the information you plan to query seems module-specific, please reference the module name in the query. NEVER REFER TO A MODULE IN A QUESTION WITHOUT USING ITS NAME. This means to never use the word "module" in a question if you are not providing the module name. For example, NEVER use the terms "the module" or "this module" in a question.
 
-After each question, justify whether the question can be answered based on the module description. You do not need to provide the answer itself. Stop once a question has been generated which cannot be answered without additional information.
+After each question, justify whether the question can be answered based on the module description. You do not need to provide the answer itself. Continue generating questions yourself until you've devided to stop. Stop once a question has been generated which cannot be answered without additional information.
 
 Module description: {text}"""
             else:
