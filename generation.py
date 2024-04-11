@@ -72,6 +72,8 @@ Here are the requirements:
 - If the information you plan to query seems module-specific, please reference the module name in the query.
 - NEVER REFER TO A MODULE IN A QUESTION WITHOUT USING ITS NAME. This means to never use the word "module" in a question if you are not providing the module name. For example, NEVER use the terms "the module" or "this module" in a question.
 
+After each question, justify whether the question can be answered based on the module description. You do not need to provide the answer itself. Stop once a question has been generated which cannot be answered without additional information.
+
 Module description: {text}"""
             else:
                 prompt = f"Ich gebe dir im Folgenden eine Beschreibung eines einzelnen Moduls. Bitte generiere {promptsPerClass} Frage-Antwort Paare, bei denen die Frage einen relevanten Aspekt der Funktionalität des Moduls abfragt und die Antwort eine genaue und hilfreiche Reaktion zur entsprechenden Frage bietet.\n\nModulbeschreibung: {text}"
