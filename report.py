@@ -27,18 +27,18 @@ def load_model(model_name_or_path='huggyllama/llama-7b', adapter_path=None):
         model = PeftModel.from_pretrained(base_model, adapter_path)
         model.eval()
     else:
-        model = None
+        model = base_model
 
     return model, tokenizer
 
 def generate(model, tokenizer, template, prompt, max_new_tokens=2000):
-    input = template.format(prompt)
+    input = template.format(prompt=prompt)
     inputs = tokenizer(input, return_tensors="pt").to('cuda')
 
-    outputs = model.generate(**inputs, return_dict_in_generate=True, max_new_tokens=max_new_tokens)
+    outputs = model.generate(**inputs, return_dict_in_generate=True, max_new_tokens=max_new_tokens, do_sample=False)
 
     text = tokenizer.decode(outputs.sequences[0], skip_special_tokens=True)
-    return text.replace(input, '').strip()
+    return text.replace(input.replace('<s>', ''), '').strip()
 
 if __name__ == "__main__":
     prompts = [
@@ -46,14 +46,10 @@ if __name__ == "__main__":
 
     ]
 
-    lc_model, lc_tokenizer = load_model('meta-llama/Llama-2-13b-chat-hf')
-    _, kal_model, kal_tokenizer = load_model('meta-llama/Llama-2-13b-hf', 'output/klio-alpaca-2-13b-r64-noeval/checkpoint-1875/adapter_model')
-    _, karg_model, karg_tokenizer = load_model('meta-llama/Llama-2-13b-hf', 'output/klio-autoregressive-2-13b-r64-noeval/checkpoint-1875/adapter_model')
-
     implementations = [
         ('LC', 'meta-llama/Llama-2-13b-chat-hf', None, "<s>[INST] <<SYS>>\nYou are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.\n\nIf a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.\n<</SYS>>\n\n{prompt} [/INST]"),
-        ('KAL', 'meta-llama/Llama-2-13b-hf', 'output/klio-alpaca-2-13b-r64-noeval/checkpoint-1875/adapter_model', "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat types of reports can I generate using the Order report module?\n\n### Input:\n{prompt}\n\n### Response:"),
-        ('KARG', 'meta-llama/Llama-2-13b-hf', 'output/klio-autoregressive-2-13b-r64-noeval/checkpoint-1875/adapter_model', "### Human: {prompt} ### Assistant: ")
+        ('KAL', 'meta-llama/Llama-2-13b-hf', 'output/klio-alpaca-2-13b-r64-noeval/checkpoint-1875/adapter_model', "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\n{prompt}\n\n### Response:"),
+        ('KARG', 'meta-llama/Llama-2-13b-hf', 'output/klio-autoregressive-2-13b-r64-noeval/checkpoint-1875/adapter_model', "### Human: {prompt}### Assistant: ")
     ]
 
     if os.path.exists("responses.json"):
@@ -63,16 +59,28 @@ if __name__ == "__main__":
         responses = {}
 
     for implementation in implementations:
-        if implementation[0] not in responses:
-            responses[implementation[0]] = []
+        name = implementation[0]
+        if name not in responses:
+            responses[name] = []
 
-        model, tokenizer = load_model(implementation[0], implementation[1])
+        if set(prompts) == set([response["query"] for response in responses[name]]):
+            continue
+
+        model, tokenizer = load_model(implementation[1], implementation[2])
         for prompt in prompts:
-            if prompt in responses[implementation[0]]:
+            if prompt in [response["query"] for response in responses[name]]:
                 continue
 
-            response = generate(model, tokenizer, implementation[2], prompt)
-            responses[implementation[0]].append({"query": prompt, "response": response})
+            print(f"Computing response for {name}...")
+            response = generate(model, tokenizer, implementation[3], prompt)
+            responses[name].append({"query": prompt, "response": response})
+            #print(prompt)
+            #print(implementation[3])
+            #print(response)
 
-    with open("responses.json") as f:
-        json.dump(responses, f)
+        del model
+        del tokenizer
+        torch.cuda.empty_cache()
+
+    with open("responses.json", "w", encoding="utf-8") as f:
+        json.dump(responses, f, ensure_ascii=False, indent=4)
