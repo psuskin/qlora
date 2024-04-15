@@ -7,7 +7,8 @@ from transformers import (
 )
 
 #model_name_or_path = "huggyllama/llama-7b"
-model_name_or_path = "meta-llama/Llama-2-7b-hf"
+#model_name_or_path = "meta-llama/Llama-2-7b-hf"
+model_name_or_path = "meta-llama/Llama-2-13b-hf"
 cache_dir = None
 
 DEFAULT_PAD_TOKEN = "[PAD]"
@@ -38,8 +39,11 @@ if 'llama' in model_name_or_path or isinstance(tokenizer, LlamaTokenizer):
     })
 
 def count(path, sequencePart="output", maxTokens=max_sequence_length):
-    with open(path, encoding="utf-8") as f:
-        jsonArray = json.load(f)
+    if isinstance(path, str):
+        with open(path, encoding="utf-8") as f:
+            jsonArray = json.load(f)
+    else:
+        jsonArray = path
 
     sources = [f"{tokenizer.bos_token}{jsonObject[sequencePart]}{tokenizer.eos_token}" for jsonObject in jsonArray]
 
@@ -77,6 +81,17 @@ def count(path, sequencePart="output", maxTokens=max_sequence_length):
 
 #count("data/de_articles_alpaca.json", "input", 1024)
 #count("data/de_articles_alpaca.json", "output", 1024)
+
+#count("data/en_articles_klio_alpaca.json", "input", 5120)
+#count("data/en_articles_klio_alpaca.json", "output", 5120)
+
+#count("data/en_articles_klio_autoregressive.json", "output", 5120)
+
+from datasets import load_dataset
+dataset = load_dataset("timdettmers/openassistant-guanaco")
+count(dataset["train"], "text", 5120)
+
+exit()
 
 example = tokenizer(
     #["This evaluation serves the analysis of recorded BDE time tickets."],
