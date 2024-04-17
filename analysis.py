@@ -9,7 +9,7 @@ import statistics
 import numpy as np
 import scipy.stats as stats
 from datetime import timedelta
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 from collections import defaultdict
 
 PATH = "/home/psuskin/repos/analysis"
@@ -506,7 +506,7 @@ def print_adapter_singular(singulars=None):
     exit()
 
 def plot_loss():
-    with open("training/trainer_state/alpaca-2-7b-r64-t.json") as f:
+    with open("output/klio-autoregressive-2-13b-r64-noeval/backup/trainer_state.json") as f:
         data = json.load(f)
 
         train_loss = []
@@ -523,7 +523,7 @@ def plot_loss():
         print(*train_loss)
         print(*eval_loss)
         print(*mmlu_loss)
-
+        """
         plt.plot(*zip(*train_loss), label="Train loss")
         plt.plot(*zip(*eval_loss), label="Eval loss")
         plt.plot(*zip(*mmlu_loss), label="MMLU loss")
@@ -532,7 +532,7 @@ def plot_loss():
         plt.ylabel("Loss")
         plt.title("Loss over training steps")
         plt.show()
-
+        """
     exit()
 
 def print_runtime():
@@ -965,7 +965,7 @@ if __name__ == '__main__':
     #print_absolute()
 
     #print_runtime()
-    #plot_loss()
+    plot_loss()
 
     #print_absolute_singular()
     print_differences()

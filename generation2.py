@@ -56,11 +56,12 @@ def instruct(promptsPerClass=10):
     text = text.replace("in SAP", "in classix")
 
     #encountered = False
-    pattern = re.compile(r'^\d+\.\s(.+?)(?:\n|$)', re.MULTILINE)
-    instructionSets = text.split("This is the description of")
+    descriptionPattern = re.compile(r'^This is the description of', re.MULTILINE)
+    instructionPattern = re.compile(r'^\d+\.\s(.+?)(?:\n|$)', re.MULTILINE)
+    instructionSets = re.split(descriptionPattern, text)
     for instructionSet in instructionSets:
         if instructionSet:
-            instructions = re.findall(pattern, instructionSet)
+            instructions = re.findall(instructionPattern, instructionSet)
             for instruction in instructions:
                 #if not encountered:
                 #    if instruction == 'Are there any manual changes that can be made to the disposition type and/or procurement time of individual parts in the "cxItemDemand" module in SAP?':

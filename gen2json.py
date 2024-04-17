@@ -27,6 +27,9 @@ print(len(queries), len(contexts), len(responses))
 samples = []
 samplesNoContext = []
 for query, context, response in zip(queries, contexts, responses):
+    if "SAP" in response and not "SAP" in query:
+        response.replace("SAP", "classix")
+
     samples.append({"input": f"Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\n{query}\n### Input:\n{context}\n### Response:",
                     "output": response})
     samplesNoContext.append({"input": f"Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\n{query}\n### Response:",
