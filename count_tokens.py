@@ -82,14 +82,14 @@ def count(path, sequencePart="output", maxTokens=max_sequence_length):
 #count("data/de_articles_alpaca.json", "input", 1024)
 #count("data/de_articles_alpaca.json", "output", 1024)
 
-#count("data/en_articles_klio_alpaca.json", "input", 5120)
-#count("data/en_articles_klio_alpaca.json", "output", 5120)
+count("data/en_articles_klio_alpaca.json", "input", 5120)
+count("data/en_articles_klio_alpaca.json", "output", 5120)
 
 #count("data/en_articles_klio_autoregressive.json", "output", 5120)
 
-from datasets import load_dataset
-dataset = load_dataset("timdettmers/openassistant-guanaco")
-count(dataset["train"], "text", 5120)
+#from datasets import load_dataset
+#dataset = load_dataset("timdettmers/openassistant-guanaco")
+#count(dataset["train"], "text", 5120)
 
 exit()
 

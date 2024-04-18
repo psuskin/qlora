@@ -506,7 +506,7 @@ def print_adapter_singular(singulars=None):
     exit()
 
 def plot_loss():
-    with open("output/klio-autoregressive-2-13b-r64-noeval/backup/trainer_state.json") as f:
+    with open("output/klio-autoregressive-2-13b-r64-noeval/trainer_state.json") as f:
         data = json.load(f)
 
         train_loss = []
