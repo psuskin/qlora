@@ -116,3 +116,6 @@ def infer():
     for document in docs:
         print(document.page_content)
     print("----------------------------------SOURCE DOCUMENTS---------------------------")
+
+if __name__ == '__main__':
+    infer()
