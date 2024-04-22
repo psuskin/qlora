@@ -9,6 +9,8 @@ from langchain.llms import HuggingFacePipeline
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 
+import json
+
 EMBEDDING_MODEL_NAME = "hkunlp/instructor-large"  # Uses 1.5 GB of VRAM (High Accuracy with lower VRAM usage)
 
 device_type = "cuda" if torch.cuda.is_available() else "cpu"
@@ -100,22 +102,47 @@ def run():
         print("----------------------------------SOURCE DOCUMENTS---------------------------")
 
 def infer():
-    query = "What is a gozintograph?"
+    responses = []
 
-    response = qa(query)
-    answer, docs = response["result"], response["source_documents"]
+    queries = [
+        "What is a variant part?",
+        "What is a gozintograph?",
+        "How do I plan production orders?",
+        "What are specification numbers?",
+        "What is a subject characteristics bar?",
+        "How do I implement attributes into subject characteristics bars?",
+        "How are parts evaluated in the warehouse?",
+        "What is a price table?",
+        "What are conditional parts list items?",
+        "How do I import my inventory data into GESTIN?",
+        "What is inventory sampling?",
+        "What does PYTHIA do?",
+        "Can I change the output currency of an order confirmation?",
+        "What is a packing list?",
+        "What is master data?"
+    ]
 
-    # Print the result
-    print("\n\n> Question:")
-    print(query)
-    print("\n> Answer:")
-    print(answer)
+    for query in queries:
+        response = qa(query)
+        answer, docs = response["result"], response["source_documents"]
+        answer = answer.split("### Response:")[1].strip()
 
-    # # Print the relevant sources used for the answer
-    print("----------------------------------SOURCE DOCUMENTS---------------------------")
-    for document in docs:
-        print(document.page_content)
-    print("----------------------------------SOURCE DOCUMENTS---------------------------")
+        # Print the result
+        print("\n\n> Question:")
+        print(query)
+        print("\n> Answer:")
+        print(answer)
+
+        # # Print the relevant sources used for the answer
+        print("----------------------------------SOURCE DOCUMENTS---------------------------")
+        for document in docs:
+            print(document.page_content)
+        print("----------------------------------SOURCE DOCUMENTS---------------------------")
+
+        responses.append({"query": query, "response": answer, "docs": [doc.page_content for doc in docs]})
+
+    with open("kal_rag.json", "w", encoding="utf-8") as f:
+        json.dump(responses, f, ensure_ascii=False, indent=4)
 
 if __name__ == '__main__':
     infer()
