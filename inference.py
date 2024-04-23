@@ -9,6 +9,7 @@ from langchain.llms import HuggingFacePipeline
 from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 
+import re
 import json
 
 EMBEDDING_MODEL_NAME = "hkunlp/instructor-large"  # Uses 1.5 GB of VRAM (High Accuracy with lower VRAM usage)
@@ -88,6 +89,7 @@ def run():
 
         response = qa(query)
         answer, docs = response["result"], response["source_documents"]
+        answer = answer.split("### Response:")[1].strip()
 
         # Print the result
         print("\n\n> Question:")
@@ -98,7 +100,8 @@ def run():
         # # Print the relevant sources used for the answer
         print("----------------------------------SOURCE DOCUMENTS---------------------------")
         for document in docs:
-            print(document.page_content)
+            print(re.search(r'"([^"]+)"', document.page_content).group(1))
+            #print(document.page_content)
         print("----------------------------------SOURCE DOCUMENTS---------------------------")
 
 def infer():
@@ -126,6 +129,7 @@ def infer():
         response = qa(query)
         answer, docs = response["result"], response["source_documents"]
         answer = answer.split("### Response:")[1].strip()
+        answer.replace()
 
         # Print the result
         print("\n\n> Question:")
@@ -135,14 +139,17 @@ def infer():
 
         # # Print the relevant sources used for the answer
         print("----------------------------------SOURCE DOCUMENTS---------------------------")
+        modules = []
         for document in docs:
+            modules.append(re.search(r'"([^"]+)"', document.page_content).group(1))
             print(document.page_content)
         print("----------------------------------SOURCE DOCUMENTS---------------------------")
 
-        responses.append({"query": query, "response": answer, "docs": [doc.page_content for doc in docs]})
+        responses.append({"query": query, "response": answer, "docs": [doc.page_content for doc in docs], "modules": modules})
 
-    with open("kal_rag.json", "w", encoding="utf-8") as f:
+    with open("KAL/evaluation.json", "w", encoding="utf-8") as f:
         json.dump(responses, f, ensure_ascii=False, indent=4)
 
 if __name__ == '__main__':
-    infer()
+    run()
+    #infer()
