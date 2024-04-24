@@ -90,6 +90,7 @@ def run():
         response = qa(query)
         answer, docs = response["result"], response["source_documents"]
         answer = answer.split("### Response:")[1].strip()
+        answer.replace("SAP", "classix")
 
         # Print the result
         print("\n\n> Question:")
@@ -129,7 +130,7 @@ def infer():
         response = qa(query)
         answer, docs = response["result"], response["source_documents"]
         answer = answer.split("### Response:")[1].strip()
-        answer.replace()
+        answer.replace("SAP", "classix")
 
         # Print the result
         print("\n\n> Question:")
@@ -141,7 +142,9 @@ def infer():
         print("----------------------------------SOURCE DOCUMENTS---------------------------")
         modules = []
         for document in docs:
-            modules.append(re.search(r'"([^"]+)"', document.page_content).group(1))
+            module = re.search(r'"([^"]+)"', document.page_content).group(1)
+            if module not in modules:
+                modules.append(module)
             print(document.page_content)
         print("----------------------------------SOURCE DOCUMENTS---------------------------")
 
@@ -151,5 +154,5 @@ def infer():
         json.dump(responses, f, ensure_ascii=False, indent=4)
 
 if __name__ == '__main__':
-    run()
-    #infer()
+    #run()
+    infer()

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <title>Klio-Chat</title>
+    <link rel="icon" type="image/png" href="/static/favicon.png">
+    <meta name="description" content="classix virtual assistant">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.3/tailwind.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css">
+
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.0/alpine.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"
+        integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="chatInterface" x-data="chatBot()" x-init="init()">
+        <div class="flex flex-col h-screen">
+            <div class="flex items-center justify-between bg-orange-500 p-4">
+                <div class="flex items-center space-x-4">
+                    <img src="https://cdn.icon-icons.com/icons2/1371/PNG/512/robot02_90810.png" alt="..."
+                        class="w-10 h-10 rounded-full">
+                    <div>
+                        <h4 class="text-white">Klio-Chat</h4>
+                        <p class="text-xs text-white status-indicator">Online</p>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="text-white" @click="clearChat()">Clear Chat</button>
+                </div>
+            </div>
+
+            <div class="flex-1 p:2 sm:p-6 justify-between flex flex-col overflow-y-auto">
+                <div id="messages"
+                    class="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch">
+                    <template x-for="(message, key) in messages">
+                        <div>
+                            <div class="flex items-end" :class="message.from=='bot'?'':'justify-end'">
+                                <div class="flex flex-col space-y-2 text-md leading-tight max-w-lg mx-2"
+                                    :class="message.from=='bot'?'order-2 items-start':'order-1 items-end'">
+                                    <div>
+                                        <span class="px-4 py-3 rounded-xl inline-block"
+                                            :class="message.from=='bot'?'rounded-bl-none bg-gray-100 text-gray-600':'rounded-br-none bg-orange-500 text-white'"
+                                            @click.onstop="message.show = true"
+                                            :style="message.more ? 'cursor: zoom-in' : ''">
+                                            <p x-text="message.text"></p>
+                                            <p></p>
+                                            <p x-show="message.modules && message.modules.length > 0"><br>Related modules:</p>
+                                            <template x-for="module in message.modules" :key="module">
+                                                <p>
+                                                    <a :href="`https://appswarehouse.de/en_AppsWH_${module}`" x-text="module" @click.stop target="_blank" style="cursor: pointer;"></a>
+                                                </p>
+                                            </template>
+                                        </span>
+
+                                        <div x-show="message.show && message.more" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                                            <div class="bg-white p-4 rounded" @click.away="message.show = false" style="max-width: 95%;">
+                                                <div x-html="message.saliency"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <img :src="message.from=='bot'?'https://cdn.icon-icons.com/icons2/1371/PNG/512/robot02_90810.png':'https://i.pravatar.cc/100?img=7'"
+                                    alt="" class="w-6 h-6 rounded-full"
+                                    :class="message.from=='bot'?'order-1':'order-2'">
+                            </div>
+                        </div>
+                    </template>
+                    <div x-show="botTyping" style="display: none;">
+                        <div class="flex items-end">
+                            <div class="flex flex-col space-y-2 text-md leading-tight mx-2 order-2 items-start">
+                                <img src="/static/typing.gif" alt="..." class="w-16 ml-6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
+                    <div class="relative flex">
+                        <input type="text" placeholder="Say something..." autofocus="true"
+                            @keydown.enter="updateChat($event.target)"
+                            class="text-md w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-5 pr-16 bg-gray-100 border-2 border-gray-200 focus:border-orange-500 rounded-full py-2"
+                            x-ref="input" />
+                        <div class="absolute right-2 items-center inset-y-0 hidden sm:flex">
+                            <button type="button"
+                                class="inline-flex items-center justify-center rounded-full h-8 w-8 transition duration-200 ease-in-out text-white bg-orange-500 hover:bg-orange-600 focus:outline-none"
+                                @click.prevent="updateChat($refs.input)">
+                                <i class="mdi mdi-arrow-right text-xl leading-none"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="../static/chat.js"></script>
+
+</html>
