@@ -1,0 +1,1 @@
+This is the description of the module "processes_reportfkt" with the name "Reporting": Lists Information on handling and using lists in ClassiX®.Module documentation Reports, reportingModule Documentation Data Query Wizard Create Data QueryTutorial.

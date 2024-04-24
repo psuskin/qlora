@@ -1,0 +1,1 @@
+This is the description of the module "solutions_helios" with the name "HELIOS - Steel Coil Slitting ERP": Optimised coil splittingSplit coilSteel ring weight detection.

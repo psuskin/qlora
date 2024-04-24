@@ -1,1 +1,1 @@
-This is the description of the module "qm_simplwid_qm" with the name "English:Integer, Numeric, Date, String, FString": In this test the simple input widgets are tested.
+This is the description of the module "qm_simplwid_qm" with the name "Integer, Numeric, Date, String, FString": In this test the simple input widgets are tested.

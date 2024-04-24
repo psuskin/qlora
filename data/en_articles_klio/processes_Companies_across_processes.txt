@@ -1,0 +1,1 @@
+This is the description of the module "processes_Companies_across_processes" with the name "Cross-company processes": Register Bank codes Postcodes and area codes Combined Nomenclature (list of goods numbers) Legal notifications Advance turnover tax return ZM Summary notification Z4 Message Intrastat declaration Intercompany Exchange IC orders via web service.

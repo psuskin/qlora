@@ -1,0 +1,1 @@
+This is the description of the module "processes_sales_deliverynote" with the name "Sales - Delivery note": See the module description of delivery notes.

@@ -1,0 +1,1 @@
+This is the description of the module "logindex" with the name "Login module overview": System login without selecting a client or user System Login with user specification System login with selection of a client System login with selection of a client and a user.

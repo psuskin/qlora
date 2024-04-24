@@ -1,1 +1,1 @@
-This is the description of the module "logout" with the name "English:Logout": This app is called up when a user presses or selects the button or menu item to log off. With this app, the user can confirm logoff or select certain settings.
+This is the description of the module "logout" with the name "Logout": This app is called up when a user presses or selects the button or menu item to log off. With this app, the user can confirm logoff or select certain settings.

@@ -1,0 +1,1 @@
+This is the description of the module "processes_libstdpart" with the name "Standard parts library": Comparable to the standard parts libraries of CAD System, ClassiX® provides as an additional product an already partly predefined parts master with nuts, bolts and washers. Raw materials such as sheets and tubes can also be supplied on request.

@@ -1,0 +1,1 @@
+This is the description of the module "processes_busidom" with the name "Divisions": The business areas of a company are usually represented by their departments. {img type="fileId" fileId="185" thumb="box" width="50%"} Office | Accounting | Sales | Purchasing | Engineering | Design | Logistics | Warehouse | Production | Human Resources | IT Administration.

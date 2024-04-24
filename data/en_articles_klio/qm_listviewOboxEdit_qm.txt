@@ -1,1 +1,1 @@
-This is the description of the module "qm_listviewOboxEdit_qm" with the name "English:ObjectListView::OboxEdit": Test of OboxEdit with ObjectListView.
+This is the description of the module "qm_listviewOboxEdit_qm" with the name "ObjectListView::OboxEdit": Test of OboxEdit with ObjectListView.

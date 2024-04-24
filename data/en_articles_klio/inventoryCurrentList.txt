@@ -1,1 +1,1 @@
-This is the description of the functionality of the module "inventoryCurrentList" with the name "Inventories" regarding List window: This window is used for listing .
+This is the description of the module "inventoryCurrentList" with the name "Inventories": (Please always mark the terms ClassiX®, CyberEnterprise®, InstantView® and AppsWarehouse® with the trademark reference®). This is the description of the functionality of the module "inventoryCurrentList" with the name "Inventories" regarding List window: This window is used for listing .

@@ -1,1 +1,0 @@
-This is the description of the functionality of the module "defclass" with the name "Pseudo class" regarding Functionality: This window is used to maintain pseudo classes.
