@@ -51,7 +51,7 @@
                                             :class="message.from=='bot'?'rounded-bl-none bg-gray-100 text-gray-600':'rounded-br-none bg-orange-500 text-white'"
                                             @click.onstop="message.show = true"
                                             :style="message.more ? 'cursor: zoom-in' : ''">
-                                            <p x-text="message.text"></p>
+                                            <p x-text="message.text" style="white-space: pre-wrap;"></p>
                                             <p></p>
                                             <p x-show="message.modules && message.modules.length > 0"><br>Related modules:</p>
                                             <template x-for="module in message.modules" :key="module">
