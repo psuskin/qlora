@@ -8,47 +8,23 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 # Inference
 from peft import PeftModel
 
-EN = True
-
 def instruct(promptsPerClass=10):
-    if EN:
-        instructModel = "meta-llama/Llama-2-13b-chat-hf"
+    instructModel = "meta-llama/Meta-Llama-3-8b-Instruct"
 
-        tokenizer = AutoTokenizer.from_pretrained(instructModel)
-        # Fixing some of the early LLaMA HF conversion issues.
-        tokenizer.bos_token_id = 1
+    tokenizer = AutoTokenizer.from_pretrained(instructModel)
 
-        # Load the model (use bf16 for faster inference)
-        model = AutoModelForCausalLM.from_pretrained(
-            instructModel,
-            torch_dtype=torch.bfloat16,
-            device_map={"": 0},
+    # Load the model (use bf16 for faster inference)
+    model = AutoModelForCausalLM.from_pretrained(
+        instructModel,
+        torch_dtype=torch.bfloat16,
+        device_map={"": 0},
+        quantization_config=BitsAndBytesConfig(
             load_in_4bit=True,
-            quantization_config=BitsAndBytesConfig(
-                load_in_4bit=True,
-                bnb_4bit_compute_dtype=torch.bfloat16,
-                bnb_4bit_use_double_quant=True,
-                bnb_4bit_quant_type='nf4',
-            )
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_use_double_quant=True,
+            bnb_4bit_quant_type='nf4',
         )
-    else:
-        instructModel = "jphme/Llama-2-13b-chat-german"
-
-        tokenizer = AutoTokenizer.from_pretrained(instructModel)
-        tokenizer.pad_token_id=tokenizer.eos_token_id
-
-        # Load the model (use bf16 for faster inference)
-        model = AutoModelForCausalLM.from_pretrained(
-            instructModel,
-            device_map={"": 0},
-            load_in_4bit=True,
-            quantization_config=BitsAndBytesConfig(
-                load_in_4bit=True,
-                bnb_4bit_compute_dtype=torch.bfloat16,
-                bnb_4bit_use_double_quant=True,
-                bnb_4bit_quant_type='nf4',
-            )
-        )
+    )
 
     for file in os.listdir("data/en_articles_klio"):
         description = open(f"data/en_articles_klio/{file}", encoding="utf-8").read()
@@ -66,28 +42,16 @@ def instruct(promptsPerClass=10):
             if not text:
                 continue
 
-            if EN:
-                prompt = f"""In the following, you will be provided with the description of a module. Your task is to generate realistic questions referencing this module description from the perspective of an unfamiliar user who would like to know more about a certain functionality specific to the provided module. Please use both the imperative and interrogative forms and try not to repeat verbs for the questions to maximize variety.
+            prompt = f"""In the following, you will be provided with the description of a module. Your task is to generate realistic questions referencing this module description from the perspective of an unfamiliar user who would like to know more about a certain functionality specific to the provided module. Please use both the imperative and interrogative forms and try not to repeat verbs for the questions to maximize variety.
 
 If the information you plan to query seems module-specific, please reference the module name in the query. NEVER REFER TO A MODULE IN A QUESTION WITHOUT USING ITS NAME. This means to never use the word "module" in a question if you are not providing the module name. For example, NEVER use the terms "the module" or "this module" in a question.
 
 ONLY GENERATE QUESTIONS WHICH CAN BE ANSWERED SOLELY USING THE MODULE DESCRIPTION. DO NOT ASK QUESTIONS WHICH REQUIRE ADDITIONAL INFORMATION.
 
 Module description: {text}"""
-            else:
-                prompt = f"Ich gebe dir im Folgenden eine Beschreibung eines einzelnen Moduls. Bitte generiere {promptsPerClass} Frage-Antwort Paare, bei denen die Frage einen relevanten Aspekt der Funktionalität des Moduls abfragt und die Antwort eine genaue und hilfreiche Reaktion zur entsprechenden Frage bietet.\n\nModulbeschreibung: {text}"
 
-            if EN:
-                # https://huggingface.co/blog/llama2
-                llamaPrompt = f"""<s>[INST] <<SYS>>
-You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
-
-If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.
-<</SYS>>
-
-{prompt} [/INST]"""
-            else:
-                llamaPrompt = f"Du bist ein hilfreicher Assistent. USER: {prompt} ASSISTANT:"
+            # https://llama.meta.com/docs/model-cards-and-prompt-formats/meta-llama-3/
+            llamaPrompt = f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. If you don't know the answer to a question, please don't share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
 
             inputs = tokenizer(llamaPrompt, return_tensors="pt").to('cuda')
 
@@ -103,7 +67,8 @@ If a question does not make any sense, or is not factually coherent, explain why
             )
 
             output = tokenizer.decode(outputs[0], skip_special_tokens=True)
-            response = output.split("[/INST]" if EN else "ASSISTANT:", 1)[1].strip()
+            print(output)
+            response = output.split("<|end_header_id|>")[-1].strip()
 
             # Free GPU memory
             #del inputs
@@ -114,68 +79,6 @@ If a question does not make any sense, or is not factually coherent, explain why
             with open("instructOutput.txt", "a", encoding="utf-8") as f:
                 f.write(text + "\n" + response + "\n\n")
 
-def inference(modelName, adapter_path):
-    prompts = [
-        ("Which module provides version and copyright information?", 0),
-
-        ("How can I calculate the current time in another location?", 627),
-        ("How can I calculate the current time in another location while accounting for discrepancies due to time zones?", 627),
-        ("With which module can I calculate the current time in another location while accounting for discrepancies due to time zones?", 627),
-
-        ("Tell me how to test the conversion of a temperature into the different heat units.", 460),
-        ("Where do I record both flexitime and operating data (BDE)?", 626),
-        ("Where can I check offer/order data?", 608),
-        ("Help me with inspection of partner data.", 609),
-        ("Provide me with resources on inspection of purchasing data.", 610),
-
-        ("Parts lists describe the composition of a production part. A bill of material consists of parts, which in turn can have a bill of material.", 45),
-        ("Which module am I referencing? Parts lists describe the composition of a production part. A bill of material consists of parts, which in turn can have a bill of material.", 45),
-        
-        ("Welches Modul ist dafür verantwortlich, Informationen über Versionen und Urheberrecht anzuzeigen?", 0),
-        ("Anzeige und Auflistung der Versions- und Urheberrechtsinformationen.", 0),
-    ]
-
-    tokenizer = AutoTokenizer.from_pretrained(modelName)
-    # Fixing some of the early LLaMA HF conversion issues.
-    tokenizer.bos_token_id = 1
-
-    # Load the model (use bf16 for faster inference)
-    base_model = AutoModelForCausalLM.from_pretrained(
-        modelName,
-        torch_dtype=torch.bfloat16,
-        device_map={"": 0},
-        load_in_4bit=True,
-        quantization_config=BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_compute_dtype=torch.bfloat16,
-            bnb_4bit_use_double_quant=True,
-            bnb_4bit_quant_type='nf4',
-        )
-    )
-
-    model = PeftModel.from_pretrained(base_model, adapter_path)
-    model.eval()
-
-    for prompt, _ in prompts:
-        inputs = tokenizer(prompt, return_tensors="pt").to('cuda')
-
-        outputs = model.generate(
-            **inputs, 
-            generation_config=GenerationConfig(
-                do_sample=True,
-                max_new_tokens=4096,
-                top_p=1,
-                temperature=0.01,
-                repetition_penalty=1.2
-            )
-        )
-
-        text = tokenizer.decode(outputs[0], skip_special_tokens=True)
-        response = text.replace(prompt, "").strip()
-
-        print(prompt, response)
 
 if __name__ == '__main__':
     instruct()
-
-    # inference("distilbert-base-uncased-classification/checkpoint-30000")

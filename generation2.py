@@ -7,48 +7,23 @@ from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 
 # Inference
 from peft import PeftModel
-
-EN = True
-
 def instruct(promptsPerClass=10):
-    if EN:
-        instructModel = "meta-llama/Llama-2-13b-chat-hf"
+    instructModel = "meta-llama/Meta-Llama-3-8b-Instruct"
 
-        tokenizer = AutoTokenizer.from_pretrained(instructModel)
-        # Fixing some of the early LLaMA HF conversion issues.
-        tokenizer.bos_token_id = 1
+    tokenizer = AutoTokenizer.from_pretrained(instructModel)
 
-        # Load the model (use bf16 for faster inference)
-        model = AutoModelForCausalLM.from_pretrained(
-            instructModel,
-            torch_dtype=torch.bfloat16,
-            device_map={"": 0},
+    # Load the model (use bf16 for faster inference)
+    model = AutoModelForCausalLM.from_pretrained(
+        instructModel,
+        torch_dtype=torch.bfloat16,
+        device_map={"": 0},
+        quantization_config=BitsAndBytesConfig(
             load_in_4bit=True,
-            quantization_config=BitsAndBytesConfig(
-                load_in_4bit=True,
-                bnb_4bit_compute_dtype=torch.bfloat16,
-                bnb_4bit_use_double_quant=True,
-                bnb_4bit_quant_type='nf4',
-            )
+            bnb_4bit_compute_dtype=torch.bfloat16,
+            bnb_4bit_use_double_quant=True,
+            bnb_4bit_quant_type='nf4',
         )
-    else:
-        instructModel = "jphme/Llama-2-13b-chat-german"
-
-        tokenizer = AutoTokenizer.from_pretrained(instructModel)
-        tokenizer.pad_token_id=tokenizer.eos_token_id
-
-        # Load the model (use bf16 for faster inference)
-        model = AutoModelForCausalLM.from_pretrained(
-            instructModel,
-            device_map={"": 0},
-            load_in_4bit=True,
-            quantization_config=BitsAndBytesConfig(
-                load_in_4bit=True,
-                bnb_4bit_compute_dtype=torch.bfloat16,
-                bnb_4bit_use_double_quant=True,
-                bnb_4bit_quant_type='nf4',
-            )
-        )
+    )
 
     with open("instructOutput.txt", "r", encoding="utf-8") as f:
         text = f.read()
@@ -74,13 +49,8 @@ def instruct(promptsPerClass=10):
 Module description: {description}
 
 Query: {instruction}"""
-                llamaPrompt = f"""<s>[INST] <<SYS>>
-You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content. Please ensure that your responses are socially unbiased and positive in nature.
-
-If a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don't know the answer to a question, please don't share false information.
-<</SYS>>
-
-{prompt} [/INST]"""
+                # https://llama.meta.com/docs/model-cards-and-prompt-formats/meta-llama-3/
+                llamaPrompt = f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. If you don't know the answer to a question, please don't share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
 
                 inputs = tokenizer(llamaPrompt, return_tensors="pt").to('cuda')
 
@@ -96,7 +66,7 @@ If a question does not make any sense, or is not factually coherent, explain why
                 )
 
                 output = tokenizer.decode(outputs[0], skip_special_tokens=True)
-                response = output.split("[/INST]" if EN else "ASSISTANT:", 1)[1].strip()
+                response = output.split("<|end_header_id|>", 1)[1].strip()
 
                 # Free GPU memory
                 #del inputs
@@ -109,5 +79,3 @@ If a question does not make any sense, or is not factually coherent, explain why
 
 if __name__ == '__main__':
     instruct()
-
-    # inference("distilbert-base-uncased-classification/checkpoint-30000")

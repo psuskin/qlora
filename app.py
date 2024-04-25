@@ -47,7 +47,7 @@ class Model:
         response = self.pipe(text)
         reply, docs, saliency = response["result"], response["source_documents"], response["saliency"]
 
-        answer = reply.split("### Response:")[1].strip()
+        answer = reply.split("### Response:", 1)[1].strip()
         answer.replace("SAP", "classix")
 
         modules = []

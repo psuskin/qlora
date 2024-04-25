@@ -89,7 +89,7 @@ def run():
 
         response = qa(query)
         answer, docs = response["result"], response["source_documents"]
-        answer = answer.split("### Response:")[1].strip()
+        answer = answer.split("### Response:", 1)[1].strip()
         answer.replace("SAP", "classix")
 
         # Print the result
@@ -129,7 +129,7 @@ def infer():
     for query in queries:
         response = qa(query)
         answer, docs = response["result"], response["source_documents"]
-        answer = answer.split("### Response:")[1].strip()
+        answer = answer.split("### Response:", 1)[1].strip()
         answer.replace("SAP", "classix")
 
         # Print the result
