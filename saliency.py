@@ -33,17 +33,8 @@ def load_model(model_name_or_path='huggyllama/llama-7b', adapter_path=None):
 
     return model, tokenizer
 
-model, tokenizer = load_model('meta-llama/Llama-2-13b-hf', 'output/klio-alpaca-2-13b-r64-noeval/checkpoint-1875/adapter_model')
 
-forward = lambda input_embedding, model, input_attention_mask, target_id: model(input_ids=None,
-                                                                                inputs_embeds=input_embedding,
-                                                                                attention_mask=input_attention_mask).logits[
-                                                                          :, -1, :].squeeze(1).to(model.device).softmax(dim=-1).gather(
-    -1, target_id.reshape(-1, 1)).squeeze(-1)
-method = captum.attr.InputXGradient(forward_func=forward)
-
-
-def getOutput(text):
+def getOutput(model, tokenizer, text):
     inputs = tokenizer.encode(text, return_tensors="pt")
 
     outputs = model.generate(input_ids=inputs.to(model.device), max_new_tokens=2048, return_dict_in_generate=True)
@@ -53,7 +44,7 @@ def getOutput(text):
     return (target_ids, target_text), (inputs.shape[1], target_ids.shape[1])
 
 
-def getEmbeddings(target_ids, target_text):
+def getEmbeddings(model, tokenizer, target_ids, target_text):
     batch = tokenizer(
         text=target_text,
         text_target=target_text,
@@ -68,7 +59,7 @@ def getEmbeddings(target_ids, target_text):
     return attention_mask, input_embeddings
 
 
-def getAttributionOutputs(target_ids, attention_mask, input_embeddings, inputLength, targetLength):
+def getAttributionOutputs(model, tokenizer, method, target_ids, attention_mask, input_embeddings, inputLength, targetLength):
     attribution_outputs = []
     for step in range(inputLength, targetLength):
         target_id = target_ids[0, step].unsqueeze(0)
@@ -142,13 +133,30 @@ def consolidateAttributionOutputs(attribution_outputs, inputLength, targetLength
     return attributed
 
 
-if __name__ == "__main__":
-    (target_ids, target_text), (inputLength, targetLength) = getOutput('Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\nWhich attributes exist? Context: This is the description of the module "attribut" with the name "Attribute (module)": There are three attribute types in ClassiX®: Preset material characteristic Calculated material characteristic Conditional material characteristic You can find more information in the topic Features. This is the description of the functionality of the module "attribut" with the name "Attribute (module)" regarding Input window: This window is used to maintain the attributes. It varies for the three attribute types, but behaves almost the same. Note: Characteristics are clearly defined via the data field. Therefore, each data field should only be used once, otherwise unwanted results may occur when integrating the attributes within the quotation and order items. This is the description of the functionality of the module "attribut" with the name "Attribute (module)" regarding List window: Serves to list the attribute objects. This is the description of the functionality of the module "attribut" with the name "Attribute (module)" regarding Selection window: This window is used to select an attribute object.\n\n### Response:')
+def run(model, tokenizer, forward):
+    method = captum.attr.InputXGradient(forward_func=forward)
+
+    (target_ids, target_text), (inputLength, targetLength) = getOutput(model, tokenizer,
+        'Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\nWhich attributes exist?\n\nInput:\nThis is the description of the module "attribut" with the name "Attribute (module)": There are three attribute types in ClassiX®: Preset material characteristic Calculated material characteristic Conditional material characteristic You can find more information in the topic Features. This is the description of the functionality of the module "attribut" with the name "Attribute (module)" regarding Input window: This window is used to maintain the attributes. It varies for the three attribute types, but behaves almost the same. Note: Characteristics are clearly defined via the data field. Therefore, each data field should only be used once, otherwise unwanted results may occur when integrating the attributes within the quotation and order items. This is the description of the functionality of the module "attribut" with the name "Attribute (module)" regarding List window: Serves to list the attribute objects. This is the description of the functionality of the module "attribut" with the name "Attribute (module)" regarding Selection window: This window is used to select an attribute object.\n\n### Response:')
     subwords = tokenizer.convert_ids_to_tokens(target_ids[0].tolist())
-    attention_mask, input_embeddings = getEmbeddings(target_ids, target_text)
-    attribution_outputs = getAttributionOutputs(target_ids, attention_mask, input_embeddings, inputLength, targetLength)
+    attention_mask, input_embeddings = getEmbeddings(model, tokenizer, target_ids, target_text)
+    attribution_outputs = getAttributionOutputs(model, tokenizer, method, target_ids, attention_mask, input_embeddings, inputLength, targetLength)
     attributed = consolidateAttributionOutputs(attribution_outputs, inputLength, targetLength)
     # print(subwords, attributed)
+    return subwords, attributed
+
+
+if __name__ == "__main__":
+    model, tokenizer = load_model('meta-llama/Llama-2-13b-hf',
+                                  'output/klio-alpaca-2-13b-r64-noeval/checkpoint-1875/adapter_model')
+
+    forward = lambda input_embedding, model, input_attention_mask, target_id: model(input_ids=None,
+                                                                                    inputs_embeds=input_embedding,
+                                                                                    attention_mask=input_attention_mask).logits[
+                                                                              :, -1, :].squeeze(1).to(
+        model.device).softmax(dim=-1).gather(
+        -1, target_id.reshape(-1, 1)).squeeze(-1)
+    subwords, attributed = run(model, tokenizer, forward)
 
     tokens, arrays, probabilities = zip(*attributed)
 
