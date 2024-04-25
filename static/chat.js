@@ -69,6 +69,22 @@ function chatBot() {
                 modules: []
             }]
         },
+        loadChat: function() {
+            this.clearChat();
+
+            let self = this;
+            $.ajax({
+                type: 'GET',
+                url: '/load',
+                success: function(response) {
+                    self.messages = self.messages.concat(response);
+                    self.scrollChat();
+                },
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        },
         output: function(input) {
             this.messages.push({
                 from: 'user',
@@ -89,24 +105,27 @@ function chatBot() {
                 url: '/query/generation',
                 data: { text: input },
                 success: function(response) {
-                    let product = '';
+                    self.botTyping = false;
                     if ("error" in response) {
-                        product = response["error"];
+                        self.messages.push({
+                            from: 'bot',
+                            text: response["error"],
+                            show: false,
+                            more: false,
+                            saliency: "",
+                            modules: []
+                        });
                     }
                     else if ("output" in response) {
-                        product = response["output"];
+                        self.messages.push({
+                            from: 'bot',
+                            text: response["output"],
+                            show: false,
+                            more: true,
+                            saliency: response["saliency"],
+                            modules: response["modules"]
+                        });
                     }
-
-
-                    self.botTyping = false;
-                    self.messages.push({
-                        from: 'bot',
-                        text: product,
-                        show: false,
-                        more: true,
-                        saliency: response["saliency"],
-                        modules: response["modules"]
-                    });
                     self.scrollChat();
                 },
                 error: function(error) {
