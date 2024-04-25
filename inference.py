@@ -65,6 +65,7 @@ pipe = pipeline(
     # top_p=0.95,
     repetition_penalty=1.15,
     generation_config=generation_config,
+    # exponential_decay_length_penalty=(15, 1.01),
 )
 llm = HuggingFacePipeline(pipeline=pipe)
 
@@ -129,6 +130,10 @@ def infer():
     for query in queries:
         response = qa(query)
         answer, docs = response["result"], response["source_documents"]
+
+        from saliency import runOnOutput
+        subwords, attributed = runOnOutput(model, tokenizer, answer.split("### Response:")[0] + "### Response:", answer)
+
         answer = answer.split("### Response:", 1)[1].strip()
         answer.replace("SAP", "classix")
 

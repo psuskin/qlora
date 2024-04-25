@@ -133,7 +133,10 @@ def consolidateAttributionOutputs(attribution_outputs, inputLength, targetLength
     return attributed
 
 
-def run(model, tokenizer, forward):
+def run(model, tokenizer):
+    forward = lambda input_embedding, model, input_attention_mask, target_id: model(input_ids=None,
+        inputs_embeds=input_embedding,
+        attention_mask=input_attention_mask).logits[ :, -1, :].squeeze(1).to( model.device).softmax(dim=-1).gather(-1, target_id.reshape(-1, 1)).squeeze(-1)
     method = captum.attr.InputXGradient(forward_func=forward)
 
     (target_ids, target_text), (inputLength, targetLength) = getOutput(model, tokenizer,
@@ -146,17 +149,31 @@ def run(model, tokenizer, forward):
     return subwords, attributed
 
 
+def runOnOutput(model, tokenizer, input_text, target_text):
+    forward = lambda input_embedding, model, input_attention_mask, target_id: model(input_ids=None,
+        inputs_embeds=input_embedding,
+        attention_mask=input_attention_mask).logits[:, -1, :].squeeze(1).to(model.device).softmax(dim=-1).gather(-1, target_id.reshape(-1, 1)).squeeze(-1)
+    method = captum.attr.InputXGradient(forward_func=forward)
+
+    target_ids = tokenizer.encode(target_text, return_tensors="pt").to(model.device)
+    inputLength = tokenizer.encode(input_text, return_tensors="pt").shape[1]
+    targetLength = target_ids.shape[1]
+
+    subwords = tokenizer.convert_ids_to_tokens(target_ids[0].tolist())
+    attention_mask, input_embeddings = getEmbeddings(model, tokenizer, target_ids, target_text)
+    attribution_outputs = getAttributionOutputs(model, tokenizer, method, target_ids, attention_mask, input_embeddings, inputLength, targetLength)
+    attributed = consolidateAttributionOutputs(attribution_outputs, inputLength, targetLength)
+
+    return subwords, attributed
+
+
+
+
 if __name__ == "__main__":
     model, tokenizer = load_model('meta-llama/Llama-2-13b-hf',
                                   'output/klio-alpaca-2-13b-r64-noeval/checkpoint-1875/adapter_model')
 
-    forward = lambda input_embedding, model, input_attention_mask, target_id: model(input_ids=None,
-                                                                                    inputs_embeds=input_embedding,
-                                                                                    attention_mask=input_attention_mask).logits[
-                                                                              :, -1, :].squeeze(1).to(
-        model.device).softmax(dim=-1).gather(
-        -1, target_id.reshape(-1, 1)).squeeze(-1)
-    subwords, attributed = run(model, tokenizer, forward)
+    subwords, attributed = run(model, tokenizer)
 
     tokens, arrays, probabilities = zip(*attributed)
 
