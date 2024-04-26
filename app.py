@@ -50,7 +50,7 @@ class Model:
         response = self.pipe(text)
         reply, docs = response["result"], response["source_documents"]
 
-        answer = reply.split("### Response:", 1)[1].strip()
+        answer = reply.split("[/INST]", 1)[1].strip()
 
         # Hard-coded aspects
         answer = answer.replace("SAP", "classix")
@@ -100,10 +100,10 @@ class Model:
             saliencyHTML = generate_html(saliency["tokens"], saliency["arrays"], saliency["probabilities"])
         else:
             from saliency import runOnOutput
-            subwords, attributed = runOnOutput(chat.model, chat.tokenizer, reply.split("### Response:")[0] + "### Response:", reply)
+            subwords, attributed = runOnOutput(chat.model, chat.tokenizer, reply.split("[/INST]")[0] + "[/INST]", reply)
             saliencyHTML = generate_html(subwords, [t[1] for t in attributed], [t[2] for t in attributed])
 
-        with open("KAL/outputs.txt", "a", encoding="utf-8") as f:
+        with open("KAL/outputsBase.txt", "a", encoding="utf-8") as f:
             stringified = json.dumps({"query": text, "response": answer, "modules": modules, "saliency": saliencyHTML, "chunks": chunks, "full": reply}, ensure_ascii=False, indent=4)
             f.write(stringified + '\n')
 
@@ -113,7 +113,7 @@ class Model:
 def setup():
     device_type = "cuda" if torch.cuda.is_available() else "cpu"
     EMBEDDING_MODEL_NAME = "hkunlp/instructor-large"
-    model_id = 'meta-llama/Llama-2-13b-hf'
+    model_id = 'meta-llama/Llama-2-13b-chat-hf'
 
     def load_model(model_name_or_path, adapter_path=None):
         tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
@@ -152,7 +152,7 @@ def setup():
                 client_settings=Settings(anonymized_telemetry=False, is_persistent=True))
     retriever = db.as_retriever()
 
-    model, tokenizer = load_model(model_id, 'output/klio-alpaca-2-13b-r64-noeval/checkpoint-1875/adapter_model')
+    model, tokenizer = load_model(model_id)
     generation_config = GenerationConfig.from_pretrained(model_id)
     pipe = pipeline(
         "text-generation",
@@ -166,8 +166,18 @@ def setup():
     )
     llm = HuggingFacePipeline(pipeline=pipe)
 
-    template = "Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\n{question}\n\n###Input:\n{context}\n\n### Response:"
-    prompt = PromptTemplate(input_variables=["history", "context", "question"], template=template)
+    B_INST, E_INST = "[INST]", "[/INST]"
+    B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
+    system_prompt = """You are a helpful assistant, you will use the provided context to answer user questions.
+            Read the given context before answering questions and think step by step. If you can not answer a user question based on 
+            the provided context, inform the user. Do not use any other information for answering user. Provide a detailed answer to the question."""
+    SYSTEM_PROMPT = B_SYS + system_prompt + E_SYS
+    instruction = """
+            Context: {context}
+            User: {question}"""
+
+    prompt_template = B_INST + SYSTEM_PROMPT + instruction + E_INST
+    prompt = PromptTemplate(input_variables=["history", "context", "question"], template=prompt_template)
 
     qa = RetrievalQA.from_chain_type(
         llm=llm,
@@ -208,7 +218,7 @@ def query(intention):
 @app.route('/load', methods=['GET'])
 def loadChat():
     messages = []
-    with open("KAL/outputs.txt", "r", encoding="utf-8") as f:
+    with open("KAL/outputsBase.txt", "r", encoding="utf-8") as f:
         data = f.read()
         data = re.sub(r'^\}\s*$', '},', data, flags=re.MULTILINE)
         data = json.loads('[' + data[:-1] + ']')
