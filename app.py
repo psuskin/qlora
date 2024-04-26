@@ -52,7 +52,8 @@ class Model:
 
         answer = reply.split("### Response:", 1)[1].strip()
 
-        answer.replace("SAP", "classix")
+        # Hard-coded aspects
+        answer = answer.replace("SAP", "classix")
         if not docs:
             answer = "I'm sorry, due to a lack of context able to be acquired regarding your query, I must assume that your query is not sufficiently associated with the AppsWarehouse documentation. Should I be mistaken in this assumption, I would suggest that you reword or rephrase your query or provide additional specifying information, so that I can respond accurately."
 
