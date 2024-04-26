@@ -36,7 +36,7 @@ def cut(string):
     return string
 
 def cleanSequence(sequence):
-    re.sub(r'\{img[^}]*\}', '', sequence)
+    sequence = re.sub(r'\{img[^}]*\}', '', sequence)
     return _RE_COMBINE_PERIOD.sub(".", _RE_COMBINE_WHITESPACE.sub(" ", sequence)).replace("?.", "?").strip()
 
 def joinBlock(name, description):

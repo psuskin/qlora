@@ -1,1 +1,1 @@
-This is the description of the module "monitor" with the name "ClassiX-Shell": By clicking the right mouse button while holding down the Alt key, the ClassiX shell is opened:{img type="fileId" fileId="238" thumb="box" width="100%"} For further information, please refer to the InstantView® documentation.
+This is the description of the module "monitor" with the name "ClassiX-Shell": By clicking the right mouse button while holding down the Alt key, the ClassiX shell is opened: For further information, please refer to the InstantView® documentation.
