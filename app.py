@@ -169,12 +169,12 @@ def setup():
     B_INST, E_INST = "[INST]", "[/INST]"
     B_SYS, E_SYS = "<<SYS>>\n", "\n<</SYS>>\n\n"
     system_prompt = """You are a helpful assistant, you will use the provided context to answer user questions.
-            Read the given context before answering questions and think step by step. If you can not answer a user question based on 
-            the provided context, inform the user. Do not use any other information for answering user. Provide a detailed answer to the question."""
+Read the given context before answering questions and think step by step. If you can not answer a user question based on 
+the provided context, inform the user. Do not use any other information for answering user. Provide a detailed answer to the question."""
     SYSTEM_PROMPT = B_SYS + system_prompt + E_SYS
     instruction = """
-            Context: {context}
-            User: {question}"""
+Context: {context}
+User: {question}"""
 
     prompt_template = B_INST + SYSTEM_PROMPT + instruction + E_INST
     prompt = PromptTemplate(input_variables=["history", "context", "question"], template=prompt_template)
