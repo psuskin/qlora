@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_ACCESS_WAY" regarding Description: This class describes the paths between objects of type CX_ACCESS_NODE. Each connection or path object between 2 nodes is described by its direction and weight. * MA = member access function, greyed out = inherited function * I = Indexable data field, greyed out = inherited data field.

@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_WAVE - Wave" regarding Description: This class is used to manage audio files in various file formats (.wav .mp3 .au).

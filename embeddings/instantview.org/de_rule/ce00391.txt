@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_VALUE - Einheiten-Genauigkeit": Die Funktionen, die in diesem Bereich zusammengefasst sind, liefern für eine Einheit ihre standardmäßige definierte Anzahl an Nachkommastellen: Funktionsname Beschreibung UnitPrecision nationale Genauigkeit der Einheit RateTablePrecision internationale Genauigkeit der Einheit.

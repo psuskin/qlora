@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "utilofor" mit dem Namen "Inspektion - Angebote und Aufträge": Dieses Modul prüft diverse Angebots-/Auftragsdaten.

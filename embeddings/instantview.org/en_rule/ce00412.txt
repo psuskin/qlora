@@ -1,0 +1,1 @@
+This is the description of the class "CX_FRACTION - Comparisons": No comparisons with other objects are implemented for this class.

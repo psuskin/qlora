@@ -1,0 +1,1 @@
+This is the description of the module "processes_wfwepos" with the name "Workflow goods receipt and direct delivery items": .

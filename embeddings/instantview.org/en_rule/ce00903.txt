@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_ACCOUNT_DOMAIN" regarding Description: Here follows a description of the class.

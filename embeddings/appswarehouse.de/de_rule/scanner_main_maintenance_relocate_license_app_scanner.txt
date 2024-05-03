@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "scanner_main_maintenance_relocate_license_app_scanner" mit dem Namen "Scanner Alle Einzelteile oder Lizenz umlagern": Funktion um ganze Lagerhilfsmittel umzulagern. Die darin liegende Ware wird dadurch implizit mitumgelagert.

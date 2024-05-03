@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "purcappr" mit dem Namen "Eingangsrechnung freigeben": Die Eingangsrechnung für Bestellpositionen, die ohne Wareneingangsbeleg ins Unternehmen gelangt sind, können freigeben werden. Dazu müssen Sie die Bestellpositionen auswählen (es werden nur die angezeigt, die noch nicht geliefert oder freigegeben wurden) und den Knopf "OK" betätigen.

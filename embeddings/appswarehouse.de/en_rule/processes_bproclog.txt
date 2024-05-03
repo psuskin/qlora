@@ -1,0 +1,1 @@
+This is the description of the module "processes_bproclog" with the name "Business processes - Logistics": Own supplies Customer Supplies Shipping Provision Returns and complaints The logistical process in a company is a complicated process network, which will be examined here a little bit. VDMA Scenariowww.vdma.org.

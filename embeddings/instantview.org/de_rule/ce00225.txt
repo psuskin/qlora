@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_PERIODIC_DATE - Häufigkeit und Position": Die Zugriffsfunktionen, die in diesem Bereich zusammengefasst sind, verwalten die Häufigkeit und die Position eines periodischen Datums. Zugriffsfunktion Beschreibung Frequency Setzen der Häufigkeit Position Setzen einer bestimmten Position.

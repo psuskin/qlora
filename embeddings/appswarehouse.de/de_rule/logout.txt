@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "logout" mit dem Namen "Logout": Diese App wird aufgerufen, wenn ein Benutzer den Knopf oder den Menüeintrag zum Abmelden drückt bzw. auswählt. Mit dieser App kann der Benutzer das Abmelden bestätigen oder bestimmte Einstellungen auswählen.

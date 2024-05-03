@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "scanner_select_workzone_app_scanner" mit dem Namen "Scanner Arbeitszone wählen": Festlegen der Arbeitszone. Dies ist die Beschreibung der Funktionalität des Moduls "scanner_select_workzone_app_scanner" mit dem Namen "Scanner Arbeitszone wählen" bezüglich Selektionsfenster: Auswahl der Arbeitszone.

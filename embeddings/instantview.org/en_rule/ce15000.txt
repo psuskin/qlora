@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_BANK" regarding Description: This class represents a bank. This is the description of the functionality of the class "CX_BANK" regarding Code example: * MA = Member Access function, grey background = inherited function * I = Indexable data field, grey background = inherited data field.

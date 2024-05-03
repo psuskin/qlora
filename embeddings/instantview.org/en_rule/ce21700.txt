@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_AMOUNT - Abstract base class for numbers" regarding Description: Abstract base class for arithmetic objects.

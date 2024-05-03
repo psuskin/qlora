@@ -1,0 +1,1 @@
+This is the description of the class "CX_NUMERIC - Information": The functions summarised in this section provide information on a real number. Function name Description IsNegatives Test negative sign InWords Convert number into number words IsZero Test number to zero.

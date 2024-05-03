@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Bedingungen": Bedingungen sind in der Klasse CX_CONDITION mit einer REL_MN-Relation zu Geschäftsobjekten definiert. Sie werden unterteilt in: Bedingung Beschreibung Zahlungsbedingungen Kreditvereinbarungen.

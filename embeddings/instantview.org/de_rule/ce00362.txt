@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_PERCENT_PER - Bereichs-Prozentzahl" bezüglich Beschreibung: Achtung: Diese Klasse wird aufgrund der unklaren semantischen Bedeutung und dem praktischen Nutzen ab Dll-Version (209838) vom ClassiX-System nicht mehr unterstützt.

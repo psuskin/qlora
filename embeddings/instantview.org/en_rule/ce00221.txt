@@ -1,0 +1,1 @@
+This is the description of the class "CX_PERIODIC_DATE - Public holidays": The access functions grouped together in this section manage the way in which public holidays are to be taken into account in the periodic date. Access function Description OrHolidays "or holiday" AndHolidays "and holidays" OrNoHolidays "or not a holiday" AndNoHolidays "and not a holiday".

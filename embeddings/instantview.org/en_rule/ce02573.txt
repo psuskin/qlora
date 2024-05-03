@@ -1,0 +1,1 @@
+This is the description of the class "CX_SPAN_DATE - Incomplete date": Period length not positive semi-restricted and unrestricted periods Daily categories Functions restricted to a specific interpretation.

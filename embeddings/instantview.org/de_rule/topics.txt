@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Topics - CyberEnterprise": Cross-Referenz Entladen und Laden Gültigkeiten Listen und Berichte Query und Index Security System (Zugriffsrechte) Start des ClassiX®-Systems Wrapped Objects Zugriffausdruck Zugriffsfunktion.

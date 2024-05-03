@@ -1,0 +1,1 @@
+This is the description of the class "CX_PERCENT - Operators": The operators available for a percentage are divided into the following areas: Area Description Arithmetic The operators +, - and * Compare The operators >, < and =.

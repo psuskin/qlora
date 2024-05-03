@@ -1,0 +1,1 @@
+This is the description of the class "Functions for setting a new locale": To set a new locale, the following two functions are available: SetLocaleByName SetLocaleByObject.

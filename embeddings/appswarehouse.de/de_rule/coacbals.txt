@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "coacbals" mit dem Namen "Kostenkontenlisten" bezüglich Listenfenster: Dieses Fenster dient der Auflistung .

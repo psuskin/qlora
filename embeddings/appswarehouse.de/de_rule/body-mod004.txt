@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "body-mod004" mit dem Namen "Provider": {iframe width="100%" height="700px" frameborder="0" scrolling="auto" src="https://appswarehouse.de/docu/index.html#/de/providers"}.

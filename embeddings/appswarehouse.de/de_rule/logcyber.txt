@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "logcyber" mit dem Namen "System Anmeldung unter Auswahl eines Mandanten": Innerhalb dieser Verarbeitungsstufe bestimmen Sie den Mandanten, mit dem Sie arbeiten wollen.

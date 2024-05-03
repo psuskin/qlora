@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "logindex" mit dem Namen "Login Modul-Übersicht": System Anmeldung ohne Auswahl eines Mandanten oder eines Benutzers System Anmeldung mit Angabe eines Benutzers System Anmeldung mit Auswahl eines Mandanten System Anmeldung mit Auswahl eines Mandanten und eines Benutzers.

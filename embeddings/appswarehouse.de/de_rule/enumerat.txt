@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "enumerat" mit dem Namen "Aufzählung": Implementation Qualitätssicherung Aufzählung Providermodul Aufzählung Editier-App Aufzählung Listen-App Aufzählung Selektions-App.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "windows" mit dem Namen "Liste offener Fenster": Liste der offenen Fenster anzeigen. Dies ist die Beschreibung der Funktionalität des Moduls "windows" mit dem Namen "Liste offener Fenster" bezüglich Funktionalität: Mit Doppelklick kann ein Fenster aktiviert werden.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "processes_logistics" mit dem Namen "Logistik": Bedarfs-/Bestandsliste Wareneingang Direktlieferung Wareneingangsprüfung Qualitätssicherung Retourbelege Seriennummern Bereitstellung.

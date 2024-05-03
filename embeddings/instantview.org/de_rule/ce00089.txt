@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_DATE - Text": Die Funktionen, die Textausgaben zu einem Datum liefern, teilen sich in die folgenden Bereiche auf: Bereich Beschreibung Einsprachig Ausgaben in der aktuell eingestellten Sprache Mehrsprachig Ausgaben als mehrsprachiger Text.

@@ -1,0 +1,1 @@
+This is the description of the class "CX_SPAN_TIME - Time comparisons": The functions grouped together in this section compare two time entries with each other. Function name Description Encompassed "Contained in" test Overlap Overlap test.

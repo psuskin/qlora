@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_GLOBAL_DATETIME - Zugriffsfunktionen": Für einen globalen Zeitpunkt stehen die folgenden Zugriffsfunktionen zur Verfügung: Zugriffsfunktion Beschreibung TimeZone Ein-/Ausgabesteuerung der Zeitzone EndTimeZone Ein-/Ausgabesteuerung der Ziel-Zeitzone.

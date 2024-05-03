@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "organizationChart" mit dem Namen "Organigramm für Kostenstellenplan": Dieses Netz stellt die gesamte Organisationshierarchie (oder nur Teile davon), wahlweise mit allen Mitarbeitern, anhand des Kostenstellenplans als Diagramm dar.

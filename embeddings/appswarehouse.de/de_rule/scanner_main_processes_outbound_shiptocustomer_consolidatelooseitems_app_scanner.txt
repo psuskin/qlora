@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "scanner_main_processes_outbound_shiptocustomer_consolidatelooseitems_app_scanner" mit dem Namen "Scanner Einzelteile konsolidieren": Sollen einzelne Teile von einem Lagerhilfsmittel auf ein anderes gelegt werden, dann kommt diese Funktion zur Anwendung.

@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_SYSTEM_MANAGER - Abstract base class for managers" regarding Description: This class is the base class for all managers in the system. CX_SYSTEM_MANAGER itself cannot be used directly, only its derivatives. See also InstantView® command GetManager.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CXI_OBJECT - InstantView®-Objekt" bezüglich Beschreibung: Diese Klasse stellt ein InstantView-Objekt dar. Sie kann nicht selbst benutzt werden und besitzt weder Funktionen noch Datenfelder.

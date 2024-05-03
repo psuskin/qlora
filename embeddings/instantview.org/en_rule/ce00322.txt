@@ -1,0 +1,1 @@
+This is the description of the class "CX_GLOBAL_DATETIME - Comparisons": For the class CX_GLOBAL_DATETIME the implementations of the comparison operators are still missing.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "qm_helpinfo_qm" mit dem Namen "F1-Hilfe": Beschreibung Funktionalität Verwandte Themen Technische Dokumentation.

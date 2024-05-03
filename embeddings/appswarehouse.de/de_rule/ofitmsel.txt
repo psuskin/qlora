@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "ofitmsel" mit dem Namen "Angebotsposition selektieren" bezüglich Funktionalität: Dieses Fenster dient der Selektion einer Angebotsposition.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "scanner_dialog_yesnodialog_app_scanner" mit dem Namen "Scanner Dialogauswahl" bezüglich Entscheiden Sie bitte: .

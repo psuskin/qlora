@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Sachen": Es stehen folgende Klassen zur Verfügung: Sache Objekttypname Sache CX_ITEM Muster : CX_ITEM_PATTERN.

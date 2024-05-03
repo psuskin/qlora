@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "scanner_main_processes_inbound_receivefromwarehouseitr_app_scanner" mit dem Namen "Scanner Umlagerungsanforderung (von anderem Lager)" bezüglich Funktionalität: .

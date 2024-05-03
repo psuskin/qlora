@@ -1,0 +1,1 @@
+This is the description of the module "statistx" with the name "Statistics": Basic module of statistics.

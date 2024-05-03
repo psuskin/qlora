@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "advancedSearch" mit dem Namen "Erweiterte Suche": Die erweiterte Suche ermöglicht über das Wörterbuch und die Felder der Liste zu suchen. Dabei können Sie die suche frei definieren.

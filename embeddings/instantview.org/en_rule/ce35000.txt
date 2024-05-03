@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_FOREIGN_OBJECT_MANAGER" regarding Description: CX_FOREIGN_OBJECT_MANAGER is an auxiliary class . This is the description of the functionality of the class "CX_FOREIGN_OBJECT_MANAGER" regarding Code example: * MA = Member Access function, grey background = inherited function.

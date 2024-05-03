@@ -1,0 +1,1 @@
+This is the description of the class "CX_GLOBAL_DATETIME - Access functions": The following access functions are available for a global time: Access function Description TimeZone Input/output control of the time zone EndTimeZone Input/output control of the destination time zone.

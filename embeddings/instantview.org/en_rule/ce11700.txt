@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_ACCESS_NODE" regarding Description: * MA = member access function, greyed out = inherited function * I = Indexable data field, greyed out = inherited data field.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "statinpl" mit dem Namen "Fakturierungsplan" bezüglich Listenfenster: Dieses Fenster dient der Auflistung .

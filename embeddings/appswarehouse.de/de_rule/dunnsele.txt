@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "dunnsele" mit dem Namen "Mahnungen vorschlagen": Dieses Modul dient der Auswahl zum automatisierten Vorschlag (debitorischer) Mahnungen. Nach Eingabe der Selektionskriterien und Drücken des Knopfes "Listen" wird eine Mahnungsvorschlagsliste erstellt, aus der heraus gemahnt werden kann.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "inventoryCurrentList" mit dem Namen "Inventuren" bezüglich Listenfenster: Dieses Fenster dient der Auflistung .

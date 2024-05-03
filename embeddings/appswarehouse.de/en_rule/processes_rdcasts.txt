@@ -1,0 +1,1 @@
+This is the description of the module "processes_rdcasts" with the name "Master information - Role concept": With companies, persons and parts as core business objects, additional data such as customer, supplier, sales item or order data is assigned to these objects in the form of "roles". Rolls.

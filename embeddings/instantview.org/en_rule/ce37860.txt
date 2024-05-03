@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_RESOURCE_SET*" regarding Description: This class is used to allocate resources (e.g. parts, people) for planning purposes (milestones). For information on the method directory (MDI) and data directory (DDI), please refer to the class documentation.

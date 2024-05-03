@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_SECURITY - Abstract base class for access rights" regarding Description: Base class for all security policies. The CX_SECURITY object currently active in the system can be queried via CX_SYSTEM_OBJECT։։GetRegisteredSecurity.

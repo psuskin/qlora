@@ -1,0 +1,1 @@
+This is the description of the class "CX_VALUE - Calculations": The functions summarised in this section calculate a new number from the value. Function name Description Reciprocal Calculation of reciprocal values.

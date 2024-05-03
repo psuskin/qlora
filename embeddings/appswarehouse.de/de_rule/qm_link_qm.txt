@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "qm_link_qm" mit dem Namen "Link und Unlink": Link und Unlink ersetzen die Funktion SetReference. In diesem Modul werden die beiden Funktionen getestet.

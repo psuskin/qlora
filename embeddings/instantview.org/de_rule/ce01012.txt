@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_WAVE - Wave" bezüglich Beschreibung: Mit dieser Klasse werden die Audio-Dateien im verschiedenen Dateiformaten (.wav .mp3 .au) verwaltet.

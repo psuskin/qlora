@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_DATETIME - Funktionen": Die folgenden Funktionen können für einen Zeitpunkt aufgerufen werden: Funktionsname Beschreibung StartOfTerm Start des Zeitpunktes EndOfTerm Ende des Zeitpunktes Comprise Überprüfen, ob ein bestimmtes Datum im Zeitpunkt enthalten ist.

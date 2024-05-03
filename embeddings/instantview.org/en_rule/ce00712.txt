@@ -1,0 +1,1 @@
+This is the description of the class "Structures": The following structure objects are available for organising business objects: Structure Object type name Structures CX_STRUCTURE.

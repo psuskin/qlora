@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_SYSTEM_MANAGER - Abstrakte Basisklasse für Manager" bezüglich Beschreibung: Diese Klasse stellt die Basisklasse für alle Manager im System dar. CX_SYSTEM_MANAGER selbst kann nicht direkt benutzt werden, nur dessen Ableitungen. Siehe auch InstantView®-Befehl GetManager.

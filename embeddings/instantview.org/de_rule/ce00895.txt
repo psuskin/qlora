@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Signal": Unter einem Signal ist ein Mechanismus zu verstehen, der das Senden einer Message, die von einem beliebigen Windowobjekt abgefangen werden kann, und/oder den direkten Aufruf einer Funktion für ein bestimmtes Objekt auslöst.

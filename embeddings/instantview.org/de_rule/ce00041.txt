@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "STRING - Operatoren": Die Operatoren, die für einen Text vorhanden sind, teilen sich in die folgenden Bereiche auf: Bereich Beschreibung Arithmetik Der Operator + Vergleiche Die Operatoren >, < und =.

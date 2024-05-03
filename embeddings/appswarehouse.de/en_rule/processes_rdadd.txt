@@ -1,0 +1,1 @@
+This is the description of the module "processes_rdadd" with the name "Additional information": For the sake of clarity, all master data can be classified as often as required below self-defined classification terms. Extensive functionality can be found with regard to the pricing of sales and order items. Classification sales pricing.

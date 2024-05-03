@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_ALLOCATION_TXN - Resolved allocation" regarding Code example: * MA = Member Access function, grey background = inherited function * I = Indexable data field, grey background = inherited data field.

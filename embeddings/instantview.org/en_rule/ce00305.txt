@@ -1,0 +1,1 @@
+This is the description of the class "CX_PERIODIC_SPAN_TIME - Modification": The functions that change a time value are divided into the following areas: Area Description Detailed information Changing certain parts of a time specification addition/subtraction Adding/subtracting values to/from a time start/end Changing the limits.

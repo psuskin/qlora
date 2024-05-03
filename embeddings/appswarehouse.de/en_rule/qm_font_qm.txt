@@ -1,0 +1,1 @@
+This is the description of the module "qm_font_qm" with the name "Character sets": This demonstrates the representation of various character sets using the alphabet and the numbers 0-9.

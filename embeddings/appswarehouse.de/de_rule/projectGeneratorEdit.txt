@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "projectGeneratorEdit" mit dem Namen "Projekt-App Generator": Mit dieser App kann eine neue Projekt-App generiert werden. Das Besondere einer Projekt-App ist, das diese eigenständig gestartet werden kann, wohingegen andere Apps als Teil-Anwendung eines Projekts (einer sog. App-Suite) gesehen werden.

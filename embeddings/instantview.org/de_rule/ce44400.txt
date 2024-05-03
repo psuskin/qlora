@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_COMPONENT_SET*" bezüglich Beschreibung: Mit dieser Klasse werden (Fremd-) Komponenten in Industrieanlagen abgebildet. Informationen zum Methodenverzeichnis (MDI) und Datenverzeichnis (DDI) entnehmen Sie bitte der Klassendokumentation.

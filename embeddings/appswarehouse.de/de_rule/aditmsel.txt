@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "aditmsel" mit dem Namen "Vorabbedarfsposition selektieren" bezüglich Selektionsfenster: Dieses Fenster dient der Selektion einer Vorabbedarfsposition.

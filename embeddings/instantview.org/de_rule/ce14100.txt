@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_LOAN_ACCOUNT" bezüglich Beschreibung: Diese Klasse bildet ein Darlehenskonto ab. Dies ist die Beschreibung der Funktionalität der Klasse "CX_LOAN_ACCOUNT" bezüglich Code-Beispiel: * MA = Member-Access-Funktion, grau unterlegt = geerbte Funktion * I = Indizierbares Datenfeld, grau unterlegt = geerbtes Datenfeld.

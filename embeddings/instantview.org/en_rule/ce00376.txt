@@ -1,0 +1,1 @@
+This is the description of the class "CX_VALUE - Number (information)": The functions summarised in this section provide information on the number of a value. Function name Description IsNegatives Test negative sign InWords Convert number into number words IsZero Test number to zero.

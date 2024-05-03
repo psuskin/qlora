@@ -1,0 +1,1 @@
+This is the description of the class "Employee types": The following types of employees exist: Type Object type name Employees CX_EMPLOYEE Flexitime employees CX_FLEXTIMER Salaried employees CX_SALARY_MAN Seller CX_REPRESENTATIVE.

@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_XML_NODE" regarding Description: Auxiliary object for CX_XML_PROCESSOR. Provides the information of an XML node for processing. The values of all subnodes are also accessible with qualified names. See CX_XML_PROCESSOR::SetMessageRule and CX_XML_PROCESSOR::SetProcessingRule.

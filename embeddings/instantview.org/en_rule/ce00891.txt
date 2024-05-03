@@ -1,0 +1,1 @@
+This is the description of the class "REL_11 Relation": In a REL_11 relation an (original) object can only refer to another (counter) object once. The counter-object can also only refer back to the original object. As further relations there are: REL_1N REL_N1 REL_MN.

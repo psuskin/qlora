@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "scanner_dialog_error_app_scanner" mit dem Namen "Scanner Fehler" bezüglich Fehler: .

@@ -1,0 +1,1 @@
+This is the description of the functionality of the module "messaint" with the name "Relationships between messages" regarding Functionality: This window is used to display relations between technical requests and technical tasks.

@@ -1,0 +1,1 @@
+This is the description of the class "Truth value (Boolean)": A truth value is a value that can be either "Yes" (= TRUE) or "No" (= FALSE). Thus it can indicate, for example, whether a certain condition is fulfilled or not. The following values are used for these two conditions: Status Value TRUE 1 FALSE 0 These states are represented by the InstantView constants TRUE or FALSE.

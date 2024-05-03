@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_PAPER_FORMAT - Papierformat" bezüglich Beschreibung: Dies Klasse bildet das Papierformat im System ab. Die Instanzen dieser Klasse können mit Hilfe der CreatePersObject-Methode persistent gemacht werden. * I = Indizierbares Datenfeld, grau unterlegt = geerbtes Datenfeld.

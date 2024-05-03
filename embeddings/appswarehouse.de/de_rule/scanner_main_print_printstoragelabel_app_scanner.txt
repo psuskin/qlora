@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "scanner_main_print_printstoragelabel_app_scanner" mit dem Namen "Scanner Lagerplatzetikette drucken": Ausdruck der Etiketten für einen Lagerplatz.

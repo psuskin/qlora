@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_DEVELOPMENT_ITEM*" bezüglich Beschreibung: Mit dieser Teilerolle werden eigene, selbst erstellte Produkte aus Sicht der Entwicklungsteams im Rahmen des PLM (product lifecycle managements) gepflegt. Informationen zum Methodenverzeichnis (MDI) und Datenverzeichnis (DDI) entnehmen Sie bitte der Klassendokumentation.

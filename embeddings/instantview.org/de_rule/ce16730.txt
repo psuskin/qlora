@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_INTERNAL_COST_OBJECTIVE*" bezüglich Beschreibung: (Business Pattern): Spezialisierung der Klasse CX_COST_OBJECTIVE als Kostenträger für interne Projekte, z.B. im Rahmen des Aufwands für F&E.

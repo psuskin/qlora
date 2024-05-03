@@ -1,0 +1,1 @@
+This is the description of the class "Conditions": Conditions are defined in the class CX_CONDITION with a REL_MN relation to business objects. They are divided into: Condition Description Terms of payment Credit agreements.

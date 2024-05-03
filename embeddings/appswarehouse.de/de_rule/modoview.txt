@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "modoview" mit dem Namen "Übersicht der Apps und Module": nach Funktionalität nach alphabetischer Sortierung Provider.

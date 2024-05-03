@@ -1,0 +1,1 @@
+This is the description of the class "CX_PERIODIC_DATE - Date calculations": The functions summarised in this section calculate a new date object from a periodic date. Function name Description GenerateDays Tag generation NextDate create next date.

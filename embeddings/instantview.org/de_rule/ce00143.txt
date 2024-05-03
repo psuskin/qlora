@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_SPAN_DATE - Operatoren": Die Operatoren, die für eine Datumsperiode vorhanden sind, teilen sich in die folgenden Bereiche auf: Bereich Beschreibung Arithmetik Die Operatoren + und - Vergleiche Die Operatoren >, < und =.

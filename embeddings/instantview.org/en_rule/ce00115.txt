@@ -1,0 +1,1 @@
+This is the description of the class "CX_DATE - Date calculations": The functions that calculate a new date from a date are divided into the following sections: Area Description start/end Start or end of the date Current date Calculating a date of the day periods Return of a period to which the date belongs.

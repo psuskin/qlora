@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "Bedingte Objekttabelle ohne Spaltenaufteilung" bezüglich Code-Beispiel: Der folgende Programmcode zeigt die Definition eines Windows, in dem eine bedingte Objekttabelle ohne Spaltenaufteilung in einer Objectbox angezeigt wird. Dabei wird angenommen, dass die bedingte Objekttabelle Table die gezeigten Daten enthält.

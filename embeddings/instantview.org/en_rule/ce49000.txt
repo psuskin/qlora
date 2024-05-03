@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_OPERATING_RESOURCE*" regarding Description: (BusinessPatterns): This class is used for modelling of operating equipment (tools, test equipment, storage aids). For information on the methods directory (MDI) and data directory (DDI), please refer to the class documentation.

@@ -1,0 +1,1 @@
+This is the description of the class "CX_VALUE_PER - Comparisons": For an object of this class, the comparison operators behave like those of a value. This means that only the "counter" is included in a comparison, so that, for example, the comparison "5 DM/1 piece" = "5 DM" would yield "TRUE".

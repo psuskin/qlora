@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "storageItemRegistry" mit dem Namen "Lagerhilfsmittel registrieren": Einfaches erfassen von Lagerhilfsmittel mit enem Barcodescanner.

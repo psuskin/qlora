@@ -1,0 +1,1 @@
+This is the description of the class "CX_GLOBAL_DATETIME - Information": The functions summarised in this section provide information about a specific global time. Function name Description Comprise Test whether the date of the time includes another date GetTimeZone Returning the time zone GetEndTimeZone Returning the destination time zone.

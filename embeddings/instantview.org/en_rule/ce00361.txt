@@ -1,0 +1,1 @@
+This is the description of the class "CX_PERCENT - Modification": The functions grouped together in this area change a percentage. Function name Description ChangeSign Reverse sign Round Rounding the number SetPrecision Set number of decimal places Truncate Truncation of decimal places Zero Set number to zero.

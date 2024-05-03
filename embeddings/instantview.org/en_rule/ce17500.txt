@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_CUSTOMER - Customer" regarding Description: This class represents a customer. This is the description of the functionality of the class "CX_CUSTOMER - Customer" regarding Code example: * MA = Member Access function, grey background = inherited function * I = Indexable data field, grey background = inherited data field.

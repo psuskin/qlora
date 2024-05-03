@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_SALES_COST_OBJECTIVE*" regarding Description: (Business Pattern): Specialisation of the class CX_COST_OBJECTIVE as a cost object for customer projects. Every quotation and every order is always assigned to a sales cost object.

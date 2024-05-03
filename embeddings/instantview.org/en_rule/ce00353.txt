@@ -1,0 +1,1 @@
+This is the description of the class "CX_NUMERIC - Access functions": The following access functions are available for a real number: Function name Description Precision Changing the accuracy.

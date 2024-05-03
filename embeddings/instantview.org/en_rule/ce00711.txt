@@ -1,0 +1,1 @@
+This is the description of the class "Controlling objects": Controlling objects manage other objects. Area Description Structures Organization of business objects Monitors.

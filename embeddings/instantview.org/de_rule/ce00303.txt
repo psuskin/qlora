@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_PERIODIC_SPAN_TIME - Sonstiges": Die Funktionen, die in diesem Bereich zusammengefasst sind, sind nicht einem der vorhergehenden Bereiche zuordenbar. Funktionsname Beschreibung ValueOfTime Startzeit in hundertstel Sekunden ValueInSeconds Startzeit in Sekunden ValueInMinutes Startzeit in Minuten.

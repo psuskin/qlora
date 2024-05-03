@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_VALUE_PER - Vergleiche": Die Vergleichsoperatoren verhalten sich bei einem Objekt dieser Klasse wie die eines Wertes. D.h., dass nur der "Zähler" in einen Vergleich mit einbezogen wird, so dass z.B. der Vergleich "5 DM/1 Stück" = "5 DM" "TRUE" liefern würde.

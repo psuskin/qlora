@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_GLOBAL_DATETIME - Information": Die Funktionen, die in diesem Bereich zusammengefasst sind, liefern Informationen über einen bestimmten globalen Zeitpunkt. Funktionsname Beschreibung Comprise Test, ob das Datum des Zeitpunktes ein anderes Datum beinhaltet GetTimeZone Rückgabe der Zeitzone GetEndTimeZone Rückgabe der Ziel-Zeitzone.

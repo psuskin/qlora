@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "scanner_main_print_printdocument_printinvoice_app_scanner" mit dem Namen "Scanner Rechnung drucken" bezüglich Rechnung: .

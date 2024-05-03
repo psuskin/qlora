@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_MASTER_TOOL*" regarding Description: (Business Pattern): This class represents the subrole test equipment or test tool. For information on the method directory (MDI) and data directory (DDI), please refer to the class documentation.

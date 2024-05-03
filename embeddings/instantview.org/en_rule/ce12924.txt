@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_DOCUMENT_INDEX_PATTERN*" regarding Code example: For information on the method directory (MDI) and data directory (DDI), please refer to the class documentation.

@@ -1,0 +1,1 @@
+This is the description of the class "CX_TIMED_TRIGGER - Start and stop": The functions summarised in this area are used to start or stop the activity of a signal object. Function name Description Activate Activating the trigger Deactivate Deactivating the trigger.

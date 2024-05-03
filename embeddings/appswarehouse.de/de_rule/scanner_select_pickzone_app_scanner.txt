@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "scanner_select_pickzone_app_scanner" mit dem Namen "Scanner Pickzone wählen": Festlegen der Pickzone. Dies ist die Beschreibung der Funktionalität des Moduls "scanner_select_pickzone_app_scanner" mit dem Namen "Scanner Pickzone wählen" bezüglich Selektionsfenster: Auswahl der Pickzone.

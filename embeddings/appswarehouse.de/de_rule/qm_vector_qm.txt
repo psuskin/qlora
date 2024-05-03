@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "qm_vector_qm" mit dem Namen "Operationen mit Vektoren": Bei diesem Test werden alle Funktionen, die Vektoren betreffen, auf korrekte Funktion hin überprüft. Mit den Buttons lassen sich die Funktionen ‚Revert', ‚Join', ‚Delete', ‚Insert' und ‚GetVector' überprüfen. Das Resultat der jeweiligen Funktion wird unten im Fenster angezeigt.

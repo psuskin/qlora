@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "processes_libstdpart" mit dem Namen "Normteile Bibliothek": Vergleichbar zu den Normteile-Bibliotheken von CAD System liefert ClassiX® als Zusatzprodukt einen bereits teilweise vordefinierten Teilestamm mit Muttern, Schrauben und Unterlegscheiben. Rohmaterialen wie Bleche und Rohre können auf Anfrage ebenfalls geliefert werden.

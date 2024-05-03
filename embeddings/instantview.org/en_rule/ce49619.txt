@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_XML_DATA from DLL version 4.5.2.172???" regarding Description: (Business Pattern): When iterating over a CX_XML_NODE object, XML data is obtained as key/value pairs in objects of this class. Code example: * MA = Member Access Function * I = Indexable data field.

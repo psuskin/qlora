@@ -1,0 +1,1 @@
+This is the description of the class "CX_VALUE - Information": The functions that provide information about a value are divided into the following areas: Area Description Number Information on the numerical proportion of a value Unit Information on the unit of a value.

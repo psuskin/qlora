@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_DATE - Einzelangaben (Modifikation)": Die Funktionen, die in diesem Bereich zusammengefasst sind, verändern einzelne Anteile eines bestimmten Datums. Funktionsname Beschreibung SetDay Setzen eines neuen Tages SetMonth Setzen eines neuen Monats SetYear Setzen eines neuen Jahres ImportDateNumber Import einer Datumszahl als String.

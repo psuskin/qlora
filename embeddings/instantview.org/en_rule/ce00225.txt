@@ -1,0 +1,1 @@
+This is the description of the class "CX_PERIODIC_DATE - Frequency and position": The access functions summarised in this section manage the frequency and position of a periodic date. Access function Description Frequency Setting the frequency Position Setting a specific position.

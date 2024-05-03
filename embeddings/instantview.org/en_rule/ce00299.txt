@@ -1,0 +1,1 @@
+This is the description of the class "CX_PERIODIC_SPAN_TIME - Information": The functions that provide information about a time entry are divided into the following areas: Area Description Detailed information Information about components of a time specification Time comparisons Comparison of two time data Miscellaneous Remaining functions.

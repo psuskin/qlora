@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_OPERATING_RESOURCE*" bezüglich Beschreibung: (BusinessPatterns): Diese Klasse wird zur Modellierung von Betriebsmittel (Werkzeuge, Prüfmittel, Lagerhilfsmittel) eingesetzt. Informationen zum Methodenverzeichnis (MDI) und Datenverzeichnis (DDI) entnehmen Sie bitte der Klassendokumentation.

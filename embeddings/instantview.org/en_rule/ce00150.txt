@@ -1,0 +1,1 @@
+This is the description of the class "CX_SPAN_DATE - month details": The functions summarised in this section provide information about the month of a date. Function name Description DaysInMonth Number of days per month.

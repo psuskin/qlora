@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Feiertage (Datum)": Die folgenden Funktionen sind in diesem Bereich zusammengefasst: Funktion Beschreibung AllHolidays Alle Feiertage eines Typs SortedHolidays (Sortierte) Feiertage eines Jahres.

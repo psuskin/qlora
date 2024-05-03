@@ -1,0 +1,1 @@
+This is the description of the module "about" with the name "System version": Display and listing of version and copyright information. This is the description of the functionality of the module "about" with the name "System version" regarding Input window: This window is used to display the version and copyright information.

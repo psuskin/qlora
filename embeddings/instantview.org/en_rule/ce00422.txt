@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "Managing a formula with a string field" regarding Code example: The following program code shows the definition of a window through which a formula can be input and output. A surface object String is used, whose content is placed into the object with the command DrainWindow and which is filled with FillWindow.

@@ -1,0 +1,1 @@
+This is the description of the class "Signal": A signal is a mechanism that triggers the sending of a message that can be intercepted by any Window object and/or the direct call of a function for a specific object.

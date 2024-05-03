@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CXS_CLUSTER" regarding Description: This class represents a cluster in the database. This is the description of the functionality of the class "CXS_CLUSTER" regarding Code example: * MA = member access function, greyed out = inherited function * I = Indexable data field, greyed out = inherited data field.

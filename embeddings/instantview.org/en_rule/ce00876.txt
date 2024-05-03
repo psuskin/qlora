@@ -1,0 +1,1 @@
+This is the description of the class "CX_ROOTDIR": The specification CX_ROOTDIR in the path of a file is a placeholder for the directory in which the ClassiX® systemis installed. By default this is "c:\CLASSIX".

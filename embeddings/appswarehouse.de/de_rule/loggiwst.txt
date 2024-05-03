@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "loggiwst" mit dem Namen "Arbeitsvorrat" bezüglich Listenfenster: Dieses Fenster dient der Auflistung .

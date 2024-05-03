@@ -1,0 +1,1 @@
+This is the description of the class "CX_SPAN_DATE - Text": The functions that provide text output for a date are divided into the following areas: Area Description Monolingual Output in the currently set language Multilingual Output as multilingual text.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_CHARGE - Zu- und Abschläge" bezüglich Beschreibung: Es stehen folgende Klassen zur Verfügung: Diese Klasse kann nicht selbst benutzt werden und besitzt weder Funktionen noch Datenfelder.

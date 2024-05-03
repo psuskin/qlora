@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_VALIDITY - Validity" regarding Description: Abstract base class of CX_TERMED_VALIDITY.

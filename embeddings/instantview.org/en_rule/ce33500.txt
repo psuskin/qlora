@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_PAPER_FORMAT - Paper size" regarding Description: This class represents the paper size in the machine. Instances of this class can be made persistent using the CreatePersObject method. * I = Indexable data field, grey background = inherited data field.

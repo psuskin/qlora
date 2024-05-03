@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Information (Datum)": Die folgenden Funktionen sind in diesem Bereich zusammengefasst: Funktion Beschreibung IsAnniversary Ist ein Datum ein Gedenktag? IsDateType Ist ein Datum ein spezieller (Feier-)Tag? IsHoliday Ist ein Datum ein Feiertag? IsTerm Ist ein Datum ein Termin? IsVacation Ist ein Datum ein Ferientag?

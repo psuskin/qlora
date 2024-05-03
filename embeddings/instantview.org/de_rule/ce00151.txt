@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_SPAN_DATE - Jahresangaben": Die Funktionen, die in diesem Bereich zusammengefasst sind, liefern Informationen über das Jahr eines Datums. Funktionsname Beschreibung DayOfYear Tag-Position im Jahr LeapYear Zeigt an, ob das Jahr ein Schaltjahr ist.

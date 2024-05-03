@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Kreditvereinbarungen": Zinsen Kreditlinie Tilgung.

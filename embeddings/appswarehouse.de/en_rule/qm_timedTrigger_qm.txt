@@ -1,0 +1,1 @@
+This is the description of the module "qm_timedTrigger_qm" with the name "Time Trigger (CX_TIMED_TRIGGER)": For various time and date forms, the transmission of messages of a CX_TIMED_TRIGGER object can be test/checked.

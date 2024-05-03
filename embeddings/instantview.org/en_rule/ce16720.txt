@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_PURCHASE_COST_OBJECTIVE*" regarding Description: (Business Pattern): Specialisation of the class CX_COST_OBJECTIVE as a cost object for purchasing. This class represents in particular framework agreements with suppliers.

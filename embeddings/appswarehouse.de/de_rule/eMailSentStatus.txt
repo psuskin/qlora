@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "eMailSentStatus" mit dem Namen "E-Mails Sendestatus": Anzeige der aus dem System heraus automatisch erstellten Mails.Mit deiser Liste kann überprüft werden wann, wer welche Mail erstellt bzw. verschickt oder ob diese überhaupt ohne Fehler verschickt wurde!

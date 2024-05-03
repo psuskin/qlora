@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "attributeValueEdit" mit dem Namen "Attribute Wert Editier-App": Diese App dient zum Ändern des Wertes eines Attributes. Dies ist die Beschreibung der Funktionalität des Moduls "attributeValueEdit" mit dem Namen "Attribute Wert Editier-App" bezüglich Eingabefenster: Dieses Fenster dient der Pflege von Attributewerten.

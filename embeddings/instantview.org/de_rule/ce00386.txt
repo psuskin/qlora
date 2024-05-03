@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_VALUE - Zugriffsfunktionen": Für einen Wert stehen die folgenden Zugriffsfunktionen zur Verfügung: Zugriffsfunktion Beschreibung Unit Ein-/Ausgabesteuerung der Einheit als Text UnitEnum Ein-/Ausgabesteuerung der Einheit als interner Wert DigitalHours Ein-/Ausgabesteuerung von Zeit-Einheiten.

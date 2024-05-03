@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CXS_QUERY_FUNTION" bezüglich Code-Beispiel: * MA = Member-Access-Funktion, grau unterlegt = geerbte Funktion * I = Indizierbares Datenfeld, grau unterlegt = geerbtes Datenfeld.

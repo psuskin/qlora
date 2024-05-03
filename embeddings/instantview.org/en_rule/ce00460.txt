@@ -1,0 +1,1 @@
+This is the description of the class "CX_SYSTEM_OBJECT - Fill transformation tables": The functions summarised in this section are used to initialise a transformation table. Function name Description GetClassNames Names of all known classes GetFontNames Names of the available fonts LongMonths Written out month names ShortMonths Abbreviated month names Sex Gender symbols.

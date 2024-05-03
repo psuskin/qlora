@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_DB_DUMP_FILE" regarding Description: CX_DB_DUMP_FILE is an auxiliary class for working with the size of unloading files. CX_DB_DUMP_FILE objects cannot be created using CreateTransObject or CreatePersObject, but are only obtained as a result of DBDumpFile function of CX_DB_UTILITY class.

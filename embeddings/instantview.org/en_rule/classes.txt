@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "Class reference" regarding Base classes: *Pseudo class. This is the description of the functionality of the class "Class reference" regarding Info classes: *Pseudo class. This is the description of the functionality of the class "Class reference" regarding Business classes: *Pseudo class.

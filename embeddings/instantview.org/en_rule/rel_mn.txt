@@ -1,0 +1,1 @@
+This is the description of the class "CyberEnterprise® - REL_MN Relation": In a REL_MN relation one (original) object can refer to any number of (counter) objects. Each counter-object can also refer back to any number of original objects. As further relations there are: REL_11 REL_1N REL_N1.

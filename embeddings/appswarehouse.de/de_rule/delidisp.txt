@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "delidisp" mit dem Namen "Lieferscheinversanddaten": Dieses Fenster dient der Schnellerfassung der Lieferscheinversanddaten.

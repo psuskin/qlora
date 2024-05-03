@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_DB_DUMP_FILE" bezüglich Beschreibung: CX_DB_DUMP_FILE ist eine Hilfsklasse für die Arbeit mit der Größe Entladedateien. CX_DB_DUMP_FILE-Objekte können nicht mit CreateTransObject, bzw. CreatePersObject erzeugt werden, sondern man erhält sie nur als Ergebnis von DBDumpFile Funktion der CX_DB_UTILITY-Klasse.

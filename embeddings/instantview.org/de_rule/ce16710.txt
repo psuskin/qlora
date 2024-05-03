@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_SALES_COST_OBJECTIVE*" bezüglich Beschreibung: (Business Pattern): Spezialisierung der Klasse CX_COST_OBJECTIVE als Kostenträger für Kundenprojekte. Jedes Angebot und jeder Auftrag ist immer einem VK-Kostenträger zugeordnet.

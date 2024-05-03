@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "messaint" mit dem Namen "Relationen zwischen Meldungen" bezüglich Funktionalität: Dieses Fenster dient der Anzeige von Relationen zwischen technischen Anfragen und technischen Aufgaben.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "festes Satzformat": Der Puffer-Bereich einer Datei repräsentiert einen Satz. Es ist nur dann benutzbar, falls die Datei ein festes Satzformat besitzt.Die Länge des Pufferbereichs entspricht dabei der Gesamtlänge eines Satzes. Diese wird beim Festlegen des Satzformates mit der Funktion SetFixFileFormat mit angegeben.

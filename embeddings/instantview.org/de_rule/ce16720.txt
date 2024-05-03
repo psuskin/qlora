@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_PURCHASE_COST_OBJECTIVE*" bezüglich Beschreibung: (Business Pattern): Spezialisierung der Klasse CX_COST_OBJECTIVE als Kostenträger für den Einkauf. Diese Klasse repräsentiert insbesondere Rahmenverträge mit Lieferanten.

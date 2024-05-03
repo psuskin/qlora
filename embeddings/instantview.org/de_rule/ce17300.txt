@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_ASSET - Anlagegut" bezüglich Beschreibung: Diese Klasse bildet ein Anlagegut ab. Dies ist die Beschreibung der Funktionalität der Klasse "CX_ASSET - Anlagegut" bezüglich Code-Beispiel: * MA = Member-Access-Funktion, grau unterlegt = geerbte Funktion * I = Indizierbares Datenfeld, grau unterlegt = geerbtes Datenfeld.

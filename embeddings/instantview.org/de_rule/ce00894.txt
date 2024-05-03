@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "REL_MN Relation": Bei einer REL_MN Relation kann ein (Ursprungs-)Objekt auf beliebig viele (Gegen-)Objekte verweisen. Jedes Gegen-Objekt kann auch auf beliebig viele Ursprungs-Objekte zurückverweisen.Als weitere Relationen gibt es: REL_11 REL_1N REL_N1.

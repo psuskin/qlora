@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "orderctr" mit dem Namen "Angebots- und Auftragsmonitoring - Beschreibung" bezüglich Eingabefenster: Dieses Fenster dient der Pflege von .

@@ -1,0 +1,1 @@
+This is the description of the class "CX_GLOBAL_DATETIME - Modification": The functions grouped together in this area change a specific global time. Function name Description SetTimeZone Setting the time zone SetEndTimeZone Setting the destination time zone ConvertIntoTimeZone Time zone conversion.

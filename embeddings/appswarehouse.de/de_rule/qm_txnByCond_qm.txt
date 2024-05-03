@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "qm_txnByCond_qm" mit dem Namen "Bedingte Vorgänger- und Nachfolgerbelege": Für die Klasse CX_TRANSACTION werden die Funktionen zum Ermitteln von Vorgänger- oder Nachfolgebelege(n) getestet.

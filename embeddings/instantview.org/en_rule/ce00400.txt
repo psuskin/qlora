@@ -1,0 +1,1 @@
+This is the description of the class "CX_VALUE_PER - Information": The functions grouped together in this area provide information about a range value. Function name Description Numerator Return of the counter Denominator Return of the denominator.

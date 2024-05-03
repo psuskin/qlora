@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Text (Datum)": Die folgenden Funktionen sind in diesem Bereich zusammengefasst: Funktion Beschreibung MLSpecialNameOfDay (Mehrsprachiger) spezieller Name eines Datums SpecialNameOfDay Spezieller Name eines Datums.

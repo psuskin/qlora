@@ -1,0 +1,1 @@
+This is the description of the class "CX_STRUCTURE - Remove": The functions summarised in this section allow you to remove objects from a structure. Function name Description RemoveLevel Removes the level from the hierarchy.

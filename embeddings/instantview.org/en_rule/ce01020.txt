@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_SECURITY" regarding Description: Here follows a description of the class. This is the description of the functionality of the class "CX_SECURITY" regarding Code example: * MA = member access function * I = Indexable data field.

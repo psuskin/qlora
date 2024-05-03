@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "appsWHModuleSelect" mit dem Namen "AppsWarehouse Module Selektion" bezüglich Selektionsfenster: Dieses Fenster dient der Selektion von AppsWarehouse Modulen.

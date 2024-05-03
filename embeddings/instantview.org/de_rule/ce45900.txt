@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_ITEM_PATTERN_PHANTOM (Pseudoklasse)" bezüglich Beschreibung: (Business Pattern): Phantom-Teil.

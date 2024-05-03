@@ -1,0 +1,1 @@
+This is the description of the class "Information objects": Info objects provide information for other objects. They are divided into the following areas: Area Description Attributes Description of characteristics Access Connections to real objects surcharges/discounts Allocations Schedules Terms and conditions Conversions Conversion of units.

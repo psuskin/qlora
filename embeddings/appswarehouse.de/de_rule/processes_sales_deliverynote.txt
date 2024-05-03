@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "processes_sales_deliverynote" mit dem Namen "Verkauf - Lieferschein": Siehe die Modulbeschreibung von Lieferscheinen.

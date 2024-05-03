@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_SECURITY - Abstrakte Basisklasse für Zugriffsrechte" bezüglich Beschreibung: Basisklasse für alle Sicherheitsrichtlinien. Das aktuell im System aktive CX_SECURITY-Objekt kann per CX_SYSTEM_OBJECT։։GetRegisteredSecurity abgefragt werden.

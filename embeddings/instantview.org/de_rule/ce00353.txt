@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_NUMERIC - Zugriffsfunktionen": Die folgenden Zugriffsfunktionen stehen für eine reelle Zahl zur Verfügung: Funktionsname Beschreibung Precision Verändern der Genauigkeit.

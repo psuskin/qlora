@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "chat" mit dem Namen "Unterhaltung (schreibend)" bezüglich Unterhaltung (schreibend): Dieses Fenster dient der Pflege von .

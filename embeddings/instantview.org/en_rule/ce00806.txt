@@ -1,0 +1,1 @@
+This is the description of the class "Settlement objects": Terms are divided into the following categories: Settlement object Area or object type name Costs CX_COSTS G/L accounts CX_GENERAL_LEDGER Property types CX_ITEM_CAST Personal account CX_PERSONAL_ACCOUNT Partner Types CX_PARTNER_CAST Stock CX_STOCK Workplace CX_WORK_STATION.

@@ -1,0 +1,1 @@
+This is the description of the class "CX_GLOBAL_DATETIME - Calculations": The functions summarised in this section calculate a new object from a global point in time. Function name Description StartOfTerm Start of the global time EndOfTerm End of the global date.

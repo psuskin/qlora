@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "scanner_select_businessdocumentprinter_app_scanner" mit dem Namen "Scanner Druckerauswahl" bezüglich Drucker wählen: .

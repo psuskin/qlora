@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_SIMPLE - Modellklasse" bezüglich Beschreibung: CX_SIMPLE gehört zu den grundlegenden Modellklassen. CX_SIMPLE-Klassen können, aufbauend auf CX_CLASS, etwas über ihren Zustand aussagen. Diese Klasse kann nicht selbst benutzt werden und besitzt weder Funktionen noch Datenfelder.

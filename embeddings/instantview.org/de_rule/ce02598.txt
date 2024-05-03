@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_DBASE_FILE" bezüglich Beschreibung: Mit dieser Klasse werden die Datenbank-Dateien von dBase oder Clipper (Erweiterung .dbf) verwaltet. Dies ist die Beschreibung der Funktionalität der Klasse "CX_DBASE_FILE" bezüglich Code-Beispiel: * MA = Member-Access-Funktion * I = Indizierbares Datenfeld.

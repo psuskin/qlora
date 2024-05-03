@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Informations-Objekte": Info-Objekte halten Informationen für andere Objekte bereit. Sie unterteilen sich in die folgenden Bereiche: Bereich Beschreibung Attribute Beschreibung von Sachmerkmalen Zugänge Verbindungen zu realen Objekten Zu-/Abschläge Allokationen Terminpläne Geschäftsbedingungen Konvertierungen Umwandlung von Einheiten.

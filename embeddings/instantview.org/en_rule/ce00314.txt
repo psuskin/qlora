@@ -1,0 +1,1 @@
+This is the description of the class "CX_DATETIME - Operators": The operators that exist for a point in time are divided into the following areas: Area Description Compare The operators >, < and =.

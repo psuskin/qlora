@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Abrechnungsobjekte": Begriffe unterteilen sich in folgende Kategorien: Abrechnungsobjekt Bereichs- bzw. Objekttypname Kosten CX_COSTS Sachkonten CX_GENERAL_LEDGER Sach-Typen CX_ITEM_CAST Personenkonto CX_PERSONAL_ACCOUNT Partner-Typen CX_PARTNER_CAST Lager CX_STOCK Arbeitsplatz CX_WORK_STATION.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "initsdat" mit dem Namen "Initialisierung": Initialisierung von Geschäftsjahr, Gleitzeitjahr oder Sitzungsdatum. Dies ist die Beschreibung der Funktionalität des Moduls "initsdat" mit dem Namen "Initialisierung" bezüglich Funktionalität: Die genannten Daten werden alle mit dem Systemdatum initialisiert.

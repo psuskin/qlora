@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_RATE - Einheiten-Konvertierungen" bezüglich Beschreibung: Durch eine Einheiten-Konvertierung wird eine Einheit in eine andere umgerechnet. Einzel-Umrechnungen: Tabellen:.

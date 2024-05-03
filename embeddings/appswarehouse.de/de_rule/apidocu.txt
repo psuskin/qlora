@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "apidocu" mit dem Namen "Cloud API-Dokumentation": https://classix.cloud/public/apidocu{HTML( tohead="1")}{HTML}.

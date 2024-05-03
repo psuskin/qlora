@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "Conditional object table without column division" regarding Code example: The following programme code shows the definition of a window in which a conditional object table without column division is displayed in an object box. It is assumed that the conditional object table Table contains the data shown.

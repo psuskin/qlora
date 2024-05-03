@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "cxService" mit dem Namen "Service" bezüglich Funktionalität: Das Fenster dient der Ausführung von Service-Funktionen im ClassiX®-System. Dies ist die Beschreibung der Funktionalität des Moduls "cxService" mit dem Namen "Service" bezüglich Suchfelder: keine.

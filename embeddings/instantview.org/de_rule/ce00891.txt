@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "REL_11 Relation": Bei einer REL_11 Relation kann ein (Ursprungs-)Objekt nur einmal auf ein anderes (Gegen-)Objekt verweisen. Das Gegen-Objekt kann ebenfalls nur auf das Ursprungs-Objekt zurückverweisen.Als weitere Relationen gibt es: REL_1N REL_N1 REL_MN.

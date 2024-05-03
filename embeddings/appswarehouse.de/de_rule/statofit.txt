@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "statofit" mit dem Namen "Angebotspositionen Statistik": Über die Angebotspositionsstatistik können Angebotspositionen über verschieden Filter gesucht und ausgewertet werden. So können z.B. alle Positionen angezeigt werden, die ein Kunde angeboten bekommen hat.

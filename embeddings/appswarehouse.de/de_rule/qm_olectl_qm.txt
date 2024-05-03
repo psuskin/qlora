@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "qm_olectl_qm" mit dem Namen "OLE-Control Testcontainer": Test eines OLE Widget containers.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "scanner_main_processes_inbound_checkin_app_scanner" mit dem Namen "Scanner Empfangen der Ware "Von Lieferant"" bezüglich Ware empfangen: Dieses Fenster dient der Identifikation der Artikel, Mengen und ggfs. Mengeneinheiten und Zustand der Ware.

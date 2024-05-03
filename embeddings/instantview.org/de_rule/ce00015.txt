@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Funktionen zum Erzeugen von Locales": Um ein Locale zu generieren, stehen die folgenden Funktionen zur Verfügung: CreateSublocales GetLocale PathOfLocale.

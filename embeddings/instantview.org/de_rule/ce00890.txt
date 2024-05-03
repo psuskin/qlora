@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Begriffserklärung - NULL": Unter Null wird ein Objekt verstanden, das keinerlei Daten und Funktionen beinhaltet. Es stellt somit das Objekt "nichts" dar. Solch ein Objekt kann mit der InstantView®-Anweisung NULL erzeugt werden.

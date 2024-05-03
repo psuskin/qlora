@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "processes_sales_main" mit dem Namen "Verkauf": Stammdaten Angebot Auftrag Projektabwicklung Lieferschein Kontierung/Vorkontierung Ersatzteilgeschäft Verkaufspreisbildung Kundenbonität.

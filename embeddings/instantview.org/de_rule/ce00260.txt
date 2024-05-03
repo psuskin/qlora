@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_TIME - Addition und Subtraktion": Die Funktionen, die in diesem Bereich zusammengefasst sind, addieren bzw. subtrahieren Werte zu/von einer Zeitangabe. Funktionsname Beschreibung AddHundredthSecond Hundertstel-Sekunden-Addition AddSecond Sekunden-Addition AddMinute Minuten-Addition AddHour Stunden-Addition.

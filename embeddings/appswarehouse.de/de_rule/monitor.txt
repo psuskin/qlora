@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "monitor" mit dem Namen "ClassiX-Shell": Mit Klick der rechten Maustaste bei gehaltener Alt-Taste wird die ClassiX-Shell aufgerufen: weitere Informationen entnehmen Sie bitte der InstantView® Dokumentation.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "tcpconct" mit dem Namen "TCP IP Verbindung" bezüglich Eingabefenster: Dieses Fenster dient dem Testen von TCP/IP Verbindungen.

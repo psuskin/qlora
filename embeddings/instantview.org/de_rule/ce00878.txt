@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Begriff - spezieller Tag": Unter einem speziellen Tag wird eine Tagesangabe wie z.B. der "15.te", d.h. der Tag eines Datums, verstanden.

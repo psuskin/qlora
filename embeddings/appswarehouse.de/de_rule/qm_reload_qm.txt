@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "qm_reload_qm" mit dem Namen "Qualitätssicherung - Reload": Dieser Test überprüft das Nachladen von vererbten Modulen. Es lassen sich die Anzahl der Reload- Vorgänge sowie die Verzögerung dazwischen einstellen.

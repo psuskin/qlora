@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "qm_refbasedptr_qm" mit dem Namen "Referenz-basierter Pointer-Slot": Dieser Test überprüft den Mechanismus, mit dem transiente Objekte über dynamische Datenfelder auf persistente Objekte zeigen dürfen. Dieser Test läuft von alleine durch und wenn keine Fehlermeldung auftaucht, kann er als erfolgreich angesehen werden.

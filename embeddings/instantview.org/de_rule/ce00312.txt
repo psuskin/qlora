@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Zeitpunkt-Objekttypen": Zur Abbildung eines Zeitpunktes stehen die folgenden Objekttypen zur Verfügung: Zeitangabe Objekttypname Zeitpunkt CX_DATETIME globaler Zeitpunkt : CX_GLOBAL_DATETIME.

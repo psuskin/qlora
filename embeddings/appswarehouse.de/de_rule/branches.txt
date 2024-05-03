@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "branches" mit dem Namen "Niederlassungen" bezüglich Funktionalität: Mit diesem Modul können Sie die Beziehungen zwischen verschiedenen Firmen dokumentieren. Sie können Firmen im Eingabefeld "Zentrale" oder in der Objektbox "Niederlassungen" fallen lassen (Drag&Drop).

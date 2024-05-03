@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_FOREIGN_OBJECT_MANAGER" bezüglich Beschreibung: CX_FOREIGN_OBJECT_MANAGER ist eine Hilfsklasse . Dies ist die Beschreibung der Funktionalität der Klasse "CX_FOREIGN_OBJECT_MANAGER" bezüglich Code-Beispiel: * MA = Member-Access-Funktion, grau unterlegt = geerbte Funktion.

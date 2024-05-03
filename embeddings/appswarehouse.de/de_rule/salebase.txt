@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "salebase" mit dem Namen "Verkaufswaren": Basis für Verkaufswaren-Module. Dies ist die Beschreibung der Funktionalität des Moduls "salebase" mit dem Namen "Verkaufswaren" bezüglich Funktionalität: siehe Verkaufsartikel, Verkaufsset, Ersatzteil, Sonderverkaufsteil, Dienstleistungen.

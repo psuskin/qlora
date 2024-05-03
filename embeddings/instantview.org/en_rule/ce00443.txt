@@ -1,0 +1,1 @@
+This is the description of the class "CX_CONDITIONED_BAG - Date": The following date classes allow the use of mathematical operators: Date type Class name Current date CX_DATE Date period CX_SPAN_DATE.

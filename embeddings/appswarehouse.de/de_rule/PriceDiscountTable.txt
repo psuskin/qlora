@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "PriceDiscountTable" mit dem Namen "Preistabelle": Dieses Modul dient der Pflege von bedingten Preis- oder Ab-/Zuschlagstabellen.Hinweis: Es muss immer die strengste bzw. strengere Bedingung von zwei oder mehreren oben stehen, da die Tabelle von oben nach unten durchgearbeitet und der erste Treffer als Antwort übernommen wird!

@@ -1,0 +1,1 @@
+This is the description of the class "CX_SYSTEM_OBJECT - Text editing": The functions summarised in this section are used to convert text to "normal" upper/lower case. Function name Description CommonWriting Conversion from text to upper/lower case SetCommonWritingParams Setting the parameters for converting text to upper/lower case.

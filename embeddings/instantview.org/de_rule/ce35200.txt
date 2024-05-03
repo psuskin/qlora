@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_GARBAGE_MANAGER" bezüglich Beschreibung: Der Garbage-Manager steuert die Garbage-Collection und liefert Daten über ihren Status. Dies ist die Beschreibung der Funktionalität der Klasse "CX_GARBAGE_MANAGER" bezüglich Code-Beispiel: * MA = Member-Access-Funktion, grau unterlegt = geerbte Funktion.

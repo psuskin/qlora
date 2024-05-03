@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "qm_phone_qm" mit dem Namen "Telefon Objekt (CX_PHONE)": Dieses Modul testet die Formatierung entsprechend der gesetzten Locales. Wird oben eine Telefonnummer (mit oder ohne Vorwahl, oder nur eine Durchwahl z.B. ‚-33') eingegeben, sollten in den Textfeldern entsprechend formatierte Telefonnummern zu lesen sein.

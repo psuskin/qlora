@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "cxStockExecutionItem" mit dem Namen "Lagerausführungsbelege" bezüglich Listenfenster: Dieses Fenster dient der Auflistung .

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "setalloc" mit dem Namen "Allokationsset": Dieses Modul ist das Basismodul für Allokationssets, von diesem Modul sind u.a. die Bearbeitungsmodule für Stücklisten und Arbeitspläne abgeleitet.

@@ -1,0 +1,1 @@
+This is the description of the module "delidisp" with the name "Delivery note dispatch data": This window is used for quick entry of the delivery note dispatch data.

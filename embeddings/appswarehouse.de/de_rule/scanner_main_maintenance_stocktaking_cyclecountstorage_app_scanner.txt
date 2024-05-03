@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "scanner_main_maintenance_stocktaking_cyclecountstorage_app_scanner" mit dem Namen "Scanner Bestand setzen - Inventur nach Lagerplatz": Die eingegebenen Mengen werden nicht direkt im Host-System gebucht, Differenzen werden mit dem Domain Studio mit dem Host-System abgeglichen.

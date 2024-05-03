@@ -1,0 +1,1 @@
+This is the description of the class "CX_SPAN_DATE - Weekly data": The functions summarised in this section provide information about the week of a date. Function name Description WeekOfDate Calendar week of the date YearOfWeek Year of the calendar week of the date DayOfWeek Value of the weekday of the date DayInWeek Weekday position.

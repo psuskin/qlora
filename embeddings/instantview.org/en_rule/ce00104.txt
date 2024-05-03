@@ -1,0 +1,1 @@
+This is the description of the class "CX_DATE - Modification": The functions that change a date are divided into the following sections: Area Description Detailed information Changing certain parts of a date addition/subtraction Adding/subtracting values to/from a date.

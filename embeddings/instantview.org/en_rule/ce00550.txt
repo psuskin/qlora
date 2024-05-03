@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_CURSOR" regarding Description: InstantView® statement Cursor creates an object of class CX_CURSOR. The InstantView®-instruction commands First, Next, More etc. work with this object. With the methods Next and More you get subsets - see code example. Code example:.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_VALUE_PER - Zugriffsfunktionen": Die folgenden Zugriffsfunktionen stehen für einen Bereichs-Wert zur Verfügung: Zugriffsfunktion Beschreibung Precision Verändern der Genauigkeit des Zählers Unit Ein-/Ausgabesteuerung der Einheit des Zählers.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "utilpurc" mit dem Namen "Inspektion - Einkauf": Dieses Modul dient zur Inspektion von Daten des Einkaufs. Dies ist die Beschreibung der Funktionalität des Moduls "utilpurc" mit dem Namen "Inspektion - Einkauf" bezüglich Ergebnisfenster: In diesem Fenster werden die Daten angelistet, die aufgrund eines Inspektionslaufes zu überprüfen sind.

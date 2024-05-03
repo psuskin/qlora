@@ -1,0 +1,1 @@
+This is the description of the module "processes_humanresources" with the name "Human Resources": Flexitime accounting Absenteeism accounting Working hours List of absences Flexitime accounts Paid hours Sick days Holiday accounts.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_START_APP*" bezüglich Code-Beispiel: Informationen zum Methodenverzeichnis (MDI) und Datenverzeichnis (DDI) entnehmen Sie bitte der Klassendokumentation.

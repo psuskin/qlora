@@ -1,0 +1,1 @@
+This is the description of the class "Terms of payment": Payment method Bank details Direct debit credit card Method of payment Bank transfer Cheque Direct debit Change Cash payment credit card Payment target Discount.

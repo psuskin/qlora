@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_ELSTER_PRINT_PARAMETER" regarding Description: Passes parameters to EditTask / EditTaskFile for generating the tax return in PDF format. * I = Indexable data field, greyed out = inherited data field.

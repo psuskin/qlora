@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_CURSOR" bezüglich Beschreibung: InstantView®-Anweisung Cursor erzeugt ein Objekt der Klasse CX_CURSOR. Die InstantView®-Anweisung-Befehle First, Next, More usw. arbeiten mit diesem Objekt. Mit den Methoden Next und More erhält man Teilmengen - siehe Code-Beispiel. Code-Beispiel:.

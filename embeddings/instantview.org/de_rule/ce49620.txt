@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_XML_NODE" bezüglich Beschreibung: Hilfsobjekt für CX_XML_PROCESSOR. Stellt die Information eines XML Nodes zur Verarbeitung bereit. Auch die Werte aller Subnodes sind mit qualifizierten Namen erreichbar. Siehe CX_XML_PROCESSOR::SetMessageRule und CX_XML_PROCESSOR::SetProcessingRule.

@@ -1,0 +1,1 @@
+This is the description of the functionality of the module "scanner_main_processes_inbound_checkin_app_scanner" with the name "Scanner Receiving the goods "From supplier" regarding Receiving goods: This window is used to identify the items, quantities and, if applicable, units of measure and condition of the goods.

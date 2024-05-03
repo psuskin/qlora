@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "Management of a range value with two string fields" regarding Code example: Note: To addressonly the counter, the flag PF_NUMERATOR is available. In this case, the surface object behaves as if the object only consists of the counter.

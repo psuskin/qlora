@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_ELSTER_FINANZAMTSDATEN" bezüglich Beschreibung: Ein Container für die Daten eines Finanzamtes. Die Reihenfolge der Einträge in den Collections entspricht der Reihenfolge, wie sie in der vom Server des Finanzamtes übermittelten XML aufgeführt wurden. * I = Indizierbares Datenfeld.

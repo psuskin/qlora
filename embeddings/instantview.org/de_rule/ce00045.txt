@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CXB_MULTIPLE_STRING - Operatoren": Die Operatoren, die für einen mehrsprachigen Text vorhanden sind, teilen sich in die folgenden Bereiche auf: Bereich Beschreibung Arithmetik Der Operator + Vergleiche Die Operatoren >, < und =.

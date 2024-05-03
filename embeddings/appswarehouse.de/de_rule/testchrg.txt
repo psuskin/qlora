@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "testchrg" mit dem Namen "Testen Zu- und Abschläge" bezüglich Funktionalität: Das Modul testet die ausgewählten Teilzahlungs- / Skontobedingungen. Dazu müssen Sie ein Datum und einen Betrag eingeben. Nach Betätigung des Test Knopfes erscheinen alle fälligen Zahlungen in der Liste.

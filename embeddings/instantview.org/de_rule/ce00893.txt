@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "REL_N1 Relation": Bei einer REL_N1 Relation kann ein (Ursprungs-)Objekt auf mehrere (Gegen-)Objekte verweisen. Jedes Gegen-Objekt kann dagegen nur einmal auf das Ursprungs-Objekt zurückverweisen.Als weitere Relationen gibt es: REL_1N REL_11 REL_MN.

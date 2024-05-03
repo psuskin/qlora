@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_DATE - Addition und Subtraktion": Die Funktionen, die in diesem Bereich zusammengefasst sind, addieren bzw. subtrahieren Werte zu/von einem Datum. Funktionsname Beschreibung AddDay Tages-Addition AddWeek Wochen-Addition AddMonth Monats-Addition AddYear Jahres-Addition.

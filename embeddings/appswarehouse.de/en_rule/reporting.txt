@@ -1,0 +1,1 @@
+This is the description of the module "reporting" with the name "Reports (issue)": From this window, you can print all reports belonging to a list or copy the contents of the list to the clipboard. New reports can also be created from this module.

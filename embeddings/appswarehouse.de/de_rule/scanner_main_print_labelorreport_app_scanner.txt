@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "scanner_main_print_labelorreport_app_scanner" mit dem Namen "Scanner Etikette": Druck der Etiketten mit optionaler Angabe der Menge. Dies ist die Beschreibung der Funktionalität des Moduls "scanner_main_print_labelorreport_app_scanner" mit dem Namen "Scanner Etikette" bezüglich Etikette: .

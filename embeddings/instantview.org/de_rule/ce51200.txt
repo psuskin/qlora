@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_STOCK_TRANSPORT_ORDER*" bezüglich Code-Beispiel: Informationen zum Methodenverzeichnis (MDI) und Datenverzeichnis (DDI) entnehmen Sie bitte der Klassendokumentation.

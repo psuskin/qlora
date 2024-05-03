@@ -1,0 +1,1 @@
+This is the description of the class "fixed record format": The buffer area of a file represents one record. It can only be used if the file has a fixed record format . The length of the buffer area corresponds to the total length of a set. This is specified when defining the record format with the function SetFixFileFormat.

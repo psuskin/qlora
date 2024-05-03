@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_NUMERIC - Operatoren": Die Operatoren, die für eine reelle Zahl vorhanden sind, teilen sich in die folgenden Bereiche auf: Bereich Beschreibung Arithmetik Die Operatoren +, -, * und / Vergleiche Die Operatoren >, < und =.

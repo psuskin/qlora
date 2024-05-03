@@ -1,0 +1,1 @@
+This is the description of the module "processes_rdreg" with the name "Root information - Register": Master information includes data which - once created in the database - is not changed much and is referenced by transaction data (documents). Bank codes Postcodes.

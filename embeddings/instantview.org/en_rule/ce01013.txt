@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_VIDEO - Video" regarding Description: This class is used to manage the video files in different file formats (.mpg .mpeg .avi).

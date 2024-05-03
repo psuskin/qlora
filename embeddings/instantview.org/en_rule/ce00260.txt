@@ -1,0 +1,1 @@
+This is the description of the class "CX_TIME - Addition and subtraction": The functions summarised in this section add or subtract values to/from a time specification. Function name Description AddHundredthSecond Hundredths of a second addition AddSecond Addition of seconds AddMinute minutes addition AddHour Hour addition.

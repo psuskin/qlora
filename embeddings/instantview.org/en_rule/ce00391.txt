@@ -1,0 +1,1 @@
+This is the description of the class "CX_VALUE - Unit accuracy": The functions summarised in this section provide a unit with its standard defined number of decimal places: Function name Description UnitPrecision national accuracy of the unit RateTablePrecision international accuracy of the unit.

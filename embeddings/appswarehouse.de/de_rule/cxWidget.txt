@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "cxWidget" mit dem Namen "Geöffnete Fenster": Mit dieser App werden alle gestarteten (aktuell geöffneten) Fenster aufgelistet. Dies ist die Beschreibung der Funktionalität des Moduls "cxWidget" mit dem Namen "Geöffnete Fenster" bezüglich Gestartete Apps: Dieses Fenster dient der Auflistung aller geöffneten Fenster.

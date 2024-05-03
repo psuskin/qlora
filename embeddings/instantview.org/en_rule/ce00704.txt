@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_RATE_TABLE - Unit conversion table" regarding Description: A unit conversion table manages conversion rates between units. The conversion ratios are represented by objects of the classes CX_UNIT_RATE or CX_CURRENCY_RATE. A table can also contain further (subordinate) unit conversion tables as elements.

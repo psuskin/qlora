@@ -1,0 +1,1 @@
+This is the description of the class "Holidays (date)": The following functions are summarised in this section: Function Description AllHolidays All holidays of one type SortedHolidays (Sorted) holidays of a year.

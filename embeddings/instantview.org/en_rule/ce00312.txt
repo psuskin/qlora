@@ -1,0 +1,1 @@
+This is the description of the class "Event object types": The following object types are available for mapping a point in time: Date and time Object type name Date CX_DATETIME global time : CX_GLOBAL_DATETIME.

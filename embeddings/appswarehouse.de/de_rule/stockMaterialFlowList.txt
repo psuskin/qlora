@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "stockMaterialFlowList" mit dem Namen "Lager Warenfluss" bezüglich Listenfenster: Dieses Fenster dient der Auflistung .

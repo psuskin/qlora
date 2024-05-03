@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "qm_spanTime_qm" mit dem Namen "Zeitspanne Objekt (CX_SPAN_TIME)": Die Zeitspanne arbeitet genauso wie das Modul zur Datumsperiode (s.o.), nur das man hier halt Uhrzeiten eingeben muss.

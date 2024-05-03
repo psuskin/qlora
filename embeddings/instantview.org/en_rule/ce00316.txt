@@ -1,0 +1,1 @@
+This is the description of the class "CX_DATETIME - Functions": The following functions can be called for a time: Function name Description StartOfTerm Start of the time EndOfTerm End of the date Comprise Check whether a specific date is included in the time.

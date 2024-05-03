@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Controlling-Objekte": Controlling-Objekte verwalten andere Objekte. Bereich Beschreibung Strukturen Organisation von Geschäftsobjekten Monitore.

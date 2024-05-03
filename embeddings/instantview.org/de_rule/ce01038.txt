@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_SUM_AMOUNT" bezüglich Beschreibung: Diese Klasse stellt eine Menge als Summe mehrerer CX_AMOUNT-Objekte dar. Dies ist die Beschreibung der Funktionalität der Klasse "CX_SUM_AMOUNT" bezüglich Code-Beispiel: * MA = Member-Access-Funktion * I = Indizierbares Datenfeld.

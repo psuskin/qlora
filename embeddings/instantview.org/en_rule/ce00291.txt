@@ -1,0 +1,1 @@
+This is the description of the class "CX_SPAN_TIME - Time calculations": The functions summarised in this section calculate a new time from a time entry. Function name Description StartOfPeriod Calculate start time EndOfPeriod Calculate end time.

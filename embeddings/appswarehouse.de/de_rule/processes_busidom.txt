@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "processes_busidom" mit dem Namen "Geschäftsbereiche": Die Geschäftsbereiche eines Unternehmens werden üblicherweise durch deren Abteilungen repräsentiert.Office | Rechnungswesen | Verkauf | Einkauf | Engineering | Konstruktion | Logistik | Lager | Fertigung | Personalwesen | DV-Administration.

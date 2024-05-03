@@ -1,0 +1,1 @@
+This is the description of the module "inventoryCheck" with the name "Inventory checks": This app summarises various test routines for the proper operation of a warehouse with Hestia WMS. This is the description of the functionality of the module "inventoryCheck" with the name "Inventory checks" regarding Input window: The various test routines are called up from this window.

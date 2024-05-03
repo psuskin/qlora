@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "about" mit dem Namen "Systemversion": Anzeige und Auflistung der Versions- und Urheberrechtsinformationen. Dies ist die Beschreibung der Funktionalität des Moduls "about" mit dem Namen "Systemversion" bezüglich Eingabefenster: Dieses Fenster dient der Anzeige der Versions- und Urheberrechtsinformationen.

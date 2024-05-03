@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_DATE - Start und Ende": Die Funktionen, die in diesem Bereich zusammengefasst sind, liefern den Anfang bzw. das Ende eines bestimmten Datums. Funktionsname Beschreibung StartOfPeriod Periodenbeginn RealStartOfPeriod "echter" Periodenbeginn EndOfPeriod Periodenende RealEndOfPeriod "echtes" Periodenende.

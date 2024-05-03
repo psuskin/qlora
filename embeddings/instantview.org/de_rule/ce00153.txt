@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_SPAN_DATE - Datumsvergleiche": Die Funktionen, die in diesem Bereich zusammengefasst sind, vergleichen zwei Datumsangaben miteinander. Funktionsname Beschreibung Encompassed "Enthalten in"-Test Overlap Überlappungs-Test.

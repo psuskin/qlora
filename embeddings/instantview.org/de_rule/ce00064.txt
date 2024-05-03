@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_DATE - Wochenangaben": Die Funktionen, die in diesem Bereich zusammengefasst sind, liefern Informationen über die Woche eines Datums. function name description WeekOfDate Kalenderwoche des Datums YearOfWeek Jahr der Kalenderwoche des Datums DayOfWeek Wert des Wochentages des Datums DayInWeek Wochentag-Position.

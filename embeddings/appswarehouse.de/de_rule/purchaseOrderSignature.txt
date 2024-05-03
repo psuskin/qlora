@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "purchaseOrderSignature" mit dem Namen "Zu unterschreibende Bestellungen": Dem Benutzer werden sein zu unterschreibenden Bestellungen angezeigt. Die Listen werden für 1. und 2.Unterschrift getrennt angezeigt. FunktionalitätListenfenster.

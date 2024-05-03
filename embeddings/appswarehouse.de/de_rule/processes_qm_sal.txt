@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "processes_qm_sal" mit dem Namen "Qualitätssicherung - Verkauf": Verkauf (Modulbeschreibung).

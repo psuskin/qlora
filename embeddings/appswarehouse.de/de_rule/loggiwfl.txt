@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "loggiwfl" mit dem Namen "Geschäftsprozess Transaktionen" bezüglich Listenfenster: Dieses Fenster dient der Auflistung .

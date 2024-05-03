@@ -1,0 +1,1 @@
+This is the description of the module "purchaseOrderSignature" with the name "Orders to be signed": The user is shown his orders to be signed. The lists are displayed separately for 1st and 2nd signature. Functionality List window.

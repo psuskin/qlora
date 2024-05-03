@@ -1,0 +1,1 @@
+This is the description of the module "eMailSentStatus" with the name "E-mail send status": Displays the mails automatically generated from the machine. With this list you can check when, who created or sent which mail or if it was sent without errors at all!

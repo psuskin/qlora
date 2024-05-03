@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_DOMAIN" bezüglich Beschreibung: Hier folgt eine Beschreibung der Klasse.

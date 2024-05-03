@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "processes_rdreg" mit dem Namen "Stamminformationen - Register": Zu den Stamminformationen gehören solche Daten, die - einmal in der Datenbank angelegt - wenig verändert werden und von Bewegungsdaten (Belegen) referenziert werden.Bankleitzahlen Postleitzahlen.

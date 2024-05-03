@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_ASCII_FILE - (Physisches) Löschen": Die Funktionen, die in diesem Bereich zusammengefasst sind, löschen eine Datei bzw. eine Index-Datei physisch. Funktionsname Beschreibung DeleteFile Löscht die Datei DeleteIndexFile Löscht die zur Datei gehörende Index-Datei.

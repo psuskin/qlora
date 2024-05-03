@@ -1,0 +1,1 @@
+This is the description of the class "CX_STRUCTURE - Information": The functions summarised in this section provide information about a structure. Function name Description Top Returns the top level Objects Returns all elements up to a certain level LevelBelowTop Returns the level depth "seen from above LevelAboveBottom Returns the level depth "seen from below.

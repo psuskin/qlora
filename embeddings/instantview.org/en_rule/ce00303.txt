@@ -1,0 +1,1 @@
+This is the description of the class "CX_PERIODIC_SPAN_TIME - Other": The functions grouped together in this section cannot be assigned to any of the previous sections. Function name Description ValueOfTime Start time in hundredths of a second ValueInSeconds Start time in seconds ValueInMinutes Start time in minutes.

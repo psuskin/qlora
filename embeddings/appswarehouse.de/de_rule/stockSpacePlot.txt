@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "stockSpacePlot" mit dem Namen "Lagerplatz Zeichnung" bezüglich Eingabefenster: Dieses Fenster dient der Pflege von .

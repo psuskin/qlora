@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_VECTOR_AMOUNT" regarding Description: This class is the abstract base class for the aggregating CX_AMOUNT classes. Instances of this class cannot be created directly. The operators +=, -=, *=, /= are not defined for the classes derived from CX_VECTOR_AMOUNT. * MA = Member Access Function * I = Indexable data field.

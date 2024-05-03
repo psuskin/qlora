@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "salesinvitemsel" mit dem Namen "Rechnungsposition selektieren" bezüglich Selektionsfenster: Dieses Fenster dient der Selektion einer Rechnungsposition.

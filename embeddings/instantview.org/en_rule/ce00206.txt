@@ -1,0 +1,1 @@
+This is the description of the class "CX_PERIODIC_DATE - Special day": The functions summarised in this section generate a periodic date based on special days. Function name Description NthDayFromDate "n.th day from date" NthDayFromKthMonth "n.th day of the month" MthDayInEachYear "m.th day of the year".

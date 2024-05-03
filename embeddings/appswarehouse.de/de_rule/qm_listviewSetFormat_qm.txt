@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "qm_listviewSetFormat_qm" mit dem Namen "ObjectListView - -SetFormat": Test von SetFormat mit ObjectListView.

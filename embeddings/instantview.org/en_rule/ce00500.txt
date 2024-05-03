@@ -1,0 +1,1 @@
+This is the description of the class "CX_ASCII_FILE - (Physical) deletion": The functions summarized in this section physically delete a file or index file. Function name Description DeleteFile Deletes the file DeleteIndexFile Deletes the index file associated with the file.

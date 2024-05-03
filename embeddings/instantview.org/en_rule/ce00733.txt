@@ -1,0 +1,1 @@
+This is the description of the class "CX_STRUCTURE - Other": The functions grouped together in this area cannot be assigned to any other area. Function name Description GetSlotEntries SanityCheck Check the consistency of the object.

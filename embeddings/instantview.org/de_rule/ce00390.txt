@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_VALUE - Berechnungen": Die Funktionen, die in diesem Bereich zusammengefasst sind, berechnen aus dem Wert eine neue Zahl. Funktionsname Beschreibung Reciprocal Kehrwertbildung.

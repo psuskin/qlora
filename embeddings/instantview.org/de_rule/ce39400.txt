@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_FRACTION64" bezüglich Beschreibung: Achtung: Das InstantView-Interface dieser Klasse ist ab Dll-Version 209838 aufgrund von Inkonsistenzen in der Typarithmetik und der technischen Natur der Klasse nicht mehr verfügbar.

@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_ASSET - Asset" regarding Description: This class represents an asset. This is the description of the functionality of the class "CX_ASSET - Asset" regarding Code example: * MA = member access function, greyed out = inherited function * I = Indexable data field, greyed out = inherited data field.

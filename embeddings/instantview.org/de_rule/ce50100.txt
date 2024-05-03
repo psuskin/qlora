@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_OLE_WORD_XML" bezüglich Beschreibung: Toolklasse für XML-Objekte. Um diese XML-Toolklasse beim Aufruf von GetToolObject auf den COM-Manager zu erhalten, muss die cxtx.dll in der Projektdatei eingebunden sein.

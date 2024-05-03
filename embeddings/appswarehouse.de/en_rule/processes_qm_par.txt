@@ -1,0 +1,1 @@
+This is the description of the module "processes_qm_par" with the name "Quality assurance - Partners": Partner (module description).

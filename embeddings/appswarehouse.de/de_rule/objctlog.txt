@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "objctlog" mit dem Namen "Objekt Änderungshistorie" bezüglich Eingabefenster: Dieses Fenster dient der Änderung der Anzeige der Änderungshistorie von Datenfeldern eines Objekts.

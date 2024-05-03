@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_TEMP_OBJECT" bezüglich Beschreibung: Hier folgt eine Beschreibung der Klasse. Dies ist die Beschreibung der Funktionalität der Klasse "CX_TEMP_OBJECT" bezüglich Code-Beispiel: * MA = Member-Access-Funktion * I = Indizierbares Datenfeld.

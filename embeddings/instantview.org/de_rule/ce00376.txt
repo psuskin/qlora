@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_VALUE - Zahl (Information)": Die Funktionen, die in diesem Bereich zusammengefasst sind, liefern Informationen über die Zahl eines Wertes. Funktionsname Beschreibung IsNegative Negatives Vorzeichen testen InWords Zahl in Zahlwörter umsetzen IsZero Zahl auf Null testen.

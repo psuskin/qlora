@@ -1,0 +1,1 @@
+This is the description of the module "scanner_main_maintenance_stocktaking_cyclecountstorage_app_scanner" with the name "Scanner set stock - inventory by storage bin": The entered quantities are not booked directly in the host system, differences are reconciled with the Domain Studio with the host system.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Zahlungsbedingungen": Zahlungsweg Bankverbindung Bankeinzug Kreditkarte Zahlungsweise Überweisung Scheck Bankeinzug Wechsel Barzahlung Kreditkarte Zahlungsziel Skonto.

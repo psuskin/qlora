@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_ROOTDIR": Die Angabe CX_ROOTDIR in dem Pfad einer Datei ist ein Platzhalter für das Verzeichnis, in dem das ClassiX®-System installiert ist. Standardmäßig ist dieses "c:\CLASSIX".

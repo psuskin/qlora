@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_COST_OBJECTIVE_CHART*" bezüglich Code-Beispiel: Informationen zum Methodenverzeichnis (MDI) und Datenverzeichnis (DDI) entnehmen Sie bitte der Klassendokumentation. Verwendung in AppsWH Modul Kurzbeschreibung.

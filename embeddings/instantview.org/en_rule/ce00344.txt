@@ -1,0 +1,1 @@
+This is the description of the class "CX_NUMERIC - Modification": The functions grouped together in this section change a real number. Function name Description AdjustPrecision Adjusting the accuracy ChangeSign Reverse sign Round Rounding the number SetPrecision Set number of decimal places SetZero Set number to zero Truncate Truncation of decimal places.

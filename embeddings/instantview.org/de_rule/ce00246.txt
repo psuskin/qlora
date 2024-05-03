@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_TIME - Sonstiges": Die Funktionen, die in diesem Bereich zusammengefasst sind, sind nicht einem der vorhergehenden Bereiche zuordenbar. Funktionsname Beschreibung ValueOfTime Zeit in Hundertstel-Sekunden ValueInSeconds Zeit in Sekunden ValueInMinutes Zeit in Minuten.

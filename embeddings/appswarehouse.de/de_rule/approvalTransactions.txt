@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "approvalTransactions" mit dem Namen "Zu genehmigende Belege": Belege aus bestehenden Genehmigungsprozessen anzeigen. Es werden nur Belege angezeigt, die der aktuelle Benutzer genehmigen kann, d. h. dieser muss Genehmiger bzw. Vertreter eines Genehmigers seiner.

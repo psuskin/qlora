@@ -1,0 +1,1 @@
+This is the description of the module "PriceDiscountTable" with the name "Price table": This module is used to maintain conditional price or discount/surcharge tables. Note: The strictest or stricter condition of two or more must always be at the top, as the table is worked through from top to bottom and the first hit is taken as the answer!

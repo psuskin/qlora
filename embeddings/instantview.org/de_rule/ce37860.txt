@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_RESOURCE_SET*" bezüglich Beschreibung: Mit dieser Klasse werden Ressourcen (z.B. Teile, Personen) für Planungszwecke (Meilensteine) allokiert. Informationen zum Methodenverzeichnis (MDI) und Datenverzeichnis (DDI) entnehmen Sie bitte der Klassendokumentation.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_TOOL* - Werkzeug" bezüglich Beschreibung: Diese Klasse repräsentiert die Teilerolle Werkzeug. Dies ist die Beschreibung der Funktionalität der Klasse "CX_TOOL* - Werkzeug" bezüglich Code-Beispiel: Informationen zum Methodenverzeichnis (MDI) und Datenverzeichnis (DDI) entnehmen Sie bitte der Klassendokumentation.

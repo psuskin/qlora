@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "inspection" mit dem Namen "Inspektion": Testframework Einkauf Verkauf Übergreifende Prozesse Eingangsrechnung Gültigkeit Angebote/Aufträge.

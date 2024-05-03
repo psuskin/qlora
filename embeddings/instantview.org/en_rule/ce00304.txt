@@ -1,0 +1,1 @@
+This is the description of the class "CX_PERIODIC_SPAN_TIME - Text": The functions summarised in this section provide text output for a specific time. Function name Description DayTime Time of the day MLDayTime Multilingual time of the day.

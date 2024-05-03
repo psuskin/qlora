@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_STRUCTURE - Sonstiges": Die Funktionen, die in diesem Bereich zusammengefasst sind, sind keinem anderen Bereich zuordnenbar. Funktionsname Beschreibung GetSlotEntries SanityCheck Konsistenz des Objektes prüfen.

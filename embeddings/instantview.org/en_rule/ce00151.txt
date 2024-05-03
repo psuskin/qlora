@@ -1,0 +1,1 @@
+This is the description of the class "CX_SPAN_DATE - Annual data": The functions summarised in this section provide information on the year of a date. Function name Description DayOfYear Day position in the year LeapYear Shows whether the year is a leap year.

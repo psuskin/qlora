@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_SYSTEM_OBJECT - Textbearbeitung": Die Funktionen, die in diesem Bereich zusammengefasst sind, dienen der Umwandlung von Text in "normale" Groß-/Kleinschrift. Funktionsname Beschreibung CommonWriting Konvertierung von Text in Groß-/ Kleinschrift SetCommonWritingParams Setzen der Parameter zur Konvertierung von Text in Groß-/ Kleinschrift.

@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "processes_bproclog" mit dem Namen "Geschäftsprozesse - Logistik": Eigenbeistellungen Kundenbeistellungen Versand Bereitstellung Retouren und Reklamationen Der logistische Prozess in einem Unternehmen ist ein kompliziertes Prozessnetz, welches hier ein bißchen durchleuchtet werden soll.VDMA Scenariowww.vdma.org.

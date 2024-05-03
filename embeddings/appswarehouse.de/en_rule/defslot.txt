@@ -1,0 +1,1 @@
+This is the description of the module "defslot" with the name "Dynamic data fields": Dynamic data fields can be defined in this window.

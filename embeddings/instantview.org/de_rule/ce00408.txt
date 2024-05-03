@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "Verwaltung eines Bereichs-Wertes mit zwei String-Feldern" bezüglich Code-Beispiel: Anmerkung: Um nur den Zähler anzusprechen, steht das Flag PF_NUMERATOR zur Verfügung. In diesem Fall verhält sich das Oberflächenobjekt so, als ob das Objekt nur aus dem Zähler bestehen würde.

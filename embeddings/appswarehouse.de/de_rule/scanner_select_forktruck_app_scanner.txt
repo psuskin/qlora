@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "scanner_select_forktruck_app_scanner" mit dem Namen "Scanner Stapler wählen": Festlegen des Staplers. Dies ist die Beschreibung der Funktionalität des Moduls "scanner_select_forktruck_app_scanner" mit dem Namen "Scanner Stapler wählen" bezüglich Selektionsfenster: Auswahl des Staplers.

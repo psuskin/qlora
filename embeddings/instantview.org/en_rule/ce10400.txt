@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_SIMPLE - Model class" regarding Description: CX_SIMPLE belongs to the basic model classes. CX_SIMPLE classes, building on CX_CLASS, can say something about their state. This class cannot be used itself and has neither functions nor data fields.

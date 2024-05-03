@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "offorctr" mit dem Namen "Angebots- und Auftragsmonitoring" bezüglich Listenfenster: Dient der Auflistung der Angebots-/Auftragsmonitorings-Objekte.

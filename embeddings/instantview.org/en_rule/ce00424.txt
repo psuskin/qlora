@@ -1,0 +1,1 @@
+This is the description of the class "CX_FORMULA - Syntax": The grammar used for CX_FORMULA is documented below in EBNF notation. For better readability, the commas otherwise required for EBNF have been omitted.

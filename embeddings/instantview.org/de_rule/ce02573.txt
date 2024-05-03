@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "CX_SPAN_DATE - Unvollständiges Datum": Periodenlänge nicht positiv halbunbeschränkte und unbeschränkte Perioden Tageskategorien Auf eine bestimmte Interpretation eingeschränkte Funktionen.

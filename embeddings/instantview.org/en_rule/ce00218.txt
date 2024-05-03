@@ -1,0 +1,1 @@
+This is the description of the class "CX_PERIODIC_DATE - Special days": The access functions summarised in this section manage special days. Access functions Description Day Setting a special day last trading day Setting the last day of the month.

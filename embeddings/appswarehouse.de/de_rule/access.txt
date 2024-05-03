@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "access" mit dem Namen "Kommunikation": Basismodule für Partnerrollen. Dies ist die Beschreibung der Funktionalität des Moduls "access" mit dem Namen "Kommunikation" bezüglich Funktionalität: siehe Partnerrollen (z.B.: Kunden, Lieferanten).

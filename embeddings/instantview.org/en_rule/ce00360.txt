@@ -1,0 +1,1 @@
+This is the description of the class "CX_PERCENT - Information": The functions summarised in this section provide information on a percentage. Function name Description InWords Convert number into number words IsNegatives Test negative sign IsZero Test number to zero.

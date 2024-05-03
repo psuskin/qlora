@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "processes_rdcasts" mit dem Namen "Stamminformationen - Rollenkonzept": Mit Firmen, Personen und Teilen als Kern-Geschäftsobjekte werden in Form von "Rollen" diesen Objekte zusätzliche Daten wie Kunden-, Lieferanten-, Verkaufsartikel- oder Bestelldaten zugeordnet.Rollen.

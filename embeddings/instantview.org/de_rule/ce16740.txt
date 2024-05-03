@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität der Klasse "CX_MARKETING_COST_OBJECTIVE*" bezüglich Beschreibung: (Business Pattern): Spezialisierung der Klasse CX_SALES_COST_OBJECTIVE als Kostenträger im Rahmen des Marketings.

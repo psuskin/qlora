@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "objectsLoad" mit dem Namen "Laden Objekte" bezüglich Laden Objekte: Dieses Fenster dient dem Laden von Objekten in die Datenbank.

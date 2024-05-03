@@ -1,0 +1,1 @@
+This is the description of the class "CX_SPAN_TIME - Comparisons": In comparisons, a time span behaves exactly like a point in time, i.e. comparisons are only carried out with the start time.

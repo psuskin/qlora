@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Klasse "Mitarbeitertypen": Folgende Typen von Mitarbeitern existieren: Typ Objekttypname Arbeitnehmer CX_EMPLOYEE Gleitzeit-Mitarbeiter CX_FLEXTIMER Gehaltsempfänger CX_SALARY_MAN Verkäufer CX_REPRESENTATIVE.

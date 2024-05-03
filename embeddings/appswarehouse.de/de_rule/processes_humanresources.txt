@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "processes_humanresources" mit dem Namen "Personalwesen": Gleitzeitabrechnung Fehlzeitenabrechnung Arbeitsstunden Abwesenheitsliste Gleitzeitkonten Bezahlte Stunden Kranktage Urlaubskonten.

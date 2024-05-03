@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "scanner_select_layout_app_scanner" mit dem Namen "Scanner Layout Selektieren" bezüglich Selektionsfenster: .

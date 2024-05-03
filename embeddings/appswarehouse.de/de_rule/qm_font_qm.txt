@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "qm_font_qm" mit dem Namen "Zeichensätze": Hiermit wird die Darstellung diverser Zeichensätze anhand des Alphabetes und der Zahlen 0-9 demonstriert.

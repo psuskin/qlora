@@ -1,0 +1,1 @@
+Dies ist die Beschreibung des Moduls "processes_reportfkt" mit dem Namen "Reporting": Listen Informationen zum Umgang und der Verwendung von Listen in ClassiX®. Moduldokumentation Reports, Reporting Moduldokumentation Datenabfrage Assistent Tutorial Datenanfrage erstellen.

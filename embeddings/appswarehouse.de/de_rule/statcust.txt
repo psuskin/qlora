@@ -1,0 +1,1 @@
+Dies ist die Beschreibung der Funktionalität des Moduls "statcust" mit dem Namen "Kundenstatistik" bezüglich Listenfenster: Dieses Fenster dient der Auflistung .

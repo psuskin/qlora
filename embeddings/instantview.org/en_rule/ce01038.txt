@@ -1,0 +1,1 @@
+This is the description of the functionality of the class "CX_SUM_AMOUNT" regarding Description: This class represents a set as the sum of several CX_AMOUNT objects. This is the description of the functionality of the class "CX_SUM_AMOUNT" regarding Code example: * MA = Member Access Function * I = Indexable data field.
