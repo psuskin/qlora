@@ -27,6 +27,8 @@ templates = {
 
 
 def createDB(path, dirs):
+    chunks = []
+
     texts = [""]
     for dir in dirs:
         lang = os.path.basename(os.path.normpath(dir)).split("_", 1)[0]
@@ -51,7 +53,7 @@ def createDB(path, dirs):
                         texts.append(block.strip())
             texts.append("")
 
-    chunks = [Document(page_content=text) for text in texts if text]
+        chunks.extend([Document(page_content=text, metadata={"origin": dir}) for text in texts if text])
 
     embeddings = HuggingFaceInstructEmbeddings(
         model_name=EMBEDDING_MODEL_NAME,
@@ -71,5 +73,22 @@ def createDB(path, dirs):
     )
 
 
+def createVectorSpace(path):
+    embeddings = HuggingFaceInstructEmbeddings(
+        model_name=EMBEDDING_MODEL_NAME,
+        model_kwargs={"device": device_type},
+        embed_instruction="Represent the document for retrieval:",
+        query_instruction="Represent the question for retrieving supporting documents:",
+    )
+
+    db = Chroma(persist_directory=path, embedding_function=embeddings,
+                client_settings=Settings(anonymized_telemetry=False, is_persistent=True))
+
+    data = db.get(include=['embeddings', 'documents', 'metadatas'])
+
+    with open("embeddings/chunks.json", "w", encoding="utf-8") as f:
+        json.dump(data, f)
+
 if __name__ == '__main__':
-    createDB("embeddings/DB", ["A:/website/websiterawtexts/appswarehouse.de/en_rule", "A:/website/websiterawtexts/instantview.org/en_rule"])
+    createDB("embeddings/DB", ["embeddings/appswarehouse.de/en_rule", "embeddings/instantview.org/en_rule"])
+    createVectorSpace("embeddings/DB")
