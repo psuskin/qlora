@@ -88,6 +88,10 @@ class ModelArguments:
         default=False,
         metadata={"help": "Enables using Huggingface auth token from Git Credentials."}
     )
+    adapters: Optional[str] = field(
+        default=None,
+        metadata={"help": "Path to the adapter checkpoint."}
+    )
 
 @dataclass
 class DataArguments:
@@ -342,6 +346,12 @@ def get_accelerate_model(args, checkpoint_dir):
     setattr(model, 'is_parallelizable', True)
 
     model.config.torch_dtype=(torch.float32 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32))
+
+    if args.adapters:
+        adapter_weights = torch.load(args.adapters + "/adapter_model.bin")
+        for name, module in model.named_modules():
+            if isinstance(module, torch.nn.Linear):
+                module.weight.data += adapter_weights[name + '.lora_B.weight'] * adapter_weights[name + '.lora_A.weight']
 
     use_fast = True if args.model_name_or_path == "EleutherAI/pythia-12b" else False
 
