@@ -1,7 +1,5 @@
-import re
 import os
 import json
-import math
 import torch
 import spacy
 
@@ -9,6 +7,13 @@ from langchain.docstore.document import Document
 from langchain.vectorstores import Chroma
 from langchain.embeddings import HuggingFaceInstructEmbeddings
 from chromadb.config import Settings
+
+import matplotlib.pyplot as plt
+import mplcursors
+import numpy as np
+from sklearn.manifold import TSNE
+from sklearn.cluster import KMeans
+import textwrap
 
 EMBEDDING_MODEL_NAME = "hkunlp/instructor-large"  # Uses 1.5 GB of VRAM (High Accuracy with lower VRAM usage)
 
@@ -89,6 +94,38 @@ def createVectorSpace(path):
     with open("embeddings/chunks.json", "w", encoding="utf-8") as f:
         json.dump(data, f)
 
+def displayVectorSpace(path):
+    if path.endswith(".json"):
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+
+    vectors = np.array(data["embeddings"])
+    texts = data["documents"]
+    origins = data["metadatas"]
+
+    if 1:
+        tsne = TSNE(n_components=2, random_state=0)
+        projected = tsne.fit_transform(vectors)
+    else:
+        projected = vectors[:, :2]
+
+    if 0:
+        colors = KMeans(n_clusters=5, random_state=0).fit_predict(projected)
+    else:
+        colors = np.array(["black" if not origin else "orange" if "appswarehouse" in origin["origin"] else "red" if "instantview" in origin["origin"] else "blue" for origin in origins])
+
+    fig, ax = plt.subplots()
+    scatter = ax.scatter(projected[:, 0], projected[:, 1], c=colors, alpha=0.5)
+
+    mplcursors.cursor(scatter).connect(
+        "add", lambda sel: (sel.annotation.set_text(textwrap.fill(texts[sel.target.index], 60)),
+                            sel.annotation.set_multialignment('left'))
+    )
+    
+    plt.show()
+
+
 if __name__ == '__main__':
-    createDB("embeddings/DB", ["embeddings/appswarehouse.de/en_rule", "embeddings/instantview.org/en_rule"])
-    createVectorSpace("embeddings/DB")
+    # createDB("embeddings/DB", ["embeddings/appswarehouse.de/en_rule", "embeddings/instantview.org/en_rule"])
+    # createVectorSpace("embeddings/DB")
+    displayVectorSpace("embeddings/chunks.json")
