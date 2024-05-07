@@ -9,6 +9,8 @@ from os.path import exists, join, isdir
 from dataclasses import dataclass, field
 import sys
 from typing import Optional, Dict, Sequence
+
+import bitsandbytes.functional
 import numpy as np
 from tqdm import tqdm
 import logging
@@ -315,8 +317,6 @@ def get_accelerate_model(args, checkpoint_dir):
     model = AutoModelForCausalLM.from_pretrained(
         args.model_name_or_path,
         cache_dir=args.cache_dir,
-        load_in_4bit=args.bits == 4,
-        load_in_8bit=args.bits == 8,
         device_map=device_map,
         max_memory=max_memory,
         quantization_config=BitsAndBytesConfig(
@@ -351,7 +351,20 @@ def get_accelerate_model(args, checkpoint_dir):
         adapter_weights = torch.load(args.adapters + "/adapter_model.bin")
         for name, module in model.named_modules():
             if isinstance(module, torch.nn.Linear):
-                module.weight.data += adapter_weights[name + '.lora_B.weight'] * adapter_weights[name + '.lora_A.weight']
+                if name == 'lm_head':
+                    continue
+
+                adapter_name = f'base_model.model.{name}'
+                adapter_product = torch.mm(adapter_weights[adapter_name + '.lora_B.weight'], adapter_weights[adapter_name + '.lora_A.weight'])
+
+                #base_weights = module.weight.dequantize()
+                base_weights = bitsandbytes.functional.dequantize_nf4(module.weight.data, quant_state=module.weight.quant_state)
+
+                sum = torch.add(base_weights, adapter_product)
+
+                quantized = bitsandbytes.functional.quantize_nf4(sum)
+                flattened = quantized[0].view(-1, 1)
+                module.weight.data = flattened
 
     use_fast = True if args.model_name_or_path == "EleutherAI/pythia-12b" else False
 
@@ -380,11 +393,20 @@ def get_accelerate_model(args, checkpoint_dir):
         tokenizer.add_special_tokens({
                 "eos_token": tokenizer.convert_ids_to_tokens(model.config.eos_token_id),
                 "bos_token": tokenizer.convert_ids_to_tokens(model.config.bos_token_id),
-                "unk_token": tokenizer.convert_ids_to_tokens(
-                    model.config.pad_token_id if model.config.pad_token_id != -1 else tokenizer.pad_token_id
+                "unk_token": tokenizer.convert_ids_to_tokens(#model.config.eos_token_id if not model.config.pad_token_id else
+                    tokenizer.pad_token_id if not model.config.pad_token_id else model.config.pad_token_id if model.config.pad_token_id != -1 else tokenizer.pad_token_id
                 ),
         })
-    
+
+    if args.adapters:
+        model.eval()
+        input = tokenizer(
+            "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the module about used for?\n\n### Response:",
+            return_tensors="pt")
+        output = model(**input)
+        outputText = tokenizer.decode(output.logits[0].argmax(dim=-1))
+        print(outputText)
+
     if not args.full_finetune:
         model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=args.gradient_checkpointing)
 
