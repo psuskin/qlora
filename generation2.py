@@ -1,81 +1,69 @@
-# Instruct
-import os
 import re
+import os
 import json
-import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig, GenerationConfig
+from huggingface_hub import hf_hub_download
+from langchain.llms import LlamaCpp
 
-# Inference
-from peft import PeftModel
-def instruct(promptsPerClass=10):
-    instructModel = "meta-llama/Meta-Llama-3-8b-Instruct"
-
-    tokenizer = AutoTokenizer.from_pretrained(instructModel)
-
-    # Load the model (use bf16 for faster inference)
-    model = AutoModelForCausalLM.from_pretrained(
-        instructModel,
-        torch_dtype=torch.bfloat16,
-        device_map={"": 0},
-        quantization_config=BitsAndBytesConfig(
-            load_in_4bit=True,
-            bnb_4bit_compute_dtype=torch.bfloat16,
-            bnb_4bit_use_double_quant=True,
-            bnb_4bit_quant_type='nf4',
-        )
+def instruct(generations):
+    model_path = hf_hub_download(
+        repo_id="lightblue/suzume-llama-3-8B-multilingual-gguf",
+        filename="ggml-model-Q4_K_M.gguf",
+        resume_download=True
     )
 
-    with open("instructOutput.txt", "r", encoding="utf-8") as f:
-        text = f.read()
+    llm = LlamaCpp(
+        model_path=model_path,
+        n_ctx=8192,
+        max_tokens=4096,
+        n_batch=512,
+        n_gpu_layers=100
+    )
 
-    text = text.replace("in SAP", "in classix")
+    generation_kwargs = {
+        "max_tokens": 4096,
+        "echo": False,
+        "top_k": 1
+    }
 
-    #encountered = False
-    descriptionPattern = re.compile(r'^This is the description of', re.MULTILINE)
-    instructionPattern = re.compile(r'^\d+\.\s(.+?)(?:\n|$)', re.MULTILINE)
-    instructionSets = re.split(descriptionPattern, text)
-    for instructionSet in instructionSets:
-        if instructionSet:
-            instructions = re.findall(instructionPattern, instructionSet)
-            for instruction in instructions:
-                #if not encountered:
-                #    if instruction == 'Are there any manual changes that can be made to the disposition type and/or procurement time of individual parts in the "cxItemDemand" module in SAP?':
-                #        encountered = True
-                #    continue
+    for generation in generations:
+        lang = generation.get("lang", "en")
+        text = generation.get("chunk")
+        questions = generation.get("questions", [])
+        if not text or not questions:
+            continue
 
-                description = "This is the description of" + instructionSet.split("\n")[0]
+        for question in questions:
+            if lang == "en":
                 prompt = f"""In the following, you will be provided with the description of a module, as well as a query referencing this description which may or may not be answerable based solely on the information provided in the module description. Your task is to assess whether or not the query can be answered with the information provided in the module description. If the query can be answered without additional information, provide the answer. Otherwise, state that the information is not currently available.
 
-Module description: {description}
+Module description: {text}
 
-Query: {instruction}"""
-                # https://llama.meta.com/docs/model-cards-and-prompt-formats/meta-llama-3/
+Query: {question}"""
                 llamaPrompt = f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nYou are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. If you don't know the answer to a question, please don't share false information.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
+            elif lang == "de":
+                prompt = f"""Im Folgenden wird Ihnen die Beschreibung eines Moduls sowie eine Abfrage vorgelegt, bei der sich die Abfrage auf die Beschreibung bezieht und nicht unbedingt basierend ausschließlich auf die in der Modulbeschreibung bereitgestellten Informationen beantwortet werden kann. Ihre Aufgabe besteht darin, zu beurteilen, ob die Abfrage mit den in der Modulbeschreibung bereitgestellten Informationen beantwortet werden kann. Wenn die Abfrage ohne zusätzliche Informationen beantwortet werden kann, geben Sie die Antwort an. Andernfalls geben Sie an, dass die Informationen derzeit nicht verfügbar sind.
+                
+Modulbeschreibung: {text}
 
-                inputs = tokenizer(llamaPrompt, return_tensors="pt").to('cuda')
+Abfrage: {question}"""
+                llamaPrompt = f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nSie sind ein hilfsbereiter, respektvoller und ehrlicher Assistent. Beantworten Sie immer so hilfreich wie möglich, während Sie sicher sind. Wenn Sie die Antwort auf eine Frage nicht kennen, geben Sie bitte keine falschen Informationen weiter.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n{prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
 
-                outputs = model.generate(
-                    **inputs,
-                    generation_config=GenerationConfig(
-                        do_sample=True,
-                        max_new_tokens=4096,
-                        top_p=1,
-                        temperature=0.01,
-                        repetition_penalty=1.2
-                    )
-                )
+            if llamaPrompt:
+                response = llm(llamaPrompt, **generation_kwargs)
 
-                output = tokenizer.decode(outputs[0], skip_special_tokens=True)
-                response = output.split("<|end_header_id|>", 1)[1].strip()
+                with open("answers.jsonl", "a") as f:
+                    f.write(json.dumps({
+                        "lang": lang,
+                        "text": text,
+                        "question": question,
+                        "answer": response
+                    }) + "\n")
 
-                # Free GPU memory
-                #del inputs
-                #del outputs
-                #torch.cuda.empty_cache()
 
-                #print(llamaPrompt, response)
-                with open("instructOutput2.txt", "a", encoding="utf-8") as f:
-                    f.write("Query: " + instruction + "\n" + "Context: " + description + "\n" + "Response: " + response + "\n\n")
-
+from langchain.docstore.document import Document
 if __name__ == '__main__':
-    instruct()
+    generations = []
+    with open("questions.jsonl", encoding="utf-8") as f:
+        for line in f:
+            generations.append(json.loads(line))
+    instruct(generations)
