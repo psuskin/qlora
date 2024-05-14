@@ -47,7 +47,12 @@ def klioImplementation():
     with open("answers.jsonl", encoding="utf-8") as f:
         for line in f:
             sample = json.loads(line)
-            samples.append({"input": sample["question"].strip(), "output": sample["answer"].strip()})
+
+            query = sample["question"].strip()
+            context = sample["text"].strip()
+            response = sample["answer"].strip()
+            samples.append({"input": f"Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\n{query}\n### Input:\n{context}\n### Response:",
+                            "output": response})
 
     with open("samples.json", "w", encoding="utf-8") as f:
         json.dump(samples, f, ensure_ascii=False, indent=4)
