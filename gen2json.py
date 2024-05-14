@@ -47,7 +47,7 @@ def klioImplementation():
     with open("answers.jsonl", encoding="utf-8") as f:
         for line in f:
             sample = json.loads(line)
-            samples.append({"input": sample["question"], "output": sample["answer"]})
+            samples.append({"input": sample["question"].strip(), "output": sample["answer"].strip()})
 
     with open("samples.json", "w", encoding="utf-8") as f:
         json.dump(samples, f, ensure_ascii=False, indent=4)
