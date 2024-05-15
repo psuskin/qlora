@@ -31,9 +31,9 @@ def initialImplementation():
         if "SAP" in response and not "SAP" in query:
             response.replace("SAP", "classix")
 
-        samples.append({"input": f"Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\n{query}\n### Input:\n{context}\n### Response:",
+        samples.append({"input": f"Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\n{query}\n\n### Input:\n{context}\n\n### Response:",
                         "output": response})
-        samplesNoContext.append({"input": f"Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\n{query}\n### Response:",
+        samplesNoContext.append({"input": f"Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\n{query}\n\n### Response:",
                                  "output": response})
 
     with open("data/en_articles_klio_alpaca.json", "w", encoding="utf-8") as f:
@@ -51,7 +51,7 @@ def klioImplementation():
             query = sample["question"].strip()
             context = sample["text"].strip()
             response = sample["answer"].strip()
-            samples.append({"input": f"Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\n{query}\n### Input:\n{context}\n### Response:",
+            samples.append({"input": f"Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.\n\n### Instruction:\n{query}\n\n### Input:\n{context}\n\n### Response:",
                             "output": response})
 
     with open("samples.json", "w", encoding="utf-8") as f:
