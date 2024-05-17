@@ -739,6 +739,14 @@ def get_last_checkpoint(checkpoint_dir):
         return checkpoint_dir, is_completed # checkpoint found!
     return None, False # first training
 
+class CustomTrainer(Seq2SeqTrainer):
+    def log(self, logs: Dict[str, float]) -> None:
+        super().log(logs)  # Call the original log method
+
+        # Add custom behavior: write logs to a .jsonl file
+        with open('finetuningLogs.jsonl', 'a') as f:
+            f.write(json.dumps(logs) + '\n')
+
 def train():
     hfparser = transformers.HfArgumentParser((
         ModelArguments, DataArguments, TrainingArguments, GenerationArguments
@@ -765,7 +773,7 @@ def train():
     
     set_seed(args.seed)
 
-    trainer = Seq2SeqTrainer(
+    trainer = CustomTrainer(
         model=model,
         tokenizer=tokenizer,
         args=training_args,
