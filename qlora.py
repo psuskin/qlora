@@ -342,6 +342,10 @@ def get_accelerate_model(args, checkpoint_dir):
         compute_dtype = torch.bfloat16
         print('Intel XPU does not support float16 yet, so switching to bfloat16')
 
+    if args.adapters:
+        peft = PeftModel.from_pretrained(model, args.adapters)
+        model = peft.merge_and_unload(progress=True)
+
     setattr(model, 'model_parallel', True)
     setattr(model, 'is_parallelizable', True)
 
@@ -399,7 +403,6 @@ def get_accelerate_model(args, checkpoint_dir):
         })
 
     if args.adapters:
-        model.eval()
         input = tokenizer(
             "Below is an instruction that describes a task. Write a response that appropriately completes the request.\n\n### Instruction:\nWhat is the module about used for?\n\n### Response:",
             return_tensors="pt")
