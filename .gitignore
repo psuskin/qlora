@@ -1,6 +1,9 @@
 wandb/
 output/
 .idea/
+ADAPTER/
+ADAPTER_TEST/
+DB/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

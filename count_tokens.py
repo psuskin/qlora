@@ -72,6 +72,18 @@ def count(path, sequencePart="output", maxTokens=max_sequence_length):
 
     print()
 
+    return samplesOverMaxLength
+
+def removeLargeSamples(path, substrings, sequencePart="input"):
+    with open(path, encoding="utf-8") as f:
+        jsonArray = json.load(f)
+
+    jsonArray = [jsonObject for jsonObject in jsonArray if not any(substring in jsonObject[sequencePart] for substring in substrings)]
+
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(jsonArray, f, indent=4, ensure_ascii=False)
+
+
 #count("data/en_articles_autoregressive.json", "output", 2000)
 
 #count("data/en_articles_alpaca.json")
@@ -82,10 +94,13 @@ def count(path, sequencePart="output", maxTokens=max_sequence_length):
 #count("data/de_articles_alpaca.json", "input", 1024)
 #count("data/de_articles_alpaca.json", "output", 1024)
 
-count("data/en_articles_klio_alpaca.json", "input", 5120)
-count("data/en_articles_klio_alpaca.json", "output", 5120)
+#count("data/en_articles_klio_alpaca.json", "input", 5120)
+#count("data/en_articles_klio_alpaca.json", "output", 5120)
 
 #count("data/en_articles_klio_autoregressive.json", "output", 5120)
+
+removeLargeSamples("data/klio-samples.json", count("data/klio-samples.json", "input", 3000), "input")
+removeLargeSamples("data/klio-samples.json", count("data/klio-samples.json", "output", 3000), "output")
 
 #from datasets import load_dataset
 #dataset = load_dataset("timdettmers/openassistant-guanaco")
