@@ -16,7 +16,8 @@ def instruct(chunks):
         n_ctx=8192,
         max_tokens=4096,
         n_batch=512,
-        n_gpu_layers=100
+        n_gpu_layers=100,
+        rope_freq_base=500000
     )
 
     generation_kwargs = {
