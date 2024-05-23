@@ -12,7 +12,8 @@ from langchain.chains import RetrievalQA
 import re
 import json
 
-EMBEDDING_MODEL_NAME = "hkunlp/instructor-large"  # Uses 1.5 GB of VRAM (High Accuracy with lower VRAM usage)
+#EMBEDDING_MODEL_NAME = "hkunlp/instructor-large"  # Uses 1.5 GB of VRAM (High Accuracy with lower VRAM usage)
+EMBEDDING_MODEL_NAME = "intfloat/multilingual-e5-large"
 
 device_type = "cuda" if torch.cuda.is_available() else "cpu"
 
@@ -47,14 +48,14 @@ def load_model(model_name_or_path='huggyllama/llama-7b', adapter_path=None):
 embeddings = HuggingFaceInstructEmbeddings(
                 model_name=EMBEDDING_MODEL_NAME,
                 model_kwargs={"device": device_type},
-                embed_instruction="Represent the document for retrieval:",
-                query_instruction="Represent the question for retrieving supporting documents:",
+                embed_instruction="query:",
+                query_instruction="passage:",
             )
 
-db = Chroma(persist_directory="DB_KLIO_ALPACA", embedding_function=embeddings, client_settings=Settings(anonymized_telemetry=False, is_persistent=True))
-retriever = db.as_retriever()
+db = Chroma(persist_directory="DB", embedding_function=embeddings, client_settings=Settings(anonymized_telemetry=False, is_persistent=True))
+retriever = db.as_retriever(search_kwargs={"k": 2})
 
-model, tokenizer = load_model(model_id, 'output/klio-alpaca-2-13b-r64-noeval/checkpoint-1875/adapter_model')
+model, tokenizer = load_model(model_id, 'ADAPTER_NEW/checkpoint-500/adapter_model')
 generation_config = GenerationConfig.from_pretrained(model_id)
 pipe = pipeline(
     "text-generation",
@@ -131,10 +132,10 @@ def infer():
         response = qa(query)
         answer, docs = response["result"], response["source_documents"]
 
-        from saliency import runOnOutput
-        subwords, attributed = runOnOutput(model, tokenizer, answer.split("### Response:")[0] + "### Response:", answer)
+        #from saliency import runOnOutput
+        #subwords, attributed = runOnOutput(model, tokenizer, answer.split("### Response:")[0] + "### Response:", answer)
 
-        answer = answer.split("### Response:", 1)[1].strip()
+        #answer = answer.split("### Response:", 1)[1].strip()
         answer.replace("SAP", "classix")
 
         # Print the result
@@ -155,7 +156,7 @@ def infer():
 
         responses.append({"query": query, "response": answer, "docs": [doc.page_content for doc in docs], "modules": modules})
 
-    with open("KAL/evaluation.json", "w", encoding="utf-8") as f:
+    with open("ADAPTER_NEW/evaluation.json", "w", encoding="utf-8") as f:
         json.dump(responses, f, ensure_ascii=False, indent=4)
 
 if __name__ == '__main__':
