@@ -99,8 +99,8 @@ def removeLargeSamples(path, substrings, sequencePart="input"):
 
 #count("data/en_articles_klio_autoregressive.json", "output", 5120)
 
-removeLargeSamples("data/klio-samples.json", count("data/klio-samples.json", "input", 3000), "input")
-removeLargeSamples("data/klio-samples.json", count("data/klio-samples.json", "output", 3000), "output")
+removeLargeSamples("data/klio-samples.json", count("data/klio-samples.json", "input", 2000), "input")
+removeLargeSamples("data/klio-samples.json", count("data/klio-samples.json", "output", 2000), "output")
 
 #from datasets import load_dataset
 #dataset = load_dataset("timdettmers/openassistant-guanaco")
