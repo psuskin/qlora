@@ -3,6 +3,7 @@ output/
 .idea/
 ADAPTER/
 ADAPTER_TEST/
+ADAPTER_NEW/checkpoint-*/
 DB/
 
 # Byte-compiled / optimized / DLL files

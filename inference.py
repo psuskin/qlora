@@ -55,7 +55,7 @@ embeddings = HuggingFaceInstructEmbeddings(
 db = Chroma(persist_directory="DB", embedding_function=embeddings, client_settings=Settings(anonymized_telemetry=False, is_persistent=True))
 retriever = db.as_retriever(search_kwargs={"k": 2})
 
-model, tokenizer = load_model(model_id, 'ADAPTER_NEW/checkpoint-500/adapter_model')
+model, tokenizer = load_model(model_id, 'ADAPTER_NEW/checkpoint-1875/adapter_model')
 generation_config = GenerationConfig.from_pretrained(model_id)
 pipe = pipeline(
     "text-generation",
@@ -110,23 +110,43 @@ def run():
 def infer():
     responses = []
 
-    queries = [
-        "What is a variant part?",
-        "What is a gozintograph?",
-        "How do I plan production orders?",
-        "What are specification numbers?",
-        "What is a subject characteristics bar?",
-        "How do I implement attributes into subject characteristics bars?",
-        "How are parts evaluated in the warehouse?",
-        "What is a price table?",
-        "What are conditional parts list items?",
-        "How do I import my inventory data into GESTIN?",
-        "What is inventory sampling?",
-        "What does PYTHIA do?",
-        "Can I change the output currency of an order confirmation?",
-        "What is a packing list?",
-        "What is master data?"
-    ]
+    EN = False
+
+    if EN:
+        queries = [
+            "What is a variant part?",
+            "What is a gozintograph?",
+            "How do I plan production orders?",
+            "What are specification numbers?",
+            "What is a subject characteristics bar?",
+            "How do I implement attributes into subject characteristics bars?",
+            "How are parts evaluated in the warehouse?",
+            "What is a price table?",
+            "What are conditional parts list items?",
+            "How do I import my inventory data into GESTIN?",
+            "What is inventory sampling?",
+            "What does PYTHIA do?",
+            "Can I change the output currency of an order confirmation?",
+            "What is a packing list?",
+            "What is master data?"
+        ]
+    else:
+        queries = [
+            "Was ist ein Variantenteil?",
+            "Was ist ein Gozintograph?",
+            "Wie plane ich Fertigungsaufträge?",
+            "Was sind Spezifikationsnummern?",
+            "Was ist eine Sachmerkmalsleiste?",
+            "Wie implementiere ich Attribute in Merkmalsleisten?",
+            "Wie werden Teile im Lager bewertet?",
+            "Was ist eine Preisliste?",
+            "Was sind bedingte Teilelistenpositionen?",
+            "Wie importiere ich meine Lagerdaten in GESTIN?",
+            "Was ist Stichprobeninventur?",
+            "Was macht PYTHIA?",
+            "Kann ich die Ausgabewährung einer Auftragsbestätigung ändern?",
+            "Was ist ein Lieferschein?",
+        ]
 
     for query in queries:
         response = qa(query)
